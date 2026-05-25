@@ -1793,3 +1793,4 @@ SELECT
     END AS
 FROM
     job_postings_fact;
+

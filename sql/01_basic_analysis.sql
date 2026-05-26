@@ -1797,3 +1797,20 @@ FROM
 SELECT
 SELECT
 SELECT
+
+
+---JOB TITLE PERCENTAGE OF TOTAL JOBS
+SELECT
+    job_title_short,
+    COUNT(*) AS total_jobs_by_title,
+    SUM(COUNT(*)) OVER() AS total_jobs,
+    ROUND(
+        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(),
+        2
+    ) AS job_title_percentage
+FROM
+    job_postings_fact
+GROUP BY
+    job_title_short
+ORDER BY
+    job_title_percentage DESC;

@@ -1757,19 +1757,20 @@ FROM
 
 WITH monthly_jobs AS (
     SELECT
-        DATE_TRUNC('day', job_posted_date) AS posted_month,
+        DATE_TRUNC('month', job_posted_date) AS posted_month,
         COUNT(*) AS total_jobs
     FROM
         job_postings_fact
     GROUP BY    
-        DATE_TRUNC('day', job_posted_date)
+        DATE_TRUNC('month', job_posted_date)
 )
 SELECT
     posted_month,
     total_jobs,
     LAG(total_jobs) OVER(
         ORDER BY posted_month
-    ) AS previous_month_jobs
+    ) AS previous_month_jobs,
+    total_jobs - previous_month_jobs AS total_different
 FROM
     monthly_jobs;
 
@@ -1793,10 +1794,6 @@ SELECT
     END AS
 FROM
     job_postings_fact;
-
-SELECT
-SELECT
-SELECT
 
 
 ---JOB TITLE PERCENTAGE OF TOTAL JOBS

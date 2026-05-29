@@ -1956,4 +1956,24 @@ ORDER BY
     job_order
 LIMIT 10;
 
+DESCRIBE job_postings_fact;
+SELECT
+    jpf.job_posted_date,
+    jpf.job_title,
+    jpf.salary_year_avg,
+    cd.name,
+    jpf.company_id
+FROM
+    job_postings_fact AS jpf
+JOIN company_dim AS cd
+    ON jpf.company_id = cd.company_id
+WHERE
+    salary_year_avg IS NOT NULL
+    AND
+    job_location = 'Egypt'
+    AND
+    job_title_short = 'Data Engineer'
+    AND name = 'Mashreq';
 
+
+DESCRIBE company_dim;

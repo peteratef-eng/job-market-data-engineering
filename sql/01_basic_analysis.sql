@@ -1811,3 +1811,149 @@ GROUP BY
     job_title_short
 ORDER BY
     job_title_percentage DESC;
+
+
+---مراجعه
+---partition by
+--- قسم الداتا لمجموعات,واعمل الحساب جوا كل مجموعه لوحدها
+ROW_NUMBER() OVER(
+    PARTITION BY job_title_short
+    ORDER BY salary_year_avg DESC
+)
+---لكل JOB_TITLE_SHORT لوحده , رتب الرواتب من الاعلى للاقل
+SELECT
+    job_title_short,
+    salary_year_avg,
+
+    ROW_NUMBER() OVER(
+        PARTITION BY job_title_short
+        ORDER BY salary_year_avg DESC
+    )
+
+FROM
+    job_postings_fact
+WHERE
+    salary_year_avg IS NOT NULL;
+
+/*
+أمثلة:
+
+المطلوب	PARTITION BY
+أعلى salary لكل job title	job_title_short
+أعلى skill لكل job title	job_title_short
+أعلى job لكل company	company_id
+أعلى salary لكل location	job_location
+*/
+
+---اقل مرتب داخل كل job
+WITH ranked_jobs AS (
+    SELECT
+        job_title_short,
+        job_id,
+        salary_year_avg,
+        ROW_NUMBER() OVER(
+            PARTITION BY job_title_short
+            ORDER BY salary_year_avg ASC
+        ) AS salary_rank
+    FROM
+        job_postings_fact
+    WHERE
+        salary_year_avg IS NOT NULL
+)
+SELECT
+    job_title_short,
+    job_id,
+    salary_year_avg,
+    salary_rank
+FROM
+    ranked_jobs
+WHERE
+    salary_rank = 3
+ORDER BY
+    job_title_short;
+
+
+WITH ranked_jobs AS (
+    SELECT
+        job_title_short,
+        job_id,
+        salary_year_avg,
+        ROW_NUMBER() OVER(
+            PARTITION BY job_title_short
+            ORDER BY salary_year_avg DESC
+        ) AS salary_rank
+    FROM
+        job_postings_fact
+    WHERE
+        salary_year_avg IS NOT NULL
+)
+SELECT
+    job_title_short,
+    job_id,
+    salary_year_avg,
+    salary_rank
+FROM
+    ranked_jobs
+WHERE
+    salary_rank <= 3
+ORDER BY
+    job_title_short,
+    salary_rank;
+
+
+WITH ranked_jobs AS (
+    SELECT
+        company_id,
+        job_id,
+        job_title,
+        job_posted_date,
+
+        ROW_NUMBER() OVER(
+            PARTITION BY company_id
+            ORDER BY job_posted_date ASC
+        ) AS job_order
+    FROM
+        job_postings_fact
+)
+SELECT
+    company_id,
+    job_id,
+    job_title,
+    job_posted_date, 
+    job_order
+FROM
+    ranked_jobs
+WHERE
+    job_order = 1;
+
+
+
+WITH job_rank AS (
+    SELECT
+        job_title_short,
+        job_id,
+        company_id,
+
+        ROW_NUMBER() OVER(
+            PARTITION BY company_id
+            ORDER BY job_posted_date DESC
+        ) AS job_order
+
+    FROM
+        job_postings_fact
+)
+SELECT
+    job_title_short,
+    job_id,
+    company_id,
+    job_order
+FROM
+    job_rank
+WHERE
+    job_order <= 2
+ORDER BY 
+    job_title_short,
+    job_order
+LIMIT 10;
+
+

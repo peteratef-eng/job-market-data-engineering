@@ -10,6 +10,18 @@ This project is structured like a real data engineering workflow, starting from 
 
 ---
 
+## Dataset
+
+The project uses a job market dataset containing:
+
+* 1.6M+ job postings
+* 215K+ companies
+* 700K+ job-skill relationships
+
+The dataset includes job titles, salaries, locations, companies, skills, and remote work information.
+
+---
+
 ## Business Questions
 
 This project answers questions such as:
@@ -42,13 +54,15 @@ job_market_dbt/
 
 ## Data Flow
 
-Raw Tables
+Raw CSV Files
 ↓
-Staging Models
+PostgreSQL Raw Tables
 ↓
-Intermediate Models
+dbt Staging Models
 ↓
-Analytics Marts
+dbt Intermediate Models
+↓
+dbt Analytics Marts
 ↓
 Business Insights
 
@@ -60,7 +74,6 @@ Business Insights
 * `marts/`: Contains business-ready analytics models.
 * `quality_checks/`: Validates row counts, nulls, duplicates, orphan keys, and calculation logic.
 * `insights/`: Stores SQL queries used to generate README insights.
-* `sql_training/`: Contains SQL practice and learning queries.
 
 ---
 
@@ -380,7 +393,12 @@ Implemented Tests:
 * not_null
 * unique
 
-All dbt models and tests executed successfully.
+Results:
+
+* 11 dbt models built successfully
+* 11/11 tests passed
+
+All models and tests executed successfully.
 
 ---
 
@@ -398,6 +416,8 @@ All dbt models and tests executed successfully.
 
 ![dbt Test](images/dbt_test.png)
 
+The lineage graph and test results demonstrate successful model execution, dependency management, and data quality validation using dbt.
+
 ---
 
 ## Next Steps
@@ -412,3 +432,13 @@ Future improvements include:
 * Containerizing the pipeline using Docker
 * Creating Power BI dashboards
 * Deploying the pipeline to a cloud environment
+
+---
+
+## Resume Highlights
+
+* Built a layered SQL analytics project using PostgreSQL and dbt.
+* Developed staging, intermediate, and mart models following modern data engineering practices.
+* Implemented data quality checks and dbt tests for data validation.
+* Generated business insights from 1.6M+ job postings and 7.1M+ job-skill relationships
+* Created project documentation, lineage visualization, and analytics marts using dbt.

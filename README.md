@@ -345,6 +345,7 @@ This indicates that Data Engineer roles in this dataset became more onsite-heavy
 * PostgreSQL
 * dbt
 * DuckDB / MotherDuck
+* Python
 * VS Code
 * Git & GitHub
 

@@ -1,5 +1,3 @@
-CREATE OR REPLACE TEMP VIEW stg_job_postings AS 
-
 SELECT
     job_id,
     company_id,
@@ -19,7 +17,7 @@ SELECT
 
     job_posted_date,
 
-    DATE_TRUNC('month', job_posted_date) AS posted_month,
+    DATE_TRUNC('month', job_posted_date::timestamp) AS posted_month,
 
     salary_year_avg,
 
@@ -33,5 +31,4 @@ SELECT
     ) AS salary_category
 
 FROM 
-    job_postings_fact;
-
+    job_postings_fact

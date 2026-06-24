@@ -1,5 +1,3 @@
-CREATE OR REPLACE TEMP VIEW stg_skills AS
-
 SELECT
     skill_id,
     skills AS original_skill_name,
@@ -23,6 +21,4 @@ SELECT
                   'unknown skill type'
             ) AS clean_skill_type
 FROM    
-    skills_dim;
-
-        
+    skills_dim

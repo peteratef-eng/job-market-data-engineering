@@ -26,15 +26,33 @@ This project answers questions such as:
 ## Project Structure
 
 ```text
-sql/
-├── staging/
-├── intermediate/
-├── marts/
-├── quality_checks/
-├── insights/
-└── sql_training/
+job_market_dbt/
+├── models/
+│   ├── staging/
+│   ├── intermediate/
+│   └── marts/
+├── tests/
+├── macros/
+├── analyses/
+├── snapshots/
+└── dbt_project.yml
 ```
 
+---
+
+## Data Flow
+
+Raw Tables
+↓
+Staging Models
+↓
+Intermediate Models
+↓
+Analytics Marts
+↓
+Business Insights
+
+---
 ### Folder Description
 
 * `staging/`: Cleans and standardizes raw source tables.
@@ -311,6 +329,8 @@ This indicates that Data Engineer roles in this dataset became more onsite-heavy
 ## Tools Used
 
 * SQL
+* PostgreSQL
+* dbt
 * DuckDB / MotherDuck
 * VS Code
 * Git & GitHub
@@ -330,8 +350,53 @@ This project demonstrates:
 * Staging models
 * Intermediate models
 * Analytics marts
+* Data modeling
+* dbt model development
+* dbt testing
+* Data lineage
+* Data documentation
 * Business insight generation
 * Git-based project organization
+
+---
+
+## dbt Implementation
+
+The project was migrated into dbt and organized using a layered architecture:
+
+* Staging Layer
+* Intermediate Layer
+* Mart Layer
+
+dbt was used for:
+
+* Model dependency management using ref()
+* Data quality testing
+* Documentation generation
+* Data lineage visualization
+
+Implemented Tests:
+
+* not_null
+* unique
+
+All dbt models and tests executed successfully.
+
+---
+
+## Project Screenshots
+
+### dbt Lineage Graph
+
+![dbt Lineage](images/dbt_lineage.png)
+
+### dbt Run Results
+
+![dbt Run](images/dbt_run.png)
+
+### dbt Test Results
+
+![dbt Test](images/dbt_test.png)
 
 ---
 
@@ -340,8 +405,10 @@ This project demonstrates:
 Future improvements include:
 
 * Building a Python ETL pipeline
-* Loading transformed data into PostgreSQL
-* Rebuilding the SQL models using dbt
-* Scheduling the pipeline with Airflow
-* Creating a dashboard for business insights
-* Adding automated tests for data quality checks
+* Extracting data from public APIs
+* Loading raw data into PostgreSQL
+* Building incremental dbt models
+* Scheduling workflows with Airflow
+* Containerizing the pipeline using Docker
+* Creating Power BI dashboards
+* Deploying the pipeline to a cloud environment

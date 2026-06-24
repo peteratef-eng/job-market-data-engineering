@@ -1,5 +1,3 @@
-CREATE OR REPLACE TEMP VIEW mart_salary_trends AS
-
 WITH salary_summary  AS (
     SELECT
         remote_status,
@@ -8,12 +6,12 @@ WITH salary_summary  AS (
 
         COUNT(DISTINCT(job_id)) AS total_salary_jobs,
 
-        ROUND(AVG(salary_year_avg), 0) AS avg_salary,
-        ROUND(MIN(salary_year_avg), 0) AS min_salary,
-        ROUND(MAX(salary_year_avg), 0) AS max_salary
+        ROUND(AVG(salary_year_avg)::NUMERIC, 0) AS avg_salary,
+        ROUND(MIN(salary_year_avg)::NUMERIC, 0) AS min_salary,
+        ROUND(MAX(salary_year_avg)::NUMERIC, 0) AS max_salary
 
     FROM
-        int_job_postings_enriched
+        {{ ref('int_job_postings_enriched') }}
     WHERE
         salary_year_avg IS NOT NULL
     GROUP BY
@@ -55,13 +53,15 @@ SELECT
     avg_salary - previous_month_avg_salary AS salary_difference,
 
     ROUND(
-            ((avg_salary - previous_month_avg_salary) / previous_month_avg_salary) * 100.0,
-            2
-        ) AS salary_growth_percentage
+        (
+            ((avg_salary - previous_month_avg_salary) / NULLIF(previous_month_avg_salary, 0)) * 100.0
+        )::numeric,
+        2
+    ) AS salary_growth_percentage
 
 FROM
     salary_with_previous
 ORDER BY
     job_title_short,
     remote_status,
-    posted_month;
+    posted_month

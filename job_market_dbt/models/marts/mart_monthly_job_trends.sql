@@ -1,12 +1,10 @@
-CREATE OR REPLACE TEMP VIEW mart_monthly_job_trends AS 
-
 WITH monthly_jobs AS (
     SELECT
         posted_month,
         COUNT(DISTINCT job_id) AS total_jobs
 
     FROM
-        int_job_postings_enriched
+        {{ ref('int_job_postings_enriched') }}
     GROUP BY
         posted_month
 ),
@@ -36,4 +34,4 @@ SELECT
 FROM
     monthly_jobs_with_previous
 ORDER BY
-    posted_month;
+    posted_month

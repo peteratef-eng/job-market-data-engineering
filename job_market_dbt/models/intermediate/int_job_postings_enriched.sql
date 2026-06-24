@@ -1,7 +1,4 @@
-CREATE OR REPLACE TEMP VIEW int_job_postings_enriched AS
-
 SELECT
-
     sjp.job_id,
     sjp.company_id,
     sjp.job_title_short,
@@ -18,8 +15,7 @@ SELECT
     sc.clean_company_name
 
 FROM
-    stg_job_postings AS sjp
+    {{ ref('stg_job_postings') }} AS sjp
 
-LEFT JOIN stg_companies AS sc
-    ON sjp.company_id = sc.company_id;
-
+LEFT JOIN {{ ref('stg_companies') }} AS sc
+    ON sjp.company_id = sc.company_id

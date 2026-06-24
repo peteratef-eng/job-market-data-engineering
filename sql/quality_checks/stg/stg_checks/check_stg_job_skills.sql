@@ -11,7 +11,7 @@ FROM
 SELECT
     COUNT(*) AS total_rows,
     COUNT(*) - COUNT(job_id) AS missing_job_id_count,
-    COUNT(*) - COUNT(skill_id) AS missins_skill_id_count
+    COUNT(*) - COUNT(skill_id) AS missing_skill_id_count
 FROM
     stg_job_skills;
 

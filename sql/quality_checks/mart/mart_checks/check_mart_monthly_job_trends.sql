@@ -14,7 +14,7 @@ WHERE
 
 SELECT
     posted_month,
-    COUNT(*) AS duplcate_month_count
+    COUNT(*) AS duplicate_month_count
 FROM
     mart_monthly_job_trends
 GROUP BY

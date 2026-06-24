@@ -1,5 +1,3 @@
-CREATE OR REPLACE TEMP VIEW mart_remote_work_trends AS 
-
 WITH remote_counts AS (
     SELECT
         remote_status,
@@ -7,7 +5,7 @@ WITH remote_counts AS (
         job_title_short,
         COUNT(DISTINCT(job_id)) AS total_jobs
     FROM
-        int_job_postings_enriched
+        {{ ref('int_job_postings_enriched') }}
     GROUP BY 
         remote_status,
         posted_month,
@@ -35,7 +33,4 @@ FROM
 ORDER BY
     posted_month,
     job_title_short,
-    remote_status;
-
-
-
+    remote_status

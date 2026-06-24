@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+
+.env
+data/
+logs/
+python_training/
+src/
+sql/sql_training/

@@ -458,6 +458,8 @@ The app is prepared for Fly.io deployment, but no paid resources or real deploym
 
 This repository now includes a recruiter-friendly Streamlit application with two sections:
 
+The portfolio uses anonymous Google Analytics 4 usage analytics to understand page visits and safe aggregate interactions. It does not send filter selections, search values, salary selections, company selections, email addresses, or form content.
+
 * `app.py`: project overview, business problem, pipeline explanation, source tables, model layers, quality checks, limitations, and developer positioning.
 * `pages/1_Interactive_Job_Market_Dashboard.py`: interactive dashboard with KPI cards, filters, Plotly charts, and plain-English chart explanations.
 

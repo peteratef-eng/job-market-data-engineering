@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import streamlit as st
 
+from ui.analytics import initialize_analytics
 from ui.components import sidebar_bottom
 from ui.navigation import portfolio_navigation
 from ui.styles import inject_global_styles
@@ -21,6 +22,7 @@ st.set_page_config(
 
 theme = current_theme()
 inject_global_styles(theme)
+initialize_analytics()
 
 navigation = portfolio_navigation()
 sidebar_bottom()

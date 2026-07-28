@@ -221,6 +221,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .page-header-overview {{
             margin-top: 1rem;
         }}
+        .page-header-home .product-kicker {{
+            color: #17367D;
+            border-color: #B8CEF4;
+            font-size: .96rem;
+            font-weight: 700;
+            padding: .5rem .875rem;
+            white-space: normal;
+        }}
         .page-header-overview {{
             margin-top: 1.55rem;
         }}

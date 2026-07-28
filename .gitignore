@@ -5,6 +5,11 @@ __pycache__/
 
 .env
 data/
+!data/
+data/*
+!data/dashboard/
+!data/dashboard/*.csv
+!data/dashboard/*.json
 logs/
 python_training/
 src/*

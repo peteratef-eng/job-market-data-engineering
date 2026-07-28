@@ -1,0 +1,13 @@
+.git
+.venv
+__pycache__
+*.pyc
+.env
+logs
+python_training
+recap
+sql/sql_training
+data/company_dim.csv
+data/job_postings_fact.csv
+data/skills_dim.csv
+data/skills_job_dim.csv

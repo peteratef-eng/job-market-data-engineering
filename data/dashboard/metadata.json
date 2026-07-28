@@ -1,0 +1,9 @@
+{
+  "source": "Generated from data/job_postings_fact.csv, company_dim.csv, skills_dim.csv, and skills_job_dim.csv",
+  "source_job_postings_rows": 1615930,
+  "sample_job_postings_rows": 150000,
+  "sample_job_skills_rows": 667829,
+  "sample_size_requested": 150000,
+  "random_state": 42,
+  "method": "Random sample of source job postings, joined to matching companies and job-skill relationships."
+}

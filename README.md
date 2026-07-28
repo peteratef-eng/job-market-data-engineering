@@ -443,3 +443,246 @@ Future improvements include:
 * Implemented data quality checks and dbt tests for data validation.
 * Generated business insights from 1.6M+ job postings and 7.1M+ job-skill relationships
 * Created project documentation, lineage visualization, and analytics marts using dbt.
+
+---
+
+## Live Demo
+
+Hosted dashboard URL: `https://REPLACE_WITH_YOUR_FLY_APP_URL.fly.dev`
+
+The app is prepared for Fly.io deployment, but no paid resources or real deployment have been created from this repository.
+
+---
+
+## Streamlit Dashboard
+
+This repository now includes a recruiter-friendly Streamlit application with two sections:
+
+* `app.py`: project overview, business problem, pipeline explanation, source tables, model layers, quality checks, limitations, and developer positioning.
+* `pages/1_Interactive_Job_Market_Dashboard.py`: interactive dashboard with KPI cards, filters, Plotly charts, and plain-English chart explanations.
+
+Dashboard features include:
+
+* Total postings, companies, countries, skills, average salary, median salary, remote share, and salary coverage.
+* Filters for job title, country, skill, company, remote status, salary range, and posted date range.
+* Charts for job-title demand, skill demand, top hiring companies, salary by title, salary by country, remote versus on-site salary, monthly posting trends, monthly growth, high-salary skills, and Data Engineer skill demand.
+* Graceful handling for missing data files, missing salaries, null values, empty filter results, and data-loading errors.
+
+---
+
+## Dashboard Screenshots
+
+Add screenshots after deployment or local review:
+
+* `images/dashboard_overview.png`: first viewport of the Project Overview page.
+* `images/dashboard_filters_kpis.png`: sidebar filters with KPI cards.
+* `images/dashboard_skill_salary_trends.png`: skill demand, salary, and monthly trend charts.
+* `images/dashboard_mobile.png`: narrow-screen layout.
+
+---
+
+## Local Installation
+
+Create and activate a virtual environment, then install dependencies:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+If the `python` launcher is not available on Windows, use the existing virtual environment interpreter:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+---
+
+## Environment Variables
+
+Copy `.env.example` to `.env` for local development:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Variables:
+
+* `DATABASE_URL`: optional PostgreSQL connection string for the broader data engineering project.
+* `DASHBOARD_DATA_DIR`: dashboard dataset folder. Defaults to `data/dashboard`.
+* `STREAMLIT_SERVER_PORT`: local Streamlit port. Defaults to `8501`.
+
+Do not commit `.env` or real credentials.
+
+---
+
+## Hosted Demo Dataset
+
+The full raw CSV dataset is too large for many free hosting environments, so the dashboard uses an optimized deployment dataset generated from the real source CSVs.
+
+Generate or refresh it with:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\prepare_dashboard_data.py --sample-size 150000
+```
+
+This creates:
+
+* `data/dashboard/jobs_sample.csv`
+* `data/dashboard/job_skills_sample.csv`
+* `data/dashboard/metadata.json`
+
+The current generated dataset contains 150,000 sampled job postings and 667,829 matching job-skill relationships from 1,615,930 source job postings. The script uses a reproducible random sample and joins the sampled postings to matching company and skill data.
+
+---
+
+## Run the Dashboard
+
+```powershell
+.\.venv\Scripts\streamlit.exe run app.py
+```
+
+Then open:
+
+```text
+http://localhost:8501
+```
+
+---
+
+## Application Architecture
+
+```text
+app.py
+pages/
+  1_Interactive_Job_Market_Dashboard.py
+dashboard/
+  data_loader.py
+  transformations.py
+  charts.py
+  components.py
+scripts/
+  prepare_dashboard_data.py
+.streamlit/
+  config.toml
+data/dashboard/
+  jobs_sample.csv
+  job_skills_sample.csv
+  metadata.json
+```
+
+The Streamlit app is intentionally separate from the existing dbt and SQL workflow. It reads optimized dashboard CSVs, caches data loading, applies filters in Pandas, and renders interactive Plotly charts.
+
+---
+
+## Docker
+
+Build the image:
+
+```powershell
+docker build -t job-market-dashboard .
+```
+
+Run the container:
+
+```powershell
+docker run --rm -p 8501:8501 --env DASHBOARD_DATA_DIR=data/dashboard job-market-dashboard
+```
+
+Open:
+
+```text
+http://localhost:8501
+```
+
+---
+
+## Fly.io Deployment
+
+`fly.toml` is configured with a placeholder app name:
+
+```text
+job-market-data-engineering-dashboard
+```
+
+Replace it with a globally unique Fly.io app name before deployment.
+
+Suggested deployment flow:
+
+```powershell
+fly auth login
+fly apps create YOUR_UNIQUE_APP_NAME
+```
+
+Update `fly.toml`:
+
+```toml
+app = "YOUR_UNIQUE_APP_NAME"
+```
+
+Deploy:
+
+```powershell
+fly deploy
+```
+
+Check status:
+
+```powershell
+fly status
+fly open
+```
+
+Required placeholder to replace:
+
+* `fly.toml` `app`: use your own globally unique Fly.io app name.
+* README Live Demo URL: replace after deployment.
+
+---
+
+## Current Dashboard Limitations
+
+* Hosted charts use the optimized sample dataset, not every raw row.
+* Salary metrics only include postings with non-null yearly salary values.
+* Company rankings may include job boards or aggregators.
+* Remote status is inferred from source fields and may not fully capture hybrid roles.
+* Docker build and Fly.io deployment require Docker/Fly CLI availability on the local machine.
+
+---
+
+## Portfolio Hub
+
+The Streamlit project now works as a personal Data Engineering portfolio with the Job Market Intelligence project as the first featured case study.
+
+Navigation groups:
+
+* Portfolio: Home, About Me, Experience, Skills, Projects, Contact
+* Featured Projects: Job Market Intelligence, Market Dashboard, Data Pipeline, Data Quality
+
+Editable portfolio content is centralized in:
+
+```text
+portfolio/content/profile.py
+portfolio/content/experience.py
+portfolio/content/skills.py
+portfolio/content/projects.py
+```
+
+Resume asset:
+
+```text
+assets/resume/Peter Resume 2026.pdf
+```
+
+## Add a Future Project
+
+To add another project without redesigning the portfolio:
+
+1. Add a new dictionary entry in `portfolio/content/projects.py`.
+2. Fill in `slug`, `title`, descriptions, category, year, status, technologies, key metric, links, and case-study sections.
+3. Add optional images under an assets folder if needed.
+4. Link to a separate deployment through `demo_url` when the project runs outside this repository.
+5. Create a dedicated view only when the project needs a custom case study beyond the shared fields.
+
+The portfolio hub can link to independent deployments, so future projects can use different repositories, hosting targets, or technology stacks.

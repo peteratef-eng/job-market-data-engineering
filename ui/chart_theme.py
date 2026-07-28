@@ -7,8 +7,8 @@ def apply_chart_theme(fig, theme: dict[str, str]):
         paper_bgcolor=theme["chart_bg"],
         plot_bgcolor=theme["chart_bg"],
         font=dict(family="Inter, Segoe UI, Arial", size=13, color=theme["secondary_text"]),
-        title=None,
-        margin=dict(l=10, r=10, t=18, b=12),
+        title=dict(text=""),
+        margin=dict(l=90, r=80, t=14, b=58),
         legend=dict(
             bgcolor="rgba(0,0,0,0)",
             font=dict(color=theme["secondary_text"]),
@@ -30,13 +30,13 @@ def apply_chart_theme(fig, theme: dict[str, str]):
         zeroline=False,
         linecolor=theme["border"],
         tickfont=dict(color=theme["secondary_text"]),
-        title_font=dict(color=theme["muted_text"]),
+        title_font=dict(color=theme["muted_text"], size=13),
     )
     fig.update_yaxes(
         showgrid=False,
         zeroline=False,
         linecolor=theme["border"],
         tickfont=dict(color=theme["secondary_text"]),
-        title_font=dict(color=theme["muted_text"]),
+        title_font=dict(color=theme["muted_text"], size=13),
     )
     return fig

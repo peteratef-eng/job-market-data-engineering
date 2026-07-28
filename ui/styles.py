@@ -221,6 +221,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .page-header-overview {{
             margin-top: 1rem;
         }}
+        .page-header-overview {{
+            margin-top: 1.55rem;
+        }}
+        .page-header-overview .product-kicker {{
+            margin-bottom: .8rem;
+        }}
         .product-kicker {{
             display: inline-flex;
             align-items: center;
@@ -374,6 +380,29 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
         }}
         .challenge-chip {{ padding: .42rem .7rem; }}
+        .skill-card {{
+            overflow: visible;
+            height: auto;
+        }}
+        .skill-chip-wrap {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: .55rem .5rem;
+            align-items: flex-start;
+            max-width: 100%;
+            min-width: 0;
+            overflow: visible;
+        }}
+        .skill-chip {{
+            display: inline-flex;
+            align-items: center;
+            max-width: 100%;
+            min-width: 0;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            line-height: 1.3;
+            padding: .46rem .72rem;
+        }}
         .meta-pill {{
             display: inline-flex;
             align-items: center;

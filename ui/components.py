@@ -273,12 +273,14 @@ def timeline_entry(entry: dict) -> None:
 
 
 def skill_group_card(title: str, skills: list[str]) -> None:
-    skills_markup = "".join(f'<span class="challenge-chip">{html.escape(skill)}</span>' for skill in skills)
+    skills_markup = "".join(
+        f'<span class="challenge-chip skill-chip">{html.escape(skill)}</span>' for skill in skills
+    )
     st.markdown(
         f"""
-        <div class="section-card">
+        <div class="section-card skill-card">
             <div class="section-title">{html.escape(title)}</div>
-            <div>{skills_markup}</div>
+            <div class="skill-chip-wrap">{skills_markup}</div>
         </div>
         """,
         unsafe_allow_html=True,

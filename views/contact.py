@@ -20,7 +20,7 @@ with badge_cols[0]:
 with badge_cols[1]:
     st.caption(f"Based in {PROFILE['location']}")
 
-email_url = f"mailto:{PROFILE['email']}" if PROFILE.get("email") else ""
+footer_email_url = "https://mail.google.com/mail/?view=cm&fs=1&to=peterattef763@gmail.com"
 send_email_url = "https://mail.google.com/mail/?view=cm&fs=1&to=peterattef763@gmail.com"
 linkedin_url = PROFILE.get("linkedin_url", "")
 github_url = PROFILE.get("github_url", "")
@@ -69,8 +69,8 @@ st.caption(PROFILE["availability"])
 
 footer_links = st.columns([0.12, 0.16, 0.14, 0.58])
 with footer_links[0]:
-    if email_url:
-        st.link_button("Email", email_url)
+    if footer_email_url:
+        st.link_button("Email", footer_email_url)
 with footer_links[1]:
     if linkedin_url.startswith("https://"):
         st.link_button("LinkedIn", linkedin_url)

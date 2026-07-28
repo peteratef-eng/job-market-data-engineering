@@ -19,6 +19,8 @@ KPI_ICONS = {
     "Salary coverage": "%",
 }
 
+FOOTER_EMAIL_URL = "https://mail.google.com/mail/?view=cm&fs=1&to=peterattef763@gmail.com"
+
 
 def app_header(kicker: str, title: str, subtitle: str, location: str) -> dict[str, str]:
     st.markdown(
@@ -112,7 +114,7 @@ def active_filter_chips(
 def footer() -> None:
     links = []
     if PROFILE.get("email"):
-        links.append(f'<a href="mailto:{html.escape(PROFILE["email"])}">Email</a>')
+        links.append(f'<a href="{FOOTER_EMAIL_URL}" target="_blank" rel="noreferrer">Email</a>')
     if PROFILE.get("linkedin_url"):
         links.append(f'<a href="{html.escape(PROFILE["linkedin_url"])}" target="_blank" rel="noreferrer">LinkedIn</a>')
     if PROFILE.get("github_url"):

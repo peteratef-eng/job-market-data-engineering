@@ -44,7 +44,7 @@ def sidebar_brand() -> None:
         <div class="sidebar-brand">
             {profile_photo}
             <div>
-                <div class="brand-title">Peter</div>
+                <div class="brand-title">{html.escape(PROFILE["full_name"])}</div>
                 <div class="brand-subtitle">Junior Data Engineer</div>
             </div>
         </div>

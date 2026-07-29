@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import html
 from pathlib import Path
+from textwrap import dedent
 
 import streamlit as st
 
@@ -387,28 +388,43 @@ def project_card(project: dict, *, actions: bool = False, featured: bool = False
     )
 
 
-def timeline_entry(entry: dict, class_name: str = "") -> None:
+def _experience_card_html(entry: dict, class_name: str = "") -> str:
     responsibilities = "".join(
         f"<li>{html.escape(item)}</li>" for item in entry.get("responsibilities", [])
     )
     technologies = "".join(
         f'<span class="meta-pill">{html.escape(item)}</span>' for item in entry.get("technologies", [])
     )
-    classes = " ".join(["timeline-card", class_name]).strip()
+    classes = " ".join(["timeline-card", "experience-card", class_name]).strip()
     tabindex = ' tabindex="0"' if class_name else ""
-    st.markdown(
+    summary = (
+        f'<div class="section-copy">{html.escape(entry["summary"])}</div>'
+        if entry.get("summary")
+        else ""
+    )
+    return dedent(
         f"""
-        <div class="{html.escape(classes)}"{tabindex}>
-            <div class="timeline-date">{html.escape(entry["start_date"])} - {html.escape(entry["end_date"])}</div>
-            <div class="project-title">{html.escape(entry["role"])}</div>
-            <div class="project-meta">{html.escape(entry["company"])} | {html.escape(entry.get("location", ""))}</div>
-            {f'<div class="section-copy">{html.escape(entry["summary"])}</div>' if entry.get("summary") else ""}
-            <ul>{responsibilities}</ul>
-            <div>{technologies}</div>
-        </div>
-        """,
+        <article class="{html.escape(classes)}"{tabindex}>
+        <div class="timeline-date">{html.escape(entry["start_date"])} - {html.escape(entry["end_date"])}</div>
+        <div class="project-title">{html.escape(entry["role"])}</div>
+        <div class="project-meta">{html.escape(entry["company"])} | {html.escape(entry.get("location", ""))}</div>
+        {summary}
+        <ul class="experience-list">{responsibilities}</ul>
+        <div class="experience-tags">{technologies}</div>
+        </article>
+        """
+    ).strip()
+
+
+def render_experience_card(entry: dict, class_name: str = "") -> None:
+    st.markdown(
+        _experience_card_html(entry, class_name=class_name),
         unsafe_allow_html=True,
     )
+
+
+def timeline_entry(entry: dict, class_name: str = "") -> None:
+    render_experience_card(entry, class_name=class_name)
 
 
 def skill_group_card(title: str, skills: list[str], class_name: str = "") -> None:

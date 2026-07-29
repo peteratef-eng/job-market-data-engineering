@@ -193,7 +193,7 @@ st.subheader("Demand")
 chart_card("Most In-Demand Job Titles", "Role categories with the highest posting volume after filtering.")
 st.plotly_chart(
     charts.bar(top_counts(filtered_jobs, "job_title_short"), "job_title_short", "postings", "Most In-Demand Job Titles", theme),
-    width="stretch",
+    use_container_width=True,
     key="market_dashboard_job_title_demand",
 )
 insight("Shows which role categories appear most often after the current filters.")
@@ -201,7 +201,7 @@ insight("Shows which role categories appear most often after the current filters
 chart_card("Top Hiring Companies", "Companies or platforms with the most matching postings.")
 st.plotly_chart(
     charts.bar(top_counts(filtered_jobs, "clean_company_name"), "clean_company_name", "postings", "Top Hiring Companies", theme),
-    width="stretch",
+    use_container_width=True,
     key="market_dashboard_company_activity",
 )
 insight("Company rankings may include job boards or aggregators, which is a known source limitation.")
@@ -215,7 +215,7 @@ st.caption(
 chart_card("Average Salary by Job Title", "Salary averages by role where enough yearly salary data exists.")
 st.plotly_chart(
     charts.salary_bar(salary_by_dimension(filtered_jobs, "job_title_short"), "job_title_short", "Average Salary by Job Title", theme),
-    width="stretch",
+    use_container_width=True,
     key="market_dashboard_salary_by_job_title",
 )
 insight("Uses only postings with yearly salary values and hides groups with fewer than three salary records.")
@@ -223,7 +223,7 @@ insight("Uses only postings with yearly salary values and hides groups with fewe
 chart_card("Average Salary by Country", "Country-level salary comparison where enough salary data exists.")
 st.plotly_chart(
     charts.salary_bar(salary_by_dimension(filtered_jobs, "job_country"), "job_country", "Average Salary by Country", theme),
-    width="stretch",
+    use_container_width=True,
     key="market_dashboard_salary_by_country",
 )
 insight("Compares salary levels by country where enough salary data exists.")
@@ -231,7 +231,7 @@ insight("Compares salary levels by country where enough salary data exists.")
 chart_card("Remote vs On-site Salary", "Salary averages by work-mode classification.")
 st.plotly_chart(
     charts.remote_salary_chart(remote_salary(filtered_jobs), theme),
-    width="stretch",
+    use_container_width=True,
     key="market_dashboard_remote_salary",
 )
 insight("Compares salary averages for remote, on-site, and unknown-location postings.")
@@ -241,7 +241,7 @@ trend = monthly_trends(filtered_jobs)
 chart_card("Job Posting Trends Over Time", "Monthly posting volume for the selected market segment.")
 st.plotly_chart(
     charts.line(trend, "posted_month", "total_jobs", "Job Posting Trends Over Time", theme),
-    width="stretch",
+    use_container_width=True,
     key="market_dashboard_monthly_posting_trend",
 )
 insight("Tracks posting volume over time for the selected market segment.")
@@ -249,7 +249,7 @@ insight("Tracks posting volume over time for the selected market segment.")
 chart_card("Monthly Job-Market Growth", "Month-over-month percentage change in matching postings.")
 st.plotly_chart(
     charts.line(trend.dropna(subset=["job_growth_percentage"]), "posted_month", "job_growth_percentage", "Monthly Job-Market Growth", theme),
-    width="stretch",
+    use_container_width=True,
     key="market_dashboard_monthly_growth",
 )
 insight("Shows month-over-month percentage change. Volatility can reflect seasonality or source coverage changes.")
@@ -258,7 +258,7 @@ st.subheader("Technical Skills")
 chart_card("Most In-Demand Technical Skills", "Unique postings connected to each skill in the selected market.")
 st.plotly_chart(
     charts.bar(top_skills(filtered_skills), "clean_skill_name", "postings", "Most In-Demand Technical Skills", theme),
-    width="stretch",
+    use_container_width=True,
     key="market_dashboard_technical_skill_demand",
 )
 insight("Counts unique postings connected to each skill, helping recruiters see core technical demand.")
@@ -270,7 +270,7 @@ st.caption(
 chart_card("Skills Associated With Highest Salaries", "Skills ranked by average yearly salary where salary data exists.")
 st.plotly_chart(
     charts.salary_bar(high_salary_skills(filtered_jobs, filtered_skills), "clean_skill_name", "Skills Associated With Highest Salaries", theme),
-    width="stretch",
+    use_container_width=True,
     key="market_dashboard_high_salary_skills",
 )
 insight("Ranks skills by average yearly salary among postings with salary data.")
@@ -280,7 +280,7 @@ data_engineer_jobs = filtered_jobs[filtered_jobs["job_title_short"].eq("Data Eng
 data_engineer_skills = skills_for_jobs(filtered_skills, data_engineer_jobs)
 st.plotly_chart(
     charts.bar(top_skills(data_engineer_skills), "clean_skill_name", "postings", "Data Engineer Skill Demand", theme),
-    width="stretch",
+    use_container_width=True,
     key="market_dashboard_data_engineer_skill_demand",
 )
 insight("Focuses on Data Engineer postings in the current filter context.")

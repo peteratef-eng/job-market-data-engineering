@@ -646,10 +646,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             transform: none !important;
             filter: none !important;
         }}
-        div[data-testid="stPlotlyChart"] svg {{
-            shape-rendering: geometricPrecision;
-            text-rendering: optimizeLegibility;
-        }}
         .insight {{
             color: var(--muted);
             border-left: 3px solid var(--accent);

@@ -66,7 +66,6 @@ except Exception:
     azure_postings = None
     unique_skills = None
 
-hero_photo = asset_data_uri(HERO_PHOTO_PATH, "image/jpeg")
 preview_image = asset_data_uri(PROJECT_PREVIEW_PATH, "image/png")
 resume_href = asset_data_uri(RESUME_PATH, "application/pdf")
 resume_attr = ' download="Peter_Atef_Resume_2026.pdf"' if resume_href else ""
@@ -74,15 +73,10 @@ resume_link = resume_href or html.escape(PROFILE["resume_path"])
 tech_stack = " - ".join(project["technologies"][:6])
 specialty_markup = "".join(f'<span class="meta-pill">{html.escape(item)}</span>' for item in SPECIALTIES[:6])
 
-hero_image_markup = (
-    f'<img class="hero-photo" src="{hero_photo}" alt="Portrait of Peter Atef, Junior Data Engineer">'
-    if hero_photo
-    else '<div class="hero-photo hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>'
-)
-
-st.markdown(
-    f"""
-    <section class="portfolio-hero">
+hero_cols = st.columns([1.2, .8], vertical_alignment="center")
+with hero_cols[0]:
+    st.markdown(
+        f"""
         <div class="hero-copy">
             <div class="hero-kicker">Hi, I'm Peter Atef</div>
             <h1>Junior Data Engineer</h1>
@@ -94,13 +88,29 @@ st.markdown(
             </div>
             <div class="hero-stack">{specialty_markup}</div>
         </div>
-        <div class="hero-photo-shell">
-            {hero_image_markup}
-        </div>
-    </section>
-    """,
-    unsafe_allow_html=True,
-)
+        """,
+        unsafe_allow_html=True,
+    )
+
+with hero_cols[1]:
+    with st.container(key="home_profile_card"):
+        if HERO_PHOTO_PATH.exists():
+            st.markdown('<span class="sr-only">Portrait of Peter Atef, Junior Data Engineer</span>', unsafe_allow_html=True)
+            st.image(str(HERO_PHOTO_PATH), width="stretch")
+        else:
+            st.markdown('<div class="hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="home-profile-copy">
+                <div class="home-profile-name">Peter Atef</div>
+                <div class="home-profile-role">Junior Data Engineer</div>
+                <div class="home-profile-status"><span></span>Open to Opportunities</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+st.markdown('<div class="portfolio-hero-spacer"></div>', unsafe_allow_html=True)
 
 evidence_cards = [
     ("Source Job Postings", format_int(source_rows), "Raw project scale verified in metadata."),
@@ -169,6 +179,46 @@ st.markdown(
         <h2>Skills</h2>
         <p class="home-section-copy">Grouped by the data engineering workflow areas demonstrated across my project and professional background.</p>
         <div class="home-skills-grid">{skills_markup}</div>
+    </section>
+    """,
+    unsafe_allow_html=True,
+)
+
+live_pipeline_steps = [
+    ("Raw Job Data", "Source job postings and skill relationships.", "DB"),
+    ("Python Cleaning", "Normalize fields and prepare reliable records.", "PY"),
+    ("PostgreSQL", "Store structured, query-ready data.", "SQL"),
+    ("dbt Models", "Build staging and analytical marts.", "dbt"),
+    ("Data Quality", "Validate relationships, calculations, and outputs.", "QA"),
+    ("Market Dashboard", "Deliver trusted insights for interactive analysis.", "UI"),
+]
+live_pipeline_markup = ""
+for index, (title, body, icon) in enumerate(live_pipeline_steps, start=1):
+    live_pipeline_markup += (
+        f'<div class="home-pipeline-stage pipeline-stage-{index}" tabindex="0">'
+        '<div class="home-pipeline-stage-inner">'
+        f'<div class="home-pipeline-icon">{html.escape(icon)}</div>'
+        f'<div class="home-pipeline-stage-name">{html.escape(title)}</div>'
+        f'<div class="home-pipeline-stage-copy">{html.escape(body)}</div>'
+        '</div>'
+        '</div>'
+    )
+    if index < len(live_pipeline_steps):
+        live_pipeline_markup += (
+            f'<div class="home-pipeline-connector pipeline-connector-{index}" aria-hidden="true">'
+            '<span class="home-pipeline-particle"></span>'
+            '</div>'
+        )
+
+st.markdown(
+    f"""
+    <section class="home-section home-pipeline-section">
+        <div class="section-eyebrow">Data Pipeline</div>
+        <h2>From Raw Data to Reliable Insights</h2>
+        <p class="home-section-copy">A visual overview of how raw job-market records are cleaned, modeled, validated, and delivered for analysis.</p>
+        <div class="home-pipeline-track" aria-label="Data pipeline flow">
+            {live_pipeline_markup}
+        </div>
     </section>
     """,
     unsafe_allow_html=True,

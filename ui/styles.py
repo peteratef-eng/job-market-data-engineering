@@ -309,6 +309,20 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-copy {{
             min-width: 0;
         }}
+        .sr-only {{
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }}
+        .portfolio-hero-spacer {{
+            height: 1.15rem;
+        }}
         .hero-kicker,
         .section-eyebrow {{
             color: var(--accent);
@@ -412,6 +426,75 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             color: var(--tag-text);
             font-size: 3rem;
             font-weight: 800;
+        }}
+        .st-key-home_profile_card {{
+            width: min(100%, 360px);
+            margin: 1rem auto 0;
+            padding: 1rem 1rem 1.05rem;
+            border: 1px solid rgba(37, 99, 235, .22);
+            border-radius: 18px;
+            background:
+                radial-gradient(circle at 72% 12%, rgba(37, 99, 235, .14), transparent 34%),
+                linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(248, 250, 252, .92));
+            box-shadow: 0 18px 38px rgba(37, 99, 235, .12);
+            overflow: hidden;
+            transform-origin: center center;
+            transition:
+                transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 260ms ease,
+                box-shadow 260ms ease;
+        }}
+        .st-key-home_profile_card [data-testid="stImage"] {{
+            margin: 0 auto;
+        }}
+        .st-key-home_profile_card img {{
+            display: block;
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 14px;
+            border: 1px solid rgba(37, 99, 235, .16);
+            box-shadow: var(--shadow);
+            transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+        }}
+        .home-profile-copy {{
+            text-align: center;
+            padding-top: .85rem;
+        }}
+        .home-profile-name {{
+            color: var(--text);
+            font-size: 1.22rem;
+            line-height: 1.2;
+            font-weight: 800;
+            transition: color 260ms ease;
+        }}
+        .home-profile-role {{
+            color: var(--text-2);
+            font-size: .94rem;
+            line-height: 1.35;
+            margin-top: .18rem;
+        }}
+        .home-profile-status {{
+            display: inline-flex;
+            align-items: center;
+            gap: .38rem;
+            color: var(--tag-text);
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: .34rem .58rem;
+            font-size: .78rem;
+            font-weight: 700;
+            margin-top: .7rem;
+        }}
+        .home-profile-status span {{
+            width: .48rem;
+            height: .48rem;
+            border-radius: 999px;
+            background: var(--positive);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 20%, transparent);
+            transition: box-shadow 260ms ease;
         }}
         .project-evidence-strip {{
             display: grid;
@@ -562,6 +645,159 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 600;
             line-height: 1.25;
             overflow-wrap: anywhere;
+        }}
+        .home-pipeline-section {{
+            overflow: hidden;
+        }}
+        .home-pipeline-track {{
+            display: grid;
+            grid-template-columns:
+                minmax(112px, 1fr) 34px minmax(112px, 1fr) 34px minmax(112px, 1fr)
+                34px minmax(112px, 1fr) 34px minmax(112px, 1fr) 34px minmax(112px, 1fr);
+            align-items: center;
+            gap: .45rem;
+            margin-top: 1rem;
+            overflow: visible;
+        }}
+        .home-pipeline-stage {{
+            min-width: 0;
+            opacity: .82;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            transform-origin: center center;
+            translate: 0 0;
+            scale: 1;
+            animation: home-pipeline-stage-cycle 10s ease-in-out infinite;
+            transition:
+                border-color 220ms ease,
+                box-shadow 220ms ease;
+        }}
+        .home-pipeline-stage-inner {{
+            min-height: 150px;
+            padding: .9rem .75rem;
+            transform-origin: center center;
+            transition: transform 220ms ease;
+        }}
+        .home-pipeline-icon {{
+            width: 2.15rem;
+            height: 2.15rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            font-size: .78rem;
+            font-weight: 800;
+            margin-bottom: .6rem;
+        }}
+        .home-pipeline-stage-name {{
+            color: var(--text);
+            font-size: .96rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }}
+        .home-pipeline-stage-copy {{
+            color: var(--text-2);
+            font-size: .82rem;
+            line-height: 1.45;
+            margin-top: .38rem;
+        }}
+        .home-pipeline-connector {{
+            position: relative;
+            height: 3px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(148, 163, 184, .35), rgba(37, 99, 235, .42), rgba(148, 163, 184, .35));
+            background-size: 220% 100%;
+            animation: home-pipeline-flow-line 10s linear infinite;
+            overflow: visible;
+        }}
+        .home-pipeline-particle {{
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: .48rem;
+            height: .48rem;
+            border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 12px rgba(37, 99, 235, .44);
+            transform: translate(-50%, -50%);
+            animation: home-pipeline-particle-flow 10s linear infinite;
+        }}
+        .pipeline-stage-1,
+        .pipeline-connector-1 .home-pipeline-particle {{ animation-delay: 0s; }}
+        .pipeline-stage-2,
+        .pipeline-connector-2 .home-pipeline-particle {{ animation-delay: 1.65s; }}
+        .pipeline-stage-3,
+        .pipeline-connector-3 .home-pipeline-particle {{ animation-delay: 3.3s; }}
+        .pipeline-stage-4,
+        .pipeline-connector-4 .home-pipeline-particle {{ animation-delay: 4.95s; }}
+        .pipeline-stage-5,
+        .pipeline-connector-5 .home-pipeline-particle {{ animation-delay: 6.6s; }}
+        .pipeline-stage-6 {{ animation-delay: 8.25s; }}
+        @keyframes home-pipeline-stage-cycle {{
+            0%, 16%, 100% {{
+                opacity: .82;
+                border-color: var(--border);
+                box-shadow: var(--shadow);
+                translate: 0 0;
+                scale: 1;
+            }}
+            5%, 11% {{
+                opacity: 1;
+                border-color: rgba(37, 99, 235, 0.50);
+                box-shadow: 0 12px 28px rgba(37, 99, 235, 0.16);
+                translate: 0 -3px;
+                scale: 1.015;
+            }}
+        }}
+        @keyframes home-pipeline-flow-line {{
+            0% {{ background-position: 100% 50%; }}
+            100% {{ background-position: -120% 50%; }}
+        }}
+        @keyframes home-pipeline-particle-flow {{
+            0%, 14% {{
+                opacity: 0;
+                left: 0;
+            }}
+            18%, 32% {{
+                opacity: 1;
+            }}
+            42%, 100% {{
+                opacity: 0;
+                left: 100%;
+            }}
+        }}
+        @media (hover: hover) and (pointer: fine) {{
+            .st-key-home_profile_card:hover,
+            .st-key-home_profile_card:focus-within {{
+                transform: translateY(-6px) scale(1.025);
+                border-color: rgba(37, 99, 235, 0.50);
+                box-shadow: 0 20px 44px rgba(37, 99, 235, 0.18);
+            }}
+            .st-key-home_profile_card:hover img,
+            .st-key-home_profile_card:focus-within img {{
+                transform: scale(1.015);
+            }}
+            .st-key-home_profile_card:hover .home-profile-name,
+            .st-key-home_profile_card:focus-within .home-profile-name {{
+                color: var(--accent);
+            }}
+            .st-key-home_profile_card:hover .home-profile-status span,
+            .st-key-home_profile_card:focus-within .home-profile-status span {{
+                box-shadow: 0 0 0 4px color-mix(in srgb, var(--positive) 24%, transparent), 0 0 14px color-mix(in srgb, var(--positive) 45%, transparent);
+            }}
+            .home-pipeline-stage:hover,
+            .home-pipeline-stage:focus-within {{
+                border-color: rgba(37, 99, 235, 0.55);
+                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16);
+            }}
+            .home-pipeline-stage:hover .home-pipeline-stage-inner,
+            .home-pipeline-stage:focus-within .home-pipeline-stage-inner {{
+                transform: translateY(-4px) scale(1.02);
+            }}
         }}
         .pipeline-step-grid,
         .insight-card-grid {{
@@ -1382,12 +1618,41 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 order: -1;
                 width: min(100%, 300px);
             }}
+            .st-key-home_profile_card {{
+                width: min(100%, 300px);
+                transform: none;
+            }}
+            .home-pipeline-stage {{
+                translate: 0 0;
+                scale: 1;
+            }}
             .project-evidence-strip,
             .home-about-grid,
             .home-skills-grid,
             .pipeline-step-grid,
             .insight-card-grid {{
                 grid-template-columns: 1fr;
+            }}
+            .home-pipeline-track {{
+                grid-template-columns: 1fr;
+                gap: .45rem;
+            }}
+            .home-pipeline-stage-inner {{
+                min-height: 0;
+                padding: .9rem;
+            }}
+            .home-pipeline-connector {{
+                width: 3px;
+                height: 30px;
+                margin: 0 auto;
+                background: linear-gradient(180deg, rgba(148, 163, 184, .35), rgba(37, 99, 235, .42), rgba(148, 163, 184, .35));
+                background-size: 100% 220%;
+                animation-name: home-pipeline-flow-line-mobile;
+            }}
+            .home-pipeline-particle {{
+                top: 0;
+                left: 50%;
+                animation-name: home-pipeline-particle-flow-mobile;
             }}
             .contact-cta {{
                 grid-template-columns: 1fr;
@@ -1425,6 +1690,23 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .section-card {{ padding: 1rem; }}
             .kpi-card {{ min-height: 118px; }}
         }}
+        @keyframes home-pipeline-flow-line-mobile {{
+            0% {{ background-position: 50% 100%; }}
+            100% {{ background-position: 50% -120%; }}
+        }}
+        @keyframes home-pipeline-particle-flow-mobile {{
+            0%, 14% {{
+                opacity: 0;
+                top: 0;
+            }}
+            18%, 32% {{
+                opacity: 1;
+            }}
+            42%, 100% {{
+                opacity: 0;
+                top: 100%;
+            }}
+        }}
         @media (prefers-reduced-motion: reduce) {{
             *, *::before, *::after {{
                 transition-duration: 0.01ms !important;
@@ -1436,6 +1718,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .about-hover-card:focus-within,
             .experience-hover-card:hover,
             .experience-hover-card:focus-within,
+            .st-key-home_profile_card,
+            .st-key-home_profile_card:hover,
+            .st-key-home_profile_card:focus-within,
+            .st-key-home_profile_card img,
+            .home-pipeline-stage,
+            .home-pipeline-stage:hover,
+            .home-pipeline-stage:focus-within,
+            .home-pipeline-stage-inner,
+            .home-pipeline-stage:hover .home-pipeline-stage-inner,
+            .home-pipeline-stage:focus-within .home-pipeline-stage-inner,
+            .home-pipeline-connector,
+            .home-pipeline-particle,
             .sidebar-brand:hover,
             .sidebar-brand:focus-within,
             .home-card:hover,
@@ -1477,6 +1771,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 transition: none !important;
                 opacity: 1 !important;
                 translate: 0 0 !important;
+                scale: 1 !important;
+            }}
+            .home-pipeline-stage,
+            .st-key-home_profile_card {{
+                opacity: 1 !important;
+            }}
+            .home-pipeline-particle {{
+                display: none;
             }}
         }}
         </style>

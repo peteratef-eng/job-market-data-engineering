@@ -1127,6 +1127,74 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             padding: .9rem 1rem .35rem;
             margin-top: .8rem;
         }}
+        .st-key-market_dashboard_chart_job_title_demand,
+        .st-key-market_dashboard_chart_company_activity,
+        .st-key-market_dashboard_chart_salary_by_job_title,
+        .st-key-market_dashboard_chart_salary_by_country,
+        .st-key-market_dashboard_chart_remote_salary,
+        .st-key-market_dashboard_chart_monthly_posting_trend,
+        .st-key-market_dashboard_chart_monthly_growth,
+        .st-key-market_dashboard_chart_technical_skill_demand,
+        .st-key-market_dashboard_chart_high_salary_skills,
+        .st-key-market_dashboard_chart_data_engineer_skill_demand {{
+            opacity: 1;
+            translate: 0 0;
+            transform-origin: center center;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            overflow: visible;
+            transition:
+                transform 220ms ease,
+                border-color 220ms ease,
+                box-shadow 220ms ease;
+        }}
+        @supports (animation-timeline: view()) {{
+            .st-key-market_dashboard_chart_job_title_demand,
+            .st-key-market_dashboard_chart_company_activity,
+            .st-key-market_dashboard_chart_salary_by_job_title,
+            .st-key-market_dashboard_chart_salary_by_country,
+            .st-key-market_dashboard_chart_remote_salary,
+            .st-key-market_dashboard_chart_monthly_posting_trend,
+            .st-key-market_dashboard_chart_monthly_growth,
+            .st-key-market_dashboard_chart_technical_skill_demand,
+            .st-key-market_dashboard_chart_high_salary_skills,
+            .st-key-market_dashboard_chart_data_engineer_skill_demand {{
+                opacity: 0;
+                translate: -45px 0;
+                animation: chart-scroll-reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+                animation-timeline: view();
+                animation-range: entry 12% entry 32%;
+                will-change: opacity, translate;
+            }}
+        }}
+        @keyframes chart-scroll-reveal {{
+            from {{
+                opacity: 0;
+                translate: -45px 0;
+            }}
+            to {{
+                opacity: 1;
+                translate: 0 0;
+            }}
+        }}
+        @media (hover: hover) and (pointer: fine) {{
+            .st-key-market_dashboard_chart_job_title_demand:hover,
+            .st-key-market_dashboard_chart_company_activity:hover,
+            .st-key-market_dashboard_chart_salary_by_job_title:hover,
+            .st-key-market_dashboard_chart_salary_by_country:hover,
+            .st-key-market_dashboard_chart_remote_salary:hover,
+            .st-key-market_dashboard_chart_monthly_posting_trend:hover,
+            .st-key-market_dashboard_chart_monthly_growth:hover,
+            .st-key-market_dashboard_chart_technical_skill_demand:hover,
+            .st-key-market_dashboard_chart_high_salary_skills:hover,
+            .st-key-market_dashboard_chart_data_engineer_skill_demand:hover {{
+                transform: translateY(-3px) scale(1.008);
+                border-color: rgba(37, 99, 235, 0.40);
+                box-shadow: 0 16px 34px rgba(37, 99, 235, 0.14);
+                position: relative;
+                z-index: 2;
+            }}
+        }}
         .insight {{
             color: var(--muted);
             border-left: 3px solid var(--accent);
@@ -1331,6 +1399,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-actions .portfolio-button {{
                 flex: 1 1 13rem;
             }}
+            .st-key-market_dashboard_chart_job_title_demand,
+            .st-key-market_dashboard_chart_company_activity,
+            .st-key-market_dashboard_chart_salary_by_job_title,
+            .st-key-market_dashboard_chart_salary_by_country,
+            .st-key-market_dashboard_chart_remote_salary,
+            .st-key-market_dashboard_chart_monthly_posting_trend,
+            .st-key-market_dashboard_chart_monthly_growth,
+            .st-key-market_dashboard_chart_technical_skill_demand,
+            .st-key-market_dashboard_chart_high_salary_skills,
+            .st-key-market_dashboard_chart_data_engineer_skill_demand {{
+                animation: none !important;
+                opacity: 1 !important;
+                translate: 0 0 !important;
+                transform: none !important;
+            }}
         }}
         @media (max-width: 860px) {{
             .dataset-metrics {{ grid-template-columns: 1fr; }}
@@ -1378,8 +1461,22 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .pipeline-step-card:hover,
             .pipeline-step-card:focus-within,
             .insight-card:hover,
-            .insight-card:focus-within {{
+            .insight-card:focus-within,
+            .st-key-market_dashboard_chart_job_title_demand,
+            .st-key-market_dashboard_chart_company_activity,
+            .st-key-market_dashboard_chart_salary_by_job_title,
+            .st-key-market_dashboard_chart_salary_by_country,
+            .st-key-market_dashboard_chart_remote_salary,
+            .st-key-market_dashboard_chart_monthly_posting_trend,
+            .st-key-market_dashboard_chart_monthly_growth,
+            .st-key-market_dashboard_chart_technical_skill_demand,
+            .st-key-market_dashboard_chart_high_salary_skills,
+            .st-key-market_dashboard_chart_data_engineer_skill_demand {{
                 transform: none;
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                translate: 0 0 !important;
             }}
         }}
         </style>

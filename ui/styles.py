@@ -186,6 +186,23 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: 100%;
             max-width: 100%;
             min-width: 0;
+            transform-origin: center;
+            transition:
+                transform 240ms ease,
+                border-color 240ms ease,
+                background-color 240ms ease,
+                box-shadow 240ms ease;
+        }}
+        @media (hover: hover) and (pointer: fine) {{
+            .sidebar-brand:hover,
+            .sidebar-brand:focus-within {{
+                transform: translateY(-5px) scale(1.015);
+                border-color: rgba(37, 99, 235, 0.45);
+                background-color: rgba(239, 246, 255, 0.75);
+                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.14);
+                position: relative;
+                z-index: 2;
+            }}
         }}
         .sidebar-brand > div:last-child {{
             min-width: 0;
@@ -930,6 +947,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .about-hover-card:focus-within,
             .experience-hover-card:hover,
             .experience-hover-card:focus-within,
+            .sidebar-brand:hover,
+            .sidebar-brand:focus-within,
             .home-card:hover,
             .home-card:focus-within,
             .skill-card:hover,

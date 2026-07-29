@@ -334,22 +334,23 @@ def inject_global_styles(theme: dict[str, str]) -> None:
 
         .portfolio-hero {{
             display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+            grid-template-columns: minmax(0, 1.55fr) minmax(290px, .75fr);
             align-items: center;
-            gap: clamp(1.4rem, 4vw, 3.6rem);
-            padding: clamp(1.4rem, 4vw, 3rem) 0 1.15rem;
+            column-gap: clamp(2rem, 4vw, 4.5rem);
+            row-gap: 0;
+            padding: clamp(1.35rem, 3vw, 2.2rem) 0 1rem;
             overflow: visible;
         }}
         .data-command-hero {{
             position: relative;
             isolation: isolate;
-            padding: clamp(1.25rem, 4vw, 2.4rem);
+            padding: clamp(1.25rem, 3.6vw, 2.25rem);
             margin: .25rem 0 1rem;
             border: 1px solid rgba(37, 99, 235, .14);
             border-radius: 22px;
             background:
-                radial-gradient(circle at 74% 34%, rgba(37, 99, 235, .12), transparent 34%),
-                radial-gradient(circle at 16% 8%, rgba(6, 182, 212, .08), transparent 30%),
+                radial-gradient(circle at 78% 52%, rgba(37, 99, 235, .11), transparent 31%),
+                radial-gradient(circle at 26% 30%, rgba(6, 182, 212, .075), transparent 28%),
                 linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(248, 250, 252, .90));
             box-shadow: 0 22px 52px rgba(15, 23, 42, .08);
             overflow: hidden;
@@ -358,10 +359,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             position: absolute;
             inset: 0;
             z-index: -3;
-            opacity: .46;
+            opacity: .34;
             background-image:
-                linear-gradient(rgba(37, 99, 235, .055) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(37, 99, 235, .055) 1px, transparent 1px),
+                linear-gradient(rgba(37, 99, 235, .045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, .045) 1px, transparent 1px),
                 linear-gradient(rgba(15, 23, 42, .035) 1px, transparent 1px);
             background-size: 34px 34px;
             mask-image: linear-gradient(135deg, rgba(0, 0, 0, .76), transparent 78%);
@@ -370,16 +371,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: none;
         }}
         .data-background-particle {{
-            position: absolute;
-            z-index: -1;
-            width: .42rem;
-            height: .42rem;
-            border-radius: 999px;
-            background: var(--data-cyan);
-            box-shadow: 0 0 0 3px rgba(6, 182, 212, .10);
-            opacity: 0;
-            pointer-events: none;
-            animation: data-background-particle-flow 9s linear infinite;
+            display: none;
         }}
         .data-background-particle-1 {{
             left: 10%;
@@ -397,13 +389,17 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .hero-copy {{
             min-width: 0;
+            display: flex;
+            flex-direction: column;
+            grid-column: 1;
+            grid-row: 1;
         }}
         .hero-kicker,
         .hero-copy h1,
         .hero-copy > p,
         .hero-value-rotator,
         .hero-actions,
-        .hero-skill-pipeline,
+        .hero-skill-section,
         .hero-profile-card,
         .project-proof-console {{
             animation: home-entrance-rise 520ms ease-out both;
@@ -414,7 +410,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-value-rotator {{ animation-delay: 280ms; }}
         .hero-actions {{ animation-delay: 360ms; }}
         .hero-profile-card {{ animation-delay: 440ms; }}
-        .hero-skill-pipeline {{ animation-delay: 520ms; }}
+        .hero-skill-section {{ animation-delay: 520ms; }}
         .project-proof-console {{ animation-delay: 660ms; }}
         @keyframes home-entrance-rise {{
             from {{ opacity: 0; transform: translateY(.65rem); }}
@@ -445,14 +441,16 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 700;
             letter-spacing: .08em;
             text-transform: uppercase;
-            margin-bottom: .55rem;
+            margin-bottom: 0;
         }}
         .portfolio-hero h1 {{
             color: var(--text);
-            font-size: clamp(2.45rem, 6vw, 4.85rem);
+            font-size: clamp(3.3rem, 5.5vw, 5.15rem);
             line-height: .98;
             font-weight: 750;
-            margin: 0;
+            letter-spacing: -0.045em;
+            max-width: 700px;
+            margin: 1.8rem 0 0;
         }}
         .portfolio-hero p,
         .contact-cta p {{
@@ -461,6 +459,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-size: 1.05rem;
             line-height: 1.7;
             margin: 1rem 0 0;
+        }}
+        .hero-description {{
+            max-width: 720px;
+            margin-top: 2.25rem;
+            line-height: 1.65;
         }}
         .hero-value-rotator {{
             position: relative;
@@ -496,7 +499,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: flex;
             flex-wrap: wrap;
             gap: .7rem;
-            margin-top: 1.25rem;
+            margin-top: 1.4rem;
         }}
         .portfolio-button {{
             display: inline-flex;
@@ -548,6 +551,20 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             gap: .35rem;
             margin-top: 1.15rem;
         }}
+        .hero-skill-section {{
+            grid-column: 1;
+            grid-row: 2;
+            margin-top: 1.5rem;
+            width: min(100%, 760px);
+        }}
+        .hero-skill-label {{
+            margin-bottom: .65rem;
+            color: var(--text-2);
+            font-size: .68rem;
+            font-weight: 750;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+        }}
         .hero-skill-pipeline {{
             position: relative;
             isolation: isolate;
@@ -555,9 +572,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: grid;
             grid-template-columns: minmax(6.2rem, 1fr) minmax(7.2rem, 1fr) minmax(7.4rem, 1fr) minmax(3.4rem, .62fr) minmax(8rem, 1.15fr);
             align-items: center;
-            gap: 1.05rem;
-            width: min(100%, 760px);
-            margin-top: 1.2rem;
+            gap: .95rem;
+            width: 100%;
+            margin-top: 0;
             overflow: visible;
         }}
         .hero-skill-rail {{
@@ -587,7 +604,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             position: relative;
             z-index: 3;
             min-width: 0;
-            min-height: 2.75rem;
+            min-height: 2.8rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -595,7 +612,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border: 1px solid rgba(37, 99, 235, .18);
             border-radius: 10px;
             background: rgba(255, 255, 255, .90);
-            box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
+            box-shadow: 0 6px 14px rgba(15, 23, 42, .045);
             color: var(--text);
             font-size: .76rem;
             font-weight: 850;
@@ -774,20 +791,24 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-profile-card {{
             position: relative;
             justify-self: center;
-            width: min(100%, 360px);
-            padding: 0;
-            border: 1px solid rgba(37, 99, 235, .24);
-            border-radius: 24px;
+            align-self: center;
+            grid-column: 2;
+            grid-row: 1 / span 2;
+            width: min(100%, 340px);
+            padding: .7rem;
+            border: 1px solid rgba(37, 99, 235, .22);
+            border-radius: 22px;
             background:
+                radial-gradient(circle at 75% 88%, rgba(37, 99, 235, 0.10), transparent 34%),
                 linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.88));
-            box-shadow: 0 16px 38px rgba(15, 23, 42, .09);
+            box-shadow: 0 16px 38px rgba(15, 23, 42, 0.10);
             overflow: hidden;
             transform: translateZ(0);
             transform-origin: center center;
             transition:
-                transform 220ms ease,
-                border-color 220ms ease,
-                box-shadow 220ms ease;
+                transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 240ms ease,
+                box-shadow 240ms ease;
         }}
         .hero-profile-card:focus-within {{
             border-color: rgba(37, 99, 235, 0.72);
@@ -795,25 +816,23 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .hero-profile-media {{
             position: relative;
-            padding: 14px 14px 0;
             background: transparent;
         }}
-        .hero-profile-image-accent {{
-            position: absolute;
-            inset: 6px 24px auto;
-            height: 2px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.45), rgba(6, 182, 212, 0.35), transparent);
-            pointer-events: none;
+        .hero-profile-image-wrap {{
+            aspect-ratio: 1 / 1.02;
+            overflow: hidden;
+            border-radius: 17px;
+            background: #eef2f7;
+            border: 1px solid rgba(148, 163, 184, 0.18);
         }}
         .hero-profile-image {{
             display: block;
             width: 100%;
-            aspect-ratio: 4 / 4.15;
+            height: 100%;
             object-fit: cover;
-            object-position: center 28%;
-            border-radius: 18px;
-            border: 1px solid rgba(148, 163, 184, 0.22);
+            object-position: center top;
+            border-radius: 0;
+            border: 0;
             background: #E2E8F0;
             box-shadow: none;
             transform: none;
@@ -822,10 +841,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-profile-identity {{
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            padding: 20px 22px 18px;
+            gap: 0;
+            padding: 1rem .3rem .2rem;
             text-align: left;
-            border-top: 1px solid rgba(148, 163, 184, 0.16);
+            border-top: 0;
         }}
         .hero-profile-heading {{
             display: flex;
@@ -835,23 +854,24 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-profile-name {{
             margin: 0;
             color: #0F172A;
-            font-size: clamp(1.15rem, 1.8vw, 1.35rem);
-            font-weight: 750;
-            line-height: 1.2;
+            font-size: 1.55rem;
+            font-weight: 800;
+            line-height: 1.15;
         }}
         .hero-profile-role {{
-            margin: 0;
-            color: #2563EB;
-            font-size: .96rem;
+            margin: .3rem 0 0;
+            color: var(--text-2);
+            font-size: .98rem;
             font-weight: 650;
-            line-height: 1.35;
+            line-height: 1.3;
         }}
         .hero-profile-meta {{
             display: flex;
             align-items: center;
             justify-content: flex-start;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: .55rem;
+            margin-top: .8rem;
         }}
         .hero-profile-status {{
             display: inline-flex;
@@ -1377,16 +1397,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 transform: translateX(.18rem);
             }}
             .hero-skill-node:hover {{
-                transform: translateY(-2px) scale(1.035);
+                transform: translateY(-2px);
                 border-color: rgba(37, 99, 235, 0.50);
                 box-shadow: 0 10px 22px rgba(37, 99, 235, 0.12);
             }}
             .hero-profile-card:hover {{
-                transform: translateY(-5px) scale(1.018);
-                border-color: rgba(37, 99, 235, 0.58);
-                box-shadow:
-                    0 22px 46px rgba(37, 99, 235, 0.16),
-                    0 0 0 3px rgba(6, 182, 212, 0.05);
+                transform: translateY(-4px) scale(1.012);
+                border-color: rgba(37, 99, 235, 0.42);
+                box-shadow: 0 20px 44px rgba(37, 99, 235, 0.15);
             }}
             .home-profile-info-card:hover,
             .home-profile-info-card:focus-within {{
@@ -2886,6 +2904,24 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             line-height: 1.15;
             margin: 0 0 .7rem;
         }}
+        @media (max-width: 1100px) {{
+            .portfolio-hero {{
+                grid-template-columns: minmax(0, 1.45fr) minmax(280px, .72fr);
+                column-gap: clamp(1.5rem, 3vw, 2.4rem);
+            }}
+            .portfolio-hero h1 {{
+                font-size: clamp(3rem, 5vw, 4.35rem);
+            }}
+            .hero-profile-card {{
+                width: min(100%, 310px);
+            }}
+            .hero-profile-name {{
+                font-size: 1.42rem;
+            }}
+            .hero-skill-section {{
+                width: min(100%, 700px);
+            }}
+        }}
         @media (max-width: 1024px) {{
             .pipeline {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
             .project-evidence-strip {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
@@ -2957,6 +2993,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .portfolio-hero {{
                 grid-template-columns: 1fr;
                 padding-top: 1rem;
+                row-gap: 1.15rem;
             }}
             .data-command-hero {{
                 padding: 1rem;
@@ -2972,17 +3009,38 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-value-rotator {{
                 width: 100%;
             }}
+            .hero-copy,
+            .hero-profile-card,
+            .hero-skill-section {{
+                grid-column: 1;
+                grid-row: auto;
+            }}
+            .portfolio-hero h1 {{
+                font-size: clamp(2.65rem, 15vw, 3.65rem);
+                margin-top: 1.35rem;
+                max-width: 100%;
+            }}
+            .hero-description {{
+                margin-top: 1.35rem;
+            }}
+            .hero-actions {{
+                margin-top: 1.25rem;
+            }}
             .hero-profile-card {{
-                width: min(100%, 310px);
-                margin: .35rem auto 0;
+                width: min(100%, 300px);
+                margin: 0 auto;
                 transform: none;
             }}
             .hero-profile-identity {{
                 text-align: center;
-                padding: 16px 16px 15px;
+                padding: .9rem .2rem .15rem;
             }}
             .hero-profile-meta {{
                 justify-content: center;
+            }}
+            .hero-skill-section {{
+                width: 100%;
+                margin-top: 0;
             }}
             .project-proof-console {{
                 margin-top: .85rem;

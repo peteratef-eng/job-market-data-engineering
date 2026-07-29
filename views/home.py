@@ -99,7 +99,7 @@ st.markdown(
         <div class="hero-copy">
             <div class="hero-kicker">Hi, I'm Peter Atef</div>
             <h1>Junior Data Engineer</h1>
-            <p>I build reliable data pipelines and transform raw, messy data into analytics-ready insights using Python, SQL, PostgreSQL, and dbt.</p>
+            <p class="hero-description">I build reliable data pipelines and transform raw, messy data into analytics-ready insights using Python, SQL, PostgreSQL, and dbt.</p>
             <div class="hero-value-rotator" aria-hidden="true">
                 <span class="hero-value-line hero-value-line-1">Building Reliable Pipelines</span>
                 <span class="hero-value-line hero-value-line-2">Transforming Messy Data</span>
@@ -112,16 +112,14 @@ st.markdown(
                 <a class="portfolio-button" href="{resume_link}"{resume_attr}>DOWNLOAD RESUME</a>
                 <a class="portfolio-button portfolio-button-quiet" href="/contact">CONTACT ME</a>
             </div>
-            <div class="hero-skill-pipeline" aria-label="Data Engineering workflow: ingest through ETL pipelines, process with Python and Pandas, store and query with SQL and PostgreSQL, model with dbt, and deliver analytics-ready data.">
-                {skill_pipeline_markup}
-            </div>
         </div>
         <article class="hero-profile-card">
             <div class="hero-profile-media">
-                <div class="hero-profile-image-accent" aria-hidden="true"></div>
-                {hero_photo_markup}
+                <div class="hero-profile-image-wrap">
+                    {hero_photo_markup}
+                </div>
             </div>
-            <div class="hero-profile-identity">
+            <div class="hero-profile-identity hero-profile-info">
                 <div class="hero-profile-heading">
                     <h2 class="hero-profile-name">Peter Atef</h2>
                     <p class="hero-profile-role">Junior Data Engineer</p>
@@ -132,12 +130,17 @@ st.markdown(
                         Open to opportunities
                     </span>
                     <span class="hero-profile-location">
-                        <span class="hero-profile-location-icon" aria-hidden="true"></span>
                         {html.escape(PROFILE["location"])}
                     </span>
                 </div>
             </div>
         </article>
+        <div class="hero-skill-section">
+            <div class="hero-skill-label">CORE DATA WORKFLOW</div>
+            <div class="hero-skill-pipeline" aria-label="Data Engineering workflow: ingest through ETL pipelines, process with Python and Pandas, store and query with SQL and PostgreSQL, model with dbt, and deliver analytics-ready data.">
+                {skill_pipeline_markup}
+            </div>
+        </div>
     </section>
     <section class="project-proof-console" aria-label="Project evidence">
         <div class="proof-console-status">PROJECT EVIDENCE</div>

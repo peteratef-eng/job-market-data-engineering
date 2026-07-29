@@ -298,6 +298,256 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 400;
         }}
 
+        .portfolio-hero {{
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+            align-items: center;
+            gap: clamp(1.4rem, 4vw, 3.6rem);
+            padding: clamp(1.4rem, 4vw, 3rem) 0 1.15rem;
+            overflow: visible;
+        }}
+        .hero-copy {{
+            min-width: 0;
+        }}
+        .hero-kicker,
+        .section-eyebrow {{
+            color: var(--accent);
+            font-size: .82rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: .55rem;
+        }}
+        .portfolio-hero h1 {{
+            color: var(--text);
+            font-size: clamp(2.45rem, 6vw, 4.85rem);
+            line-height: .98;
+            font-weight: 750;
+            margin: 0;
+        }}
+        .portfolio-hero p,
+        .contact-cta p {{
+            color: var(--text-2);
+            max-width: 680px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 1rem 0 0;
+        }}
+        .hero-actions,
+        .contact-cta-actions {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: .7rem;
+            margin-top: 1.25rem;
+        }}
+        .portfolio-button {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.65rem;
+            padding: .7rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-weight: 700;
+            font-size: .82rem;
+            line-height: 1.15;
+            text-decoration: none;
+            transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+        }}
+        .portfolio-button:hover {{
+            border-color: var(--accent);
+            background: var(--hover);
+            color: var(--accent);
+            text-decoration: none;
+        }}
+        .portfolio-button-primary {{
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--on-accent) !important;
+            box-shadow: var(--shadow-accent);
+        }}
+        .portfolio-button-primary:hover {{
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+            color: var(--on-accent) !important;
+        }}
+        .portfolio-button-quiet {{
+            background: transparent;
+        }}
+        .hero-stack {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: .35rem;
+            margin-top: 1.15rem;
+        }}
+        .hero-photo-shell {{
+            justify-self: center;
+            width: min(100%, 360px);
+            aspect-ratio: 1;
+            border-radius: 34px;
+            padding: 1rem;
+            background:
+                radial-gradient(circle at 72% 18%, rgba(37, 99, 235, .2), transparent 36%),
+                linear-gradient(145deg, rgba(239, 246, 255, .95), rgba(255, 255, 255, .5));
+            border: 1px solid rgba(37, 99, 235, .18);
+            box-shadow: 0 22px 44px rgba(37, 99, 235, .14);
+            overflow: hidden;
+        }}
+        .hero-photo {{
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 26px;
+            box-shadow: var(--shadow);
+        }}
+        .hero-photo-fallback {{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            font-size: 3rem;
+            font-weight: 800;
+        }}
+        .project-evidence-strip {{
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: .8rem;
+            margin: 1.35rem 0 2rem;
+            overflow: visible;
+        }}
+        .project-evidence-card,
+        .featured-project-card,
+        .pipeline-step-card,
+        .insight-card,
+        .contact-cta {{
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }}
+        .project-evidence-card {{
+            padding: .95rem;
+            min-height: 132px;
+        }}
+        .evidence-value {{
+            color: var(--text);
+            font-size: clamp(1.18rem, 2.2vw, 1.55rem);
+            font-weight: 800;
+            line-height: 1.15;
+            overflow-wrap: anywhere;
+        }}
+        .evidence-label {{
+            color: var(--text);
+            font-size: .86rem;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-top: .35rem;
+        }}
+        .evidence-note {{
+            color: var(--muted);
+            font-size: .78rem;
+            line-height: 1.45;
+            margin-top: .45rem;
+        }}
+        .featured-project-card {{
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+            gap: 1.25rem;
+            align-items: center;
+            padding: 1.25rem;
+            margin: 1.4rem 0 2rem;
+            overflow: visible;
+        }}
+        .featured-project-copy h2,
+        .home-section h2,
+        .contact-cta h2 {{
+            color: var(--text);
+            font-size: clamp(1.55rem, 3vw, 2.15rem);
+            line-height: 1.12;
+            margin: 0;
+        }}
+        .featured-project-copy p {{
+            color: var(--text-2);
+            line-height: 1.65;
+            margin: .75rem 0 0;
+        }}
+        .featured-meta {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-top: 1rem;
+        }}
+        .featured-meta span {{
+            display: inline-flex;
+            border: 1px solid var(--border);
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            border-radius: 999px;
+            padding: .34rem .58rem;
+            font-size: .82rem;
+            font-weight: 600;
+            line-height: 1.25;
+        }}
+        .featured-preview {{
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface-2);
+            overflow: hidden;
+            min-height: 230px;
+        }}
+        .featured-preview img {{
+            width: 100%;
+            height: 100%;
+            min-height: 230px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }}
+        .featured-preview-fallback {{
+            min-height: 230px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-weight: 700;
+        }}
+        .home-section {{
+            margin: 2rem 0;
+        }}
+        .pipeline-step-grid,
+        .insight-card-grid {{
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: .85rem;
+            margin-top: 1rem;
+            overflow: visible;
+        }}
+        .pipeline-step-card,
+        .insight-card {{
+            padding: 1rem;
+            min-height: 150px;
+        }}
+        .pipeline-step-name {{
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: .45rem;
+        }}
+        .contact-cta {{
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 1.25rem;
+            margin: 2rem 0 1rem;
+        }}
+
         .section-card, .dataset-card, .challenge-panel, .kpi-card {{
             background: var(--surface);
             border: 1px solid var(--border);
@@ -547,7 +797,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .job-intelligence-hover-card,
         .contact-hover-card,
-        .data-quality-hover-card {{
+        .data-quality-hover-card,
+        .project-evidence-card,
+        .featured-project-card,
+        .pipeline-step-card,
+        .insight-card {{
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -573,7 +827,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .job-intelligence-hover-card .section-title,
         .job-intelligence-hover-card strong,
         .contact-hover-card .section-title,
-        .data-quality-hover-card .section-title {{
+        .data-quality-hover-card .section-title,
+        .project-evidence-card .evidence-label,
+        .featured-project-card h2,
+        .pipeline-step-card .pipeline-step-name,
+        .insight-card .section-title {{
             transition: color 250ms ease;
         }}
         .contact-card-action {{
@@ -645,7 +903,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-hover-card:hover,
             .contact-hover-card:focus-within,
             .data-quality-hover-card:hover,
-            .data-quality-hover-card:focus-within {{
+            .data-quality-hover-card:focus-within,
+            .project-evidence-card:hover,
+            .project-evidence-card:focus-within,
+            .featured-project-card:hover,
+            .featured-project-card:focus-within,
+            .pipeline-step-card:hover,
+            .pipeline-step-card:focus-within,
+            .insight-card:hover,
+            .insight-card:focus-within {{
                 transform: translateY(-5px) scale(1.015);
                 border-color: rgba(37, 99, 235, 0.45);
                 background-color: rgba(239, 246, 255, 0.75);
@@ -660,7 +926,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-hover-card:hover .section-title,
             .contact-hover-card:focus-within .section-title,
             .data-quality-hover-card:hover .section-title,
-            .data-quality-hover-card:focus-within .section-title {{
+            .data-quality-hover-card:focus-within .section-title,
+            .project-evidence-card:hover .evidence-label,
+            .project-evidence-card:focus-within .evidence-label,
+            .featured-project-card:hover h2,
+            .featured-project-card:focus-within h2,
+            .pipeline-step-card:hover .pipeline-step-name,
+            .pipeline-step-card:focus-within .pipeline-step-name,
+            .insight-card:hover .section-title,
+            .insight-card:focus-within .section-title {{
                 color: var(--accent);
             }}
         }}
@@ -670,7 +944,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .pipeline-card,
             .job-intelligence-hover-card,
             .contact-hover-card,
-            .data-quality-hover-card {{
+            .data-quality-hover-card,
+            .project-evidence-card,
+            .featured-project-card,
+            .pipeline-step-card,
+            .insight-card {{
                 transform: none;
                 will-change: auto;
             }}
@@ -964,9 +1242,35 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         @media (max-width: 1024px) {{
             .pipeline {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
+            .project-evidence-strip {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
+            .featured-project-card {{ grid-template-columns: 1fr; }}
+            .featured-preview img {{ max-height: 320px; }}
         }}
         @media (max-width: 760px) {{
             .project-card-featured {{ max-width: 100%; }}
+            .portfolio-hero {{
+                grid-template-columns: 1fr;
+                padding-top: 1rem;
+            }}
+            .hero-photo-shell {{
+                order: -1;
+                width: min(100%, 300px);
+            }}
+            .project-evidence-strip,
+            .pipeline-step-grid,
+            .insight-card-grid {{
+                grid-template-columns: 1fr;
+            }}
+            .contact-cta {{
+                grid-template-columns: 1fr;
+            }}
+            .contact-cta-actions {{
+                width: 100%;
+            }}
+            .contact-cta-actions .portfolio-button,
+            .hero-actions .portfolio-button {{
+                flex: 1 1 13rem;
+            }}
         }}
         @media (max-width: 860px) {{
             .dataset-metrics {{ grid-template-columns: 1fr; }}
@@ -1002,7 +1306,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-hover-card:hover,
             .contact-hover-card:focus-within,
             .data-quality-hover-card:hover,
-            .data-quality-hover-card:focus-within {{
+            .data-quality-hover-card:focus-within,
+            .project-evidence-card:hover,
+            .project-evidence-card:focus-within,
+            .featured-project-card:hover,
+            .featured-project-card:focus-within,
+            .pipeline-step-card:hover,
+            .pipeline-step-card:focus-within,
+            .insight-card:hover,
+            .insight-card:focus-within {{
                 transform: none;
             }}
         }}

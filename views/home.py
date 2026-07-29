@@ -1,12 +1,16 @@
 from __future__ import annotations
 
+import base64
+import html
 from pathlib import Path
 
 import streamlit as st
 
+from dashboard.data_loader import load_dashboard_data, load_dashboard_metadata
+from dashboard.transformations import remote_salary, salary_coverage, top_skills
 from portfolio.content.profile import PROFILE, SPECIALTIES
 from portfolio.content.projects import PROJECTS
-from ui.components import app_header, badge_row, footer, project_card, section_card
+from ui.components import footer
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -14,49 +18,230 @@ from ui.theme import current_theme
 theme = current_theme()
 inject_global_styles(theme)
 
-app_header(
-    "Built by Peter | Junior Data Engineer",
-    PROFILE["headline"],
-    PROFILE["summary"],
-    "home",
+ROOT = Path(__file__).resolve().parents[1]
+HERO_PHOTO_PATH = ROOT / "assets" / "profile" / "peter-atef-hero.jpg"
+PROJECT_PREVIEW_PATH = ROOT / "images" / "dbt_lineage.png"
+RESUME_PATH = ROOT / PROFILE["resume_path"]
+
+
+def asset_data_uri(path: Path, mime_type: str) -> str:
+    if not path.exists():
+        return ""
+    encoded = base64.b64encode(path.read_bytes()).decode("ascii")
+    return f"data:{mime_type};base64,{encoded}"
+
+
+def format_int(value: int | str | None) -> str:
+    return f"{value:,}" if isinstance(value, int) else html.escape(str(value or "Verified"))
+
+
+project = PROJECTS[0]
+metadata = load_dashboard_metadata()
+source_rows = metadata.get("source_job_postings_rows")
+sample_rows = metadata.get("sample_job_postings_rows")
+sample_skill_rows = metadata.get("sample_job_skills_rows")
+
+try:
+    jobs, skills, _ = load_dashboard_data()
+    salary_label, salary_records, total_records = salary_coverage(jobs)
+    remote_salary_data = remote_salary(jobs).set_index("remote_status")
+    remote_avg = int(remote_salary_data.loc["Remote", "avg_salary"]) if "Remote" in remote_salary_data.index else None
+    onsite_avg = int(remote_salary_data.loc["Onsite", "avg_salary"]) if "Onsite" in remote_salary_data.index else None
+    top_skill_rows = top_skills(skills, 4)
+    python_postings = int(top_skill_rows.loc[top_skill_rows["clean_skill_name"].eq("python"), "postings"].iloc[0])
+    sql_postings = int(top_skill_rows.loc[top_skill_rows["clean_skill_name"].eq("sql"), "postings"].iloc[0])
+    aws_postings = int(top_skill_rows.loc[top_skill_rows["clean_skill_name"].eq("aws"), "postings"].iloc[0])
+    azure_postings = int(top_skill_rows.loc[top_skill_rows["clean_skill_name"].eq("azure"), "postings"].iloc[0])
+    unique_skills = int(skills["clean_skill_name"].dropna().nunique())
+except Exception:
+    salary_label = "Verified"
+    salary_records = None
+    total_records = sample_rows
+    remote_avg = None
+    onsite_avg = None
+    python_postings = None
+    sql_postings = None
+    aws_postings = None
+    azure_postings = None
+    unique_skills = None
+
+hero_photo = asset_data_uri(HERO_PHOTO_PATH, "image/jpeg")
+preview_image = asset_data_uri(PROJECT_PREVIEW_PATH, "image/png")
+resume_href = asset_data_uri(RESUME_PATH, "application/pdf")
+resume_attr = ' download="Peter_Atef_Resume_2026.pdf"' if resume_href else ""
+resume_link = resume_href or html.escape(PROFILE["resume_path"])
+tech_stack = " - ".join(project["technologies"][:6])
+specialty_markup = "".join(f'<span class="meta-pill">{html.escape(item)}</span>' for item in SPECIALTIES[:6])
+
+hero_image_markup = (
+    f'<img class="hero-photo" src="{hero_photo}" alt="Portrait of Peter Atef, Junior Data Engineer">'
+    if hero_photo
+    else '<div class="hero-photo hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>'
 )
 
-badge_row(SPECIALTIES)
+st.markdown(
+    f"""
+    <section class="portfolio-hero">
+        <div class="hero-copy">
+            <div class="hero-kicker">Hi, I'm Peter Atef</div>
+            <h1>Junior Data Engineer</h1>
+            <p>I build reliable data pipelines and transform raw, messy data into analytics-ready insights using Python, SQL, PostgreSQL, and dbt.</p>
+            <div class="hero-actions">
+                <a class="portfolio-button portfolio-button-primary" href="/project_overview">EXPLORE MY PROJECT</a>
+                <a class="portfolio-button" href="{resume_link}"{resume_attr}>DOWNLOAD RESUME</a>
+                <a class="portfolio-button portfolio-button-quiet" href="/contact">CONTACT ME</a>
+            </div>
+            <div class="hero-stack">{specialty_markup}</div>
+        </div>
+        <div class="hero-photo-shell">
+            {hero_image_markup}
+        </div>
+    </section>
+    """,
+    unsafe_allow_html=True,
+)
 
-cta_cols = st.columns([1.05, .85, .7, 2.4])
-with cta_cols[0]:
-    st.link_button("Explore My Projects", "/projects", type="primary")
-with cta_cols[1]:
-    st.link_button("Contact Me", "/contact")
-with cta_cols[2]:
-    st.link_button("GitHub", PROFILE["github_url"])
+evidence_cards = [
+    ("Source Job Postings", format_int(source_rows), "Raw project scale verified in metadata."),
+    ("Hosted Sample Records", format_int(sample_rows), "Optimized sample powering the Streamlit app."),
+    ("Job-Skill Rows", format_int(sample_skill_rows), "Joined skill relationships in the hosted sample."),
+    ("Distinct Skills", format_int(unique_skills), "Technical skills available for market analysis."),
+    ("Technology Stack", "Python - SQL - dbt", "Python, Pandas, PostgreSQL, dbt, SQL, Streamlit."),
+]
+evidence_markup = "".join(
+    (
+        '<div class="project-evidence-card" tabindex="0">'
+        f'<div class="evidence-value">{value}</div>'
+        f'<div class="evidence-label">{html.escape(label)}</div>'
+        f'<div class="evidence-note">{html.escape(note)}</div>'
+        '</div>'
+    )
+    for label, value, note in evidence_cards
+)
+st.markdown(f'<section class="project-evidence-strip">{evidence_markup}</section>', unsafe_allow_html=True)
 
-resume_path = Path(PROFILE["resume_path"])
-if resume_path.exists():
-    with resume_path.open("rb") as resume_file:
-        st.download_button(
-            "Download Resume",
-            resume_file,
-            file_name="Peter_Atef_Resume_2026.pdf",
-            mime="application/pdf",
-            type="secondary",
-        )
+repository_button = (
+    f'<a class="portfolio-button" href="{html.escape(project["repository_url"])}" target="_blank" rel="noopener noreferrer">VIEW ON GITHUB</a>'
+    if project.get("repository_url")
+    else ""
+)
+preview_markup = (
+    f'<img src="{preview_image}" alt="dbt lineage screenshot for the Job Market Intelligence project">'
+    if preview_image
+    else '<div class="featured-preview-fallback">dbt lineage preview</div>'
+)
+st.markdown(
+    f"""
+    <section class="featured-project-card" tabindex="0">
+        <div class="featured-project-copy">
+            <div class="section-eyebrow">Featured Project</div>
+            <h2>{html.escape(project["title"])}</h2>
+            <p>{html.escape(project["case_study_sections"]["Business problem"])}</p>
+            <p>{html.escape(project["case_study_sections"]["Project summary"])}</p>
+            <div class="featured-meta">
+                <span>{html.escape(tech_stack)}</span>
+                <span>{format_int(source_rows)} source postings</span>
+                <span>{format_int(sample_rows)} hosted records</span>
+            </div>
+            <div class="hero-actions">
+                <a class="portfolio-button portfolio-button-primary" href="/market_dashboard">VIEW LIVE PROJECT</a>
+                {repository_button}
+            </div>
+        </div>
+        <div class="featured-preview">
+            {preview_markup}
+        </div>
+    </section>
+    """,
+    unsafe_allow_html=True,
+)
 
-st.subheader("What I Build")
-cols = st.columns(3)
-with cols[0]:
-    section_card("Reliable Pipelines", "ETL workflows that move raw records into structured, trusted datasets.", class_name="home-card")
-with cols[1]:
-    section_card("Analytics-Ready Models", "Clean staging layers, reusable joins, and marts designed around business questions.", class_name="home-card")
-with cols[2]:
-    section_card("Quality Checks", "Validation for row counts, nulls, duplicates, joins, and calculation logic.", class_name="home-card")
+pipeline_steps = [
+    ("Raw Job Data", "CSV source tables for postings, companies, skills, and job-skill relationships."),
+    ("Python Cleaning", "Pandas prepares the hosted sample and normalized dashboard-ready files."),
+    ("PostgreSQL", "Relational warehouse tables support structured modeling work."),
+    ("dbt Models", "Staging, intermediate, and mart models organize analysis-ready data."),
+    ("Data Quality", "SQL checks validate counts, keys, joins, duplicates, and calculations."),
+    ("Market Dashboard", "Streamlit presents KPIs, filters, and project insights for review."),
+]
+pipeline_markup = "".join(
+    (
+        '<div class="pipeline-step-card" tabindex="0">'
+        f'<div class="pipeline-step-name">{html.escape(title)}</div>'
+        f'<div class="section-copy">{html.escape(body)}</div>'
+        '</div>'
+    )
+    for title, body in pipeline_steps
+)
+st.markdown(
+    f"""
+    <section class="home-section">
+        <div class="section-eyebrow">Project Journey</div>
+        <h2>From Raw Records to Market Intelligence</h2>
+        <div class="pipeline-step-grid">{pipeline_markup}</div>
+    </section>
+    """,
+    unsafe_allow_html=True,
+)
 
-st.subheader("Featured Project")
-project_card(PROJECTS[0])
-actions = st.columns([1, .85, 3])
-with actions[0]:
-    st.link_button("View Case Study", "/project_overview", type="primary")
-with actions[1]:
-    st.link_button("Live Demo", "/market_dashboard")
+remote_text = (
+    f"Remote roles average ${remote_avg:,} versus ${onsite_avg:,} onsite among salary-covered records."
+    if remote_avg and onsite_avg
+    else "Remote and onsite salary comparisons are available where salary data exists."
+)
+skills_text = (
+    f"Python appears in {python_postings:,} postings and SQL appears in {sql_postings:,} postings in the hosted sample."
+    if python_postings and sql_postings
+    else "Python and SQL are core demand signals in the hosted skill sample."
+)
+cloud_text = (
+    f"AWS appears in {aws_postings:,} postings and Azure appears in {azure_postings:,} postings in the hosted sample."
+    if aws_postings and azure_postings
+    else "Cloud platforms are tracked as part of the technical skill demand model."
+)
+insight_cards = [
+    ("Remote Salary Signal", remote_text, f"Salary coverage: {salary_label} ({salary_records:,} of {total_records:,} records)." if salary_records and total_records else "Salary coverage is tracked in the dashboard."),
+    ("Python and SQL Demand", skills_text, "These are the top two skills in the hosted skill-demand sample."),
+    ("Cloud Skill Demand", cloud_text, "Cloud skills are modeled from unique posting-skill relationships."),
+]
+insight_markup = "".join(
+    (
+        '<div class="insight-card" tabindex="0">'
+        f'<div class="section-title">{html.escape(title)}</div>'
+        f'<div class="section-copy">{html.escape(body)}</div>'
+        f'<div class="evidence-note">{html.escape(note)}</div>'
+        '</div>'
+    )
+    for title, body, note in insight_cards
+)
+st.markdown(
+    f"""
+    <section class="home-section">
+        <div class="section-eyebrow">Verified Insights</div>
+        <h2>Signals Already Backed by the Data</h2>
+        <div class="insight-card-grid">{insight_markup}</div>
+    </section>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    f"""
+    <section class="contact-cta">
+        <div>
+            <div class="section-eyebrow">Contact</div>
+            <h2>Let's Build Something Reliable</h2>
+            <p>I'm open to Junior Data Engineer opportunities where I can build dependable pipelines, improve data quality, and make analytics easier for teams.</p>
+        </div>
+        <div class="contact-cta-actions">
+            <a class="portfolio-button portfolio-button-primary" href="{html.escape(PROFILE["mailto_url"])}">Email</a>
+            <a class="portfolio-button" href="{html.escape(PROFILE["linkedin_url"])}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="portfolio-button" href="{html.escape(PROFILE["github_url"])}" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="portfolio-button" href="{resume_link}"{resume_attr}>Resume</a>
+        </div>
+    </section>
+    """,
+    unsafe_allow_html=True,
+)
 
 footer()

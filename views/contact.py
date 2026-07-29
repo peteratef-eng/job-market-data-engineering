@@ -13,8 +13,8 @@ from ui.theme import current_theme
 
 inject_global_styles(current_theme())
 
-st.title("Let's Connect")
-st.markdown("I'm open to Junior Data Engineer opportunities and conversations about data projects.")
+st.title("Let's Build Something Reliable")
+st.markdown("I'm open to Junior Data Engineer opportunities where I can build dependable pipelines, improve data quality, and make analytics easier for teams.")
 
 badge_cols = st.columns([0.28, 0.22, 0.5])
 with badge_cols[0]:
@@ -23,7 +23,7 @@ with badge_cols[1]:
     st.caption(f"Based in {PROFILE['location']}")
 
 footer_email_url = PROFILE["mailto_url"]
-send_email_url = PROFILE["gmail_compose_url"]
+send_email_url = PROFILE["mailto_url"]
 linkedin_url = PROFILE.get("linkedin_url", "")
 github_url = PROFILE.get("github_url", "")
 
@@ -35,7 +35,7 @@ with cards[0]:
             <div class="section-title">Email</div>
             <div class="section-copy">Send me a message</div>
             <p>{html.escape(PROFILE["email"])}</p>
-            <a class="contact-card-action" href="{html.escape(send_email_url)}" target="_blank" rel="noreferrer">Send Email</a>
+            <a class="contact-card-action" href="{html.escape(send_email_url)}">Send Email</a>
         </div>
         """,
         unsafe_allow_html=True,

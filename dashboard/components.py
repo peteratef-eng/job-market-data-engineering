@@ -19,7 +19,7 @@ KPI_ICONS = {
     "Salary coverage": "%",
 }
 
-FOOTER_EMAIL_URL = f"mailto:{PROFILE['email']}"
+FOOTER_EMAIL_URL = PROFILE["mailto_url"]
 
 
 def app_header(kicker: str, title: str, subtitle: str, location: str) -> dict[str, str]:

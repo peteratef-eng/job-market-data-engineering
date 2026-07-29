@@ -5,7 +5,6 @@ from pathlib import Path
 import streamlit as st
 
 from portfolio.content.profile import PROFILE
-from ui.components import mailto_url
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -21,8 +20,8 @@ with badge_cols[0]:
 with badge_cols[1]:
     st.caption(f"Based in {PROFILE['location']}")
 
-footer_email_url = mailto_url()
-send_email_url = mailto_url("Junior Data Engineer opportunity")
+footer_email_url = PROFILE["mailto_url"]
+send_email_url = PROFILE["gmail_compose_url"]
 linkedin_url = PROFILE.get("linkedin_url", "")
 github_url = PROFILE.get("github_url", "")
 

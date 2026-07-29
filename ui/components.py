@@ -58,29 +58,42 @@ def sidebar_brand() -> None:
 def sidebar_projects() -> None:
     cards = []
     for project in SIDEBAR_PROJECTS:
+        page_links = "".join(
+            (
+                '<a class="sidebar-project-link" '
+                f'href="{html.escape(page["route"])}">'
+                f'{html.escape(page["label"])}</a>'
+            )
+            for page in project["pages"]
+        )
         cards.append(
             f"""
-            <div class="sidebar-project-card sidebar-project-card-active">
-                <div class="sidebar-project-card-header">
-                    <span class="sidebar-project-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" focusable="false">
-                            <path d="M6 7c0-1.7 12-1.7 12 0v10c0 1.7-12 1.7-12 0V7z"></path>
-                            <path d="M6 7c0 1.7 12 1.7 12 0"></path>
-                            <path d="M6 12c0 1.7 12 1.7 12 0"></path>
-                        </svg>
-                    </span>
-                    <div class="sidebar-project-copy">
-                        <div class="sidebar-project-name">{html.escape(project["name"])}</div>
-                        <div class="sidebar-project-type">{html.escape(project["type"])}</div>
+            <div class="sidebar-project-group">
+                <div class="sidebar-project-card sidebar-project-card-active">
+                    <div class="sidebar-project-card-header">
+                        <span class="sidebar-project-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" focusable="false">
+                                <path d="M6 7c0-1.7 12-1.7 12 0v10c0 1.7-12 1.7-12 0V7z"></path>
+                                <path d="M6 7c0 1.7 12 1.7 12 0"></path>
+                                <path d="M6 12c0 1.7 12 1.7 12 0"></path>
+                            </svg>
+                        </span>
+                        <div class="sidebar-project-copy">
+                            <div class="sidebar-project-name">{html.escape(project["name"])}</div>
+                            <div class="sidebar-project-type">{html.escape(project["type"])}</div>
+                        </div>
+                    </div>
+                    <div class="sidebar-project-mini-lineage" aria-hidden="true">
+                        <span class="sidebar-mini-stage sidebar-mini-source"></span>
+                        <span class="sidebar-mini-track"></span>
+                        <span class="sidebar-mini-stage sidebar-mini-model"></span>
+                        <span class="sidebar-mini-track"></span>
+                        <span class="sidebar-mini-stage sidebar-mini-mart"></span>
+                        <span class="sidebar-mini-packet"></span>
                     </div>
                 </div>
-                <div class="sidebar-project-mini-lineage" aria-hidden="true">
-                    <span class="sidebar-mini-stage sidebar-mini-source"></span>
-                    <span class="sidebar-mini-track"></span>
-                    <span class="sidebar-mini-stage sidebar-mini-model"></span>
-                    <span class="sidebar-mini-track"></span>
-                    <span class="sidebar-mini-stage sidebar-mini-mart"></span>
-                    <span class="sidebar-mini-packet"></span>
+                <div class="sidebar-project-links">
+                    {page_links}
                 </div>
             </div>
             """

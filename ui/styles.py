@@ -276,6 +276,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             max-width: 100%;
             margin: 0 0 .5rem;
         }}
+        .sidebar-project-group {{
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+        }}
         .sidebar-project-card {{
             position: relative;
             width: 100%;
@@ -342,6 +347,53 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 650;
             line-height: 1.2;
             margin-top: .18rem;
+        }}
+        .sidebar-project-links {{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: .08rem;
+            margin: .35rem 0 0 .7rem;
+            padding-left: .7rem;
+            border-left: 1px solid rgba(37, 99, 235, .18);
+        }}
+        .sidebar-project-link {{
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-height: 2.05rem;
+            padding: .38rem .5rem;
+            border-radius: 8px;
+            color: var(--text-2);
+            font-size: .82rem;
+            font-weight: 600;
+            line-height: 1.2;
+            text-decoration: none;
+            transition:
+                background-color 180ms ease,
+                color 180ms ease,
+                border-color 180ms ease;
+        }}
+        .sidebar-project-link::before {{
+            content: "";
+            position: absolute;
+            left: -.84rem;
+            top: 50%;
+            width: .34rem;
+            height: .34rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, .26);
+            transform: translateY(-50%);
+        }}
+        .sidebar-project-link:hover,
+        .sidebar-project-link:focus-visible {{
+            color: var(--data-blue);
+            background: rgba(239, 246, 255, .82);
+            text-decoration: none;
+        }}
+        .sidebar-project-link:hover::before,
+        .sidebar-project-link:focus-visible::before {{
+            background: var(--data-blue);
         }}
         .sidebar-project-mini-lineage {{
             position: relative;

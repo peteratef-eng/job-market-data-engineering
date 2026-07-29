@@ -8,10 +8,10 @@ SIDEBAR_PROJECTS = [
         "name": "Job Market Intelligence",
         "type": "Data Engineering Project",
         "pages": [
-            {"label": "Overview", "path": "views/project_overview.py"},
-            {"label": "Market Dashboard", "path": "views/market_dashboard.py"},
-            {"label": "Data Pipeline", "path": "views/data_pipeline.py"},
-            {"label": "Data Quality", "path": "views/data_quality.py"},
+            {"label": "Overview", "path": "views/project_overview.py", "route": "/project_overview"},
+            {"label": "Market Dashboard", "path": "views/market_dashboard.py", "route": "/market_dashboard"},
+            {"label": "Data Pipeline", "path": "views/data_pipeline.py", "route": "/data_pipeline"},
+            {"label": "Data Quality", "path": "views/data_quality.py", "route": "/data_quality"},
         ],
     },
 ]
@@ -19,7 +19,7 @@ SIDEBAR_PROJECTS = [
 
 def portfolio_navigation() -> st.navigation:
     project_pages = [
-        st.Page(page["path"], title=page["label"])
+        st.Page(page["path"], title=page["label"], visibility="hidden")
         for project in SIDEBAR_PROJECTS
         for page in project["pages"]
     ]

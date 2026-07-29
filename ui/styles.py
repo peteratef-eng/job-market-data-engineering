@@ -684,22 +684,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 700;
             line-height: 2.4rem;
         }}
-        .filter-panel {{
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            padding: .95rem 1rem .75rem;
-            margin: .3rem 0 .7rem;
-            width: 100%;
-            max-width: 100%;
-            min-width: 0;
-            transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-        }}
-        .filter-panel [data-testid="column"] {{
-            min-width: 0;
-        }}
-
         @media (max-width: 1024px) {{
             .pipeline {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
         }}

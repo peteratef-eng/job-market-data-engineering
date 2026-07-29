@@ -78,9 +78,11 @@ if resume_path.exists():
     encoded_resume = base64.b64encode(resume_path.read_bytes()).decode("ascii")
     st.markdown(
         f"""
-        <div class="contact-hover-card" tabindex="0">
-            <div class="section-title">Want the full overview?</div>
-            <div class="section-copy">Download my resume for experience, skills, and project details.</div>
+        <div class="contact-hover-card contact-resume-strip" tabindex="0">
+            <div>
+                <div class="section-title">Want the full overview?</div>
+                <div class="section-copy">Download my resume for experience, skills, and project details.</div>
+            </div>
             <a class="contact-card-action" href="data:application/pdf;base64,{encoded_resume}" download="Peter_Atef_Resume_2026.pdf">Download Resume</a>
         </div>
         """,

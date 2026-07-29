@@ -879,7 +879,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .project-evidence-card,
         .featured-project-card,
         .pipeline-step-card,
-        .insight-card,
         .contact-cta {{
             background: var(--surface);
             border: 1px solid var(--border);
@@ -1060,15 +1059,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
         }}
         .pipeline-step-grid,
-        .insight-card-grid {{
+        .case-study-links {{
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: .85rem;
             margin-top: 1rem;
             overflow: visible;
         }}
-        .pipeline-step-card,
-        .insight-card {{
+        .pipeline-step-card {{
             padding: 1rem;
             min-height: 150px;
         }}
@@ -1086,6 +1084,56 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             gap: 1.2rem;
             padding: 1.25rem;
             margin: 2rem 0 1rem;
+        }}
+        .home-contact-cta {{
+            padding: .85rem 1rem;
+            margin: 1.15rem 0 .5rem;
+        }}
+        .home-contact-cta p {{
+            margin: 0;
+            font-size: .98rem;
+            line-height: 1.45;
+        }}
+        .home-contact-cta .contact-cta-actions {{
+            margin-top: 0;
+        }}
+        .case-study-links {{
+            grid-template-columns: repeat(4, max-content);
+            justify-content: start;
+            align-items: center;
+            margin: 1rem 0 0;
+        }}
+        .project-overview-architecture-link {{
+            width: fit-content;
+            margin: .1rem 0 .8rem;
+        }}
+        .pipeline-info-grid {{
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: .85rem;
+            align-items: stretch;
+            margin-top: 1rem;
+        }}
+        .pipeline-info-grid .pipeline-card {{
+            height: 100%;
+            margin: 0;
+        }}
+        .contact-resume-strip {{
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 1rem;
+            padding: .78rem 1rem;
+            margin-top: 1rem;
+            min-height: 0;
+        }}
+        .contact-resume-strip .section-copy {{
+            font-size: .88rem;
+            line-height: 1.4;
+        }}
+        .contact-resume-strip .contact-card-action {{
+            margin-top: 0;
+            white-space: nowrap;
         }}
 
         .section-card, .dataset-card, .challenge-panel, .kpi-card {{
@@ -1573,8 +1621,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .home-skill-card,
         .project-evidence-card,
         .featured-project-card,
-        .pipeline-step-card,
-        .insight-card {{
+        .pipeline-step-card {{
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -1656,8 +1703,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .home-skill-card .section-title,
         .project-evidence-card .evidence-label,
         .featured-project-card h2,
-        .pipeline-step-card .pipeline-step-name,
-        .insight-card .section-title {{
+        .pipeline-step-card .pipeline-step-name {{
             transition: color 250ms ease;
         }}
         .contact-card-action {{
@@ -1739,9 +1785,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .featured-project-card:hover,
             .featured-project-card:focus-within,
             .pipeline-step-card:hover,
-            .pipeline-step-card:focus-within,
-            .insight-card:hover,
-            .insight-card:focus-within {{
+            .pipeline-step-card:focus-within {{
                 transform: translateY(-5px) scale(1.015);
                 border-color: rgba(37, 99, 235, 0.45);
                 background-color: rgba(239, 246, 255, 0.75);
@@ -1766,9 +1810,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .featured-project-card:hover h2,
             .featured-project-card:focus-within h2,
             .pipeline-step-card:hover .pipeline-step-name,
-            .pipeline-step-card:focus-within .pipeline-step-name,
-            .insight-card:hover .section-title,
-            .insight-card:focus-within .section-title {{
+            .pipeline-step-card:focus-within .pipeline-step-name {{
                 color: var(--accent);
             }}
         }}
@@ -1783,8 +1825,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-skill-card,
             .project-evidence-card,
             .featured-project-card,
-            .pipeline-step-card,
-            .insight-card {{
+            .pipeline-step-card {{
                 transform: none;
                 will-change: auto;
             }}
@@ -1885,7 +1926,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .dashboard-metadata-strip {{
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             margin: 0 0 1.2rem;
             padding: .65rem .85rem;
             border: 1px solid rgba(37, 99, 235, .16);
@@ -2286,6 +2327,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .quality-summary-grid {{
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }}
+            .pipeline-info-grid {{
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }}
+            .pipeline-info-grid .pipeline-card:last-child {{
+                grid-column: 1 / -1;
+            }}
             .dashboard-meta-item-1,
             .dashboard-meta-item-3 {{
                 border-left: 0;
@@ -2353,7 +2400,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-about-grid,
             .home-skills-grid,
             .pipeline-step-grid,
-            .insight-card-grid {{
+            .case-study-links,
+            .pipeline-info-grid {{
                 grid-template-columns: 1fr;
             }}
             .contact-cta {{
@@ -2365,6 +2413,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-cta-actions .portfolio-button,
             .hero-actions .portfolio-button {{
                 flex: 1 1 13rem;
+            }}
+            .contact-resume-strip {{
+                grid-template-columns: 1fr;
+            }}
+            .contact-resume-strip .contact-card-action {{
+                width: 100%;
             }}
             .st-key-dashboard_filter_panel {{
                 padding: .8rem .85rem .35rem;
@@ -2485,8 +2539,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .featured-project-card:focus-within,
             .pipeline-step-card:hover,
             .pipeline-step-card:focus-within,
-            .insight-card:hover,
-            .insight-card:focus-within,
             .st-key-market_dashboard_chart_job_title_demand,
             .st-key-market_dashboard_chart_company_activity,
             .st-key-market_dashboard_chart_salary_by_job_title,

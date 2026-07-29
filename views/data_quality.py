@@ -102,7 +102,7 @@ summary_items = [
     ("Overall Status", "Passed with one documented limitation"),
     ("Row Counts", "Matched"),
     ("Key Integrity", "Implemented"),
-    ("Join Completeness", "Passed with documented limitation"),
+    ("Join Completeness", "Validated"),
     ("Calculation Methods", "4 of 5 passed"),
     ("dbt Schema Tests", dbt_result),
 ]
@@ -141,7 +141,7 @@ for check in checks:
         )
         for label, value in check["metrics"]
     )
-    with st.expander(check["title"], expanded=check["title"] in {"Row Count Validation", "Key Integrity"}):
+    with st.expander(check["title"], expanded=False):
         st.markdown(
             f"""
             <div class="data-quality-detail">

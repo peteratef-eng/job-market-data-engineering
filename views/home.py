@@ -221,45 +221,14 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-insight_cards = [
-    ("Market Dashboard", "Interactive filters, KPIs, and charts make the hosted job-market sample easy to explore.", "Live analysis is available in the Market Dashboard."),
-    ("Data Pipeline", "The technical workflow is documented separately for inputs, processing, storage, modeling, tests, and outputs.", "Detailed architecture lives on the Data Pipeline page."),
-    ("Data Quality", "Validation checks document row counts, keys, joins, calculations, and dbt schema tests.", "Known limitations are called out on the Data Quality page."),
-]
-insight_markup = "".join(
-    (
-        '<div class="insight-card" tabindex="0">'
-        f'<div class="section-title">{html.escape(title)}</div>'
-        f'<div class="section-copy">{html.escape(body)}</div>'
-        f'<div class="evidence-note">{html.escape(note)}</div>'
-        '</div>'
-    )
-    for title, body, note in insight_cards
-)
 st.markdown(
     f"""
-    <section class="home-section">
-        <div class="section-eyebrow">Verified Insights</div>
-        <h2>Signals Already Backed by the Data</h2>
-        <div class="insight-card-grid">{insight_markup}</div>
-    </section>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    f"""
-    <section class="contact-cta">
+    <section class="contact-cta home-contact-cta">
         <div>
-            <div class="section-eyebrow">Contact</div>
-            <h2>Let's Build Something Reliable</h2>
-            <p>I'm open to Junior Data Engineer opportunities where I can build dependable pipelines, improve data quality, and make analytics easier for teams.</p>
+            <p>Open to Junior Data Engineer opportunities.</p>
         </div>
         <div class="contact-cta-actions">
-            <a class="portfolio-button portfolio-button-primary" href="{html.escape(PROFILE["mailto_url"])}">Email</a>
-            <a class="portfolio-button" href="{html.escape(PROFILE["linkedin_url"])}" rel="noopener noreferrer">LinkedIn</a>
-            <a class="portfolio-button" href="{html.escape(PROFILE["github_url"])}" rel="noopener noreferrer">GitHub</a>
-            <a class="portfolio-button" href="{resume_link}"{resume_attr}>Resume</a>
+            <a class="portfolio-button portfolio-button-primary" href="/contact">CONTACT ME</a>
         </div>
     </section>
     """,

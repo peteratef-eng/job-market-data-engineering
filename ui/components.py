@@ -366,7 +366,7 @@ def timeline_entry(entry: dict, class_name: str = "") -> None:
             <div class="timeline-date">{html.escape(entry["start_date"])} - {html.escape(entry["end_date"])}</div>
             <div class="project-title">{html.escape(entry["role"])}</div>
             <div class="project-meta">{html.escape(entry["company"])} | {html.escape(entry.get("location", ""))}</div>
-            <div class="section-copy">{html.escape(entry["summary"])}</div>
+            {f'<div class="section-copy">{html.escape(entry["summary"])}</div>' if entry.get("summary") else ""}
             <ul>{responsibilities}</ul>
             <div>{technologies}</div>
         </div>

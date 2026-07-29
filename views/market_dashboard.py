@@ -360,8 +360,6 @@ def dashboard_kpi_panel(values: dict[str, str]) -> None:
 def dashboard_metadata_strip(values: dict[str, str]) -> None:
     metadata_items = [
         ("Median Salary", values["Median salary"]),
-        ("Countries", values["Countries"]),
-        ("Skills", values["Skills"]),
         ("Salary Coverage", values["Salary coverage"]),
     ]
     markup = "".join(
@@ -529,7 +527,7 @@ else:
 
 st.subheader("Salary Insights")
 st.caption(
-    f"Salary analysis is based on {salary_records:,} records - {coverage_label} coverage of the current result set."
+    f"Salary analysis is based on {salary_records:,} records in the current result set."
 )
 salary_choice = st.radio(
     "Salary chart",
@@ -660,6 +658,8 @@ with st.expander("Methodology & Data Notes", expanded=False):
         f"""
         <div class="dashboard-methodology">
             <p><strong>Hosted sample:</strong> {sample_rows:,} of {source_rows:,} source postings.</p>
+            <p><strong>Countries:</strong> {html.escape(kpis["Countries"])} distinct job countries in the current result set.</p>
+            <p><strong>Skills:</strong> {html.escape(kpis["Skills"])} distinct technical skills in the current result set.</p>
             <p><strong>Salary coverage:</strong> Salary analysis uses postings with yearly salary values; missing salaries are excluded from salary charts.</p>
             <p><strong>Minimum salary sample:</strong> Salary groups require at least 3 salary records.</p>
             <p><strong>Remote work:</strong> Unknown remote status is retained as its own classification when present.</p>

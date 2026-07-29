@@ -82,7 +82,9 @@ for index, label in enumerate(skill_pipeline_steps, start=1):
     )
     if index < len(skill_pipeline_steps):
         skill_pipeline_markup += (
-            f'<span class="hero-skill-connector hero-skill-connector-{index}" aria-hidden="true"></span>'
+            f'<span class="hero-skill-connector hero-skill-connector-{index}" aria-hidden="true">'
+            '<span class="hero-skill-packet"></span>'
+            '</span>'
         )
 
 st.markdown(
@@ -109,7 +111,7 @@ st.markdown(
                 <a class="portfolio-button" href="{resume_link}"{resume_attr}>DOWNLOAD RESUME</a>
                 <a class="portfolio-button portfolio-button-quiet" href="/contact">CONTACT ME</a>
             </div>
-            <div class="hero-skill-pipeline" aria-label="Data Engineering workflow: ETL Pipelines, Python and Pandas, SQL and PostgreSQL, dbt, and Analytics-Ready Data.">
+            <div class="hero-skill-pipeline" aria-label="Data Engineering workflow: ingest through ETL pipelines, process with Python and Pandas, store and query with SQL and PostgreSQL, model with dbt, and deliver analytics-ready data.">
                 {skill_pipeline_markup}
             </div>
         </div>

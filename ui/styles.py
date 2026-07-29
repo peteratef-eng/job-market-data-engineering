@@ -354,14 +354,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             box-shadow: 0 22px 52px rgba(15, 23, 42, .08);
             overflow: hidden;
         }}
-        .data-command-hero::after {{
-            content: "";
-            position: absolute;
-            inset: auto 8% 14% 8%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, .32), transparent);
-            z-index: -1;
-        }}
         .data-blueprint-grid {{
             position: absolute;
             inset: 0;
@@ -375,26 +367,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             mask-image: linear-gradient(135deg, rgba(0, 0, 0, .76), transparent 78%);
         }}
         .data-background-path {{
-            position: absolute;
-            z-index: -2;
-            border: 1px solid rgba(37, 99, 235, .16);
-            border-left: 0;
-            border-bottom: 0;
-            border-radius: 0 28px 0 0;
-            pointer-events: none;
-        }}
-        .data-background-path-1 {{
-            width: 34%;
-            height: 30%;
-            right: 12%;
-            top: 18%;
-        }}
-        .data-background-path-2 {{
-            width: 42%;
-            height: 22%;
-            left: 8%;
-            bottom: 13%;
-            transform: rotate(180deg);
+            display: none;
         }}
         .data-background-particle {{
             position: absolute;
@@ -577,10 +550,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .hero-skill-pipeline {{
             position: relative;
+            isolation: isolate;
+            z-index: 5;
             display: grid;
             grid-template-columns: minmax(6.2rem, 1fr) 22px minmax(7.2rem, 1fr) 22px minmax(7.4rem, 1fr) 22px minmax(3.4rem, .62fr) 22px minmax(8rem, 1.15fr);
             align-items: center;
-            gap: .32rem;
+            gap: .58rem;
             width: min(100%, 760px);
             margin-top: 1.2rem;
             overflow: visible;
@@ -605,7 +580,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             text-align: center;
             transform-origin: center;
             animation:
-                hero-skill-node-receive 8s ease-in-out infinite,
+                hero-skill-node-receive 5.4s ease-in-out infinite,
                 home-skill-node-enter 420ms ease-out both;
             transition:
                 transform 240ms ease,
@@ -613,18 +588,16 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 box-shadow 240ms ease;
         }}
         .hero-skill-node-1 {{ animation-delay: 0s, 560ms; }}
-        .hero-skill-node-2 {{ animation-delay: 1.6s, 620ms; }}
-        .hero-skill-node-3 {{ animation-delay: 3.2s, 680ms; }}
-        .hero-skill-node-4 {{ animation-delay: 4.8s, 740ms; }}
-        .hero-skill-node-5 {{ animation-delay: 6.4s, 800ms; }}
+        .hero-skill-node-2 {{ animation-delay: .85s, 620ms; }}
+        .hero-skill-node-3 {{ animation-delay: 2s, 680ms; }}
+        .hero-skill-node-4 {{ animation-delay: 3.15s, 740ms; }}
+        .hero-skill-node-5 {{ animation-delay: 4.3s, 800ms; }}
         .hero-skill-connector {{
             position: relative;
             z-index: 1;
             height: 2px;
             border-radius: 999px;
             background: linear-gradient(90deg, var(--data-border), var(--data-border));
-            background-size: 220% 100%;
-            animation: hero-skill-connector-flow 8s linear infinite;
             overflow: visible;
         }}
         .hero-skill-connector::before {{
@@ -634,58 +607,70 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border-radius: inherit;
             background: linear-gradient(90deg, var(--data-blue), var(--data-cyan));
             opacity: 0;
-            animation: hero-skill-connector-active 8s linear infinite;
+            animation: hero-skill-connector-active 5.4s linear infinite;
         }}
-        .hero-skill-connector::after {{
-            content: "";
+        .hero-skill-packet {{
             position: absolute;
             z-index: 2;
             top: 50%;
             left: 0;
-            width: .4rem;
-            height: .4rem;
+            width: 9px;
+            height: 9px;
             border-radius: 999px;
             background:
                 radial-gradient(circle at center, #FFFFFF 0 28%, var(--data-cyan) 31% 100%);
             border: 2px solid #FFFFFF;
-            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.14);
+            box-shadow:
+                0 0 0 3px rgba(6, 182, 212, 0.12),
+                -8px 0 10px rgba(37, 99, 235, 0.18);
             transform: translate3d(-50%, -50%, 0);
             pointer-events: none;
-            animation: hero-skill-packet-flow 8s linear infinite;
+            opacity: 0;
+            animation: hero-skill-packet-flow 5.4s linear infinite;
         }}
-        .hero-skill-connector-1::after {{ animation-delay: 0s; }}
-        .hero-skill-connector-2::after {{ animation-delay: 1.6s; }}
-        .hero-skill-connector-3::after {{ animation-delay: 3.2s; }}
-        .hero-skill-connector-4::after {{ animation-delay: 4.8s; }}
+        .hero-skill-packet::after {{
+            content: "";
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            width: min(16px, 70%);
+            height: 2px;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.55));
+            border-radius: 999px;
+        }}
+        .hero-skill-connector-1 .hero-skill-packet {{ animation-delay: 0s; }}
+        .hero-skill-connector-2 .hero-skill-packet {{ animation-delay: 1.15s; }}
+        .hero-skill-connector-3 .hero-skill-packet {{ animation-delay: 2.3s; }}
+        .hero-skill-connector-4 .hero-skill-packet {{ animation-delay: 3.45s; }}
         .hero-skill-connector-1::before {{ animation-delay: 0s; }}
-        .hero-skill-connector-2::before {{ animation-delay: 1.6s; }}
-        .hero-skill-connector-3::before {{ animation-delay: 3.2s; }}
-        .hero-skill-connector-4::before {{ animation-delay: 4.8s; }}
+        .hero-skill-connector-2::before {{ animation-delay: 1.15s; }}
+        .hero-skill-connector-3::before {{ animation-delay: 2.3s; }}
+        .hero-skill-connector-4::before {{ animation-delay: 3.45s; }}
         @keyframes hero-skill-node-receive {{
-            0%, 18%, 100% {{
+            0%, 7% {{
+                border-color: rgba(6, 182, 212, .60);
+                background-color: rgba(6, 182, 212, .07);
+                box-shadow: 0 9px 20px rgba(37, 99, 235, 0.12);
+                transform: translateY(-1px) scale(1.01);
+            }}
+            7.5%, 100% {{
                 border-color: rgba(37, 99, 235, .18);
+                background-color: rgba(255, 255, 255, .90);
                 box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
                 transform: translateY(0) scale(1);
             }}
-            7%, 12% {{
-                border-color: rgba(6, 182, 212, .46);
-                background-color: rgba(6, 182, 212, .07);
-                box-shadow: 0 8px 20px rgba(6, 182, 212, .12);
-                transform: translateY(-1px) scale(1.012);
-            }}
-        }}
-        @keyframes hero-skill-connector-flow {{
-            0% {{ background-position: 100% 50%; }}
-            100% {{ background-position: -120% 50%; }}
         }}
         @keyframes hero-skill-connector-active {{
-            0%, 13%, 32%, 100% {{ opacity: 0; }}
-            16%, 27% {{ opacity: 1; }}
+            0% {{ opacity: 0; }}
+            1%, 15.5% {{ opacity: 1; }}
+            16.5%, 100% {{ opacity: 0; }}
         }}
         @keyframes hero-skill-packet-flow {{
-            0%, 13% {{ left: 0; opacity: 0; }}
-            16%, 27% {{ opacity: 1; }}
-            30%, 100% {{ left: 100%; opacity: 0; }}
+            0% {{ left: 0; opacity: 0; }}
+            1% {{ opacity: 1; }}
+            15.5% {{ left: 100%; opacity: 1; }}
+            16.5%, 100% {{ left: 100%; opacity: 0; }}
         }}
         .hero-photo-shell {{
             justify-self: center;
@@ -2587,15 +2572,26 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 width: 2px;
                 height: 18px;
                 margin: 0 auto;
-                background: linear-gradient(180deg, rgba(148, 163, 184, .34), rgba(37, 99, 235, .50), rgba(148, 163, 184, .34));
-                background-size: 100% 220%;
-                animation-name: hero-skill-connector-flow-mobile;
+                background: linear-gradient(180deg, var(--data-border), var(--data-border));
             }}
-            .hero-skill-connector::after {{
+            .hero-skill-connector::before {{
+                background: linear-gradient(180deg, var(--data-blue), var(--data-cyan));
+            }}
+            .hero-skill-packet {{
                 left: 50%;
                 top: 0;
                 transform: translate3d(-50%, 0, 0);
                 animation-name: hero-skill-packet-flow-mobile;
+            }}
+            .hero-skill-packet::after {{
+                right: auto;
+                left: 50%;
+                top: auto;
+                bottom: 6px;
+                width: 2px;
+                height: min(16px, 70%);
+                transform: translateX(-50%);
+                background: linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.55));
             }}
             .dashboard-primary-kpis,
             .dashboard-metadata-strip {{
@@ -2632,9 +2628,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .data-blueprint-grid {{
                 opacity: .28;
                 background-size: 28px 28px;
-            }}
-            .data-background-path {{
-                opacity: .45;
             }}
             .hero-value-rotator {{
                 width: 100%;
@@ -2755,14 +2748,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .section-card {{ padding: 1rem; }}
             .kpi-card {{ min-height: 118px; }}
         }}
-        @keyframes hero-skill-connector-flow-mobile {{
-            0% {{ background-position: 50% 100%; }}
-            100% {{ background-position: 50% -120%; }}
-        }}
         @keyframes hero-skill-packet-flow-mobile {{
-            0%, 13% {{ top: 0; opacity: 0; }}
-            16%, 27% {{ opacity: 1; }}
-            30%, 100% {{ top: 100%; opacity: 0; }}
+            0% {{ top: 0; opacity: 0; }}
+            1% {{ opacity: 1; }}
+            15.5% {{ top: 100%; opacity: 1; }}
+            16.5%, 100% {{ top: 100%; opacity: 0; }}
         }}
         @media (hover: none), (pointer: coarse) {{
             .hero-skill-node:hover {{
@@ -2800,7 +2790,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-skill-node:hover,
             .hero-skill-connector,
             .hero-skill-connector::before,
-            .hero-skill-connector::after,
+            .hero-skill-packet,
+            .hero-skill-packet::after,
             .data-quality-detail,
             .sidebar-brand:hover,
             .sidebar-brand:focus-within,
@@ -2873,19 +2864,17 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .proof-console-item,
             .hero-skill-node,
             .hero-skill-connector,
-            .hero-skill-connector::before {{
+            .hero-skill-connector::before,
+            .hero-skill-packet,
+            .hero-skill-packet::after {{
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;
                 opacity: 1 !important;
             }}
-            .hero-skill-connector::after {{
-                animation: none !important;
-                transition: none !important;
-                left: 50% !important;
-                top: 50% !important;
-                transform: translate3d(-50%, -50%, 0) !important;
-                opacity: 1 !important;
+            .hero-skill-packet,
+            .hero-skill-packet::after {{
+                display: none;
             }}
         }}
         </style>

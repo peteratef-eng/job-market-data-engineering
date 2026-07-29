@@ -172,6 +172,30 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             color: var(--tag-text);
             border: 1px solid var(--border);
         }}
+        [data-testid="stSidebarNav"] a[href$="/project_overview"],
+        [data-testid="stSidebarNav"] a[href$="/data_quality"] {{
+            transform-origin: center;
+            transition:
+                transform 240ms ease,
+                border-color 240ms ease,
+                background-color 240ms ease,
+                box-shadow 240ms ease,
+                color 240ms ease;
+        }}
+        @media (hover: hover) and (pointer: fine) {{
+            [data-testid="stSidebarNav"] a[href$="/project_overview"]:hover,
+            [data-testid="stSidebarNav"] a[href$="/project_overview"]:focus-visible,
+            [data-testid="stSidebarNav"] a[href$="/data_quality"]:hover,
+            [data-testid="stSidebarNav"] a[href$="/data_quality"]:focus-visible {{
+                transform: translateY(-5px) scale(1.015);
+                border-color: rgba(37, 99, 235, 0.45);
+                background-color: rgba(239, 246, 255, 0.75);
+                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.14);
+                color: var(--accent);
+                position: relative;
+                z-index: 2;
+            }}
+        }}
 
         .sidebar-brand {{
             display: flex;
@@ -947,6 +971,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .about-hover-card:focus-within,
             .experience-hover-card:hover,
             .experience-hover-card:focus-within,
+            [data-testid="stSidebarNav"] a[href$="/project_overview"]:hover,
+            [data-testid="stSidebarNav"] a[href$="/project_overview"]:focus-visible,
+            [data-testid="stSidebarNav"] a[href$="/data_quality"]:hover,
+            [data-testid="stSidebarNav"] a[href$="/data_quality"]:focus-visible,
             .sidebar-brand:hover,
             .sidebar-brand:focus-within,
             .home-card:hover,

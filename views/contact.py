@@ -28,6 +28,7 @@ github_url = PROFILE.get("github_url", "")
 cards = st.columns(3)
 with cards[0]:
     with st.container(border=True, key="contact_email_card"):
+        st.markdown('<span class="contact-hover-card"></span>', unsafe_allow_html=True)
         st.subheader("Email")
         st.caption("Send me a message")
         st.markdown(PROFILE["email"])
@@ -35,6 +36,7 @@ with cards[0]:
 
 with cards[1]:
     with st.container(border=True, key="contact_linkedin_card"):
+        st.markdown('<span class="contact-hover-card"></span>', unsafe_allow_html=True)
         st.subheader("LinkedIn")
         st.caption("Connect professionally")
         st.markdown("peter-atef-eng")
@@ -43,6 +45,7 @@ with cards[1]:
 
 with cards[2]:
     with st.container(border=True, key="contact_github_card"):
+        st.markdown('<span class="contact-hover-card"></span>', unsafe_allow_html=True)
         st.subheader("GitHub")
         st.caption("Explore my repositories")
         st.markdown("peteratef-eng")
@@ -52,6 +55,7 @@ with cards[2]:
 resume_path = Path(PROFILE["resume_path"])
 if resume_path.exists():
     with st.container(border=True, key="contact_resume_card"):
+        st.markdown('<span class="contact-hover-card"></span>', unsafe_allow_html=True)
         st.subheader("Want the full overview?")
         st.markdown("Download my resume for experience, skills, and project details.")
         with resume_path.open("rb") as resume_file:

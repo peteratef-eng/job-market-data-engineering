@@ -172,31 +172,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             color: var(--tag-text);
             border: 1px solid var(--border);
         }}
-        [data-testid="stSidebarNav"] a[href$="/project_overview"],
-        [data-testid="stSidebarNav"] a[href$="/data_quality"] {{
-            transform-origin: center;
-            transition:
-                transform 240ms ease,
-                border-color 240ms ease,
-                background-color 240ms ease,
-                box-shadow 240ms ease,
-                color 240ms ease;
-        }}
-        @media (hover: hover) and (pointer: fine) {{
-            [data-testid="stSidebarNav"] a[href$="/project_overview"]:hover,
-            [data-testid="stSidebarNav"] a[href$="/project_overview"]:focus-visible,
-            [data-testid="stSidebarNav"] a[href$="/data_quality"]:hover,
-            [data-testid="stSidebarNav"] a[href$="/data_quality"]:focus-visible {{
-                transform: translateY(-5px) scale(1.015);
-                border-color: rgba(37, 99, 235, 0.45);
-                background-color: rgba(239, 246, 255, 0.75);
-                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.14);
-                color: var(--accent);
-                position: relative;
-                z-index: 2;
-            }}
-        }}
-
         .sidebar-brand {{
             display: flex;
             align-items: center;
@@ -570,26 +545,27 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .pipeline-card strong {{
             transition: color 240ms ease;
         }}
-        .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"],
-        .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"],
-        .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"],
-        .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"],
-        [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"] {{
+        .job-intelligence-hover-card,
+        [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card),
+        [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card) {{
             transform-origin: center;
             overflow: visible;
             will-change: transform;
             transition:
-                transform 240ms ease,
-                border-color 240ms ease,
-                background-color 240ms ease,
-                box-shadow 240ms ease;
+                transform 250ms ease,
+                border-color 250ms ease,
+                background-color 250ms ease,
+                box-shadow 250ms ease;
         }}
-        .st-key-contact_email_card h3,
-        .st-key-contact_linkedin_card h3,
-        .st-key-contact_github_card h3,
-        .st-key-contact_resume_card h3,
-        [class*="st-key-data_quality_check_card_"] h3 {{
-            transition: color 240ms ease;
+        .contact-hover-card,
+        .data-quality-hover-card {{
+            display: none;
+        }}
+        .job-intelligence-hover-card .section-title,
+        .job-intelligence-hover-card strong,
+        [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card) h3,
+        [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card) h3 {{
+            transition: color 250ms ease;
         }}
         @media (hover: hover) and (pointer: fine) {{
             .home-card:hover,
@@ -615,16 +591,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .pipeline-card:focus-within strong {{
                 color: var(--accent);
             }}
-            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
-            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
-            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
-            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
-            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
-            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
-            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
-            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
-            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:hover,
-            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:focus-within {{
+            .job-intelligence-hover-card:hover,
+            .job-intelligence-hover-card:focus-within,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):hover,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):focus-within,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):hover,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):focus-within {{
                 transform: translateY(-5px) scale(1.015);
                 border-color: rgba(37, 99, 235, 0.45);
                 background-color: rgba(239, 246, 255, 0.75);
@@ -632,16 +604,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 position: relative;
                 z-index: 2;
             }}
-            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:hover h3,
-            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within h3,
-            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:hover h3,
-            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within h3,
-            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:hover h3,
-            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within h3,
-            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:hover h3,
-            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within h3,
-            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:hover h3,
-            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:focus-within h3 {{
+            .job-intelligence-hover-card:hover .section-title,
+            .job-intelligence-hover-card:focus-within .section-title,
+            .job-intelligence-hover-card:hover strong,
+            .job-intelligence-hover-card:focus-within strong,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):hover h3,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):focus-within h3,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):hover h3,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):focus-within h3 {{
                 color: var(--accent);
             }}
         }}
@@ -649,11 +619,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-card,
             .skill-card,
             .pipeline-card,
-            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"],
-            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"],
-            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"],
-            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"],
-            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"] {{
+            .job-intelligence-hover-card,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card),
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card) {{
                 transform: none;
                 will-change: auto;
             }}
@@ -971,10 +939,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .about-hover-card:focus-within,
             .experience-hover-card:hover,
             .experience-hover-card:focus-within,
-            [data-testid="stSidebarNav"] a[href$="/project_overview"]:hover,
-            [data-testid="stSidebarNav"] a[href$="/project_overview"]:focus-visible,
-            [data-testid="stSidebarNav"] a[href$="/data_quality"]:hover,
-            [data-testid="stSidebarNav"] a[href$="/data_quality"]:focus-visible,
             .sidebar-brand:hover,
             .sidebar-brand:focus-within,
             .home-card:hover,
@@ -983,16 +947,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .skill-card:focus-within,
             .pipeline-card:hover,
             .pipeline-card:focus-within,
-            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
-            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
-            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
-            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
-            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
-            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
-            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
-            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
-            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:hover,
-            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:focus-within {{
+            .job-intelligence-hover-card:hover,
+            .job-intelligence-hover-card:focus-within,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):hover,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):focus-within,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):hover,
+            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):focus-within {{
                 transform: none;
             }}
         }}

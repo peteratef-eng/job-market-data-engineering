@@ -44,18 +44,18 @@ try:
     metadata = load_dashboard_metadata()
     source_rows = metadata.get("source_job_postings_rows", "1.6M+")
     sample_rows = metadata.get("sample_job_postings_rows", "Hosted sample")
-    metric_status_card(sample_rows, source_rows, class_name="overview-hover-card")
+    metric_status_card(sample_rows, source_rows, class_name="job-intelligence-hover-card")
 except Exception:
     st.warning("Dataset metadata unavailable. Generate the hosted sample data before sharing this portfolio.")
 
 st.subheader("Project Purpose")
-purpose_cards(class_name="overview-hover-card")
+purpose_cards(class_name="job-intelligence-hover-card")
 
 st.subheader("Business Challenge")
-challenge_points(class_name="overview-hover-card")
+challenge_points(class_name="job-intelligence-hover-card")
 
 st.subheader("Architecture")
-pipeline_visual()
+pipeline_visual(class_name="job-intelligence-hover-card")
 
 sections = project["case_study_sections"]
 ordered_sections = [
@@ -75,6 +75,6 @@ for index in range(0, len(ordered_sections), 2):
     cols = st.columns(2)
     for col, title in zip(cols, ordered_sections[index : index + 2]):
         with col:
-            section_card(title, sections[title], class_name="overview-hover-card")
+            section_card(title, sections[title], class_name="job-intelligence-hover-card")
 
 footer()

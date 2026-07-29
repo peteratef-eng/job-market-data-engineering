@@ -306,6 +306,87 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             padding: clamp(1.4rem, 4vw, 3rem) 0 1.15rem;
             overflow: visible;
         }}
+        .data-command-hero {{
+            position: relative;
+            isolation: isolate;
+            padding: clamp(1.25rem, 4vw, 2.4rem);
+            margin: .25rem 0 1rem;
+            border: 1px solid rgba(37, 99, 235, .14);
+            border-radius: 22px;
+            background:
+                radial-gradient(circle at 74% 34%, rgba(37, 99, 235, .14), transparent 34%),
+                radial-gradient(circle at 16% 8%, rgba(14, 165, 233, .10), transparent 30%),
+                linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(248, 250, 252, .90));
+            box-shadow: 0 22px 52px rgba(15, 23, 42, .08);
+            overflow: hidden;
+        }}
+        .data-command-hero::after {{
+            content: "";
+            position: absolute;
+            inset: auto 8% 14% 8%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, .32), transparent);
+            z-index: -1;
+        }}
+        .data-blueprint-grid {{
+            position: absolute;
+            inset: 0;
+            z-index: -3;
+            opacity: .46;
+            background-image:
+                linear-gradient(rgba(37, 99, 235, .08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, .08) 1px, transparent 1px);
+            background-size: 34px 34px;
+            mask-image: linear-gradient(135deg, rgba(0, 0, 0, .76), transparent 78%);
+        }}
+        .data-background-path {{
+            position: absolute;
+            z-index: -2;
+            border: 1px solid rgba(37, 99, 235, .16);
+            border-left: 0;
+            border-bottom: 0;
+            border-radius: 0 28px 0 0;
+            pointer-events: none;
+        }}
+        .data-background-path-1 {{
+            width: 34%;
+            height: 30%;
+            right: 12%;
+            top: 18%;
+        }}
+        .data-background-path-2 {{
+            width: 42%;
+            height: 22%;
+            left: 8%;
+            bottom: 13%;
+            transform: rotate(180deg);
+        }}
+        .data-background-particle {{
+            position: absolute;
+            z-index: -1;
+            width: .42rem;
+            height: .42rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, .52);
+            box-shadow: 0 0 12px rgba(37, 99, 235, .26);
+            opacity: 0;
+            pointer-events: none;
+            animation: data-background-particle-flow 9s linear infinite;
+        }}
+        .data-background-particle-1 {{
+            left: 10%;
+            bottom: 18%;
+        }}
+        .data-background-particle-2 {{
+            right: 18%;
+            top: 24%;
+            animation-delay: 4.4s;
+        }}
+        @keyframes data-background-particle-flow {{
+            0%, 12% {{ opacity: 0; transform: translate3d(0, 0, 0); }}
+            18%, 60% {{ opacity: .75; }}
+            84%, 100% {{ opacity: 0; transform: translate3d(78px, -34px, 0); }}
+        }}
         .hero-copy {{
             min-width: 0;
         }}
@@ -346,6 +427,35 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-size: 1.05rem;
             line-height: 1.7;
             margin: 1rem 0 0;
+        }}
+        .hero-value-rotator {{
+            position: relative;
+            width: min(100%, 31rem);
+            min-height: 2.25rem;
+            margin-top: 1rem;
+            border-left: 3px solid rgba(37, 99, 235, .42);
+            padding: .4rem .75rem;
+            color: var(--accent);
+            font-size: .9rem;
+            font-weight: 800;
+            letter-spacing: .01em;
+            overflow: hidden;
+        }}
+        .hero-value-line {{
+            position: absolute;
+            inset: .4rem auto auto .75rem;
+            opacity: 0;
+            transform: translateY(.55rem);
+            animation: hero-value-rotate 16s ease-in-out infinite;
+        }}
+        .hero-value-line-1 {{ animation-delay: 0s; }}
+        .hero-value-line-2 {{ animation-delay: 4s; }}
+        .hero-value-line-3 {{ animation-delay: 8s; }}
+        .hero-value-line-4 {{ animation-delay: 12s; }}
+        @keyframes hero-value-rotate {{
+            0%, 5% {{ opacity: 0; transform: translateY(.55rem); }}
+            10%, 21% {{ opacity: 1; transform: translateY(0); }}
+            26%, 100% {{ opacity: 0; transform: translateY(-.45rem); }}
         }}
         .hero-actions,
         .contact-cta-actions {{
@@ -390,11 +500,121 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .portfolio-button-quiet {{
             background: transparent;
         }}
+        .hero-primary-action {{
+            gap: .42rem;
+        }}
+        .hero-primary-action span {{
+            display: inline-block;
+            transform: translateX(0);
+            transition: transform 180ms ease;
+        }}
         .hero-stack {{
             display: flex;
             flex-wrap: wrap;
             gap: .35rem;
             margin-top: 1.15rem;
+        }}
+        .hero-skill-pipeline {{
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(6.5rem, 1fr) 22px minmax(7.4rem, 1fr) 22px minmax(7.8rem, 1fr) 22px minmax(4.2rem, .72fr) 22px minmax(8.2rem, 1.12fr);
+            align-items: center;
+            gap: .34rem;
+            width: min(100%, 760px);
+            margin-top: 1.2rem;
+            overflow: visible;
+        }}
+        .hero-skill-node {{
+            position: relative;
+            z-index: 2;
+            min-width: 0;
+            min-height: 3.2rem;
+            display: grid;
+            align-content: center;
+            gap: .1rem;
+            padding: .45rem .6rem;
+            border: 1px solid rgba(37, 99, 235, .18);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .84);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, .05);
+            transform-origin: center;
+            animation: hero-skill-node-pulse 9s ease-in-out infinite;
+            transition:
+                transform 220ms ease,
+                border-color 220ms ease,
+                box-shadow 220ms ease;
+        }}
+        .hero-skill-node span {{
+            color: var(--text);
+            font-size: .8rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }}
+        .hero-skill-node small {{
+            color: var(--muted);
+            font-size: .64rem;
+            font-weight: 700;
+            line-height: 1;
+        }}
+        .hero-skill-node-1 {{ animation-delay: 0s; }}
+        .hero-skill-node-2 {{ animation-delay: 1.8s; }}
+        .hero-skill-node-3 {{ animation-delay: 3.6s; }}
+        .hero-skill-node-4 {{ animation-delay: 5.4s; }}
+        .hero-skill-node-5 {{ animation-delay: 7.2s; }}
+        .hero-skill-connector {{
+            position: relative;
+            z-index: 1;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(148, 163, 184, .36), rgba(37, 99, 235, .45));
+            overflow: hidden;
+        }}
+        .hero-skill-connector::after {{
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, .72), transparent);
+            animation: hero-skill-connector-flow 3s linear infinite;
+        }}
+        .hero-skill-packet {{
+            position: absolute;
+            z-index: 3;
+            top: 50%;
+            left: 2%;
+            width: .42rem;
+            height: .42rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, .9);
+            box-shadow: 0 0 10px rgba(37, 99, 235, .36);
+            transform: translate3d(0, -50%, 0);
+            animation: hero-skill-packet-flow 9s cubic-bezier(.45, 0, .2, 1) infinite;
+        }}
+        .hero-skill-packet-2 {{
+            width: .34rem;
+            height: .34rem;
+            opacity: .78;
+            animation-delay: 4.35s;
+        }}
+        @keyframes hero-skill-node-pulse {{
+            0%, 17%, 100% {{
+                border-color: rgba(37, 99, 235, .18);
+                box-shadow: 0 8px 20px rgba(15, 23, 42, .05);
+                transform: scale(1);
+            }}
+            7%, 12% {{
+                border-color: rgba(37, 99, 235, .50);
+                box-shadow: 0 8px 22px rgba(37, 99, 235, .16);
+                transform: translateY(-2px) scale(1.025);
+            }}
+        }}
+        @keyframes hero-skill-connector-flow {{
+            from {{ transform: translateX(-100%); }}
+            to {{ transform: translateX(100%); }}
+        }}
+        @keyframes hero-skill-packet-flow {{
+            0% {{ left: 2%; opacity: 0; transform: translate3d(0, -50%, 0); }}
+            7%, 82% {{ opacity: 1; }}
+            95%, 100% {{ left: 98%; opacity: 0; transform: translate3d(-100%, -50%, 0); }}
         }}
         .hero-photo-shell {{
             justify-self: center;
@@ -517,6 +737,278 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             background: var(--positive);
             box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 20%, transparent);
             transition: box-shadow 250ms ease;
+        }}
+        .profile-terminal {{
+            position: relative;
+            justify-self: center;
+            width: min(100%, 360px);
+            padding: .85rem .85rem 0;
+        }}
+        .profile-terminal-label {{
+            color: var(--accent);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            margin: 0 0 .45rem .25rem;
+        }}
+        .profile-terminal-frame {{
+            position: relative;
+            aspect-ratio: 1;
+            padding: .75rem;
+            border-radius: 24px;
+            border: 1px solid rgba(37, 99, 235, .20);
+            background:
+                linear-gradient(145deg, rgba(239, 246, 255, .92), rgba(255, 255, 255, .72));
+            box-shadow: 0 18px 42px rgba(37, 99, 235, .12);
+            overflow: hidden;
+            transform: none;
+        }}
+        .profile-terminal-photo {{
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 18px;
+            border: 1px solid rgba(37, 99, 235, .18);
+            box-shadow: var(--shadow);
+            transform: none;
+            animation: none;
+        }}
+        .profile-corner {{
+            position: absolute;
+            width: 1.3rem;
+            height: 1.3rem;
+            border-color: rgba(37, 99, 235, .52);
+            z-index: 2;
+            pointer-events: none;
+        }}
+        .profile-corner-tl {{
+            top: .55rem;
+            left: .55rem;
+            border-top: 2px solid;
+            border-left: 2px solid;
+        }}
+        .profile-corner-tr {{
+            top: .55rem;
+            right: .55rem;
+            border-top: 2px solid;
+            border-right: 2px solid;
+        }}
+        .profile-corner-bl {{
+            bottom: .55rem;
+            left: .55rem;
+            border-bottom: 2px solid;
+            border-left: 2px solid;
+        }}
+        .profile-corner-br {{
+            right: .55rem;
+            bottom: .55rem;
+            border-right: 2px solid;
+            border-bottom: 2px solid;
+        }}
+        .profile-identity-card {{
+            position: relative;
+            z-index: 3;
+            width: min(92%, 310px);
+            margin: -2.3rem auto 0;
+            padding: .9rem 1rem;
+            border: 1px solid rgba(37, 99, 235, .24);
+            border-radius: 16px;
+            background:
+                radial-gradient(circle at 86% 14%, rgba(37, 99, 235, .13), transparent 34%),
+                rgba(255, 255, 255, .92);
+            box-shadow: 0 16px 36px rgba(37, 99, 235, .12);
+            backdrop-filter: blur(8px);
+            transform-origin: center center;
+            transition:
+                transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 250ms ease,
+                box-shadow 250ms ease;
+        }}
+        .profile-identity-name {{
+            color: var(--text);
+            font-size: 1.12rem;
+            font-weight: 850;
+            line-height: 1.15;
+        }}
+        .profile-identity-role {{
+            color: var(--accent);
+            font-size: .92rem;
+            font-weight: 800;
+            margin-top: .16rem;
+        }}
+        .profile-availability {{
+            display: flex;
+            align-items: center;
+            gap: .42rem;
+            color: var(--tag-text);
+            font-size: .74rem;
+            font-weight: 750;
+            margin-top: .55rem;
+            line-height: 1.25;
+        }}
+        .profile-status-dot {{
+            width: .5rem;
+            height: .5rem;
+            flex: 0 0 auto;
+            border-radius: 999px;
+            background: var(--positive);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 20%, transparent);
+            animation: profile-status-dot-pulse 2.8s ease-in-out infinite;
+        }}
+        .profile-identity-location {{
+            color: var(--muted);
+            font-size: .72rem;
+            font-weight: 700;
+            margin-top: .35rem;
+        }}
+        @keyframes profile-status-dot-pulse {{
+            0%, 100% {{ box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 18%, transparent); }}
+            50% {{ box-shadow: 0 0 0 5px color-mix(in srgb, var(--positive) 10%, transparent), 0 0 12px color-mix(in srgb, var(--positive) 32%, transparent); }}
+        }}
+        .project-proof-console {{
+            position: relative;
+            border: 1px solid rgba(37, 99, 235, .16);
+            border-radius: 16px;
+            background:
+                linear-gradient(90deg, rgba(239, 246, 255, .85), rgba(255, 255, 255, .92));
+            box-shadow: var(--shadow);
+            margin: 1rem 0 .9rem;
+            overflow: hidden;
+        }}
+        .project-proof-console::before {{
+            content: "";
+            display: block;
+            height: 3px;
+            background: linear-gradient(90deg, rgba(37, 99, 235, .18), rgba(37, 99, 235, .58), rgba(37, 99, 235, .18));
+        }}
+        .proof-console-status {{
+            color: var(--accent);
+            font-size: .72rem;
+            font-weight: 850;
+            letter-spacing: .11em;
+            padding: .72rem 1rem .15rem;
+        }}
+        .proof-console-grid {{
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            padding: .35rem 1rem .95rem;
+        }}
+        .proof-console-item {{
+            min-width: 0;
+            padding: .25rem 1rem;
+            border-left: 1px solid rgba(37, 99, 235, .14);
+            animation: proof-console-enter 520ms ease-out both;
+        }}
+        .proof-console-item-1 {{
+            border-left: 0;
+            padding-left: 0;
+        }}
+        .proof-console-value {{
+            color: var(--text);
+            font-size: clamp(1.15rem, 2vw, 1.55rem);
+            font-weight: 850;
+            line-height: 1.1;
+            overflow-wrap: anywhere;
+        }}
+        .proof-console-label {{
+            color: var(--muted);
+            font-size: .74rem;
+            font-weight: 750;
+            text-transform: uppercase;
+            letter-spacing: .035em;
+            margin-top: .22rem;
+        }}
+        @keyframes proof-console-enter {{
+            from {{ opacity: 0; transform: translateY(.45rem); }}
+            to {{ opacity: 1; transform: translateY(0); }}
+        }}
+        .hero-pipeline-divider {{
+            position: relative;
+            margin: 0 0 2rem;
+            padding: .78rem .95rem;
+            border: 1px solid rgba(37, 99, 235, .14);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .72);
+            overflow: hidden;
+        }}
+        .hero-pipeline-track {{
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(5.5rem, 1fr) 20px minmax(5.7rem, 1fr) 20px minmax(5.6rem, 1fr) 20px minmax(5.4rem, 1fr) 20px minmax(5.6rem, 1fr) 20px minmax(6.2rem, 1fr);
+            align-items: center;
+            gap: .28rem;
+            z-index: 2;
+        }}
+        .hero-pipeline-stage {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.1rem;
+            padding: .35rem .45rem;
+            border: 1px solid rgba(37, 99, 235, .16);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .82);
+            color: var(--tag-text);
+            font-size: .68rem;
+            font-weight: 850;
+            text-align: center;
+            line-height: 1.1;
+            animation: hero-divider-stage-pulse 9s ease-in-out infinite;
+        }}
+        .hero-pipeline-stage-1 {{ animation-delay: 0s; }}
+        .hero-pipeline-stage-2 {{ animation-delay: 1.5s; }}
+        .hero-pipeline-stage-3 {{ animation-delay: 3s; }}
+        .hero-pipeline-stage-4 {{ animation-delay: 4.5s; }}
+        .hero-pipeline-stage-5 {{ animation-delay: 6s; }}
+        .hero-pipeline-stage-6 {{ animation-delay: 7.5s; }}
+        .hero-pipeline-connector {{
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(148, 163, 184, .32), rgba(37, 99, 235, .48), rgba(148, 163, 184, .32));
+            background-size: 220% 100%;
+            animation: hero-divider-connector-flow 9s linear infinite;
+        }}
+        .hero-pipeline-packet {{
+            position: absolute;
+            z-index: 3;
+            top: 50%;
+            left: 2%;
+            width: .42rem;
+            height: .42rem;
+            border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 10px rgba(37, 99, 235, .34);
+            transform: translate3d(0, -50%, 0);
+            animation: hero-divider-packet-flow 9s linear infinite;
+        }}
+        .hero-pipeline-packet-2 {{
+            width: .32rem;
+            height: .32rem;
+            opacity: .72;
+            animation-delay: 4.5s;
+        }}
+        @keyframes hero-divider-stage-pulse {{
+            0%, 17%, 100% {{
+                border-color: rgba(37, 99, 235, .16);
+                box-shadow: none;
+                transform: translateY(0);
+            }}
+            7%, 12% {{
+                border-color: rgba(37, 99, 235, .48);
+                box-shadow: 0 7px 18px rgba(37, 99, 235, .13);
+                transform: translateY(-1px);
+            }}
+        }}
+        @keyframes hero-divider-connector-flow {{
+            0% {{ background-position: 100% 50%; }}
+            100% {{ background-position: -120% 50%; }}
+        }}
+        @keyframes hero-divider-packet-flow {{
+            0%, 10% {{ left: 2%; opacity: 0; }}
+            16%, 80% {{ opacity: 1; }}
+            95%, 100% {{ left: 98%; opacity: 0; }}
         }}
         .project-evidence-strip {{
             display: grid;
@@ -802,6 +1294,32 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
         }}
         @media (hover: hover) and (pointer: fine) {{
+            .data-command-hero .portfolio-button:hover,
+            .data-command-hero .portfolio-button:focus-visible {{
+                transform: translateY(-2px);
+                box-shadow: 0 10px 24px rgba(37, 99, 235, .13);
+            }}
+            .data-command-hero .portfolio-button-primary:hover span,
+            .data-command-hero .portfolio-button-primary:focus-visible span {{
+                transform: translateX(.18rem);
+            }}
+            .hero-skill-node:hover,
+            .hero-skill-node:focus-visible {{
+                transform: translateY(-2px) scale(1.04);
+                border-color: rgba(37, 99, 235, 0.50);
+                box-shadow: 0 10px 24px rgba(37, 99, 235, .14);
+            }}
+            .profile-identity-card:hover,
+            .profile-identity-card:focus-within {{
+                transform: translateY(-5px) scale(1.025);
+                border-color: rgba(37, 99, 235, 0.50);
+                box-shadow: 0 18px 38px rgba(37, 99, 235, 0.17);
+            }}
+            .profile-terminal:hover,
+            .profile-terminal-frame:hover,
+            .profile-terminal-photo:hover {{
+                transform: none;
+            }}
             .home-profile-info-card:hover,
             .home-profile-info-card:focus-within {{
                 transform: translateY(-5px) scale(1.025);
@@ -1857,6 +2375,84 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 grid-template-columns: 1fr;
                 padding-top: 1rem;
             }}
+            .data-command-hero {{
+                padding: 1rem;
+                border-radius: 18px;
+                background:
+                    radial-gradient(circle at 50% 12%, rgba(37, 99, 235, .10), transparent 32%),
+                    linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(248, 250, 252, .94));
+            }}
+            .data-blueprint-grid {{
+                opacity: .28;
+                background-size: 28px 28px;
+            }}
+            .data-background-path {{
+                opacity: .45;
+            }}
+            .hero-value-rotator {{
+                width: 100%;
+            }}
+            .hero-skill-pipeline {{
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: .45rem;
+                overflow: hidden;
+            }}
+            .hero-skill-node {{
+                min-height: 3rem;
+            }}
+            .hero-skill-connector {{
+                display: none;
+            }}
+            .hero-skill-packet {{
+                top: auto;
+                bottom: .45rem;
+                width: .32rem;
+                height: .32rem;
+                box-shadow: 0 0 7px rgba(37, 99, 235, .28);
+            }}
+            .profile-terminal {{
+                width: min(100%, 310px);
+                margin: .35rem auto 0;
+                padding-inline: .25rem;
+            }}
+            .profile-identity-card {{
+                width: 100%;
+                margin: .75rem auto 0;
+                transform: none;
+            }}
+            .project-proof-console {{
+                margin-top: .85rem;
+            }}
+            .proof-console-grid {{
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                row-gap: .65rem;
+            }}
+            .proof-console-item-1,
+            .proof-console-item-3 {{
+                border-left: 0;
+                padding-left: 0;
+            }}
+            .hero-pipeline-divider {{
+                padding: .9rem;
+            }}
+            .hero-pipeline-track {{
+                grid-template-columns: 1fr;
+                gap: .35rem;
+            }}
+            .hero-pipeline-connector {{
+                width: 2px;
+                height: 18px;
+                margin: 0 auto;
+                background: linear-gradient(180deg, rgba(148, 163, 184, .32), rgba(37, 99, 235, .48), rgba(148, 163, 184, .32));
+                background-size: 100% 220%;
+                animation-name: hero-divider-connector-flow-mobile;
+            }}
+            .hero-pipeline-packet {{
+                left: 50%;
+                top: .8rem;
+                transform: translate3d(-50%, 0, 0);
+                animation-name: hero-divider-packet-flow-mobile;
+            }}
             .hero-photo-shell {{
                 order: -1;
                 width: min(100%, 300px);
@@ -1954,6 +2550,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 top: 100%;
             }}
         }}
+        @keyframes hero-divider-connector-flow-mobile {{
+            0% {{ background-position: 50% 100%; }}
+            100% {{ background-position: 50% -120%; }}
+        }}
+        @keyframes hero-divider-packet-flow-mobile {{
+            0%, 10% {{ top: .8rem; opacity: 0; }}
+            16%, 80% {{ opacity: 1; }}
+            95%, 100% {{ top: calc(100% - 1rem); opacity: 0; }}
+        }}
         @media (prefers-reduced-motion: reduce) {{
             *, *::before, *::after {{
                 transition-duration: 0.01ms !important;
@@ -2033,6 +2638,40 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .home-pipeline-particle {{
                 display: none;
+            }}
+            .data-background-particle,
+            .hero-skill-packet,
+            .hero-pipeline-packet {{
+                display: none;
+            }}
+            .hero-value-rotator {{
+                overflow: visible;
+            }}
+            .hero-value-line {{
+                display: none;
+                position: static;
+                opacity: 1;
+                transform: none;
+            }}
+            .hero-value-line-1 {{
+                display: inline;
+            }}
+            .hero-skill-node,
+            .hero-skill-node:hover,
+            .hero-skill-node:focus-visible,
+            .profile-identity-card,
+            .profile-identity-card:hover,
+            .profile-identity-card:focus-within,
+            .profile-status-dot,
+            .project-proof-console,
+            .proof-console-item,
+            .hero-pipeline-stage,
+            .hero-pipeline-connector,
+            .hero-pipeline-connector::after {{
+                animation: none !important;
+                transition: none !important;
+                transform: none !important;
+                opacity: 1 !important;
             }}
         }}
         </style>

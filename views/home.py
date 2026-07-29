@@ -8,7 +8,7 @@ import streamlit as st
 
 from dashboard.data_loader import load_dashboard_data, load_dashboard_metadata
 from dashboard.transformations import remote_salary, salary_coverage, top_skills
-from portfolio.content.profile import PROFILE, SPECIALTIES
+from portfolio.content.profile import PROFILE
 from portfolio.content.projects import PROJECTS
 from portfolio.content.skills import SKILL_GROUPS
 from ui.components import footer
@@ -71,66 +71,113 @@ resume_href = asset_data_uri(RESUME_PATH, "application/pdf")
 resume_attr = ' download="Peter_Atef_Resume_2026.pdf"' if resume_href else ""
 resume_link = resume_href or html.escape(PROFILE["resume_path"])
 tech_stack = " - ".join(project["technologies"][:6])
-specialty_markup = "".join(f'<span class="meta-pill">{html.escape(item)}</span>' for item in SPECIALTIES[:6])
+hero_photo_src = asset_data_uri(HERO_PHOTO_PATH, "image/jpeg")
+hero_photo_markup = (
+    f'<img class="profile-terminal-photo" src="{hero_photo_src}" alt="Portrait of Peter Atef, Junior Data Engineer">'
+    if hero_photo_src
+    else '<div class="hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>'
+)
 
-hero_cols = st.columns([1.2, .8], vertical_alignment="center")
-with hero_cols[0]:
-    st.markdown(
-        f"""
+skill_pipeline_steps = [
+    ("ETL Pipelines", "Flow"),
+    ("Python / Pandas", "Clean"),
+    ("SQL / PostgreSQL", "Store"),
+    ("dbt", "Model"),
+    ("Analytics-Ready Data", "Deliver"),
+]
+skill_pipeline_markup = ""
+for index, (label, detail) in enumerate(skill_pipeline_steps, start=1):
+    skill_pipeline_markup += (
+        f'<div class="hero-skill-node hero-skill-node-{index}" tabindex="0">'
+        f'<span>{html.escape(label)}</span>'
+        f'<small>{html.escape(detail)}</small>'
+        '</div>'
+    )
+    if index < len(skill_pipeline_steps):
+        skill_pipeline_markup += f'<div class="hero-skill-connector hero-skill-connector-{index}" aria-hidden="true"></div>'
+
+proof_items = [
+    ("Source Job Postings", format_int(source_rows)),
+    ("Hosted Sample", format_int(sample_rows)),
+    ("Job-Skill Rows", format_int(sample_skill_rows)),
+    ("Distinct Skills", format_int(unique_skills)),
+]
+proof_markup = "".join(
+    (
+        f'<div class="proof-console-item proof-console-item-{index}">'
+        f'<div class="proof-console-value">{value}</div>'
+        f'<div class="proof-console-label">{html.escape(label)}</div>'
+        '</div>'
+    )
+    for index, (label, value) in enumerate(proof_items, start=1)
+)
+
+divider_steps = ["Raw Job Data", "Python/Pandas", "PostgreSQL", "dbt Models", "Data Quality", "Market Dashboard"]
+divider_markup = ""
+for index, label in enumerate(divider_steps, start=1):
+    divider_markup += f'<span class="hero-pipeline-stage hero-pipeline-stage-{index}">{html.escape(label)}</span>'
+    if index < len(divider_steps):
+        divider_markup += f'<span class="hero-pipeline-connector hero-pipeline-connector-{index}" aria-hidden="true"></span>'
+
+st.markdown(
+    f"""
+    <section class="portfolio-hero data-command-hero">
+        <div class="data-blueprint-grid" aria-hidden="true"></div>
+        <div class="data-background-path data-background-path-1" aria-hidden="true"></div>
+        <div class="data-background-path data-background-path-2" aria-hidden="true"></div>
+        <span class="data-background-particle data-background-particle-1" aria-hidden="true"></span>
+        <span class="data-background-particle data-background-particle-2" aria-hidden="true"></span>
         <div class="hero-copy">
             <div class="hero-kicker">Hi, I'm Peter Atef</div>
             <h1>Junior Data Engineer</h1>
             <p>I build reliable data pipelines and transform raw, messy data into analytics-ready insights using Python, SQL, PostgreSQL, and dbt.</p>
+            <div class="hero-value-rotator" aria-hidden="true">
+                <span class="hero-value-line hero-value-line-1">Building Reliable Pipelines</span>
+                <span class="hero-value-line hero-value-line-2">Transforming Messy Data</span>
+                <span class="hero-value-line hero-value-line-3">Validating Trusted Models</span>
+                <span class="hero-value-line hero-value-line-4">Delivering Analytics-Ready Insights</span>
+            </div>
+            <span class="hero-value-accessible-summary sr-only">Building reliable pipelines, transforming messy data, validating trusted models, and delivering analytics-ready insights.</span>
             <div class="hero-actions">
-                <a class="portfolio-button portfolio-button-primary" href="/project_overview">EXPLORE MY PROJECT</a>
+                <a class="portfolio-button portfolio-button-primary hero-primary-action" href="/project_overview">EXPLORE MY PROJECT<span aria-hidden="true">-&gt;</span></a>
                 <a class="portfolio-button" href="{resume_link}"{resume_attr}>DOWNLOAD RESUME</a>
                 <a class="portfolio-button portfolio-button-quiet" href="/contact">CONTACT ME</a>
             </div>
-            <div class="hero-stack">{specialty_markup}</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-with hero_cols[1]:
-    with st.container(key="home_profile_photo_shell"):
-        if HERO_PHOTO_PATH.exists():
-            st.markdown('<span class="sr-only">Portrait of Peter Atef, Junior Data Engineer</span>', unsafe_allow_html=True)
-            st.image(str(HERO_PHOTO_PATH), width="stretch")
-        else:
-            st.markdown('<div class="hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>', unsafe_allow_html=True)
-    with st.container(key="home_profile_info_card"):
-        st.markdown(
-            """
-            <div class="home-profile-info-card" tabindex="0">
-                <div class="home-profile-info-name">Peter Atef</div>
-                <div class="home-profile-info-role">Junior Data Engineer</div>
-                <div class="home-profile-info-status"><span></span>Open to Junior Data Engineer Opportunities</div>
+            <div class="hero-skill-pipeline" aria-label="Skills pipeline from ETL pipelines to analytics-ready data">
+                <span class="hero-skill-packet hero-skill-packet-1" aria-hidden="true"></span>
+                <span class="hero-skill-packet hero-skill-packet-2" aria-hidden="true"></span>
+                {skill_pipeline_markup}
             </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-st.markdown('<div class="portfolio-hero-spacer"></div>', unsafe_allow_html=True)
-
-evidence_cards = [
-    ("Source Job Postings", format_int(source_rows), "Raw project scale verified in metadata."),
-    ("Hosted Sample Records", format_int(sample_rows), "Optimized sample powering the Streamlit app."),
-    ("Job-Skill Rows", format_int(sample_skill_rows), "Joined skill relationships in the hosted sample."),
-    ("Distinct Skills", format_int(unique_skills), "Technical skills available for market analysis."),
-    ("Technology Stack", "Python - SQL - dbt", "Python, Pandas, PostgreSQL, dbt, SQL, Streamlit."),
-]
-evidence_markup = "".join(
-    (
-        '<div class="project-evidence-card" tabindex="0">'
-        f'<div class="evidence-value">{value}</div>'
-        f'<div class="evidence-label">{html.escape(label)}</div>'
-        f'<div class="evidence-note">{html.escape(note)}</div>'
-        '</div>'
-    )
-    for label, value, note in evidence_cards
+        </div>
+        <div class="profile-terminal">
+            <div class="profile-terminal-label">PROFILE_01</div>
+            <div class="profile-terminal-frame">
+                <span class="profile-corner profile-corner-tl" aria-hidden="true"></span>
+                <span class="profile-corner profile-corner-tr" aria-hidden="true"></span>
+                <span class="profile-corner profile-corner-bl" aria-hidden="true"></span>
+                <span class="profile-corner profile-corner-br" aria-hidden="true"></span>
+                {hero_photo_markup}
+            </div>
+            <div class="profile-identity-card" tabindex="0">
+                <div class="profile-identity-name">Peter Atef</div>
+                <div class="profile-identity-role">Junior Data Engineer</div>
+                <div class="profile-availability"><span class="profile-status-dot"></span>Open to Junior Data Engineer Opportunities</div>
+                <div class="profile-identity-location">{html.escape(PROFILE["location"])}</div>
+            </div>
+        </div>
+    </section>
+    <section class="project-proof-console" aria-label="Project evidence">
+        <div class="proof-console-status">PROJECT EVIDENCE</div>
+        <div class="proof-console-grid">{proof_markup}</div>
+    </section>
+    <section class="hero-pipeline-divider" aria-label="Raw job data moves through Python and Pandas, PostgreSQL, dbt models, data quality, and the Market Dashboard">
+        <span class="hero-pipeline-packet hero-pipeline-packet-1" aria-hidden="true"></span>
+        <span class="hero-pipeline-packet hero-pipeline-packet-2" aria-hidden="true"></span>
+        <div class="hero-pipeline-track">{divider_markup}</div>
+    </section>
+    """,
+    unsafe_allow_html=True,
 )
-st.markdown(f'<section class="project-evidence-strip">{evidence_markup}</section>', unsafe_allow_html=True)
 
 about_cards = [
     (

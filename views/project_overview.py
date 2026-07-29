@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html
 import streamlit as st
 
 from dashboard.data_loader import load_dashboard_metadata
@@ -34,11 +35,17 @@ badge_row(project["technologies"][:6])
 
 action_cols = st.columns([1.05, .95, .8, 2.4])
 with action_cols[0]:
-    st.link_button("Explore Market Dashboard", "/market_dashboard", type="primary")
+    st.markdown(
+        '<a class="portfolio-button portfolio-button-primary" href="/market_dashboard">Explore Market Dashboard</a>',
+        unsafe_allow_html=True,
+    )
 with action_cols[1]:
-    st.link_button("View Data Pipeline", "/data_pipeline")
+    st.markdown('<a class="portfolio-button" href="/data_pipeline">View Data Pipeline</a>', unsafe_allow_html=True)
 with action_cols[2]:
-    st.link_button("GitHub", project["repository_url"])
+    st.markdown(
+        f'<a class="portfolio-button" href="{html.escape(project["repository_url"])}">GitHub</a>',
+        unsafe_allow_html=True,
+    )
 
 try:
     metadata = load_dashboard_metadata()

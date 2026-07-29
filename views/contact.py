@@ -43,7 +43,7 @@ with cards[0]:
 
 with cards[1]:
     linkedin_action = (
-        f'<a class="contact-card-action" href="{html.escape(linkedin_url)}" target="_blank" rel="noreferrer">View LinkedIn</a>'
+        f'<a class="contact-card-action" href="{html.escape(linkedin_url)}" rel="noreferrer">View LinkedIn</a>'
         if linkedin_url.startswith("https://")
         else ""
     )
@@ -61,7 +61,7 @@ with cards[1]:
 
 with cards[2]:
     github_action = (
-        f'<a class="contact-card-action" href="{html.escape(github_url)}" target="_blank" rel="noreferrer">View GitHub</a>'
+        f'<a class="contact-card-action" href="{html.escape(github_url)}" rel="noreferrer">View GitHub</a>'
         if github_url.startswith("https://")
         else ""
     )
@@ -98,10 +98,10 @@ st.caption(PROFILE["availability"])
 footer_links = st.columns([0.12, 0.16, 0.14, 0.58])
 with footer_links[0]:
     if footer_email_url:
-        st.link_button("Email", footer_email_url)
+        st.markdown(f'<a class="portfolio-button" href="{html.escape(footer_email_url)}">Email</a>', unsafe_allow_html=True)
 with footer_links[1]:
     if linkedin_url.startswith("https://"):
-        st.link_button("LinkedIn", linkedin_url)
+        st.markdown(f'<a class="portfolio-button" href="{html.escape(linkedin_url)}">LinkedIn</a>', unsafe_allow_html=True)
 with footer_links[2]:
     if github_url.startswith("https://"):
-        st.link_button("GitHub", github_url)
+        st.markdown(f'<a class="portfolio-button" href="{html.escape(github_url)}">GitHub</a>', unsafe_allow_html=True)

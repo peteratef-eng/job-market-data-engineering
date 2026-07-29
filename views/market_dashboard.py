@@ -669,7 +669,7 @@ with st.expander("Methodology & Data Notes", expanded=False):
 
 st.markdown(
     '<div class="dashboard-compact-footer">Built by Peter Atef &middot; '
-    '<a href="https://github.com/peteratef-eng/job-market-data-engineering" target="_blank" rel="noopener noreferrer">GitHub</a>'
+    '<a href="https://github.com/peteratef-eng/job-market-data-engineering" rel="noopener noreferrer">GitHub</a>'
     '</div>',
     unsafe_allow_html=True,
 )

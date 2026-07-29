@@ -116,9 +116,9 @@ def footer() -> None:
     if PROFILE.get("email"):
         links.append(f'<a href="{html.escape(FOOTER_EMAIL_URL)}">Email</a>')
     if PROFILE.get("linkedin_url"):
-        links.append(f'<a href="{html.escape(PROFILE["linkedin_url"])}" target="_blank" rel="noreferrer">LinkedIn</a>')
+        links.append(f'<a href="{html.escape(PROFILE["linkedin_url"])}" rel="noreferrer">LinkedIn</a>')
     if PROFILE.get("github_url"):
-        links.append(f'<a href="{html.escape(PROFILE["github_url"])}" target="_blank" rel="noreferrer">GitHub</a>')
+        links.append(f'<a href="{html.escape(PROFILE["github_url"])}" rel="noreferrer">GitHub</a>')
     links_markup = " | ".join(links)
     st.markdown(
         f'<div class="footer">Peter &mdash; Junior Data Engineer<br>{html.escape(PROFILE["availability"])}<br>{links_markup}</div>',

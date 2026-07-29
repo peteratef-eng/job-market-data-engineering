@@ -275,7 +275,7 @@ st.markdown(
 )
 
 repository_button = (
-    f'<a class="portfolio-button" href="{html.escape(project["repository_url"])}" target="_blank" rel="noopener noreferrer">VIEW ON GITHUB</a>'
+    f'<a class="portfolio-button" href="{html.escape(project["repository_url"])}" rel="noopener noreferrer">VIEW ON GITHUB</a>'
     if project.get("repository_url")
     else ""
 )
@@ -389,8 +389,8 @@ st.markdown(
         </div>
         <div class="contact-cta-actions">
             <a class="portfolio-button portfolio-button-primary" href="{html.escape(PROFILE["mailto_url"])}">Email</a>
-            <a class="portfolio-button" href="{html.escape(PROFILE["linkedin_url"])}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a class="portfolio-button" href="{html.escape(PROFILE["github_url"])}" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="portfolio-button" href="{html.escape(PROFILE["linkedin_url"])}" rel="noopener noreferrer">LinkedIn</a>
+            <a class="portfolio-button" href="{html.escape(PROFILE["github_url"])}" rel="noopener noreferrer">GitHub</a>
             <a class="portfolio-button" href="{resume_link}"{resume_attr}>Resume</a>
         </div>
     </section>

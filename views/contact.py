@@ -31,7 +31,7 @@ with cards[0]:
     with st.container(border=True):
         st.subheader("Email")
         st.caption("Send me a message")
-        st.markdown(PROFILE["email"])
+        st.markdown(f"[{PROFILE['email']}]({footer_email_url})")
         st.link_button("Send Email", send_email_url, type="primary")
 
 with cards[1]:

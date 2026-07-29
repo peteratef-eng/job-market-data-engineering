@@ -53,7 +53,7 @@ resume_link = resume_href or html.escape(PROFILE["resume_path"])
 tech_stack = " - ".join(project["technologies"][:6])
 hero_photo_src = asset_data_uri(HERO_PHOTO_PATH, "image/jpeg")
 hero_photo_markup = (
-    f'<img class="profile-terminal-photo" src="{hero_photo_src}" alt="Portrait of Peter Atef, Junior Data Engineer">'
+    f'<img class="hero-profile-image" src="{hero_photo_src}" alt="Portrait of Peter Atef, Junior Data Engineer">'
     if hero_photo_src
     else '<div class="hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>'
 )
@@ -106,20 +106,15 @@ st.markdown(
                 <a class="portfolio-button portfolio-button-quiet" href="/contact">CONTACT ME</a>
             </div>
         </div>
-        <div class="profile-terminal">
-            <div class="profile-terminal-label">PROFILE_01</div>
-            <div class="profile-terminal-frame">
-                <span class="profile-corner profile-corner-tl" aria-hidden="true"></span>
-                <span class="profile-corner profile-corner-tr" aria-hidden="true"></span>
-                <span class="profile-corner profile-corner-bl" aria-hidden="true"></span>
-                <span class="profile-corner profile-corner-br" aria-hidden="true"></span>
+        <div class="hero-profile-card">
+            <div class="hero-profile-image-wrap">
                 {hero_photo_markup}
             </div>
-            <div class="profile-identity-card" tabindex="0">
-                <div class="profile-identity-name">Peter Atef</div>
-                <div class="profile-identity-role">Junior Data Engineer</div>
+            <div class="hero-profile-content">
+                <div class="hero-profile-name">Peter Atef</div>
+                <div class="hero-profile-role">Junior Data Engineer</div>
                 <div class="profile-availability"><span class="profile-status-dot"></span>Open to Junior Data Engineer Opportunities</div>
-                <div class="profile-identity-location">{html.escape(PROFILE["location"])}</div>
+                <div class="hero-profile-location">{html.escape(PROFILE["location"])}</div>
             </div>
         </div>
     </section>
@@ -128,8 +123,6 @@ st.markdown(
         <div class="proof-console-grid">{proof_markup}</div>
     </section>
     <section class="hero-pipeline-divider" aria-label="Raw job data moves through Python and Pandas, PostgreSQL, dbt models, data quality, and the Market Dashboard">
-        <span class="hero-pipeline-packet hero-pipeline-packet-1" aria-hidden="true"></span>
-        <span class="hero-pipeline-packet hero-pipeline-packet-2" aria-hidden="true"></span>
         <div class="hero-pipeline-track">{divider_markup}</div>
     </section>
     """,

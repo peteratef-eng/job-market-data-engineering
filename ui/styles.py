@@ -636,101 +636,58 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 20%, transparent);
             transition: box-shadow 250ms ease;
         }}
-        .profile-terminal {{
+        .hero-profile-card {{
             position: relative;
             justify-self: center;
             width: min(100%, 360px);
-            padding: .85rem .85rem 0;
+            padding: .85rem;
+            border: 1px solid rgba(37, 99, 235, .20);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .92);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, .10);
+            overflow: hidden;
+            transform: translateZ(0);
+            transform-origin: center center;
+            transition:
+                transform 240ms ease,
+                border-color 240ms ease,
+                box-shadow 240ms ease;
         }}
-        .profile-terminal-label {{
-            color: var(--accent);
-            font-size: .72rem;
-            font-weight: 800;
-            letter-spacing: .12em;
-            margin: 0 0 .45rem .25rem;
+        .hero-profile-card:focus-within {{
+            border-color: rgba(37, 99, 235, 0.72);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
         }}
-        .profile-terminal-frame {{
+        .hero-profile-image-wrap {{
             position: relative;
             aspect-ratio: 1;
-            padding: .75rem;
-            border-radius: 24px;
-            border: 1px solid rgba(37, 99, 235, .20);
-            background:
-                linear-gradient(145deg, rgba(239, 246, 255, .92), rgba(255, 255, 255, .72));
-            box-shadow: 0 18px 42px rgba(37, 99, 235, .12);
+            border-radius: 18px;
             overflow: hidden;
-            transform: none;
+            background: rgba(239, 246, 255, .76);
         }}
-        .profile-terminal-photo {{
+        .hero-profile-image {{
             display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center top;
             border-radius: 18px;
-            border: 1px solid rgba(37, 99, 235, .18);
+            border: 1px solid rgba(37, 99, 235, .16);
             box-shadow: var(--shadow);
             transform: none;
             animation: none;
         }}
-        .profile-corner {{
-            position: absolute;
-            width: 1.3rem;
-            height: 1.3rem;
-            border-color: rgba(37, 99, 235, .52);
-            z-index: 2;
-            pointer-events: none;
+        .hero-profile-content {{
+            padding: .9rem .15rem .05rem;
+            text-align: center;
         }}
-        .profile-corner-tl {{
-            top: .55rem;
-            left: .55rem;
-            border-top: 2px solid;
-            border-left: 2px solid;
-        }}
-        .profile-corner-tr {{
-            top: .55rem;
-            right: .55rem;
-            border-top: 2px solid;
-            border-right: 2px solid;
-        }}
-        .profile-corner-bl {{
-            bottom: .55rem;
-            left: .55rem;
-            border-bottom: 2px solid;
-            border-left: 2px solid;
-        }}
-        .profile-corner-br {{
-            right: .55rem;
-            bottom: .55rem;
-            border-right: 2px solid;
-            border-bottom: 2px solid;
-        }}
-        .profile-identity-card {{
-            position: relative;
-            z-index: 3;
-            width: min(92%, 310px);
-            margin: -2.3rem auto 0;
-            padding: .9rem 1rem;
-            border: 1px solid rgba(37, 99, 235, .24);
-            border-radius: 16px;
-            background:
-                radial-gradient(circle at 86% 14%, rgba(37, 99, 235, .13), transparent 34%),
-                rgba(255, 255, 255, .92);
-            box-shadow: 0 16px 36px rgba(37, 99, 235, .12);
-            backdrop-filter: blur(8px);
-            transform-origin: center center;
-            transition:
-                transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 250ms ease,
-                box-shadow 250ms ease;
-        }}
-        .profile-identity-name {{
+        .hero-profile-name {{
             color: var(--text);
             font-size: 1.12rem;
             font-weight: 850;
             line-height: 1.15;
+            transition: color 240ms ease;
         }}
-        .profile-identity-role {{
+        .hero-profile-role {{
             color: var(--accent);
             font-size: .92rem;
             font-weight: 800;
@@ -755,7 +712,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 20%, transparent);
             animation: profile-status-dot-pulse 2.8s ease-in-out infinite;
         }}
-        .profile-identity-location {{
+        .hero-profile-location {{
             color: var(--muted);
             font-size: .72rem;
             font-weight: 700;
@@ -837,9 +794,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             grid-template-columns: minmax(5.5rem, 1fr) 20px minmax(5.7rem, 1fr) 20px minmax(5.6rem, 1fr) 20px minmax(5.4rem, 1fr) 20px minmax(5.6rem, 1fr) 20px minmax(6.2rem, 1fr);
             align-items: center;
             gap: .28rem;
-            z-index: 2;
+            z-index: 1;
         }}
         .hero-pipeline-stage {{
+            position: relative;
+            z-index: 3;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -862,31 +821,34 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-pipeline-stage-5 {{ animation-delay: 6s; }}
         .hero-pipeline-stage-6 {{ animation-delay: 7.5s; }}
         .hero-pipeline-connector {{
+            position: relative;
+            z-index: 2;
             height: 2px;
             border-radius: 999px;
             background: linear-gradient(90deg, rgba(148, 163, 184, .32), rgba(37, 99, 235, .48), rgba(148, 163, 184, .32));
             background-size: 220% 100%;
             animation: hero-divider-connector-flow 9s linear infinite;
+            overflow: visible;
         }}
-        .hero-pipeline-packet {{
+        .hero-pipeline-connector::after {{
+            content: "";
             position: absolute;
-            z-index: 3;
+            z-index: 2;
             top: 50%;
-            left: 2%;
+            left: 0;
             width: .42rem;
             height: .42rem;
             border-radius: 999px;
             background: var(--accent);
             box-shadow: 0 0 10px rgba(37, 99, 235, .34);
-            transform: translate3d(0, -50%, 0);
-            animation: hero-divider-packet-flow 9s linear infinite;
+            transform: translate3d(-50%, -50%, 0);
+            animation: hero-divider-packet-on-connector 9s linear infinite;
         }}
-        .hero-pipeline-packet-2 {{
-            width: .32rem;
-            height: .32rem;
-            opacity: .72;
-            animation-delay: 4.5s;
-        }}
+        .hero-pipeline-connector-1::after {{ animation-delay: 0s; }}
+        .hero-pipeline-connector-2::after {{ animation-delay: 1.5s; }}
+        .hero-pipeline-connector-3::after {{ animation-delay: 3s; }}
+        .hero-pipeline-connector-4::after {{ animation-delay: 4.5s; }}
+        .hero-pipeline-connector-5::after {{ animation-delay: 6s; }}
         @keyframes hero-divider-stage-pulse {{
             0%, 17%, 100% {{
                 border-color: rgba(37, 99, 235, .16);
@@ -903,10 +865,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             0% {{ background-position: 100% 50%; }}
             100% {{ background-position: -120% 50%; }}
         }}
-        @keyframes hero-divider-packet-flow {{
-            0%, 10% {{ left: 2%; opacity: 0; }}
-            16%, 80% {{ opacity: 1; }}
-            95%, 100% {{ left: 98%; opacity: 0; }}
+        @keyframes hero-divider-packet-on-connector {{
+            0%, 13% {{ left: 0; opacity: 0; }}
+            16%, 27% {{ opacity: 1; }}
+            30%, 100% {{ left: 100%; opacity: 0; }}
         }}
         .project-evidence-strip {{
             display: grid;
@@ -1201,16 +1163,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .data-command-hero .portfolio-button-primary:focus-visible span {{
                 transform: translateX(.18rem);
             }}
-            .profile-identity-card:hover,
-            .profile-identity-card:focus-within {{
-                transform: translateY(-5px) scale(1.025);
-                border-color: rgba(37, 99, 235, 0.50);
-                box-shadow: 0 18px 38px rgba(37, 99, 235, 0.17);
+            .hero-profile-card:hover {{
+                transform: translateY(-6px) scale(1.025);
+                border-color: rgba(37, 99, 235, 0.72);
+                box-shadow:
+                    0 20px 44px rgba(37, 99, 235, 0.20),
+                    0 0 0 3px rgba(37, 99, 235, 0.08);
             }}
-            .profile-terminal:hover,
-            .profile-terminal-frame:hover,
-            .profile-terminal-photo:hover {{
-                transform: none;
+            .hero-profile-card:hover .hero-profile-name {{
+                color: var(--accent);
             }}
             .home-profile-info-card:hover,
             .home-profile-info-card:focus-within {{
@@ -2459,14 +2420,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-value-rotator {{
                 width: 100%;
             }}
-            .profile-terminal {{
+            .hero-profile-card {{
                 width: min(100%, 310px);
                 margin: .35rem auto 0;
-                padding-inline: .25rem;
-            }}
-            .profile-identity-card {{
-                width: 100%;
-                margin: .75rem auto 0;
+                padding: .75rem;
                 transform: none;
             }}
             .project-proof-console {{
@@ -2489,6 +2446,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 gap: .35rem;
             }}
             .hero-pipeline-connector {{
+                position: relative;
                 width: 2px;
                 height: 18px;
                 margin: 0 auto;
@@ -2496,11 +2454,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 background-size: 100% 220%;
                 animation-name: hero-divider-connector-flow-mobile;
             }}
-            .hero-pipeline-packet {{
+            .hero-pipeline-connector::after {{
                 left: 50%;
-                top: .8rem;
+                top: 0;
                 transform: translate3d(-50%, 0, 0);
-                animation-name: hero-divider-packet-flow-mobile;
+                animation-name: hero-divider-packet-on-connector-mobile;
             }}
             .hero-photo-shell {{
                 order: -1;
@@ -2627,10 +2585,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             0% {{ background-position: 50% 100%; }}
             100% {{ background-position: 50% -120%; }}
         }}
-        @keyframes hero-divider-packet-flow-mobile {{
-            0%, 10% {{ top: .8rem; opacity: 0; }}
-            16%, 80% {{ opacity: 1; }}
-            95%, 100% {{ top: calc(100% - 1rem); opacity: 0; }}
+        @keyframes hero-divider-packet-on-connector-mobile {{
+            0%, 13% {{ top: 0; opacity: 0; }}
+            16%, 27% {{ opacity: 1; }}
+            30%, 100% {{ top: 100%; opacity: 0; }}
+        }}
+        @media (hover: none), (pointer: coarse) {{
+            .hero-profile-card,
+            .hero-profile-card:hover {{
+                transform: none;
+                border-color: rgba(37, 99, 235, .28);
+                box-shadow: 0 12px 30px rgba(15, 23, 42, .10);
+            }}
         }}
         @media (prefers-reduced-motion: reduce) {{
             *, *::before, *::after {{
@@ -2649,6 +2615,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-profile-info-card,
             .home-profile-info-card:hover,
             .home-profile-info-card:focus-within,
+            .hero-profile-card,
+            .hero-profile-card:hover,
             .home-pipeline-stage,
             .home-pipeline-stage:hover,
             .home-pipeline-stage:focus-within,
@@ -2712,8 +2680,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-pipeline-particle {{
                 display: none;
             }}
-            .data-background-particle,
-            .hero-pipeline-packet {{
+            .data-background-particle {{
                 display: none;
             }}
             .hero-value-rotator {{
@@ -2728,9 +2695,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-value-line-1 {{
                 display: inline;
             }}
-            .profile-identity-card,
-            .profile-identity-card:hover,
-            .profile-identity-card:focus-within,
+            .hero-profile-card,
+            .hero-profile-card:hover,
             .profile-status-dot,
             .project-proof-console,
             .proof-console-item,
@@ -2740,6 +2706,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;
+                opacity: 1 !important;
+            }}
+            .hero-pipeline-connector::after {{
+                animation: none !important;
+                transition: none !important;
+                left: 50% !important;
+                top: 50% !important;
+                transform: translate3d(-50%, -50%, 0) !important;
                 opacity: 1 !important;
             }}
         }}

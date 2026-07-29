@@ -10,6 +10,7 @@ from dashboard.data_loader import load_dashboard_data, load_dashboard_metadata
 from dashboard.transformations import remote_salary, salary_coverage, top_skills
 from portfolio.content.profile import PROFILE, SPECIALTIES
 from portfolio.content.projects import PROJECTS
+from portfolio.content.skills import SKILL_GROUPS
 from ui.components import footer
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
@@ -119,6 +120,59 @@ evidence_markup = "".join(
     for label, value, note in evidence_cards
 )
 st.markdown(f'<section class="project-evidence-strip">{evidence_markup}</section>', unsafe_allow_html=True)
+
+about_cards = [
+    (
+        "Professional Story",
+        "After working across AI, NLP, data annotation leadership, quality assurance, and integration workflows, I moved deeper into Data Engineering. I enjoy building reliable pipelines, cleaning messy data, validating outputs, and turning raw records into analytics-ready models that teams can trust.",
+    ),
+    (
+        "Current Focus",
+        "I am targeting Junior Data Engineer opportunities where I can build dependable pipelines, improve data quality, and create models that make analysis easier for teams.",
+    ),
+]
+about_markup = "".join(
+    (
+        '<div class="section-card home-about-card" tabindex="0">'
+        f'<div class="section-title">{html.escape(title)}</div>'
+        f'<div class="section-copy">{html.escape(body)}</div>'
+        '</div>'
+    )
+    for title, body in about_cards
+)
+st.markdown(
+    f"""
+    <section class="home-section home-about-section">
+        <div class="section-eyebrow">Professional Profile</div>
+        <h2>About Me</h2>
+        <div class="home-about-grid">{about_markup}</div>
+    </section>
+    """,
+    unsafe_allow_html=True,
+)
+
+skills_markup = "".join(
+    (
+        '<div class="section-card home-skill-card" tabindex="0">'
+        f'<div class="section-title">{html.escape(title)}</div>'
+        '<div class="home-skill-badge-wrap">'
+        + "".join(f'<span class="home-skill-badge">{html.escape(skill)}</span>' for skill in skills)
+        + '</div>'
+        '</div>'
+    )
+    for title, skills in SKILL_GROUPS.items()
+)
+st.markdown(
+    f"""
+    <section class="home-section home-skills-section">
+        <div class="section-eyebrow">Workflow Skills</div>
+        <h2>Skills</h2>
+        <p class="home-section-copy">Grouped by the data engineering workflow areas demonstrated across my project and professional background.</p>
+        <div class="home-skills-grid">{skills_markup}</div>
+    </section>
+    """,
+    unsafe_allow_html=True,
+)
 
 repository_button = (
     f'<a class="portfolio-button" href="{html.escape(project["repository_url"])}" target="_blank" rel="noopener noreferrer">VIEW ON GITHUB</a>'

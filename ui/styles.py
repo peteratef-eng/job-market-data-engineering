@@ -519,6 +519,50 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .home-section {{
             margin: 2rem 0;
         }}
+        .home-section-copy {{
+            color: var(--text-2);
+            max-width: 720px;
+            line-height: 1.65;
+            margin: .6rem 0 0;
+        }}
+        .home-about-grid {{
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr);
+            gap: .85rem;
+            margin-top: 1rem;
+            overflow: visible;
+        }}
+        .home-skills-grid {{
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: .85rem;
+            margin-top: 1rem;
+            overflow: visible;
+        }}
+        .home-about-card,
+        .home-skill-card {{
+            min-height: 150px;
+        }}
+        .home-skill-badge-wrap {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-top: .7rem;
+        }}
+        .home-skill-badge {{
+            display: inline-flex;
+            align-items: center;
+            max-width: 100%;
+            border: 1px solid var(--border);
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            border-radius: 999px;
+            padding: .42rem .68rem;
+            font-size: .82rem;
+            font-weight: 600;
+            line-height: 1.25;
+            overflow-wrap: anywhere;
+        }}
         .pipeline-step-grid,
         .insight-card-grid {{
             display: grid;
@@ -798,6 +842,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .job-intelligence-hover-card,
         .contact-hover-card,
         .data-quality-hover-card,
+        .home-about-card,
+        .home-skill-card,
         .project-evidence-card,
         .featured-project-card,
         .pipeline-step-card,
@@ -828,6 +874,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .job-intelligence-hover-card strong,
         .contact-hover-card .section-title,
         .data-quality-hover-card .section-title,
+        .home-about-card .section-title,
+        .home-skill-card .section-title,
         .project-evidence-card .evidence-label,
         .featured-project-card h2,
         .pipeline-step-card .pipeline-step-name,
@@ -904,6 +952,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-hover-card:focus-within,
             .data-quality-hover-card:hover,
             .data-quality-hover-card:focus-within,
+            .home-about-card:hover,
+            .home-about-card:focus-within,
+            .home-skill-card:hover,
+            .home-skill-card:focus-within,
             .project-evidence-card:hover,
             .project-evidence-card:focus-within,
             .featured-project-card:hover,
@@ -927,6 +979,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-hover-card:focus-within .section-title,
             .data-quality-hover-card:hover .section-title,
             .data-quality-hover-card:focus-within .section-title,
+            .home-about-card:hover .section-title,
+            .home-about-card:focus-within .section-title,
+            .home-skill-card:hover .section-title,
+            .home-skill-card:focus-within .section-title,
             .project-evidence-card:hover .evidence-label,
             .project-evidence-card:focus-within .evidence-label,
             .featured-project-card:hover h2,
@@ -945,6 +1001,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .job-intelligence-hover-card,
             .contact-hover-card,
             .data-quality-hover-card,
+            .home-about-card,
+            .home-skill-card,
             .project-evidence-card,
             .featured-project-card,
             .pipeline-step-card,
@@ -1257,6 +1315,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 width: min(100%, 300px);
             }}
             .project-evidence-strip,
+            .home-about-grid,
+            .home-skills-grid,
             .pipeline-step-grid,
             .insight-card-grid {{
                 grid-template-columns: 1fr;
@@ -1307,6 +1367,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-hover-card:focus-within,
             .data-quality-hover-card:hover,
             .data-quality-hover-card:focus-within,
+            .home-about-card:hover,
+            .home-about-card:focus-within,
+            .home-skill-card:hover,
+            .home-skill-card:focus-within,
             .project-evidence-card:hover,
             .project-evidence-card:focus-within,
             .featured-project-card:hover,

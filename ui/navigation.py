@@ -8,9 +8,9 @@ def portfolio_navigation() -> st.navigation:
         {
             "Portfolio": [
                 st.Page("views/home.py", title="Home"),
-                st.Page("views/about.py", title="About Me"),
+                st.Page("views/about.py", title="About Me", visibility="hidden"),
                 st.Page("views/experience.py", title="Experience"),
-                st.Page("views/skills.py", title="Skills"),
+                st.Page("views/skills.py", title="Skills", visibility="hidden"),
                 st.Page("views/projects.py", title="Projects"),
                 st.Page("views/contact.py", title="Contact"),
             ],

@@ -264,6 +264,45 @@ def badge_row(items: list[str]) -> None:
     st.markdown(f"<div>{markup}</div>", unsafe_allow_html=True)
 
 
+def _project_pipeline_visual() -> str:
+    stages = [
+        ("raw", "Raw Data", "Source", "M4 5h16v14H4z M7 9h10 M7 13h7"),
+        ("etl", "Python ETL", "Pandas", "M12 3v18 M5 8h14 M5 16h14"),
+        ("warehouse project-warehouse-stage", "PostgreSQL", "Warehouse", "M6 6c0-1.7 12-1.7 12 0v12c0 1.7-12 1.7-12 0V6z M6 6c0 1.7 12 1.7 12 0 M6 12c0 1.7 12 1.7 12 0"),
+        ("marts", "dbt Marts", "Analytics", "M5 18V8l7-4 7 4v10 M9 18v-6h6v6"),
+        ("dashboard", "Dashboard", "Streamlit", "M4 5h16v12H4z M8 21h8 M12 17v4"),
+    ]
+    stage_markup = []
+    for index, (class_name, label, detail, icon_path) in enumerate(stages, start=1):
+        stage_markup.append(
+            f"""
+            <div class="project-pipeline-stage project-pipeline-stage-{index} {class_name}">
+                <svg class="project-pipeline-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="{icon_path}"></path>
+                </svg>
+                <span class="project-pipeline-label">{html.escape(label)}</span>
+                <span class="project-pipeline-detail">{html.escape(detail)}</span>
+            </div>
+            """
+        )
+        if index < len(stages):
+            stage_markup.append(f'<div class="project-pipeline-connector project-pipeline-connector-{index}" aria-hidden="true"></div>')
+
+    particles = "".join(
+        f'<span class="project-pipeline-particle project-pipeline-particle-{index}" aria-hidden="true"></span>'
+        for index in range(1, 4)
+    )
+    return (
+        '<div class="project-visual project-pipeline-banner" '
+        'aria-label="Data pipeline from raw data through Python ETL, PostgreSQL, dbt marts, and dashboard">'
+        '<div class="project-pipeline-track">'
+        f'{particles}'
+        f'{"".join(stage_markup)}'
+        '</div>'
+        '</div>'
+    )
+
+
 def project_card(project: dict, *, actions: bool = False, featured: bool = False) -> None:
     tech_markup = "".join(
         f'<span class="meta-pill">{html.escape(tech)}</span>' for tech in project.get("technologies", [])[:6]
@@ -273,22 +312,33 @@ def project_card(project: dict, *, actions: bool = False, featured: bool = False
         demo_url = project.get("demo_url") or "/market_dashboard"
         repository_url = project.get("repository_url", "")
         repository_link = (
-            f'<a class="project-action" href="{html.escape(repository_url)}" target="_blank" rel="noreferrer">GitHub Repository</a>'
+            f'<a class="project-action" href="{html.escape(repository_url)}" target="_blank" rel="noopener noreferrer">GitHub Repository</a>'
             if repository_url
             else ""
         )
+        case_study_link = (
+            ""
+            if featured and project.get("slug") == "job-market-intelligence"
+            else '<a class="project-action project-action-primary" href="/project_overview">View Case Study</a>'
+        )
+        demo_class = "project-action project-action-primary" if not case_study_link else "project-action"
         action_markup = (
             '<div class="project-actions">'
-            '<a class="project-action project-action-primary" href="/project_overview">View Case Study</a>'
-            f'<a class="project-action" href="{html.escape(demo_url)}">Live Demo</a>'
+            f'{case_study_link}'
+            f'<a class="{demo_class}" href="{html.escape(demo_url)}">Live Demo</a>'
             f'{repository_link}'
             '</div>'
         )
     card_class = "project-card project-card-featured" if featured else "project-card"
+    visual_markup = (
+        _project_pipeline_visual()
+        if featured and project.get("slug") == "job-market-intelligence"
+        else '<div class="project-visual">DATA</div>'
+    )
     st.markdown(
         f"""
         <div class="{card_class}">
-            <div class="project-visual">DATA</div>
+            {visual_markup}
             <div class="project-meta">{html.escape(project.get("category", ""))} | {html.escape(project.get("status", ""))}</div>
             <div class="project-title">{html.escape(project["title"])}</div>
             <div class="section-copy">{html.escape(project["short_description"])}</div>

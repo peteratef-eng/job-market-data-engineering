@@ -901,6 +901,237 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 700;
             margin-bottom: .8rem;
         }}
+        .project-pipeline-banner {{
+            position: relative;
+            align-items: stretch;
+            justify-content: stretch;
+            padding: .72rem .8rem;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 45%, rgba(37, 99, 235, 0.13), transparent 28%),
+                linear-gradient(135deg, rgba(239, 246, 255, 0.98), rgba(255, 255, 255, 0.88)),
+                repeating-linear-gradient(90deg, transparent 0 22px, rgba(147, 197, 253, 0.18) 22px 23px);
+        }}
+        .project-pipeline-track {{
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(4.5rem, 1fr) minmax(1rem, .5fr) minmax(4.9rem, 1fr) minmax(1rem, .5fr) minmax(5.4rem, 1.12fr) minmax(1rem, .5fr) minmax(4.9rem, 1fr) minmax(1rem, .5fr) minmax(4.8rem, 1fr);
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            gap: .28rem;
+        }}
+        .project-pipeline-stage {{
+            position: relative;
+            z-index: 2;
+            display: grid;
+            justify-items: center;
+            align-content: center;
+            gap: .12rem;
+            min-width: 0;
+            min-height: 4.45rem;
+            padding: .42rem .34rem;
+            border: 1px solid rgba(37, 99, 235, 0.18);
+            border-radius: 9px;
+            background: rgba(255, 255, 255, 0.78);
+            color: var(--text);
+            opacity: .78;
+            transform: scale(1);
+            animation: project-pipeline-stage-pulse 8s ease-in-out infinite;
+            box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
+        }}
+        .project-pipeline-stage-1 {{ animation-delay: 0s; }}
+        .project-pipeline-stage-2 {{ animation-delay: 1.45s; }}
+        .project-pipeline-stage-3 {{ animation-delay: 2.9s; }}
+        .project-pipeline-stage-4 {{ animation-delay: 4.35s; }}
+        .project-pipeline-stage-5 {{ animation-delay: 5.8s; }}
+        .project-pipeline-icon {{
+            width: 1.22rem;
+            height: 1.22rem;
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }}
+        .project-pipeline-label {{
+            max-width: 100%;
+            color: var(--text);
+            font-size: .68rem;
+            font-weight: 800;
+            line-height: 1.05;
+            text-align: center;
+            white-space: normal;
+        }}
+        .project-pipeline-detail {{
+            max-width: 100%;
+            color: var(--muted);
+            font-size: .55rem;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: normal;
+        }}
+        .project-warehouse-stage {{
+            min-height: 5rem;
+            border-color: rgba(37, 99, 235, 0.32);
+            background:
+                radial-gradient(circle at 50% 36%, rgba(37, 99, 235, 0.18), transparent 55%),
+                rgba(255, 255, 255, 0.86);
+            animation-name: project-pipeline-warehouse-pulse;
+        }}
+        .project-warehouse-stage .project-pipeline-icon {{
+            width: 1.42rem;
+            height: 1.42rem;
+        }}
+        .project-pipeline-connector {{
+            position: relative;
+            height: 2px;
+            min-width: 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0.5));
+            overflow: hidden;
+        }}
+        .project-pipeline-connector::after {{
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.78), transparent);
+            animation: project-pipeline-connector-flow 2.8s linear infinite;
+        }}
+        .project-pipeline-particle {{
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 3.2%;
+            width: .46rem;
+            height: .46rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.92);
+            box-shadow: 0 0 11px rgba(37, 99, 235, 0.42);
+            transform: translate3d(0, -50%, 0);
+            animation: project-pipeline-particle-flow 8s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+        }}
+        .project-pipeline-particle-2 {{
+            animation-delay: 2.65s;
+            width: .38rem;
+            height: .38rem;
+            opacity: .82;
+        }}
+        .project-pipeline-particle-3 {{
+            animation-delay: 5.25s;
+            width: .34rem;
+            height: .34rem;
+            opacity: .72;
+        }}
+        @keyframes project-pipeline-particle-flow {{
+            0% {{ left: 3.2%; opacity: 0; transform: translate3d(0, -50%, 0); }}
+            7%, 82% {{ opacity: 1; }}
+            95%, 100% {{ left: 96.8%; opacity: 0; transform: translate3d(-100%, -50%, 0); }}
+        }}
+        @keyframes project-pipeline-stage-pulse {{
+            0%, 16%, 100% {{
+                opacity: .78;
+                transform: scale(1);
+                border-color: rgba(37, 99, 235, 0.18);
+                box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
+            }}
+            7%, 11% {{
+                opacity: 1;
+                transform: translateY(-2px) scale(1.025);
+                border-color: rgba(37, 99, 235, 0.50);
+                box-shadow: 0 8px 22px rgba(37, 99, 235, 0.16);
+            }}
+        }}
+        @keyframes project-pipeline-warehouse-pulse {{
+            0%, 16%, 100% {{
+                opacity: .82;
+                transform: scale(1);
+                border-color: rgba(37, 99, 235, 0.32);
+                box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
+            }}
+            7%, 11% {{
+                opacity: 1;
+                transform: translateY(-2px) scale(1.03);
+                border-color: rgba(37, 99, 235, 0.56);
+                box-shadow: 0 8px 24px rgba(37, 99, 235, 0.20);
+            }}
+        }}
+        @keyframes project-pipeline-connector-flow {{
+            from {{ transform: translateX(-100%); }}
+            to {{ transform: translateX(100%); }}
+        }}
+        @media (max-width: 680px) {{
+            .project-pipeline-banner {{
+                padding: .58rem .55rem;
+            }}
+            .project-pipeline-track {{
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                gap: .18rem;
+            }}
+            .project-pipeline-stage {{
+                min-height: 4rem;
+                padding: .32rem .18rem;
+                border-radius: 8px;
+            }}
+            .project-warehouse-stage {{
+                min-height: 4.25rem;
+            }}
+            .project-pipeline-icon {{
+                width: 1rem;
+                height: 1rem;
+            }}
+            .project-warehouse-stage .project-pipeline-icon {{
+                width: 1.14rem;
+                height: 1.14rem;
+            }}
+            .project-pipeline-label {{
+                font-size: .58rem;
+            }}
+            .project-pipeline-detail {{
+                display: none;
+            }}
+            .project-pipeline-connector-1 {{
+                position: absolute;
+                z-index: 1;
+                left: 8%;
+                right: 8%;
+                top: 50%;
+                width: auto;
+            }}
+            .project-pipeline-connector-2,
+            .project-pipeline-connector-3,
+            .project-pipeline-connector-4 {{
+                display: none;
+            }}
+            .project-pipeline-particle {{
+                width: .34rem;
+                height: .34rem;
+                box-shadow: 0 0 7px rgba(37, 99, 235, 0.32);
+            }}
+            .project-card-featured .project-actions {{
+                flex-direction: column;
+            }}
+            .project-card-featured .project-action {{
+                width: 100%;
+            }}
+        }}
+        @media (prefers-reduced-motion: reduce) {{
+            .project-pipeline-stage,
+            .project-warehouse-stage {{
+                opacity: 1;
+                transform: none;
+                animation: none !important;
+            }}
+            .project-pipeline-connector::after,
+            .project-pipeline-particle {{
+                animation: none !important;
+            }}
+            .project-pipeline-particle {{
+                display: none;
+            }}
+        }}
         .project-title {{
             color: var(--text);
             font-weight: 700;

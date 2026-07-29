@@ -75,17 +75,20 @@ proof_markup = "".join(
 )
 
 skill_pipeline_steps = ["ETL Pipelines", "Python / Pandas", "SQL / PostgreSQL", "dbt", "Analytics-Ready Data"]
-skill_pipeline_markup = ""
+skill_pipeline_markup = (
+    '<span class="hero-skill-rail" aria-hidden="true"></span>'
+    '<span class="hero-skill-packet-track" aria-hidden="true">'
+    '<span class="hero-skill-packet"></span>'
+    '</span>'
+)
 for index, label in enumerate(skill_pipeline_steps, start=1):
+    input_port = '<span class="hero-skill-port hero-skill-port-in" aria-hidden="true"></span>' if index > 1 else ""
+    output_port = '<span class="hero-skill-port hero-skill-port-out" aria-hidden="true"></span>' if index < len(skill_pipeline_steps) else ""
     skill_pipeline_markup += (
-        f'<span class="hero-skill-node hero-skill-node-{index}">{html.escape(label)}</span>'
+        f'<span class="hero-skill-node hero-skill-node-{index}">'
+        f'{input_port}<span class="hero-skill-node-content">{html.escape(label)}</span>{output_port}'
+        '</span>'
     )
-    if index < len(skill_pipeline_steps):
-        skill_pipeline_markup += (
-            f'<span class="hero-skill-connector hero-skill-connector-{index}" aria-hidden="true">'
-            '<span class="hero-skill-packet"></span>'
-            '</span>'
-        )
 
 st.markdown(
     f"""

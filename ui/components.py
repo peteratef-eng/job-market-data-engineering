@@ -267,36 +267,62 @@ def badge_row(items: list[str]) -> None:
 
 def data_lineage(active: str, *, limitation: bool = False) -> None:
     stages = [
-        ("source", "SOURCE"),
-        ("model", "MODEL"),
-        ("test", "TEST"),
-        ("serve", "SERVE"),
+        ("source", "Raw Sources", "source", "M4 7c0-2 16-2 16 0v10c0 2-16 2-16 0V7z M4 7c0 2 16 2 16 0 M4 12c0 2 16 2 16 0"),
+        ("model", "Transform & Model", "model", "M5 7h5l4 10h5 M10 7l4 10 M4 17h6 M14 7h6"),
+        ("quality", "Quality Tests", "quality", "M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z M9 12l2 2 4-5"),
+        ("serve", "Dashboard", "serve", "M4 5h16v12H4z M7 9h4 M7 13h2 M13 9h4v4h-4z M9 21h6 M12 17v4"),
     ]
     active_key = active.lower()
     active_map = {
-        "overview": {"source", "model", "test", "serve"},
+        "overview": set(),
         "pipeline": {"source", "model"},
-        "quality": {"test"},
+        "quality": {"quality"},
         "dashboard": {"serve"},
     }
-    completed = active_map.get(active_key, set())
-    markup = ""
-    for index, (key, label) in enumerate(stages):
-        state = "complete" if key in completed else "neutral"
-        if active_key == "quality" and key == "test":
-            state = "warning" if limitation else "complete"
-        markup += (
-            f'<span class="project-lineage-step project-lineage-step-{state}">'
-            f'<span aria-hidden="true"></span>{html.escape(label)}</span>'
+    context_map = {
+        "overview": "Project Overview",
+        "pipeline": "Pipeline",
+        "quality": "Data Quality",
+        "dashboard": "Market Dashboard",
+    }
+    active_stages = active_map.get(active_key, set())
+    stage_markup = ""
+    for index, (key, label, modifier, icon_path) in enumerate(stages):
+        is_active = key in active_stages
+        active_class = " is-active" if is_active else ""
+        current_attr = ' aria-current="step"' if is_active else ""
+        stage_markup += (
+            f'<div class="data-lineage-stage data-lineage-stage--{html.escape(modifier)}{active_class}"{current_attr}>'
+            f'<svg class="data-lineage-icon" viewBox="0 0 24 24" aria-hidden="true">'
+            f'<path d="{html.escape(icon_path)}"></path>'
+            f'</svg>'
+            f'<span class="data-lineage-text">{html.escape(label)}</span>'
+            f'</div>'
         )
         if index < len(stages) - 1:
-            markup += '<span class="project-lineage-connector" aria-hidden="true"></span>'
-    st.markdown(
+            stage_markup += '<span class="data-lineage-connector" aria-hidden="true">-&gt;</span>'
+    limitation_markup = (
+        '<span class="data-lineage-badge">1 documented limitation</span>'
+        if active_key == "quality" and limitation
+        else ""
+    )
+    lineage_html = dedent(
         f"""
-        <div class="project-lineage project-lineage-{html.escape(active_key)}" aria-label="Data lineage: Source, Model, Test, Serve">
-            {markup}
+        <div class="data-lineage data-lineage-{html.escape(active_key)}" aria-label="Project data flow: raw sources are transformed and modeled, validated through quality tests, and delivered through the dashboard.">
+        <div class="data-lineage-heading">
+        <span class="data-lineage-label">Data Flow</span>
+        <span class="data-lineage-context">{html.escape(context_map.get(active_key, "Project Flow"))}</span>
+        {limitation_markup}
         </div>
-        """,
+        <div class="data-lineage-stages">
+        {stage_markup}
+        </div>
+        <div class="data-lineage-caption">From raw job records to validated market insights.</div>
+        </div>
+        """
+    ).strip()
+    st.markdown(
+        lineage_html,
         unsafe_allow_html=True,
     )
 

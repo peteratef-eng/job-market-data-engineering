@@ -553,12 +553,35 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             isolation: isolate;
             z-index: 5;
             display: grid;
-            grid-template-columns: minmax(6.2rem, 1fr) 22px minmax(7.2rem, 1fr) 22px minmax(7.4rem, 1fr) 22px minmax(3.4rem, .62fr) 22px minmax(8rem, 1.15fr);
+            grid-template-columns: minmax(6.2rem, 1fr) minmax(7.2rem, 1fr) minmax(7.4rem, 1fr) minmax(3.4rem, .62fr) minmax(8rem, 1.15fr);
             align-items: center;
-            gap: .58rem;
+            gap: 1.05rem;
             width: min(100%, 760px);
             margin-top: 1.2rem;
             overflow: visible;
+        }}
+        .hero-skill-rail {{
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 7%;
+            right: 7%;
+            height: 2px;
+            transform: translateY(-50%);
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(148, 163, 184, .38), rgba(37, 99, 235, .48), rgba(6, 182, 212, .38));
+            pointer-events: none;
+        }}
+        .hero-skill-packet-track {{
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 7%;
+            right: 7%;
+            height: 0;
+            pointer-events: none;
+            animation: hero-skill-packet-run 4s linear infinite;
+            will-change: transform;
         }}
         .hero-skill-node {{
             position: relative;
@@ -579,98 +602,52 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             line-height: 1.12;
             text-align: center;
             transform-origin: center;
-            animation:
-                hero-skill-node-receive 5.4s ease-in-out infinite,
-                home-skill-node-enter 420ms ease-out both;
-            transition:
-                transform 240ms ease,
-                border-color 240ms ease,
-                box-shadow 240ms ease;
-        }}
-        .hero-skill-node-1 {{ animation-delay: 0s, 560ms; }}
-        .hero-skill-node-2 {{ animation-delay: .85s, 620ms; }}
-        .hero-skill-node-3 {{ animation-delay: 2s, 680ms; }}
-        .hero-skill-node-4 {{ animation-delay: 3.15s, 740ms; }}
-        .hero-skill-node-5 {{ animation-delay: 4.3s, 800ms; }}
-        .hero-skill-connector {{
-            position: relative;
-            z-index: 1;
-            height: 2px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, var(--data-border), var(--data-border));
-            overflow: visible;
-        }}
-        .hero-skill-connector::before {{
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: linear-gradient(90deg, var(--data-blue), var(--data-cyan));
-            opacity: 0;
-            animation: hero-skill-connector-active 5.4s linear infinite;
+            animation: home-skill-node-enter 420ms ease-out both;
         }}
         .hero-skill-packet {{
             position: absolute;
-            z-index: 2;
-            top: 50%;
+            z-index: 1;
+            top: 0;
             left: 0;
-            width: 9px;
-            height: 9px;
-            border-radius: 999px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
             background:
                 radial-gradient(circle at center, #FFFFFF 0 28%, var(--data-cyan) 31% 100%);
             border: 2px solid #FFFFFF;
             box-shadow:
-                0 0 0 3px rgba(6, 182, 212, 0.12),
-                -8px 0 10px rgba(37, 99, 235, 0.18);
+                0 0 0 2px rgba(6, 182, 212, 0.14),
+                0 2px 7px rgba(37, 99, 235, 0.24);
             transform: translate3d(-50%, -50%, 0);
             pointer-events: none;
-            opacity: 0;
-            animation: hero-skill-packet-flow 5.4s linear infinite;
         }}
-        .hero-skill-packet::after {{
-            content: "";
+        .hero-skill-node-content {{
+            position: relative;
+            z-index: 5;
+        }}
+        .hero-skill-port {{
             position: absolute;
-            right: 6px;
+            z-index: 4;
             top: 50%;
-            width: min(16px, 70%);
-            height: 2px;
-            transform: translateY(-50%);
-            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.55));
+            width: 6px;
+            height: 6px;
             border-radius: 999px;
+            background: #93C5FD;
+            border: 1px solid #FFFFFF;
+            transform: translateY(-50%);
+            pointer-events: none;
         }}
-        .hero-skill-connector-1 .hero-skill-packet {{ animation-delay: 0s; }}
-        .hero-skill-connector-2 .hero-skill-packet {{ animation-delay: 1.15s; }}
-        .hero-skill-connector-3 .hero-skill-packet {{ animation-delay: 2.3s; }}
-        .hero-skill-connector-4 .hero-skill-packet {{ animation-delay: 3.45s; }}
-        .hero-skill-connector-1::before {{ animation-delay: 0s; }}
-        .hero-skill-connector-2::before {{ animation-delay: 1.15s; }}
-        .hero-skill-connector-3::before {{ animation-delay: 2.3s; }}
-        .hero-skill-connector-4::before {{ animation-delay: 3.45s; }}
-        @keyframes hero-skill-node-receive {{
-            0%, 7% {{
-                border-color: rgba(6, 182, 212, .60);
-                background-color: rgba(6, 182, 212, .07);
-                box-shadow: 0 9px 20px rgba(37, 99, 235, 0.12);
-                transform: translateY(-1px) scale(1.01);
-            }}
-            7.5%, 100% {{
-                border-color: rgba(37, 99, 235, .18);
-                background-color: rgba(255, 255, 255, .90);
-                box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
-                transform: translateY(0) scale(1);
-            }}
-        }}
-        @keyframes hero-skill-connector-active {{
-            0% {{ opacity: 0; }}
-            1%, 15.5% {{ opacity: 1; }}
-            16.5%, 100% {{ opacity: 0; }}
-        }}
-        @keyframes hero-skill-packet-flow {{
-            0% {{ left: 0; opacity: 0; }}
-            1% {{ opacity: 1; }}
-            15.5% {{ left: 100%; opacity: 1; }}
-            16.5%, 100% {{ left: 100%; opacity: 0; }}
+        .hero-skill-port-in {{ left: -3px; }}
+        .hero-skill-port-out {{ right: -3px; }}
+        .hero-skill-node-1 {{ animation-delay: 560ms; }}
+        .hero-skill-node-2 {{ animation-delay: 620ms; }}
+        .hero-skill-node-3 {{ animation-delay: 680ms; }}
+        .hero-skill-node-4 {{ animation-delay: 740ms; }}
+        .hero-skill-node-5 {{ animation-delay: 800ms; }}
+        @keyframes hero-skill-packet-run {{
+            0% {{ opacity: 1; transform: translate3d(0, 0, 0); }}
+            94% {{ opacity: 1; transform: translate3d(100%, 0, 0); }}
+            95%, 100% {{ opacity: 0; transform: translate3d(100%, 0, 0); }}
         }}
         .hero-photo-shell {{
             justify-self: center;
@@ -1715,56 +1692,110 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             padding: .95rem 1rem;
             margin: 1rem 0;
         }}
-        .project-lineage {{
+        .data-lineage {{
+            --lineage-source: #64748B;
+            --lineage-model: #2563EB;
+            --lineage-quality: #10B981;
+            --lineage-serve: #4F46E5;
+            --lineage-flow: #06B6D4;
             display: inline-flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 100%;
+            margin: .25rem 0 1.1rem;
+            padding: 12px 14px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.78);
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+        }}
+        .data-lineage-heading {{
+            display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: .42rem;
-            max-width: 100%;
-            margin: .25rem 0 .95rem;
-            padding: .38rem .56rem;
-            border: 1px solid var(--data-border-soft);
-            border-radius: 999px;
-            background: rgba(255, 255, 255, .76);
-            color: var(--data-text-secondary);
-            font-size: .68rem;
-            font-weight: 850;
-            letter-spacing: .055em;
+            gap: .48rem;
         }}
-        .project-lineage-step {{
+        .data-lineage-label {{
+            color: #64748B;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .10em;
+            text-transform: uppercase;
+        }}
+        .data-lineage-context {{
+            color: #334155;
+            font-size: .72rem;
+            font-weight: 700;
+        }}
+        .data-lineage-badge {{
+            color: #92400E;
+            background: rgba(245, 158, 11, .12);
+            border: 1px solid rgba(245, 158, 11, .24);
+            border-radius: 999px;
+            padding: .15rem .42rem;
+            font-size: .66rem;
+            font-weight: 750;
+        }}
+        .data-lineage-stages {{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: .36rem;
+        }}
+        .data-lineage-stage {{
             display: inline-flex;
             align-items: center;
-            gap: .28rem;
+            gap: 6px;
+            min-height: 30px;
+            padding: 5px 8px;
+            border: 1px solid transparent;
+            border-radius: 9px;
+            color: #334155;
+            font-size: .72rem;
+            font-weight: 650;
+            line-height: 1.15;
             white-space: nowrap;
         }}
-        .project-lineage-step span {{
-            width: .42rem;
-            height: .42rem;
-            border-radius: 999px;
-            background: var(--data-border);
+        .data-lineage-icon {{
+            width: 15px;
+            height: 15px;
+            flex: 0 0 auto;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.9;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }}
-        .project-lineage-step-complete {{
-            color: var(--data-blue);
+        .data-lineage-stage--source {{
+            color: var(--lineage-source);
+            background: rgba(100, 116, 139, 0.08);
         }}
-        .project-lineage-step-complete span {{
-            background: var(--data-green);
-            box-shadow: 0 0 0 3px var(--data-green-soft);
+        .data-lineage-stage--model {{
+            color: var(--lineage-model);
+            background: rgba(37, 99, 235, 0.08);
         }}
-        .project-lineage-step-warning {{
-            color: var(--data-amber);
+        .data-lineage-stage--quality {{
+            color: var(--lineage-quality);
+            background: rgba(16, 185, 129, 0.09);
         }}
-        .project-lineage-step-warning span {{
-            background: var(--data-amber);
-            box-shadow: 0 0 0 3px var(--data-amber-soft);
+        .data-lineage-stage--serve {{
+            color: var(--lineage-serve);
+            background: rgba(79, 70, 229, 0.08);
         }}
-        .project-lineage-dashboard .project-lineage-step-complete {{
-            color: var(--data-cyan);
+        .data-lineage-stage.is-active {{
+            border-color: currentColor;
+            box-shadow: 0 5px 12px rgba(15, 23, 42, 0.07);
         }}
-        .project-lineage-connector {{
-            width: 1.3rem;
-            height: 1px;
-            background: linear-gradient(90deg, var(--data-blue), var(--data-cyan));
-            opacity: .52;
+        .data-lineage-connector {{
+            color: rgba(6, 182, 212, 0.72);
+            font-size: .78rem;
+            font-weight: 800;
+            line-height: 1;
+        }}
+        .data-lineage-caption {{
+            color: #64748B;
+            font-size: .72rem;
+            line-height: 1.35;
         }}
         .dataset-metrics {{
             display: grid;
@@ -2566,32 +2597,43 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-skill-pipeline {{
                 grid-template-columns: minmax(0, 12.5rem);
                 justify-content: start;
-                gap: .34rem;
+                gap: .7rem;
             }}
-            .hero-skill-connector {{
+            .hero-skill-rail {{
+                top: .5rem;
+                bottom: .5rem;
+                left: 50%;
+                right: auto;
                 width: 2px;
-                height: 18px;
-                margin: 0 auto;
-                background: linear-gradient(180deg, var(--data-border), var(--data-border));
+                height: auto;
+                transform: translateX(-50%);
+                background: linear-gradient(180deg, rgba(148, 163, 184, .38), rgba(37, 99, 235, .48), rgba(6, 182, 212, .38));
             }}
-            .hero-skill-connector::before {{
-                background: linear-gradient(180deg, var(--data-blue), var(--data-cyan));
+            .hero-skill-packet-track {{
+                left: 50%;
+                top: .5rem;
+                right: auto;
+                bottom: .5rem;
+                width: 0;
+                height: auto;
+                animation: hero-skill-packet-run-mobile 4.8s linear infinite;
             }}
             .hero-skill-packet {{
                 left: 50%;
                 top: 0;
-                transform: translate3d(-50%, 0, 0);
-                animation-name: hero-skill-packet-flow-mobile;
+                transform: translate3d(-50%, -50%, 0);
             }}
-            .hero-skill-packet::after {{
-                right: auto;
+            .hero-skill-port {{
                 left: 50%;
-                top: auto;
-                bottom: 6px;
-                width: 2px;
-                height: min(16px, 70%);
                 transform: translateX(-50%);
-                background: linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.55));
+            }}
+            .hero-skill-port-in {{
+                top: -3px;
+            }}
+            .hero-skill-port-out {{
+                top: auto;
+                right: auto;
+                bottom: -3px;
             }}
             .dashboard-primary-kpis,
             .dashboard-metadata-strip {{
@@ -2690,12 +2732,26 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-resume-strip .contact-card-action {{
                 width: 100%;
             }}
-            .project-lineage {{
-                gap: .35rem;
-                border-radius: 12px;
-                font-size: .64rem;
+            .data-lineage {{
+                width: 100%;
+                padding: 11px 12px;
             }}
-            .project-lineage-connector {{
+            .data-lineage-stages {{
+                display: grid;
+                grid-template-columns: 1fr;
+                align-items: start;
+                gap: .34rem;
+            }}
+            .data-lineage-stage {{
+                width: 100%;
+                justify-content: flex-start;
+            }}
+            .data-lineage-connector {{
+                padding-left: 13px;
+                transform: rotate(90deg);
+                transform-origin: left center;
+            }}
+            .data-lineage-caption {{
                 display: none;
             }}
             .st-key-dashboard_filter_panel {{
@@ -2748,11 +2804,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .section-card {{ padding: 1rem; }}
             .kpi-card {{ min-height: 118px; }}
         }}
-        @keyframes hero-skill-packet-flow-mobile {{
-            0% {{ top: 0; opacity: 0; }}
-            1% {{ opacity: 1; }}
-            15.5% {{ top: 100%; opacity: 1; }}
-            16.5%, 100% {{ top: 100%; opacity: 0; }}
+        @keyframes hero-skill-packet-run-mobile {{
+            0% {{ opacity: 1; transform: translate3d(0, 0, 0); }}
+            94% {{ opacity: 1; transform: translate3d(0, 100%, 0); }}
+            95%, 100% {{ opacity: 0; transform: translate3d(0, 100%, 0); }}
         }}
         @media (hover: none), (pointer: coarse) {{
             .hero-skill-node:hover {{
@@ -2788,10 +2843,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-profile-card:hover,
             .hero-skill-node,
             .hero-skill-node:hover,
-            .hero-skill-connector,
-            .hero-skill-connector::before,
+            .hero-skill-packet-track,
             .hero-skill-packet,
-            .hero-skill-packet::after,
             .data-quality-detail,
             .sidebar-brand:hover,
             .sidebar-brand:focus-within,
@@ -2863,17 +2916,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .project-proof-console,
             .proof-console-item,
             .hero-skill-node,
-            .hero-skill-connector,
-            .hero-skill-connector::before,
-            .hero-skill-packet,
-            .hero-skill-packet::after {{
+            .hero-skill-packet-track,
+            .hero-skill-packet {{
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;
                 opacity: 1 !important;
             }}
-            .hero-skill-packet,
-            .hero-skill-packet::after {{
+            .hero-skill-packet-track {{
                 display: none;
             }}
         }}

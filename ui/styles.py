@@ -514,6 +514,96 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             gap: .35rem;
             margin-top: 1.15rem;
         }}
+        .hero-skill-pipeline {{
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(6.2rem, 1fr) 22px minmax(7.2rem, 1fr) 22px minmax(7.4rem, 1fr) 22px minmax(3.4rem, .62fr) 22px minmax(8rem, 1.15fr);
+            align-items: center;
+            gap: .32rem;
+            width: min(100%, 760px);
+            margin-top: 1.2rem;
+            overflow: visible;
+        }}
+        .hero-skill-node {{
+            position: relative;
+            z-index: 3;
+            min-width: 0;
+            min-height: 2.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: .44rem .58rem;
+            border: 1px solid rgba(37, 99, 235, .18);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .90);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
+            color: var(--text);
+            font-size: .76rem;
+            font-weight: 850;
+            line-height: 1.12;
+            text-align: center;
+            transform-origin: center;
+            animation: hero-skill-node-receive 8s ease-in-out infinite;
+            transition:
+                transform 240ms ease,
+                border-color 240ms ease,
+                box-shadow 240ms ease;
+        }}
+        .hero-skill-node-1 {{ animation-delay: 0s; }}
+        .hero-skill-node-2 {{ animation-delay: 1.6s; }}
+        .hero-skill-node-3 {{ animation-delay: 3.2s; }}
+        .hero-skill-node-4 {{ animation-delay: 4.8s; }}
+        .hero-skill-node-5 {{ animation-delay: 6.4s; }}
+        .hero-skill-connector {{
+            position: relative;
+            z-index: 1;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(148, 163, 184, .34), rgba(37, 99, 235, .50), rgba(148, 163, 184, .34));
+            background-size: 220% 100%;
+            animation: hero-skill-connector-flow 8s linear infinite;
+            overflow: visible;
+        }}
+        .hero-skill-connector::after {{
+            content: "";
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 0;
+            width: .4rem;
+            height: .4rem;
+            border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 10px rgba(37, 99, 235, .32);
+            transform: translate3d(-50%, -50%, 0);
+            pointer-events: none;
+            animation: hero-skill-packet-flow 8s linear infinite;
+        }}
+        .hero-skill-connector-1::after {{ animation-delay: 0s; }}
+        .hero-skill-connector-2::after {{ animation-delay: 1.6s; }}
+        .hero-skill-connector-3::after {{ animation-delay: 3.2s; }}
+        .hero-skill-connector-4::after {{ animation-delay: 4.8s; }}
+        @keyframes hero-skill-node-receive {{
+            0%, 18%, 100% {{
+                border-color: rgba(37, 99, 235, .18);
+                box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
+                transform: translateY(0) scale(1);
+            }}
+            7%, 12% {{
+                border-color: rgba(37, 99, 235, .46);
+                box-shadow: 0 8px 20px rgba(37, 99, 235, .13);
+                transform: translateY(-1px) scale(1.012);
+            }}
+        }}
+        @keyframes hero-skill-connector-flow {{
+            0% {{ background-position: 100% 50%; }}
+            100% {{ background-position: -120% 50%; }}
+        }}
+        @keyframes hero-skill-packet-flow {{
+            0%, 13% {{ left: 0; opacity: 0; }}
+            16%, 27% {{ opacity: 1; }}
+            30%, 100% {{ left: 100%; opacity: 0; }}
+        }}
         .hero-photo-shell {{
             justify-self: center;
             width: min(100%, 360px);
@@ -779,97 +869,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             from {{ opacity: 0; transform: translateY(.45rem); }}
             to {{ opacity: 1; transform: translateY(0); }}
         }}
-        .hero-pipeline-divider {{
-            position: relative;
-            margin: 0 0 2rem;
-            padding: .78rem .95rem;
-            border: 1px solid rgba(37, 99, 235, .14);
-            border-radius: 14px;
-            background: rgba(255, 255, 255, .72);
-            overflow: hidden;
-        }}
-        .hero-pipeline-track {{
-            position: relative;
-            display: grid;
-            grid-template-columns: minmax(5.5rem, 1fr) 20px minmax(5.7rem, 1fr) 20px minmax(5.6rem, 1fr) 20px minmax(5.4rem, 1fr) 20px minmax(5.6rem, 1fr) 20px minmax(6.2rem, 1fr);
-            align-items: center;
-            gap: .28rem;
-            z-index: 1;
-        }}
-        .hero-pipeline-stage {{
-            position: relative;
-            z-index: 3;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 2.1rem;
-            padding: .35rem .45rem;
-            border: 1px solid rgba(37, 99, 235, .16);
-            border-radius: 999px;
-            background: rgba(255, 255, 255, .82);
-            color: var(--tag-text);
-            font-size: .68rem;
-            font-weight: 850;
-            text-align: center;
-            line-height: 1.1;
-            animation: hero-divider-stage-pulse 9s ease-in-out infinite;
-        }}
-        .hero-pipeline-stage-1 {{ animation-delay: 0s; }}
-        .hero-pipeline-stage-2 {{ animation-delay: 1.5s; }}
-        .hero-pipeline-stage-3 {{ animation-delay: 3s; }}
-        .hero-pipeline-stage-4 {{ animation-delay: 4.5s; }}
-        .hero-pipeline-stage-5 {{ animation-delay: 6s; }}
-        .hero-pipeline-stage-6 {{ animation-delay: 7.5s; }}
-        .hero-pipeline-connector {{
-            position: relative;
-            z-index: 2;
-            height: 2px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, rgba(148, 163, 184, .32), rgba(37, 99, 235, .48), rgba(148, 163, 184, .32));
-            background-size: 220% 100%;
-            animation: hero-divider-connector-flow 9s linear infinite;
-            overflow: visible;
-        }}
-        .hero-pipeline-connector::after {{
-            content: "";
-            position: absolute;
-            z-index: 2;
-            top: 50%;
-            left: 0;
-            width: .42rem;
-            height: .42rem;
-            border-radius: 999px;
-            background: var(--accent);
-            box-shadow: 0 0 10px rgba(37, 99, 235, .34);
-            transform: translate3d(-50%, -50%, 0);
-            animation: hero-divider-packet-on-connector 9s linear infinite;
-        }}
-        .hero-pipeline-connector-1::after {{ animation-delay: 0s; }}
-        .hero-pipeline-connector-2::after {{ animation-delay: 1.5s; }}
-        .hero-pipeline-connector-3::after {{ animation-delay: 3s; }}
-        .hero-pipeline-connector-4::after {{ animation-delay: 4.5s; }}
-        .hero-pipeline-connector-5::after {{ animation-delay: 6s; }}
-        @keyframes hero-divider-stage-pulse {{
-            0%, 17%, 100% {{
-                border-color: rgba(37, 99, 235, .16);
-                box-shadow: none;
-                transform: translateY(0);
-            }}
-            7%, 12% {{
-                border-color: rgba(37, 99, 235, .48);
-                box-shadow: 0 7px 18px rgba(37, 99, 235, .13);
-                transform: translateY(-1px);
-            }}
-        }}
-        @keyframes hero-divider-connector-flow {{
-            0% {{ background-position: 100% 50%; }}
-            100% {{ background-position: -120% 50%; }}
-        }}
-        @keyframes hero-divider-packet-on-connector {{
-            0%, 13% {{ left: 0; opacity: 0; }}
-            16%, 27% {{ opacity: 1; }}
-            30%, 100% {{ left: 100%; opacity: 0; }}
-        }}
         .project-evidence-strip {{
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1020,139 +1019,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             line-height: 1.25;
             overflow-wrap: anywhere;
         }}
-        .home-pipeline-section {{
-            overflow: hidden;
-        }}
-        .home-pipeline-track {{
-            display: grid;
-            grid-template-columns:
-                minmax(112px, 1fr) 34px minmax(112px, 1fr) 34px minmax(112px, 1fr)
-                34px minmax(112px, 1fr) 34px minmax(112px, 1fr) 34px minmax(112px, 1fr);
-            align-items: center;
-            gap: .45rem;
-            margin-top: 1rem;
-            overflow: visible;
-        }}
-        .home-pipeline-stage {{
-            min-width: 0;
-            opacity: .82;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--surface);
-            box-shadow: var(--shadow);
-            transform-origin: center center;
-            translate: 0 0;
-            scale: 1;
-            animation: home-pipeline-stage-cycle 10s ease-in-out infinite;
-            transition:
-                border-color 220ms ease,
-                box-shadow 220ms ease;
-        }}
-        .home-pipeline-stage-inner {{
-            min-height: 150px;
-            padding: .9rem .75rem;
-            transform-origin: center center;
-            transition: transform 220ms ease;
-        }}
-        .home-pipeline-icon {{
-            width: 2.15rem;
-            height: 2.15rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background: var(--tag-bg);
-            color: var(--tag-text);
-            font-size: .78rem;
-            font-weight: 800;
-            margin-bottom: .6rem;
-        }}
-        .home-pipeline-stage-name {{
-            color: var(--text);
-            font-size: .96rem;
-            font-weight: 800;
-            line-height: 1.2;
-        }}
-        .home-pipeline-stage-copy {{
-            color: var(--text-2);
-            font-size: .82rem;
-            line-height: 1.45;
-            margin-top: .38rem;
-        }}
-        .home-pipeline-connector {{
-            position: relative;
-            height: 3px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, rgba(148, 163, 184, .35), rgba(37, 99, 235, .42), rgba(148, 163, 184, .35));
-            background-size: 220% 100%;
-            animation: home-pipeline-flow-line 10s linear infinite;
-            overflow: visible;
-        }}
-        .home-pipeline-particle {{
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: .48rem;
-            height: .48rem;
-            border-radius: 999px;
-            background: var(--accent);
-            box-shadow: 0 0 12px rgba(37, 99, 235, .44);
-            transform: translate(-50%, -50%);
-            animation: home-pipeline-particle-flow 10s linear infinite;
-            animation-delay: var(--flow-delay, 0s);
-        }}
-        .home-pipeline-particle-2 {{
-            animation-delay: calc(var(--flow-delay, 0s) + .22s);
-            opacity: .86;
-        }}
-        .home-pipeline-particle-3 {{
-            animation-delay: calc(var(--flow-delay, 0s) + .44s);
-            opacity: .72;
-        }}
-        .pipeline-stage-1 {{ animation-delay: 0s; }}
-        .pipeline-stage-2 {{ animation-delay: 1.65s; }}
-        .pipeline-stage-3 {{ animation-delay: 3.3s; }}
-        .pipeline-stage-4 {{ animation-delay: 4.95s; }}
-        .pipeline-stage-5 {{ animation-delay: 6.6s; }}
-        .pipeline-stage-6 {{ animation-delay: 8.25s; }}
-        .pipeline-connector-1 {{ --flow-delay: 0s; }}
-        .pipeline-connector-2 {{ --flow-delay: 1.65s; }}
-        .pipeline-connector-3 {{ --flow-delay: 3.3s; }}
-        .pipeline-connector-4 {{ --flow-delay: 4.95s; }}
-        .pipeline-connector-5 {{ --flow-delay: 6.6s; }}
-        @keyframes home-pipeline-stage-cycle {{
-            0%, 16%, 100% {{
-                opacity: .82;
-                border-color: var(--border);
-                box-shadow: var(--shadow);
-                translate: 0 0;
-                scale: 1;
-            }}
-            5%, 11% {{
-                opacity: 1;
-                border-color: rgba(37, 99, 235, 0.50);
-                box-shadow: 0 12px 28px rgba(37, 99, 235, 0.16);
-                translate: 0 -3px;
-                scale: 1.015;
-            }}
-        }}
-        @keyframes home-pipeline-flow-line {{
-            0% {{ background-position: 100% 50%; }}
-            100% {{ background-position: -120% 50%; }}
-        }}
-        @keyframes home-pipeline-particle-flow {{
-            0%, 14% {{
-                opacity: 0;
-                left: 0;
-            }}
-            18%, 32% {{
-                opacity: 1;
-            }}
-            42%, 100% {{
-                opacity: 0;
-                left: 100%;
-            }}
-        }}
         @media (hover: hover) and (pointer: fine) {{
             .data-command-hero .portfolio-button:hover,
             .data-command-hero .portfolio-button:focus-visible {{
@@ -1162,6 +1028,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .data-command-hero .portfolio-button-primary:hover span,
             .data-command-hero .portfolio-button-primary:focus-visible span {{
                 transform: translateX(.18rem);
+            }}
+            .hero-skill-node:hover {{
+                transform: translateY(-2px) scale(1.035);
+                border-color: rgba(37, 99, 235, 0.50);
+                box-shadow: 0 10px 22px rgba(37, 99, 235, 0.12);
             }}
             .hero-profile-card:hover {{
                 transform: translateY(-6px) scale(1.025);
@@ -1186,15 +1057,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-profile-info-card:hover .home-profile-info-status span,
             .home-profile-info-card:focus-within .home-profile-info-status span {{
                 box-shadow: 0 0 0 4px color-mix(in srgb, var(--positive) 24%, transparent), 0 0 14px color-mix(in srgb, var(--positive) 45%, transparent);
-            }}
-            .home-pipeline-stage:hover,
-            .home-pipeline-stage:focus-within {{
-                border-color: rgba(37, 99, 235, 0.55);
-                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16);
-            }}
-            .home-pipeline-stage:hover .home-pipeline-stage-inner,
-            .home-pipeline-stage:focus-within .home-pipeline-stage-inner {{
-                transform: translateY(-4px) scale(1.02);
             }}
         }}
         .pipeline-step-grid,
@@ -2398,6 +2260,25 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .project-evidence-strip {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
             .featured-project-card {{ grid-template-columns: 1fr; }}
             .featured-preview img {{ max-height: 320px; }}
+            .hero-skill-pipeline {{
+                grid-template-columns: minmax(0, 12.5rem);
+                justify-content: start;
+                gap: .34rem;
+            }}
+            .hero-skill-connector {{
+                width: 2px;
+                height: 18px;
+                margin: 0 auto;
+                background: linear-gradient(180deg, rgba(148, 163, 184, .34), rgba(37, 99, 235, .50), rgba(148, 163, 184, .34));
+                background-size: 100% 220%;
+                animation-name: hero-skill-connector-flow-mobile;
+            }}
+            .hero-skill-connector::after {{
+                left: 50%;
+                top: 0;
+                transform: translate3d(-50%, 0, 0);
+                animation-name: hero-skill-packet-flow-mobile;
+            }}
             .dashboard-primary-kpis,
             .dashboard-metadata-strip {{
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2452,27 +2333,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 border-left: 0;
                 padding-left: 0;
             }}
-            .hero-pipeline-divider {{
-                padding: .9rem;
-            }}
-            .hero-pipeline-track {{
-                grid-template-columns: 1fr;
-                gap: .35rem;
-            }}
-            .hero-pipeline-connector {{
-                position: relative;
-                width: 2px;
-                height: 18px;
-                margin: 0 auto;
-                background: linear-gradient(180deg, rgba(148, 163, 184, .32), rgba(37, 99, 235, .48), rgba(148, 163, 184, .32));
-                background-size: 100% 220%;
-                animation-name: hero-divider-connector-flow-mobile;
-            }}
-            .hero-pipeline-connector::after {{
-                left: 50%;
-                top: 0;
-                transform: translate3d(-50%, 0, 0);
-                animation-name: hero-divider-packet-on-connector-mobile;
+            .hero-skill-pipeline {{
+                grid-template-columns: minmax(0, 100%);
+                justify-content: stretch;
             }}
             .hero-photo-shell {{
                 order: -1;
@@ -2486,37 +2349,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-profile-info-card {{
                 transform: none;
             }}
-            .home-pipeline-stage {{
-                translate: 0 0;
-                scale: 1;
-            }}
             .project-evidence-strip,
             .home-about-grid,
             .home-skills-grid,
             .pipeline-step-grid,
             .insight-card-grid {{
                 grid-template-columns: 1fr;
-            }}
-            .home-pipeline-track {{
-                grid-template-columns: 1fr;
-                gap: .45rem;
-            }}
-            .home-pipeline-stage-inner {{
-                min-height: 0;
-                padding: .9rem;
-            }}
-            .home-pipeline-connector {{
-                width: 3px;
-                height: 30px;
-                margin: 0 auto;
-                background: linear-gradient(180deg, rgba(148, 163, 184, .35), rgba(37, 99, 235, .42), rgba(148, 163, 184, .35));
-                background-size: 100% 220%;
-                animation-name: home-pipeline-flow-line-mobile;
-            }}
-            .home-pipeline-particle {{
-                top: 0;
-                left: 50%;
-                animation-name: home-pipeline-particle-flow-mobile;
             }}
             .contact-cta {{
                 grid-template-columns: 1fr;
@@ -2578,33 +2416,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .section-card {{ padding: 1rem; }}
             .kpi-card {{ min-height: 118px; }}
         }}
-        @keyframes home-pipeline-flow-line-mobile {{
+        @keyframes hero-skill-connector-flow-mobile {{
             0% {{ background-position: 50% 100%; }}
             100% {{ background-position: 50% -120%; }}
         }}
-        @keyframes home-pipeline-particle-flow-mobile {{
-            0%, 14% {{
-                opacity: 0;
-                top: 0;
-            }}
-            18%, 32% {{
-                opacity: 1;
-            }}
-            42%, 100% {{
-                opacity: 0;
-                top: 100%;
-            }}
-        }}
-        @keyframes hero-divider-connector-flow-mobile {{
-            0% {{ background-position: 50% 100%; }}
-            100% {{ background-position: 50% -120%; }}
-        }}
-        @keyframes hero-divider-packet-on-connector-mobile {{
+        @keyframes hero-skill-packet-flow-mobile {{
             0%, 13% {{ top: 0; opacity: 0; }}
             16%, 27% {{ opacity: 1; }}
             30%, 100% {{ top: 100%; opacity: 0; }}
         }}
         @media (hover: none), (pointer: coarse) {{
+            .hero-skill-node:hover {{
+                transform: none;
+                border-color: rgba(37, 99, 235, .18);
+                box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
+            }}
             .hero-profile-card,
             .hero-profile-card:hover {{
                 transform: none;
@@ -2631,14 +2457,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-profile-info-card:focus-within,
             .hero-profile-card,
             .hero-profile-card:hover,
-            .home-pipeline-stage,
-            .home-pipeline-stage:hover,
-            .home-pipeline-stage:focus-within,
-            .home-pipeline-stage-inner,
-            .home-pipeline-stage:hover .home-pipeline-stage-inner,
-            .home-pipeline-stage:focus-within .home-pipeline-stage-inner,
-            .home-pipeline-connector,
-            .home-pipeline-particle,
+            .hero-skill-node,
+            .hero-skill-node:hover,
+            .hero-skill-connector,
+            .hero-skill-connector::after,
             .sidebar-brand:hover,
             .sidebar-brand:focus-within,
             .home-card:hover,
@@ -2685,14 +2507,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 translate: 0 0 !important;
                 scale: 1 !important;
             }}
-            .home-pipeline-stage,
             .home-profile-info-card,
             .st-key-home_profile_photo_shell,
             .st-key-home_profile_info_card {{
                 opacity: 1 !important;
-            }}
-            .home-pipeline-particle {{
-                display: none;
             }}
             .data-background-particle {{
                 display: none;
@@ -2714,15 +2532,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .profile-status-dot,
             .project-proof-console,
             .proof-console-item,
-            .hero-pipeline-stage,
-            .hero-pipeline-connector,
-            .hero-pipeline-connector::after {{
+            .hero-skill-node,
+            .hero-skill-connector {{
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;
                 opacity: 1 !important;
             }}
-            .hero-pipeline-connector::after {{
+            .hero-skill-connector::after {{
                 animation: none !important;
                 transition: none !important;
                 left: 50% !important;

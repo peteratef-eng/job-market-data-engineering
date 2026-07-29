@@ -74,12 +74,16 @@ proof_markup = "".join(
     for index, (label, value) in enumerate(proof_items, start=1)
 )
 
-divider_steps = ["Raw Job Data", "Python/Pandas", "PostgreSQL", "dbt Models", "Data Quality", "Market Dashboard"]
-divider_markup = ""
-for index, label in enumerate(divider_steps, start=1):
-    divider_markup += f'<span class="hero-pipeline-stage hero-pipeline-stage-{index}">{html.escape(label)}</span>'
-    if index < len(divider_steps):
-        divider_markup += f'<span class="hero-pipeline-connector hero-pipeline-connector-{index}" aria-hidden="true"></span>'
+skill_pipeline_steps = ["ETL Pipelines", "Python / Pandas", "SQL / PostgreSQL", "dbt", "Analytics-Ready Data"]
+skill_pipeline_markup = ""
+for index, label in enumerate(skill_pipeline_steps, start=1):
+    skill_pipeline_markup += (
+        f'<span class="hero-skill-node hero-skill-node-{index}">{html.escape(label)}</span>'
+    )
+    if index < len(skill_pipeline_steps):
+        skill_pipeline_markup += (
+            f'<span class="hero-skill-connector hero-skill-connector-{index}" aria-hidden="true"></span>'
+        )
 
 st.markdown(
     f"""
@@ -105,6 +109,9 @@ st.markdown(
                 <a class="portfolio-button" href="{resume_link}"{resume_attr}>DOWNLOAD RESUME</a>
                 <a class="portfolio-button portfolio-button-quiet" href="/contact">CONTACT ME</a>
             </div>
+            <div class="hero-skill-pipeline" aria-label="Data Engineering workflow: ETL Pipelines, Python and Pandas, SQL and PostgreSQL, dbt, and Analytics-Ready Data.">
+                {skill_pipeline_markup}
+            </div>
         </div>
         <div class="hero-profile-card">
             <div class="hero-profile-image-wrap">
@@ -121,9 +128,6 @@ st.markdown(
     <section class="project-proof-console" aria-label="Project evidence">
         <div class="proof-console-status">PROJECT EVIDENCE</div>
         <div class="proof-console-grid">{proof_markup}</div>
-    </section>
-    <section class="hero-pipeline-divider" aria-label="Raw job data moves through Python and Pandas, PostgreSQL, dbt models, data quality, and the Market Dashboard">
-        <div class="hero-pipeline-track">{divider_markup}</div>
     </section>
     """,
     unsafe_allow_html=True,

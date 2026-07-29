@@ -4,7 +4,7 @@ import html
 import streamlit as st
 
 from dashboard.data_loader import load_dashboard_metadata
-from ui.components import pipeline_visual
+from ui.components import data_lineage, pipeline_visual
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -12,6 +12,7 @@ from ui.theme import current_theme
 inject_global_styles(current_theme())
 
 st.title("Data Pipeline")
+data_lineage("pipeline")
 pipeline_visual(class_name="pipeline-card")
 
 metadata = load_dashboard_metadata()

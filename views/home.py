@@ -165,14 +165,14 @@ st.markdown(
 
 skills_markup = "".join(
     (
-        '<div class="section-card home-skill-card" tabindex="0">'
+        f'<div class="section-card home-skill-card home-skill-card-{index}" tabindex="0">'
         f'<div class="section-title">{html.escape(title)}</div>'
         '<div class="home-skill-badge-wrap">'
         + "".join(f'<span class="home-skill-badge">{html.escape(skill)}</span>' for skill in skills)
         + '</div>'
         '</div>'
     )
-    for title, skills in SKILL_GROUPS.items()
+    for index, (title, skills) in enumerate(SKILL_GROUPS.items(), start=1)
 )
 st.markdown(
     f"""

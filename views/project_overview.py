@@ -8,6 +8,7 @@ from portfolio.content.projects import PROJECTS
 from ui.components import (
     app_header,
     badge_row,
+    data_lineage,
     metric_status_card,
     section_card,
 )
@@ -26,6 +27,7 @@ app_header(
     "Explore hiring demand, salaries, technical skills, remote-work patterns, and market trends across 1.6M+ job postings.",
     "overview",
 )
+data_lineage("overview")
 
 badge_row(project["technologies"][:6])
 

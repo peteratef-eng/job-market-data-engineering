@@ -17,7 +17,7 @@ from dashboard.transformations import (
     top_counts,
     top_skills,
 )
-from ui.components import app_header, chart_card
+from ui.components import app_header, chart_card, data_lineage
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -228,6 +228,7 @@ app_header(
     "Explore hiring demand, salaries, technical skills, remote-work patterns, and market trends across the hosted job-posting sample.",
     "dashboard",
 )
+data_lineage("dashboard")
 initialize_market_dashboard_chart_reveal()
 
 
@@ -346,13 +347,13 @@ def dashboard_kpi_panel(values: dict[str, str]) -> None:
     ]
     markup = "".join(
         (
-            '<div class="dashboard-primary-kpi">'
+            f'<div class="dashboard-primary-kpi dashboard-primary-kpi-{index}">'
             f'<div class="dashboard-kpi-label">{html.escape(label)}</div>'
             f'<div class="dashboard-kpi-value">{html.escape(value)}</div>'
             f'<div class="dashboard-kpi-note">{html.escape(note)}</div>'
             '</div>'
         )
-        for label, value, note in primary
+        for index, (label, value, note) in enumerate(primary, start=1)
     )
     st.markdown(f'<section class="dashboard-primary-kpis">{markup}</section>', unsafe_allow_html=True)
 

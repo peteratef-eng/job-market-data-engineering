@@ -34,6 +34,24 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             --hover: {theme["hover"]};
             --disabled: {theme["disabled"]};
             --font: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --data-navy: #0F172A;
+            --data-blue: #2563EB;
+            --data-blue-dark: #1D4ED8;
+            --data-cyan: #06B6D4;
+            --data-cyan-soft: rgba(6, 182, 212, 0.12);
+            --data-indigo: #4F46E5;
+            --data-green: #10B981;
+            --data-green-soft: rgba(16, 185, 129, 0.10);
+            --data-amber: #F59E0B;
+            --data-amber-soft: rgba(245, 158, 11, 0.10);
+            --data-red: #DC2626;
+            --data-surface: #FFFFFF;
+            --data-background: #F8FAFC;
+            --data-background-blue: #EFF6FF;
+            --data-border: #CBD5E1;
+            --data-border-soft: rgba(148, 163, 184, 0.28);
+            --data-text: #0F172A;
+            --data-text-secondary: #64748B;
         }}
 
         html, body, .stApp {{
@@ -247,8 +265,24 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
 
         .page-header {{
+            position: relative;
             margin: .15rem 0 1rem;
             max-width: 900px;
+        }}
+        .page-header-overview::after,
+        .page-header-dashboard::after {{
+            content: "";
+            position: absolute;
+            right: .2rem;
+            top: .35rem;
+            width: 6.5rem;
+            height: 3.6rem;
+            opacity: .045;
+            pointer-events: none;
+            background:
+                radial-gradient(circle, var(--data-blue) 0 2px, transparent 3px),
+                linear-gradient(90deg, transparent 48%, var(--data-cyan) 49% 51%, transparent 52%);
+            background-size: 1.7rem 1.7rem, 100% 100%;
         }}
         .page-header-home,
         .page-header-overview {{
@@ -314,8 +348,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border: 1px solid rgba(37, 99, 235, .14);
             border-radius: 22px;
             background:
-                radial-gradient(circle at 74% 34%, rgba(37, 99, 235, .14), transparent 34%),
-                radial-gradient(circle at 16% 8%, rgba(14, 165, 233, .10), transparent 30%),
+                radial-gradient(circle at 74% 34%, rgba(37, 99, 235, .12), transparent 34%),
+                radial-gradient(circle at 16% 8%, rgba(6, 182, 212, .08), transparent 30%),
                 linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(248, 250, 252, .90));
             box-shadow: 0 22px 52px rgba(15, 23, 42, .08);
             overflow: hidden;
@@ -334,8 +368,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             z-index: -3;
             opacity: .46;
             background-image:
-                linear-gradient(rgba(37, 99, 235, .08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(37, 99, 235, .08) 1px, transparent 1px);
+                linear-gradient(rgba(37, 99, 235, .055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, .055) 1px, transparent 1px),
+                linear-gradient(rgba(15, 23, 42, .035) 1px, transparent 1px);
             background-size: 34px 34px;
             mask-image: linear-gradient(135deg, rgba(0, 0, 0, .76), transparent 78%);
         }}
@@ -367,8 +402,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: .42rem;
             height: .42rem;
             border-radius: 999px;
-            background: rgba(37, 99, 235, .52);
-            box-shadow: 0 0 12px rgba(37, 99, 235, .26);
+            background: var(--data-cyan);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, .10);
             opacity: 0;
             pointer-events: none;
             animation: data-background-particle-flow 9s linear infinite;
@@ -389,6 +424,32 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .hero-copy {{
             min-width: 0;
+        }}
+        .hero-kicker,
+        .hero-copy h1,
+        .hero-copy > p,
+        .hero-value-rotator,
+        .hero-actions,
+        .hero-skill-pipeline,
+        .hero-profile-card,
+        .project-proof-console {{
+            animation: home-entrance-rise 520ms ease-out both;
+        }}
+        .hero-kicker {{ animation-delay: 40ms; }}
+        .hero-copy h1 {{ animation-delay: 120ms; }}
+        .hero-copy > p {{ animation-delay: 200ms; }}
+        .hero-value-rotator {{ animation-delay: 280ms; }}
+        .hero-actions {{ animation-delay: 360ms; }}
+        .hero-profile-card {{ animation-delay: 440ms; }}
+        .hero-skill-pipeline {{ animation-delay: 520ms; }}
+        .project-proof-console {{ animation-delay: 660ms; }}
+        @keyframes home-entrance-rise {{
+            from {{ opacity: 0; transform: translateY(.65rem); }}
+            to {{ opacity: 1; transform: translateY(0); }}
+        }}
+        @keyframes home-skill-node-enter {{
+            from {{ opacity: 0; transform: translateX(-.45rem); }}
+            to {{ opacity: 1; transform: translateX(0); }}
         }}
         .sr-only {{
             position: absolute;
@@ -471,9 +532,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             min-height: 2.65rem;
             padding: .7rem 1rem;
             border-radius: 10px;
-            border: 1px solid var(--border);
+            border: 1px solid rgba(37, 99, 235, .22);
             background: var(--surface);
-            color: var(--text);
+            color: var(--data-blue);
             font-weight: 700;
             font-size: .82rem;
             line-height: 1.15;
@@ -487,8 +548,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             text-decoration: none;
         }}
         .portfolio-button-primary {{
-            background: var(--accent);
-            border-color: var(--accent);
+            background: var(--data-blue);
+            border-color: var(--data-blue);
             color: var(--on-accent) !important;
             box-shadow: var(--shadow-accent);
         }}
@@ -543,26 +604,37 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             line-height: 1.12;
             text-align: center;
             transform-origin: center;
-            animation: hero-skill-node-receive 8s ease-in-out infinite;
+            animation:
+                hero-skill-node-receive 8s ease-in-out infinite,
+                home-skill-node-enter 420ms ease-out both;
             transition:
                 transform 240ms ease,
                 border-color 240ms ease,
                 box-shadow 240ms ease;
         }}
-        .hero-skill-node-1 {{ animation-delay: 0s; }}
-        .hero-skill-node-2 {{ animation-delay: 1.6s; }}
-        .hero-skill-node-3 {{ animation-delay: 3.2s; }}
-        .hero-skill-node-4 {{ animation-delay: 4.8s; }}
-        .hero-skill-node-5 {{ animation-delay: 6.4s; }}
+        .hero-skill-node-1 {{ animation-delay: 0s, 560ms; }}
+        .hero-skill-node-2 {{ animation-delay: 1.6s, 620ms; }}
+        .hero-skill-node-3 {{ animation-delay: 3.2s, 680ms; }}
+        .hero-skill-node-4 {{ animation-delay: 4.8s, 740ms; }}
+        .hero-skill-node-5 {{ animation-delay: 6.4s, 800ms; }}
         .hero-skill-connector {{
             position: relative;
             z-index: 1;
             height: 2px;
             border-radius: 999px;
-            background: linear-gradient(90deg, rgba(148, 163, 184, .34), rgba(37, 99, 235, .50), rgba(148, 163, 184, .34));
+            background: linear-gradient(90deg, var(--data-border), var(--data-border));
             background-size: 220% 100%;
             animation: hero-skill-connector-flow 8s linear infinite;
             overflow: visible;
+        }}
+        .hero-skill-connector::before {{
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--data-blue), var(--data-cyan));
+            opacity: 0;
+            animation: hero-skill-connector-active 8s linear infinite;
         }}
         .hero-skill-connector::after {{
             content: "";
@@ -573,8 +645,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: .4rem;
             height: .4rem;
             border-radius: 999px;
-            background: var(--accent);
-            box-shadow: 0 0 10px rgba(37, 99, 235, .32);
+            background:
+                radial-gradient(circle at center, #FFFFFF 0 28%, var(--data-cyan) 31% 100%);
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.14);
             transform: translate3d(-50%, -50%, 0);
             pointer-events: none;
             animation: hero-skill-packet-flow 8s linear infinite;
@@ -583,6 +657,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-skill-connector-2::after {{ animation-delay: 1.6s; }}
         .hero-skill-connector-3::after {{ animation-delay: 3.2s; }}
         .hero-skill-connector-4::after {{ animation-delay: 4.8s; }}
+        .hero-skill-connector-1::before {{ animation-delay: 0s; }}
+        .hero-skill-connector-2::before {{ animation-delay: 1.6s; }}
+        .hero-skill-connector-3::before {{ animation-delay: 3.2s; }}
+        .hero-skill-connector-4::before {{ animation-delay: 4.8s; }}
         @keyframes hero-skill-node-receive {{
             0%, 18%, 100% {{
                 border-color: rgba(37, 99, 235, .18);
@@ -590,14 +668,19 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 transform: translateY(0) scale(1);
             }}
             7%, 12% {{
-                border-color: rgba(37, 99, 235, .46);
-                box-shadow: 0 8px 20px rgba(37, 99, 235, .13);
+                border-color: rgba(6, 182, 212, .46);
+                background-color: rgba(6, 182, 212, .07);
+                box-shadow: 0 8px 20px rgba(6, 182, 212, .12);
                 transform: translateY(-1px) scale(1.012);
             }}
         }}
         @keyframes hero-skill-connector-flow {{
             0% {{ background-position: 100% 50%; }}
             100% {{ background-position: -120% 50%; }}
+        }}
+        @keyframes hero-skill-connector-active {{
+            0%, 13%, 32%, 100% {{ opacity: 0; }}
+            16%, 27% {{ opacity: 1; }}
         }}
         @keyframes hero-skill-packet-flow {{
             0%, 13% {{ left: 0; opacity: 0; }}
@@ -733,7 +816,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             padding: .85rem;
             border: 1px solid rgba(37, 99, 235, .20);
             border-radius: 24px;
-            background: rgba(255, 255, 255, .92);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.86));
             box-shadow: 0 12px 30px rgba(15, 23, 42, .10);
             overflow: hidden;
             transform: translateZ(0);
@@ -826,7 +909,20 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             content: "";
             display: block;
             height: 3px;
-            background: linear-gradient(90deg, rgba(37, 99, 235, .18), rgba(37, 99, 235, .58), rgba(37, 99, 235, .18));
+            background: linear-gradient(90deg, rgba(6, 182, 212, .34), rgba(37, 99, 235, .66), rgba(6, 182, 212, .34));
+        }}
+        .project-proof-console::after {{
+            content: "";
+            position: absolute;
+            inset: 10px 1rem auto auto;
+            width: 9rem;
+            height: 4.8rem;
+            opacity: .055;
+            pointer-events: none;
+            background:
+                linear-gradient(var(--data-navy) 1px, transparent 1px),
+                linear-gradient(90deg, var(--data-navy) 1px, transparent 1px);
+            background-size: 100% 1.2rem, 3rem 100%;
         }}
         .proof-console-status {{
             color: var(--accent);
@@ -910,6 +1006,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             margin-top: .45rem;
         }}
         .featured-project-card {{
+            position: relative;
             display: grid;
             grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
             gap: 1.25rem;
@@ -917,6 +1014,19 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             padding: 1.25rem;
             margin: 1.4rem 0 2rem;
             overflow: visible;
+        }}
+        .featured-project-card::before {{
+            content: "";
+            position: absolute;
+            inset: 1rem auto auto 1rem;
+            width: 8.5rem;
+            height: 4.5rem;
+            opacity: .045;
+            pointer-events: none;
+            background:
+                linear-gradient(var(--data-navy) 1px, transparent 1px),
+                linear-gradient(90deg, var(--data-navy) 1px, transparent 1px);
+            background-size: 100% 1.1rem, 2.7rem 100%;
         }}
         .featured-project-copy h2,
         .home-section h2,
@@ -998,6 +1108,43 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .home-skill-card {{
             min-height: 126px;
         }}
+        .home-skill-card {{
+            border-top-width: 3px;
+        }}
+        .home-skill-card .section-title::before {{
+            content: "";
+            display: inline-block;
+            width: .48rem;
+            height: .48rem;
+            border-radius: 999px;
+            margin-right: .42rem;
+            vertical-align: .06rem;
+            background: var(--data-blue);
+        }}
+        .home-skill-card-1 {{
+            border-top-color: rgba(37, 99, 235, .42);
+        }}
+        .home-skill-card-1 .section-title::before {{
+            background: var(--data-blue);
+        }}
+        .home-skill-card-2 {{
+            border-top-color: rgba(6, 182, 212, .42);
+        }}
+        .home-skill-card-2 .section-title::before {{
+            background: var(--data-cyan);
+        }}
+        .home-skill-card-3 {{
+            border-top-color: rgba(79, 70, 229, .42);
+        }}
+        .home-skill-card-3 .section-title::before {{
+            background: var(--data-indigo);
+        }}
+        .home-skill-card-4 {{
+            border-top-color: rgba(51, 65, 85, .34);
+        }}
+        .home-skill-card-4 .section-title::before {{
+            background: #475569;
+        }}
         .home-skill-badge-wrap {{
             display: flex;
             flex-wrap: wrap;
@@ -1035,10 +1182,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .hero-profile-card:hover {{
                 transform: translateY(-6px) scale(1.025);
-                border-color: rgba(37, 99, 235, 0.72);
+                border-color: rgba(37, 99, 235, 0.70);
                 box-shadow:
-                    0 20px 44px rgba(37, 99, 235, 0.20),
-                    0 0 0 3px rgba(37, 99, 235, 0.08);
+                    0 20px 44px rgba(37, 99, 235, 0.18),
+                    0 0 0 3px rgba(6, 182, 212, 0.06);
             }}
             .hero-profile-card:hover .hero-profile-name {{
                 color: var(--accent);
@@ -1115,8 +1262,24 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             margin-top: 1rem;
         }}
         .pipeline-info-grid .pipeline-card {{
+            position: relative;
             height: 100%;
             margin: 0;
+            border-top: 3px solid rgba(6, 182, 212, .38);
+        }}
+        .pipeline-info-grid .pipeline-card::after {{
+            content: "";
+            position: absolute;
+            right: .85rem;
+            bottom: .75rem;
+            width: 4.8rem;
+            height: 2.8rem;
+            opacity: .045;
+            pointer-events: none;
+            background:
+                linear-gradient(var(--data-navy) 1px, transparent 1px),
+                linear-gradient(90deg, var(--data-navy) 1px, transparent 1px);
+            background-size: 100% .9rem, 1.6rem 100%;
         }}
         .contact-resume-strip {{
             display: grid;
@@ -1567,6 +1730,57 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             padding: .95rem 1rem;
             margin: 1rem 0;
         }}
+        .project-lineage {{
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: .42rem;
+            max-width: 100%;
+            margin: .25rem 0 .95rem;
+            padding: .38rem .56rem;
+            border: 1px solid var(--data-border-soft);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .76);
+            color: var(--data-text-secondary);
+            font-size: .68rem;
+            font-weight: 850;
+            letter-spacing: .055em;
+        }}
+        .project-lineage-step {{
+            display: inline-flex;
+            align-items: center;
+            gap: .28rem;
+            white-space: nowrap;
+        }}
+        .project-lineage-step span {{
+            width: .42rem;
+            height: .42rem;
+            border-radius: 999px;
+            background: var(--data-border);
+        }}
+        .project-lineage-step-complete {{
+            color: var(--data-blue);
+        }}
+        .project-lineage-step-complete span {{
+            background: var(--data-green);
+            box-shadow: 0 0 0 3px var(--data-green-soft);
+        }}
+        .project-lineage-step-warning {{
+            color: var(--data-amber);
+        }}
+        .project-lineage-step-warning span {{
+            background: var(--data-amber);
+            box-shadow: 0 0 0 3px var(--data-amber-soft);
+        }}
+        .project-lineage-dashboard .project-lineage-step-complete {{
+            color: var(--data-cyan);
+        }}
+        .project-lineage-connector {{
+            width: 1.3rem;
+            height: 1px;
+            background: linear-gradient(90deg, var(--data-blue), var(--data-cyan));
+            opacity: .52;
+        }}
         .dataset-metrics {{
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1646,6 +1860,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .quality-summary-panel,
         .quality-limitation-callout {{
+            position: relative;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -1654,10 +1869,26 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             margin: .85rem 0 1rem;
         }}
         .quality-summary-grid {{
+            position: relative;
+            z-index: 1;
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: .65rem;
             margin-top: .4rem;
+        }}
+        .quality-summary-panel::after {{
+            content: "";
+            position: absolute;
+            right: 1rem;
+            top: .85rem;
+            width: 7rem;
+            height: 4rem;
+            opacity: .05;
+            pointer-events: none;
+            background:
+                radial-gradient(circle, var(--data-green) 0 2px, transparent 3px),
+                linear-gradient(90deg, transparent 47%, var(--data-green) 48% 52%, transparent 53%);
+            background-size: 2rem 2rem, 100% 100%;
         }}
         .quality-summary-item {{
             min-width: 0;
@@ -1665,6 +1896,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border-radius: 10px;
             background: rgba(239, 246, 255, .52);
             padding: .65rem .75rem;
+        }}
+        .quality-summary-item-1,
+        .quality-summary-item-2,
+        .quality-summary-item-3,
+        .quality-summary-item-4,
+        .quality-summary-item-6 {{
+            border-color: rgba(16, 185, 129, .24);
+            background: rgba(16, 185, 129, .06);
+        }}
+        .quality-summary-item-5 {{
+            border-color: rgba(245, 158, 11, .28);
+            background: var(--data-amber-soft);
         }}
         .quality-summary-item span {{
             display: block;
@@ -1683,9 +1926,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             margin-top: .22rem;
         }}
         .quality-limitation-callout {{
-            border-color: rgba(37, 99, 235, .28);
+            border-color: rgba(245, 158, 11, .38);
+            border-left: 4px solid var(--data-amber);
             background:
-                linear-gradient(135deg, rgba(239, 246, 255, .82), rgba(255, 255, 255, .94));
+                linear-gradient(135deg, rgba(245, 158, 11, .10), rgba(255, 255, 255, .94));
+        }}
+        .quality-limitation-callout .section-title::before {{
+            content: "";
+            display: inline-block;
+            width: .52rem;
+            height: .52rem;
+            border-radius: 999px;
+            margin-right: .42rem;
+            background: var(--data-amber);
+            box-shadow: 0 0 0 3px var(--data-amber-soft);
+            vertical-align: .04rem;
         }}
         .quality-limitation-callout p {{
             color: var(--text-2);
@@ -1694,6 +1949,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .data-quality-detail {{
             padding: .15rem 0 .3rem;
+            animation: data-quality-detail-in 220ms ease-out both;
+        }}
+        @keyframes data-quality-detail-in {{
+            from {{ opacity: 0; transform: translateY(.25rem); }}
+            to {{ opacity: 1; transform: translateY(0); }}
         }}
         .job-intelligence-hover-card .section-title,
         .job-intelligence-hover-card strong,
@@ -1753,10 +2013,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .skill-card:focus-within,
             .pipeline-card:hover,
             .pipeline-card:focus-within {{
-                transform: translateY(-5px) scale(1.015);
-                border-color: rgba(37, 99, 235, 0.45);
-                background-color: rgba(239, 246, 255, 0.75);
-                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.14);
+                transform: translateY(-3px);
+                border-color: rgba(37, 99, 235, 0.30);
+                background-color: rgba(239, 246, 255, 0.58);
+                box-shadow: 0 14px 28px rgba(15, 23, 42, 0.09);
                 position: relative;
                 z-index: 2;
             }}
@@ -1786,10 +2046,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .featured-project-card:focus-within,
             .pipeline-step-card:hover,
             .pipeline-step-card:focus-within {{
-                transform: translateY(-5px) scale(1.015);
-                border-color: rgba(37, 99, 235, 0.45);
-                background-color: rgba(239, 246, 255, 0.75);
-                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.14);
+                transform: translateY(-4px) scale(1.012);
+                border-color: rgba(37, 99, 235, 0.30);
+                background-color: rgba(239, 246, 255, 0.58);
+                box-shadow: 0 14px 28px rgba(15, 23, 42, 0.09);
                 position: relative;
                 z-index: 2;
             }}
@@ -1899,9 +2159,19 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             min-height: 112px;
             padding: .9rem 1rem;
             border: 1px solid var(--border);
+            border-top: 3px solid var(--data-blue);
             border-radius: 12px;
             background: var(--surface);
             box-shadow: var(--shadow);
+        }}
+        .dashboard-primary-kpi-2 {{
+            border-top-color: var(--data-cyan);
+        }}
+        .dashboard-primary-kpi-3 {{
+            border-top-color: #64748B;
+        }}
+        .dashboard-primary-kpi-4 {{
+            border-top-color: var(--data-green);
         }}
         .dashboard-kpi-label {{
             color: var(--muted);
@@ -1937,6 +2207,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             min-width: 0;
             padding: .15rem .85rem;
             border-left: 1px solid rgba(37, 99, 235, .16);
+            border-top: 3px solid transparent;
+        }}
+        .dashboard-meta-item-1 {{
+            border-top-color: var(--data-indigo);
+        }}
+        .dashboard-meta-item-2 {{
+            border-top-color: var(--data-amber);
         }}
         .dashboard-meta-item:first-child {{
             border-left: 0;
@@ -2420,6 +2697,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-resume-strip .contact-card-action {{
                 width: 100%;
             }}
+            .project-lineage {{
+                gap: .35rem;
+                border-radius: 12px;
+                font-size: .64rem;
+            }}
+            .project-lineage-connector {{
+                display: none;
+            }}
             .st-key-dashboard_filter_panel {{
                 padding: .8rem .85rem .35rem;
             }}
@@ -2514,7 +2799,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-skill-node,
             .hero-skill-node:hover,
             .hero-skill-connector,
+            .hero-skill-connector::before,
             .hero-skill-connector::after,
+            .data-quality-detail,
             .sidebar-brand:hover,
             .sidebar-brand:focus-within,
             .home-card:hover,
@@ -2585,7 +2872,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .project-proof-console,
             .proof-console-item,
             .hero-skill-node,
-            .hero-skill-connector {{
+            .hero-skill-connector,
+            .hero-skill-connector::before {{
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;

@@ -264,6 +264,42 @@ def badge_row(items: list[str]) -> None:
     st.markdown(f"<div>{markup}</div>", unsafe_allow_html=True)
 
 
+def data_lineage(active: str, *, limitation: bool = False) -> None:
+    stages = [
+        ("source", "SOURCE"),
+        ("model", "MODEL"),
+        ("test", "TEST"),
+        ("serve", "SERVE"),
+    ]
+    active_key = active.lower()
+    active_map = {
+        "overview": {"source", "model", "test", "serve"},
+        "pipeline": {"source", "model"},
+        "quality": {"test"},
+        "dashboard": {"serve"},
+    }
+    completed = active_map.get(active_key, set())
+    markup = ""
+    for index, (key, label) in enumerate(stages):
+        state = "complete" if key in completed else "neutral"
+        if active_key == "quality" and key == "test":
+            state = "warning" if limitation else "complete"
+        markup += (
+            f'<span class="project-lineage-step project-lineage-step-{state}">'
+            f'<span aria-hidden="true"></span>{html.escape(label)}</span>'
+        )
+        if index < len(stages) - 1:
+            markup += '<span class="project-lineage-connector" aria-hidden="true"></span>'
+    st.markdown(
+        f"""
+        <div class="project-lineage project-lineage-{html.escape(active_key)}" aria-label="Data lineage: Source, Model, Test, Serve">
+            {markup}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def _project_pipeline_visual() -> str:
     stages = [
         ("raw", "Raw Data", "Source", "M4 5h16v14H4z M7 9h10 M7 13h7"),

@@ -37,6 +37,13 @@ def kpi_values(jobs: pd.DataFrame, skills: pd.DataFrame) -> dict[str, str]:
     }
 
 
+def salary_coverage(jobs: pd.DataFrame) -> tuple[str, int, int]:
+    total_postings = len(jobs)
+    salary_records = int(jobs["salary_year_avg"].notna().sum()) if "salary_year_avg" in jobs else 0
+    coverage = f"{salary_records / total_postings * 100:.1f}%" if total_postings else "N/A"
+    return coverage, salary_records, total_postings
+
+
 def top_counts(df: pd.DataFrame, column: str, limit: int = 15) -> pd.DataFrame:
     if df.empty or column not in df:
         return pd.DataFrame(columns=[column, "postings"])

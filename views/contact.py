@@ -5,13 +5,14 @@ from pathlib import Path
 import streamlit as st
 
 from portfolio.content.profile import PROFILE
+from ui.components import mailto_url
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
 
 inject_global_styles(current_theme())
 
-st.title("Let’s Connect")
+st.title("Let's Connect")
 st.markdown("I'm open to Junior Data Engineer opportunities and conversations about data projects.")
 
 badge_cols = st.columns([0.28, 0.22, 0.5])
@@ -20,8 +21,8 @@ with badge_cols[0]:
 with badge_cols[1]:
     st.caption(f"Based in {PROFILE['location']}")
 
-footer_email_url = "https://mail.google.com/mail/?view=cm&fs=1&to=petterattef763@gmail.com"
-send_email_url = "https://mail.google.com/mail/?view=cm&fs=1&to=petterattef763@gmail.com"
+footer_email_url = mailto_url()
+send_email_url = mailto_url("Junior Data Engineer opportunity")
 linkedin_url = PROFILE.get("linkedin_url", "")
 github_url = PROFILE.get("github_url", "")
 
@@ -64,7 +65,7 @@ if resume_path.exists():
             )
 
 st.divider()
-st.markdown("Peter — Junior Data Engineer")
+st.markdown("Peter - Junior Data Engineer")
 st.caption(PROFILE["availability"])
 
 footer_links = st.columns([0.12, 0.16, 0.14, 0.58])

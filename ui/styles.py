@@ -303,6 +303,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .project-card {{
             min-height: 360px;
         }}
+        .project-card-featured {{
+            max-width: 860px;
+            min-height: 0;
+            margin-left: auto;
+            margin-right: auto;
+        }}
         .project-card:hover {{
             border-color: var(--accent);
             background: var(--surface-elevated);
@@ -340,6 +346,34 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             color: var(--accent-bright);
             font-weight: 700;
             margin: .65rem 0 .4rem;
+        }}
+        .project-actions {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: .55rem;
+            margin-top: 1rem;
+        }}
+        .project-action {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.45rem;
+            padding: .58rem .85rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-weight: 600;
+            line-height: 1.15;
+            white-space: nowrap;
+            text-decoration: none;
+            flex: 1 1 12rem;
+        }}
+        .project-action-primary {{
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--on-accent) !important;
+            box-shadow: var(--shadow-accent);
         }}
         .timeline-card ul {{
             color: var(--text-2);
@@ -483,7 +517,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
 
         .pipeline {{
             display: grid;
-            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-template-columns: repeat(7, minmax(0, 1fr));
             gap: .65rem;
             margin: 1rem 0 1.25rem;
         }}
@@ -503,6 +537,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-size: .92rem;
             margin-bottom: .22rem;
         }}
+        .pipeline-step strong {{
+            display: block;
+            line-height: 1.25;
+        }}
+        .pipeline-step small {{
+            display: block;
+            color: var(--muted);
+            font-weight: 500;
+            font-size: .76rem;
+            line-height: 1.3;
+            margin-top: .28rem;
+        }}
 
         .chart-card-heading {{
             background: var(--surface);
@@ -520,6 +566,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             box-shadow: var(--shadow);
             padding: .55rem;
             margin-bottom: .25rem;
+            overflow: visible;
+        }}
+        div[data-testid="stPlotlyChart"] > div {{
+            overflow: visible !important;
         }}
         .insight {{
             color: var(--muted);
@@ -694,6 +744,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         @media (max-width: 1024px) {{
             .pipeline {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
+        }}
+        @media (max-width: 760px) {{
+            .project-card-featured {{ max-width: 100%; }}
         }}
         @media (max-width: 860px) {{
             .dataset-metrics {{ grid-template-columns: 1fr; }}

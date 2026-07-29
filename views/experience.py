@@ -11,7 +11,6 @@ from ui.theme import current_theme
 inject_global_styles(current_theme())
 
 st.title("Experience")
-st.caption("Verified from Peter's resume.")
 
 for entry in EXPERIENCE:
     timeline_entry(entry)

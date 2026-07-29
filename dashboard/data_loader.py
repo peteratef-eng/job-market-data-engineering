@@ -13,6 +13,17 @@ DEFAULT_DATA_DIR = PROJECT_ROOT / "data" / "dashboard"
 
 
 @st.cache_data(show_spinner=False)
+def load_dashboard_metadata(data_dir: str | None = None) -> dict:
+    base_dir = Path(data_dir or os.getenv("DASHBOARD_DATA_DIR", DEFAULT_DATA_DIR))
+    metadata_path = base_dir / "metadata.json"
+    if not metadata_path.exists():
+        return {}
+
+    with metadata_path.open("r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+@st.cache_data(show_spinner=False)
 def load_dashboard_data(data_dir: str | None = None) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     base_dir = Path(data_dir or os.getenv("DASHBOARD_DATA_DIR", DEFAULT_DATA_DIR))
     jobs_path = base_dir / "jobs_sample.csv"
@@ -51,10 +62,7 @@ def load_dashboard_data(data_dir: str | None = None) -> tuple[pd.DataFrame, pd.D
         },
     )
 
-    metadata = {}
-    if metadata_path.exists():
-        with metadata_path.open("r", encoding="utf-8") as handle:
-            metadata = json.load(handle)
+    metadata = load_dashboard_metadata(str(base_dir))
 
     return jobs, skills, metadata
 

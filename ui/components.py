@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import html
+from urllib.parse import quote
 from pathlib import Path
 
 import streamlit as st
@@ -20,7 +21,17 @@ KPI_ICONS = {
     "Salary coverage": "%",
 }
 
-FOOTER_EMAIL_URL = "https://mail.google.com/mail/?view=cm&fs=1&to=petterattef763@gmail.com"
+def mailto_url(subject: str | None = None) -> str:
+    email = PROFILE.get("email", "")
+    if not email:
+        return ""
+    url = f"mailto:{email}"
+    if subject:
+        url += f"?subject={quote(subject)}"
+    return url
+
+
+FOOTER_EMAIL_URL = mailto_url()
 PROFILE_PHOTO_PATH = Path(__file__).resolve().parents[1] / "assets" / "profile" / "peter.jpg"
 
 
@@ -129,16 +140,23 @@ def kpi_grid(values: dict[str, str]) -> None:
 
 def pipeline_visual() -> None:
     steps = [
-        ("01", "Raw CSVs"),
-        ("02", "Python / Pandas"),
-        ("03", "PostgreSQL"),
-        ("04", "dbt Models"),
-        ("05", "Analytics Marts"),
-        ("06", "Streamlit Dashboard"),
+        ("01", "Raw CSVs", "Input tables"),
+        ("02", "Python / Pandas", "Prepared sample"),
+        ("03", "PostgreSQL", "Warehouse tables"),
+        ("04", "dbt Models", "Staging and joins"),
+        ("05", "Quality Checks", "Validation SQL"),
+        ("06", "Analytics Marts", "Business-ready marts"),
+        ("07", "Streamlit Dashboard", "Interactive portfolio"),
     ]
     markup = "".join(
-        f'<div class="pipeline-step"><span>{number}</span>{html.escape(label)}</div>'
-        for number, label in steps
+        (
+            '<div class="pipeline-step">'
+            f'<span>{number}</span>'
+            f'<strong>{html.escape(label)}</strong>'
+            f'<small>{html.escape(output)}</small>'
+            '</div>'
+        )
+        for number, label, output in steps
     )
     st.markdown(f'<div class="pipeline">{markup}</div>', unsafe_allow_html=True)
 
@@ -169,7 +187,7 @@ def active_filter_chips(filters: dict[str, list[str] | tuple[float, float] | tup
 def footer() -> None:
     links = []
     if PROFILE.get("email"):
-        links.append(f'<a href="{FOOTER_EMAIL_URL}" target="_blank" rel="noreferrer">Email</a>')
+        links.append(f'<a href="{html.escape(FOOTER_EMAIL_URL)}">Email</a>')
     if PROFILE.get("linkedin_url"):
         links.append(f'<a href="{html.escape(PROFILE["linkedin_url"])}" target="_blank" rel="noreferrer">LinkedIn</a>')
     if PROFILE.get("github_url"):
@@ -183,13 +201,14 @@ def footer() -> None:
 
 def metric_status_card(sample_rows: int, source_rows: int | str) -> None:
     source_value = f"{source_rows:,}" if isinstance(source_rows, int) else html.escape(str(source_rows))
+    sample_value = f"{sample_rows:,}" if isinstance(sample_rows, int) else html.escape(str(sample_rows))
     st.markdown(
         f"""
         <div class="dataset-card">
             <div class="dataset-icon">DB</div>
             <div class="dataset-metrics">
                 <div>
-                    <div class="dataset-value">{sample_rows:,}</div>
+                    <div class="dataset-value">{sample_value}</div>
                     <div class="dataset-label">hosted sample postings</div>
                 </div>
                 <div>
@@ -248,19 +267,37 @@ def badge_row(items: list[str]) -> None:
     st.markdown(f"<div>{markup}</div>", unsafe_allow_html=True)
 
 
-def project_card(project: dict) -> None:
+def project_card(project: dict, *, actions: bool = False, featured: bool = False) -> None:
     tech_markup = "".join(
         f'<span class="meta-pill">{html.escape(tech)}</span>' for tech in project.get("technologies", [])[:6]
     )
+    action_markup = ""
+    if actions:
+        demo_url = project.get("demo_url") or "/market_dashboard"
+        repository_url = project.get("repository_url", "")
+        repository_link = (
+            f'<a class="project-action" href="{html.escape(repository_url)}" target="_blank" rel="noreferrer">GitHub Repository</a>'
+            if repository_url
+            else ""
+        )
+        action_markup = (
+            '<div class="project-actions">'
+            '<a class="project-action project-action-primary" href="/project_overview">View Case Study</a>'
+            f'<a class="project-action" href="{html.escape(demo_url)}">Live Demo</a>'
+            f'{repository_link}'
+            '</div>'
+        )
+    card_class = "project-card project-card-featured" if featured else "project-card"
     st.markdown(
         f"""
-        <div class="project-card">
+        <div class="{card_class}">
             <div class="project-visual">DATA</div>
             <div class="project-meta">{html.escape(project.get("category", ""))} | {html.escape(project.get("status", ""))}</div>
             <div class="project-title">{html.escape(project["title"])}</div>
             <div class="section-copy">{html.escape(project["short_description"])}</div>
             <div class="project-metric">{html.escape(project.get("key_metric", ""))}</div>
             <div>{tech_markup}</div>
+            {action_markup}
         </div>
         """,
         unsafe_allow_html=True,

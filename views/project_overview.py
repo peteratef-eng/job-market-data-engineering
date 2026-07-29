@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from dashboard.data_loader import load_dashboard_data
+from dashboard.data_loader import load_dashboard_metadata
 from portfolio.content.projects import PROJECTS
 from ui.components import (
     app_header,
@@ -41,12 +41,12 @@ with action_cols[2]:
     st.link_button("GitHub", project["repository_url"])
 
 try:
-    jobs, skills, metadata = load_dashboard_data()
+    metadata = load_dashboard_metadata()
     source_rows = metadata.get("source_job_postings_rows", "1.6M+")
-    sample_rows = metadata.get("sample_job_postings_rows", len(jobs))
+    sample_rows = metadata.get("sample_job_postings_rows", "Hosted sample")
     metric_status_card(sample_rows, source_rows)
-except FileNotFoundError:
-    st.warning("Dataset unavailable. Generate the hosted sample data before sharing this portfolio.")
+except Exception:
+    st.warning("Dataset metadata unavailable. Generate the hosted sample data before sharing this portfolio.")
 
 st.subheader("Project Purpose")
 purpose_cards()

@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import streamlit as st
 
+from dashboard.data_loader import load_dashboard_metadata
 from portfolio.content.profile import PROFILE
+from portfolio.content.projects import PROJECTS
 from ui.components import footer, section_card
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
@@ -11,14 +13,33 @@ from ui.theme import current_theme
 inject_global_styles(current_theme())
 
 st.title("About Me")
-section_card("Professional Story", PROFILE["bio"])
-section_card(
-    "Current Focus",
-    "I am targeting Junior Data Engineer opportunities where I can build dependable pipelines, improve data quality, and create models that make analysis easier for teams.",
-)
-section_card(
-    "Background",
-    "My experience includes data annotation leadership, quality assurance, structured dataset preparation, API integrations, automation, and cross-functional data workflows.",
-)
+metadata = load_dashboard_metadata()
+project = PROJECTS[0]
+
+cols = st.columns(2)
+with cols[0]:
+    section_card("Professional Story", PROFILE["bio"])
+with cols[1]:
+    section_card(
+        "Current Focus",
+        "I am targeting Junior Data Engineer opportunities where I can build dependable pipelines, improve data quality, and create models that make analysis easier for teams.",
+    )
+
+cols = st.columns(2)
+with cols[0]:
+    section_card(
+        "Background",
+        "My experience includes data annotation leadership, quality assurance, structured dataset preparation, API integrations, automation, and cross-functional data workflows.",
+    )
+with cols[1]:
+    evidence = []
+    source_rows = metadata.get("source_job_postings_rows")
+    sample_rows = metadata.get("sample_job_postings_rows")
+    if source_rows:
+        evidence.append(f"{source_rows:,} source postings")
+    if sample_rows:
+        evidence.append(f"{sample_rows:,} hosted sample postings")
+    evidence.append(", ".join(project["technologies"][:6]))
+    section_card("Project Evidence", " | ".join(evidence))
 
 footer()

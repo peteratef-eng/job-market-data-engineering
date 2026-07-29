@@ -2694,7 +2694,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             color: var(--text);
             font-size: 1.15rem;
             font-weight: 700;
-            line-height: 2.4rem;
+            line-height: 1.15;
+            margin: 0 0 .7rem;
         }}
         @media (max-width: 1024px) {{
             .pipeline {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}

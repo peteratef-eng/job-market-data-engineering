@@ -96,8 +96,8 @@ checks = [
     },
 ]
 
-for check in checks:
-    with st.container(border=True):
+for index, check in enumerate(checks):
+    with st.container(border=True, key=f"data_quality_check_card_{index}"):
         st.subheader(check["title"])
         st.caption(check["state"])
         st.markdown(check["body"])

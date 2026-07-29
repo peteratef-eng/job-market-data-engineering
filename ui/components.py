@@ -190,12 +190,14 @@ def footer() -> None:
     )
 
 
-def metric_status_card(sample_rows: int, source_rows: int | str) -> None:
+def metric_status_card(sample_rows: int, source_rows: int | str, class_name: str = "") -> None:
     source_value = f"{source_rows:,}" if isinstance(source_rows, int) else html.escape(str(source_rows))
     sample_value = f"{sample_rows:,}" if isinstance(sample_rows, int) else html.escape(str(sample_rows))
+    classes = " ".join(["dataset-card", class_name]).strip()
+    tabindex = ' tabindex="0"' if class_name else ""
     st.markdown(
         f"""
-        <div class="dataset-card">
+        <div class="{html.escape(classes)}"{tabindex}>
             <div class="dataset-icon">DB</div>
             <div class="dataset-metrics">
                 <div>
@@ -217,7 +219,7 @@ def metric_status_card(sample_rows: int, source_rows: int | str) -> None:
     )
 
 
-def purpose_cards() -> None:
+def purpose_cards(class_name: str = "") -> None:
     cards = [
         ("Understand Demand", "See which roles, companies, and markets show the strongest hiring activity."),
         ("Compare Salaries", "Review salary patterns across roles, countries, and remote-work status where salary data exists."),
@@ -226,10 +228,10 @@ def purpose_cards() -> None:
     columns = st.columns(3)
     for column, (title, body) in zip(columns, cards):
         with column:
-            section_card(title, body)
+            section_card(title, body, class_name=class_name)
 
 
-def challenge_points() -> None:
+def challenge_points(class_name: str = "") -> None:
     points = [
         "Inconsistent locations",
         "Missing salary values",
@@ -238,7 +240,9 @@ def challenge_points() -> None:
         "Noisy job-posting records",
     ]
     markup = "".join(f'<span class="challenge-chip">{html.escape(point)}</span>' for point in points)
-    st.markdown(f'<div class="challenge-panel">{markup}</div>', unsafe_allow_html=True)
+    classes = " ".join(["challenge-panel", class_name]).strip()
+    tabindex = ' tabindex="0"' if class_name else ""
+    st.markdown(f'<div class="{html.escape(classes)}"{tabindex}>{markup}</div>', unsafe_allow_html=True)
 
 
 def chart_card(title: str, description: str):
@@ -319,13 +323,15 @@ def timeline_entry(entry: dict, class_name: str = "") -> None:
     )
 
 
-def skill_group_card(title: str, skills: list[str]) -> None:
+def skill_group_card(title: str, skills: list[str], class_name: str = "") -> None:
     skills_markup = "".join(
         f'<span class="challenge-chip skill-chip">{html.escape(skill)}</span>' for skill in skills
     )
+    classes = " ".join(["section-card", "skill-card", class_name]).strip()
+    tabindex = ' tabindex="0"' if class_name else ""
     st.markdown(
         f"""
-        <div class="section-card skill-card">
+        <div class="{html.escape(classes)}"{tabindex}>
             <div class="section-title">{html.escape(title)}</div>
             <div class="skill-chip-wrap">{skills_markup}</div>
         </div>

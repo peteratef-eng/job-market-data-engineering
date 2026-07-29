@@ -18,6 +18,6 @@ for index in range(0, len(items), 2):
     cols = st.columns(2)
     for col, (title, skills) in zip(cols, items[index : index + 2]):
         with col:
-            skill_group_card(title, skills)
+            skill_group_card(title, skills, class_name="skills-hover-card")
 
 footer()

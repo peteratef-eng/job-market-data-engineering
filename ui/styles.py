@@ -381,7 +381,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             padding-left: 1.2rem;
         }}
         .about-hover-card,
-        .experience-hover-card {{
+        .experience-hover-card,
+        .skills-hover-card,
+        .home-hover-card,
+        .overview-hover-card,
+        .pipeline-hover-card,
+        [class*="st-key-contact_"] [data-testid="stVerticalBlockBorderWrapper"],
+        [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"] {{
             transform-origin: center;
             outline: none;
             overflow: visible;
@@ -394,14 +400,33 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 box-shadow 220ms ease;
         }}
         .about-hover-card .section-title,
-        .experience-hover-card .project-title {{
-            transition: color 220ms ease, font-size 220ms ease;
+        .skills-hover-card .section-title,
+        .home-hover-card .section-title,
+        .overview-hover-card .section-title,
+        .pipeline-hover-card .section-title,
+        .experience-hover-card .project-title,
+        [class*="st-key-contact_"] h3,
+        [class*="st-key-data_quality_check_card_"] h3 {{
+            transform-origin: left center;
+            transition: color 220ms ease, font-size 220ms ease, transform 220ms ease;
         }}
         @media (hover: hover) and (pointer: fine) {{
             .about-hover-card:hover,
             .about-hover-card:focus-within,
+            .skills-hover-card:hover,
+            .skills-hover-card:focus-within,
+            .home-hover-card:hover,
+            .home-hover-card:focus-within,
+            .overview-hover-card:hover,
+            .overview-hover-card:focus-within,
+            .pipeline-hover-card:hover,
+            .pipeline-hover-card:focus-within,
             .experience-hover-card:hover,
-            .experience-hover-card:focus-within {{
+            .experience-hover-card:focus-within,
+            [class*="st-key-contact_"]:hover [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-contact_"]:focus-within [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-data_quality_check_card_"]:hover [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-data_quality_check_card_"]:focus-within [data-testid="stVerticalBlockBorderWrapper"] {{
                 transform: translateY(-3px) scale(1.018);
                 border-color: rgba(37, 99, 235, 0.45);
                 background-color: rgba(239, 246, 255, 0.65);
@@ -411,22 +436,55 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .about-hover-card:hover .section-title,
             .about-hover-card:focus-within .section-title,
+            .skills-hover-card:hover .section-title,
+            .skills-hover-card:focus-within .section-title,
+            .home-hover-card:hover .section-title,
+            .home-hover-card:focus-within .section-title,
+            .overview-hover-card:hover .section-title,
+            .overview-hover-card:focus-within .section-title,
+            .pipeline-hover-card:hover .section-title,
+            .pipeline-hover-card:focus-within .section-title,
             .experience-hover-card:hover .project-title,
             .experience-hover-card:focus-within .project-title {{
                 color: var(--accent);
                 font-size: 1.12rem;
             }}
+            [class*="st-key-contact_"]:hover h3,
+            [class*="st-key-contact_"]:focus-within h3,
+            [class*="st-key-data_quality_check_card_"]:hover h3,
+            [class*="st-key-data_quality_check_card_"]:focus-within h3 {{
+                color: var(--accent);
+                transform: scale(1.015);
+            }}
         }}
         @media (hover: none), (pointer: coarse), (max-width: 760px) {{
             .about-hover-card,
-            .experience-hover-card {{
+            .experience-hover-card,
+            .skills-hover-card,
+            .home-hover-card,
+            .overview-hover-card,
+            .pipeline-hover-card,
+            [class*="st-key-contact_"] [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"] {{
                 transform: none;
                 transition: none;
             }}
             .about-hover-card:hover,
             .about-hover-card:focus-within,
+            .skills-hover-card:hover,
+            .skills-hover-card:focus-within,
+            .home-hover-card:hover,
+            .home-hover-card:focus-within,
+            .overview-hover-card:hover,
+            .overview-hover-card:focus-within,
+            .pipeline-hover-card:hover,
+            .pipeline-hover-card:focus-within,
             .experience-hover-card:hover,
-            .experience-hover-card:focus-within {{
+            .experience-hover-card:focus-within,
+            [class*="st-key-contact_"]:hover [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-contact_"]:focus-within [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-data_quality_check_card_"]:hover [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-data_quality_check_card_"]:focus-within [data-testid="stVerticalBlockBorderWrapper"] {{
                 transform: none;
                 border-color: var(--border);
                 background-color: var(--surface);
@@ -434,12 +492,33 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .about-hover-card:hover .section-title,
             .about-hover-card:focus-within .section-title,
+            .skills-hover-card:hover .section-title,
+            .skills-hover-card:focus-within .section-title,
+            .home-hover-card:hover .section-title,
+            .home-hover-card:focus-within .section-title,
+            .overview-hover-card:hover .section-title,
+            .overview-hover-card:focus-within .section-title,
+            .pipeline-hover-card:hover .section-title,
+            .pipeline-hover-card:focus-within .section-title,
             .experience-hover-card:hover .project-title,
-            .experience-hover-card:focus-within .project-title {{
+            .experience-hover-card:focus-within .project-title,
+            [class*="st-key-contact_"]:hover h3,
+            [class*="st-key-contact_"]:focus-within h3,
+            [class*="st-key-data_quality_check_card_"]:hover h3,
+            [class*="st-key-data_quality_check_card_"]:focus-within h3 {{
                 color: var(--text);
+                transform: none;
             }}
             .about-hover-card:hover .section-title,
-            .about-hover-card:focus-within .section-title {{
+            .about-hover-card:focus-within .section-title,
+            .skills-hover-card:hover .section-title,
+            .skills-hover-card:focus-within .section-title,
+            .home-hover-card:hover .section-title,
+            .home-hover-card:focus-within .section-title,
+            .overview-hover-card:hover .section-title,
+            .overview-hover-card:focus-within .section-title,
+            .pipeline-hover-card:hover .section-title,
+            .pipeline-hover-card:focus-within .section-title {{
                 font-size: 1.08rem;
             }}
             .experience-hover-card:hover .project-title,
@@ -833,8 +912,20 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .about-hover-card:hover,
             .about-hover-card:focus-within,
+            .skills-hover-card:hover,
+            .skills-hover-card:focus-within,
+            .home-hover-card:hover,
+            .home-hover-card:focus-within,
+            .overview-hover-card:hover,
+            .overview-hover-card:focus-within,
+            .pipeline-hover-card:hover,
+            .pipeline-hover-card:focus-within,
             .experience-hover-card:hover,
-            .experience-hover-card:focus-within {{
+            .experience-hover-card:focus-within,
+            [class*="st-key-contact_"]:hover [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-contact_"]:focus-within [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-data_quality_check_card_"]:hover [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-data_quality_check_card_"]:focus-within [data-testid="stVerticalBlockBorderWrapper"] {{
                 transform: none;
             }}
         }}

@@ -628,24 +628,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             padding: .9rem 1rem .35rem;
             margin-top: .8rem;
         }}
-        div[data-testid="stPlotlyChart"] {{
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 0 0 12px 12px;
-            box-shadow: var(--shadow);
-            padding: .55rem;
-            margin-bottom: .25rem;
-            overflow: visible;
-            transform: none !important;
-            filter: none !important;
-            transition: none !important;
-            will-change: auto;
-        }}
-        div[data-testid="stPlotlyChart"] > div {{
-            overflow: visible !important;
-            transform: none !important;
-            filter: none !important;
-        }}
         .insight {{
             color: var(--muted);
             border-left: 3px solid var(--accent);

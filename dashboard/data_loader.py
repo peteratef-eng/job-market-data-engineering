@@ -79,32 +79,35 @@ def filter_jobs(
     salary_range: tuple[float, float] | None,
     date_range: tuple[pd.Timestamp, pd.Timestamp] | None,
 ) -> pd.DataFrame:
-    filtered = jobs.copy()
+    if not any((job_titles, countries, companies, skills_filter, remote_statuses, salary_range, date_range)):
+        return jobs
+
+    mask = pd.Series(True, index=jobs.index)
 
     if job_titles:
-        filtered = filtered[filtered["job_title_short"].isin(job_titles)]
+        mask &= jobs["job_title_short"].isin(job_titles)
     if countries:
-        filtered = filtered[filtered["job_country"].isin(countries)]
+        mask &= jobs["job_country"].isin(countries)
     if companies:
-        filtered = filtered[filtered["clean_company_name"].isin(companies)]
+        mask &= jobs["clean_company_name"].isin(companies)
     if remote_statuses:
-        filtered = filtered[filtered["remote_status"].isin(remote_statuses)]
+        mask &= jobs["remote_status"].isin(remote_statuses)
     if salary_range is not None:
         low, high = salary_range
-        salary = filtered["salary_year_avg"]
-        filtered = filtered[salary.isna() | salary.between(low, high)]
+        salary = jobs["salary_year_avg"]
+        mask &= salary.isna() | salary.between(low, high)
     if date_range is not None:
         start, end = date_range
-        filtered = filtered[
-            filtered["job_posted_date"].between(pd.Timestamp(start), pd.Timestamp(end))
-        ]
+        mask &= jobs["job_posted_date"].between(pd.Timestamp(start), pd.Timestamp(end))
     if skills_filter:
         matching_job_ids = skills.loc[
             skills["clean_skill_name"].isin(skills_filter), "job_id"
         ].dropna()
-        filtered = filtered[filtered["job_id"].isin(matching_job_ids)]
+        mask &= jobs["job_id"].isin(matching_job_ids)
 
-    return filtered
+    if bool(mask.all()):
+        return jobs
+    return jobs.loc[mask]
 
 
 def skills_for_jobs(skills: pd.DataFrame, jobs: pd.DataFrame) -> pd.DataFrame:

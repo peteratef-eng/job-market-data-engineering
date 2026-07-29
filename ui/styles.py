@@ -1374,43 +1374,24 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .st-key-market_dashboard_chart_high_salary_skills,
         .st-key-market_dashboard_chart_data_engineer_skill_demand {{
             opacity: 1;
-            translate: 0 0;
             transform-origin: center center;
             border: 1px solid transparent;
             border-radius: 12px;
             overflow: visible;
+            animation: chart-scroll-reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
             transition:
                 transform 220ms ease,
                 border-color 220ms ease,
                 box-shadow 220ms ease;
         }}
-        @supports (animation-timeline: view()) {{
-            .st-key-market_dashboard_chart_job_title_demand,
-            .st-key-market_dashboard_chart_company_activity,
-            .st-key-market_dashboard_chart_salary_by_job_title,
-            .st-key-market_dashboard_chart_salary_by_country,
-            .st-key-market_dashboard_chart_remote_salary,
-            .st-key-market_dashboard_chart_monthly_posting_trend,
-            .st-key-market_dashboard_chart_monthly_growth,
-            .st-key-market_dashboard_chart_technical_skill_demand,
-            .st-key-market_dashboard_chart_high_salary_skills,
-            .st-key-market_dashboard_chart_data_engineer_skill_demand {{
-                opacity: 0;
-                translate: -45px 0;
-                animation: chart-scroll-reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
-                animation-timeline: view();
-                animation-range: entry 12% entry 32%;
-                will-change: opacity, translate;
-            }}
-        }}
         @keyframes chart-scroll-reveal {{
             from {{
                 opacity: 0;
-                translate: -45px 0;
+                transform: translate3d(-60px, 0, 0);
             }}
             to {{
                 opacity: 1;
-                translate: 0 0;
+                transform: translate3d(0, 0, 0);
             }}
         }}
         @media (hover: hover) and (pointer: fine) {{
@@ -1424,9 +1405,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .st-key-market_dashboard_chart_technical_skill_demand:hover,
             .st-key-market_dashboard_chart_high_salary_skills:hover,
             .st-key-market_dashboard_chart_data_engineer_skill_demand:hover {{
-                transform: translateY(-3px) scale(1.008);
+                transform: translate3d(0, -2px, 0) scale(1.006);
                 border-color: rgba(37, 99, 235, 0.40);
-                box-shadow: 0 16px 34px rgba(37, 99, 235, 0.14);
+                box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12);
                 position: relative;
                 z-index: 2;
             }}

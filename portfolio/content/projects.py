@@ -21,7 +21,7 @@ PROJECTS = [
         "key_metric": "1.6M+ job postings",
         "cover_image": "",
         "demo_url": "",
-        "repository_url": "https://github.com/peteratef-git/job-market-data-engineering",
+        "repository_url": "https://github.com/peteratef-eng/job-market-data-engineering",
         "case_study_page": "views/project_overview.py",
         "dashboard_page": "views/market_dashboard.py",
         "sort_order": 1,

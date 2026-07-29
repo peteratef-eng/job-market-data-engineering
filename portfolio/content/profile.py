@@ -20,7 +20,7 @@ PROFILE = {
     "location": "Egypt",
     "email": "petterattef763@gmail.com",
     "linkedin_url": "https://www.linkedin.com/in/peter-atef-eng/",
-    "github_url": "https://github.com/peteratef-git/job-market-data-engineering",
+    "github_url": "https://github.com/peteratef-eng/job-market-data-engineering",
     "resume_path": "assets/resume/Peter Resume 2026.pdf",
     "availability": "Open to Junior Data Engineer opportunities.",
 }

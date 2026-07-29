@@ -46,7 +46,7 @@ with cards[2]:
     with st.container(border=True):
         st.subheader("GitHub")
         st.caption("Explore my repositories")
-        st.markdown("peteratef-git")
+        st.markdown("peteratef-eng")
         if github_url.startswith("https://"):
             st.link_button("View GitHub", github_url, type="primary")
 

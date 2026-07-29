@@ -7,11 +7,9 @@ from pathlib import Path
 import streamlit as st
 
 from dashboard.data_loader import load_dashboard_data, load_dashboard_metadata
-from dashboard.transformations import remote_salary, salary_coverage, top_skills
 from portfolio.content.profile import PROFILE
 from portfolio.content.projects import PROJECTS
 from portfolio.content.skills import SKILL_GROUPS
-from ui.components import footer
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -44,26 +42,8 @@ sample_skill_rows = metadata.get("sample_job_skills_rows")
 
 try:
     jobs, skills, _ = load_dashboard_data()
-    salary_label, salary_records, total_records = salary_coverage(jobs)
-    remote_salary_data = remote_salary(jobs).set_index("remote_status")
-    remote_avg = int(remote_salary_data.loc["Remote", "avg_salary"]) if "Remote" in remote_salary_data.index else None
-    onsite_avg = int(remote_salary_data.loc["Onsite", "avg_salary"]) if "Onsite" in remote_salary_data.index else None
-    top_skill_rows = top_skills(skills, 4)
-    python_postings = int(top_skill_rows.loc[top_skill_rows["clean_skill_name"].eq("python"), "postings"].iloc[0])
-    sql_postings = int(top_skill_rows.loc[top_skill_rows["clean_skill_name"].eq("sql"), "postings"].iloc[0])
-    aws_postings = int(top_skill_rows.loc[top_skill_rows["clean_skill_name"].eq("aws"), "postings"].iloc[0])
-    azure_postings = int(top_skill_rows.loc[top_skill_rows["clean_skill_name"].eq("azure"), "postings"].iloc[0])
     unique_skills = int(skills["clean_skill_name"].dropna().nunique())
 except Exception:
-    salary_label = "Verified"
-    salary_records = None
-    total_records = sample_rows
-    remote_avg = None
-    onsite_avg = None
-    python_postings = None
-    sql_postings = None
-    aws_postings = None
-    azure_postings = None
     unique_skills = None
 
 preview_image = asset_data_uri(PROJECT_PREVIEW_PATH, "image/png")
@@ -77,24 +57,6 @@ hero_photo_markup = (
     if hero_photo_src
     else '<div class="hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>'
 )
-
-skill_pipeline_steps = [
-    ("ETL Pipelines", "Flow"),
-    ("Python / Pandas", "Clean"),
-    ("SQL / PostgreSQL", "Store"),
-    ("dbt", "Model"),
-    ("Analytics-Ready Data", "Deliver"),
-]
-skill_pipeline_markup = ""
-for index, (label, detail) in enumerate(skill_pipeline_steps, start=1):
-    skill_pipeline_markup += (
-        f'<div class="hero-skill-node hero-skill-node-{index}" tabindex="0">'
-        f'<span>{html.escape(label)}</span>'
-        f'<small>{html.escape(detail)}</small>'
-        '</div>'
-    )
-    if index < len(skill_pipeline_steps):
-        skill_pipeline_markup += f'<div class="hero-skill-connector hero-skill-connector-{index}" aria-hidden="true"></div>'
 
 proof_items = [
     ("Source Job Postings", format_int(source_rows)),
@@ -142,11 +104,6 @@ st.markdown(
                 <a class="portfolio-button portfolio-button-primary hero-primary-action" href="/project_overview">EXPLORE MY PROJECT<span aria-hidden="true">-&gt;</span></a>
                 <a class="portfolio-button" href="{resume_link}"{resume_attr}>DOWNLOAD RESUME</a>
                 <a class="portfolio-button portfolio-button-quiet" href="/contact">CONTACT ME</a>
-            </div>
-            <div class="hero-skill-pipeline" aria-label="Skills pipeline from ETL pipelines to analytics-ready data">
-                <span class="hero-skill-packet hero-skill-packet-1" aria-hidden="true"></span>
-                <span class="hero-skill-packet hero-skill-packet-2" aria-hidden="true"></span>
-                {skill_pipeline_markup}
             </div>
         </div>
         <div class="profile-terminal">
@@ -232,48 +189,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-live_pipeline_steps = [
-    ("Raw Job Data", "Source job postings and skill relationships.", "DB"),
-    ("Python Cleaning", "Normalize fields and prepare reliable records.", "PY"),
-    ("PostgreSQL", "Store structured, query-ready data.", "SQL"),
-    ("dbt Models", "Build staging and analytical marts.", "dbt"),
-    ("Data Quality", "Validate relationships, calculations, and outputs.", "QA"),
-    ("Market Dashboard", "Deliver trusted insights for interactive analysis.", "UI"),
-]
-live_pipeline_markup = ""
-for index, (title, body, icon) in enumerate(live_pipeline_steps, start=1):
-    live_pipeline_markup += (
-        f'<div class="home-pipeline-stage pipeline-stage-{index}" tabindex="0">'
-        '<div class="home-pipeline-stage-inner">'
-        f'<div class="home-pipeline-icon">{html.escape(icon)}</div>'
-        f'<div class="home-pipeline-stage-name">{html.escape(title)}</div>'
-        f'<div class="home-pipeline-stage-copy">{html.escape(body)}</div>'
-        '</div>'
-        '</div>'
-    )
-    if index < len(live_pipeline_steps):
-        live_pipeline_markup += (
-            f'<div class="home-pipeline-connector pipeline-connector-{index}" aria-hidden="true">'
-            '<span class="home-pipeline-particle"></span>'
-            '<span class="home-pipeline-particle home-pipeline-particle-2"></span>'
-            '<span class="home-pipeline-particle home-pipeline-particle-3"></span>'
-            '</div>'
-        )
-
-st.markdown(
-    f"""
-    <section class="home-section home-pipeline-section">
-        <div class="section-eyebrow">Data Pipeline</div>
-        <h2>From Raw Data to Reliable Insights</h2>
-        <p class="home-section-copy">A visual overview of how raw job-market records are cleaned, modeled, validated, and delivered for analysis.</p>
-        <div class="home-pipeline-track" aria-label="Data pipeline flow">
-            {live_pipeline_markup}
-        </div>
-    </section>
-    """,
-    unsafe_allow_html=True,
-)
-
 repository_button = (
     f'<a class="portfolio-button" href="{html.escape(project["repository_url"])}" rel="noopener noreferrer">VIEW ON GITHUB</a>'
     if project.get("repository_url")
@@ -295,7 +210,6 @@ st.markdown(
             <div class="featured-meta">
                 <span>{html.escape(tech_stack)}</span>
                 <span>{format_int(source_rows)} source postings</span>
-                <span>{format_int(sample_rows)} hosted records</span>
             </div>
             <div class="hero-actions">
                 <a class="portfolio-button portfolio-button-primary" href="/market_dashboard">VIEW LIVE PROJECT</a>
@@ -310,53 +224,10 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-pipeline_steps = [
-    ("Raw Job Data", "CSV source tables for postings, companies, skills, and job-skill relationships."),
-    ("Python Cleaning", "Pandas prepares the hosted sample and normalized dashboard-ready files."),
-    ("PostgreSQL", "Relational warehouse tables support structured modeling work."),
-    ("dbt Models", "Staging, intermediate, and mart models organize analysis-ready data."),
-    ("Data Quality", "SQL checks validate counts, keys, joins, duplicates, and calculations."),
-    ("Market Dashboard", "Streamlit presents KPIs, filters, and project insights for review."),
-]
-pipeline_markup = "".join(
-    (
-        '<div class="pipeline-step-card" tabindex="0">'
-        f'<div class="pipeline-step-name">{html.escape(title)}</div>'
-        f'<div class="section-copy">{html.escape(body)}</div>'
-        '</div>'
-    )
-    for title, body in pipeline_steps
-)
-st.markdown(
-    f"""
-    <section class="home-section">
-        <div class="section-eyebrow">Project Journey</div>
-        <h2>From Raw Records to Market Intelligence</h2>
-        <div class="pipeline-step-grid">{pipeline_markup}</div>
-    </section>
-    """,
-    unsafe_allow_html=True,
-)
-
-remote_text = (
-    f"Remote roles average ${remote_avg:,} versus ${onsite_avg:,} onsite among salary-covered records."
-    if remote_avg and onsite_avg
-    else "Remote and onsite salary comparisons are available where salary data exists."
-)
-skills_text = (
-    f"Python appears in {python_postings:,} postings and SQL appears in {sql_postings:,} postings in the hosted sample."
-    if python_postings and sql_postings
-    else "Python and SQL are core demand signals in the hosted skill sample."
-)
-cloud_text = (
-    f"AWS appears in {aws_postings:,} postings and Azure appears in {azure_postings:,} postings in the hosted sample."
-    if aws_postings and azure_postings
-    else "Cloud platforms are tracked as part of the technical skill demand model."
-)
 insight_cards = [
-    ("Remote Salary Signal", remote_text, f"Salary coverage: {salary_label} ({salary_records:,} of {total_records:,} records)." if salary_records and total_records else "Salary coverage is tracked in the dashboard."),
-    ("Python and SQL Demand", skills_text, "These are the top two skills in the hosted skill-demand sample."),
-    ("Cloud Skill Demand", cloud_text, "Cloud skills are modeled from unique posting-skill relationships."),
+    ("Market Dashboard", "Interactive filters, KPIs, and charts make the hosted job-market sample easy to explore.", "Live analysis is available in the Market Dashboard."),
+    ("Data Pipeline", "The technical workflow is documented separately for inputs, processing, storage, modeling, tests, and outputs.", "Detailed architecture lives on the Data Pipeline page."),
+    ("Data Quality", "Validation checks document row counts, keys, joins, calculations, and dbt schema tests.", "Known limitations are called out on the Data Quality page."),
 ]
 insight_markup = "".join(
     (
@@ -397,5 +268,3 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
-footer()

@@ -22,7 +22,6 @@ with badge_cols[0]:
 with badge_cols[1]:
     st.caption(f"Based in {PROFILE['location']}")
 
-footer_email_url = PROFILE["mailto_url"]
 send_email_url = PROFILE["mailto_url"]
 linkedin_url = PROFILE.get("linkedin_url", "")
 github_url = PROFILE.get("github_url", "")
@@ -33,7 +32,6 @@ with cards[0]:
         f"""
         <div class="contact-hover-card" tabindex="0">
             <div class="section-title">Email</div>
-            <div class="section-copy">Send me a message</div>
             <p>{html.escape(PROFILE["email"])}</p>
             <a class="contact-card-action" href="{html.escape(send_email_url)}">Send Email</a>
         </div>
@@ -51,7 +49,6 @@ with cards[1]:
         f"""
         <div class="contact-hover-card" tabindex="0">
             <div class="section-title">LinkedIn</div>
-            <div class="section-copy">Connect professionally</div>
             <p>peter-atef-eng</p>
             {linkedin_action}
         </div>
@@ -69,7 +66,6 @@ with cards[2]:
         f"""
         <div class="contact-hover-card" tabindex="0">
             <div class="section-title">GitHub</div>
-            <div class="section-copy">Explore my repositories</div>
             <p>peteratef-eng</p>
             {github_action}
         </div>
@@ -90,18 +86,3 @@ if resume_path.exists():
         """,
         unsafe_allow_html=True,
     )
-
-st.divider()
-st.markdown("Peter - Junior Data Engineer")
-st.caption(PROFILE["availability"])
-
-footer_links = st.columns([0.12, 0.16, 0.14, 0.58])
-with footer_links[0]:
-    if footer_email_url:
-        st.markdown(f'<a class="portfolio-button" href="{html.escape(footer_email_url)}">Email</a>', unsafe_allow_html=True)
-with footer_links[1]:
-    if linkedin_url.startswith("https://"):
-        st.markdown(f'<a class="portfolio-button" href="{html.escape(linkedin_url)}">LinkedIn</a>', unsafe_allow_html=True)
-with footer_links[2]:
-    if github_url.startswith("https://"):
-        st.markdown(f'<a class="portfolio-button" href="{html.escape(github_url)}">GitHub</a>', unsafe_allow_html=True)

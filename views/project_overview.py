@@ -9,7 +9,6 @@ from ui.components import (
     app_header,
     badge_row,
     challenge_points,
-    footer,
     metric_status_card,
     pipeline_visual,
     purpose_cards,
@@ -83,5 +82,3 @@ for index in range(0, len(ordered_sections), 2):
     for col, title in zip(cols, ordered_sections[index : index + 2]):
         with col:
             section_card(title, sections[title], class_name="job-intelligence-hover-card")
-
-footer()

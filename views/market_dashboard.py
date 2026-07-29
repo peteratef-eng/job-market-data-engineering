@@ -464,11 +464,15 @@ active_filters = active_filter_count(
     salary_range,
     selected_dates,
 )
-status_label = "No active filters" if active_filters == 0 else f"{active_filters} active filters"
+status_text = (
+    "No active filters &middot; Showing full hosted sample"
+    if active_filters == 0
+    else f"{len(filtered_jobs):,} results &middot; {active_filters} active filters"
+)
 status_cols = st.columns([1, 0.22])
 with status_cols[0]:
     st.markdown(
-        f'<div class="dashboard-results-status">{len(filtered_jobs):,} results &middot; {html.escape(status_label)}</div>',
+        f'<div class="dashboard-results-status">{status_text}</div>',
         unsafe_allow_html=True,
     )
 with status_cols[1]:

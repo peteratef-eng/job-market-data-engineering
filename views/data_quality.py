@@ -6,7 +6,6 @@ from pathlib import Path
 import streamlit as st
 
 from dashboard.data_loader import load_dashboard_data
-from ui.components import footer
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -35,6 +34,8 @@ jobs_without_skills = int((~jobs["job_id"].isin(skills["job_id"])).sum())
 schema_text = SCHEMA_PATH.read_text(encoding="utf-8") if SCHEMA_PATH.exists() else ""
 dbt_test_count = schema_text.count("- not_null") + schema_text.count("- unique")
 audit_text = AUDIT_PATH.read_text(encoding="utf-8") if AUDIT_PATH.exists() else ""
+readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
+dbt_result = "11/11 passed" if "11/11 tests passed" in audit_text or "11/11 tests passed" in readme_text else "Result not stored"
 
 checks = [
     {
@@ -91,13 +92,46 @@ checks = [
         "body": "Uses not-null and unique tests for key staging models.",
         "metrics": [
             ("Schema tests defined", f"{dbt_test_count:,}" if dbt_test_count else "Not stored"),
-            ("README result", "11/11 passed" if "11/11 tests passed" in audit_text or "11/11 tests passed" in (ROOT / "README.md").read_text(encoding="utf-8") else "Result not stored"),
+            ("README result", dbt_result),
         ],
         "caption": "A reliable dbt execution timestamp is not stored in the repository.",
     },
 ]
 
-for index, check in enumerate(checks):
+summary_items = [
+    ("Overall Status", "Passed with one documented limitation"),
+    ("Row Counts", "Matched"),
+    ("Key Integrity", "Implemented"),
+    ("Join Completeness", "Passed with documented limitation"),
+    ("Calculation Methods", "4 of 5 passed"),
+    ("dbt Schema Tests", dbt_result),
+]
+summary_markup = "".join(
+    (
+        '<div class="quality-summary-item">'
+        f'<span>{html.escape(label)}</span>'
+        f'<strong>{html.escape(value)}</strong>'
+        '</div>'
+    )
+    for label, value in summary_items
+)
+st.markdown(
+    f"""
+    <section class="quality-summary-panel">
+        <div class="section-eyebrow">Quality Summary</div>
+        <div class="quality-summary-grid">{summary_markup}</div>
+    </section>
+    <section class="quality-limitation-callout">
+        <div class="section-title">Known Limitation</div>
+        <p>{duplicate_clean_skills:,} duplicate cleaned skill-name relationships were detected.</p>
+        <p>The underlying job_id / skill_id bridge relationships remain unique.</p>
+        <p>Dashboard formulas passed independent validation.</p>
+    </section>
+    """,
+    unsafe_allow_html=True,
+)
+
+for check in checks:
     metrics_markup = "".join(
         (
             '<div class="quality-metric">'
@@ -107,17 +141,15 @@ for index, check in enumerate(checks):
         )
         for label, value in check["metrics"]
     )
-    st.markdown(
-        f"""
-        <div class="data-quality-hover-card" tabindex="0">
-            <div class="section-title">{html.escape(check["title"])}</div>
-            <div class="project-meta">{html.escape(check["state"])}</div>
-            <div class="section-copy">{html.escape(check["body"])}</div>
-            <div class="quality-metric-grid">{metrics_markup}</div>
-            <div class="muted">{html.escape(check["caption"])}</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-footer()
+    with st.expander(check["title"], expanded=check["title"] in {"Row Count Validation", "Key Integrity"}):
+        st.markdown(
+            f"""
+            <div class="data-quality-detail">
+                <div class="project-meta">{html.escape(check["state"])}</div>
+                <div class="section-copy">{html.escape(check["body"])}</div>
+                <div class="quality-metric-grid">{metrics_markup}</div>
+                <div class="muted">{html.escape(check["caption"])}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )

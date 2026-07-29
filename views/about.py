@@ -5,7 +5,7 @@ import streamlit as st
 from dashboard.data_loader import load_dashboard_metadata
 from portfolio.content.profile import PROFILE
 from portfolio.content.projects import PROJECTS
-from ui.components import footer, section_card
+from ui.components import section_card
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -43,5 +43,3 @@ with cols[1]:
         evidence.append(f"{sample_rows:,} hosted sample postings")
     evidence.append(", ".join(project["technologies"][:6]))
     section_card("Project Evidence", " | ".join(evidence), class_name="about-hover-card")
-
-footer()

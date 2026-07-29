@@ -3,7 +3,7 @@ from __future__ import annotations
 import streamlit as st
 
 from portfolio.content.projects import PROJECTS
-from ui.components import footer, project_card
+from ui.components import project_card
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -21,5 +21,3 @@ else:
         for column, project in zip(columns, projects[row_start : row_start + 2]):
             with column:
                 project_card(project, actions=True)
-
-footer()

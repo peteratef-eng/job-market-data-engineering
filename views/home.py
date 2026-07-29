@@ -118,17 +118,28 @@ st.markdown(
                 {skill_pipeline_markup}
             </div>
         </div>
-        <div class="hero-profile-card">
-            <div class="hero-profile-image-wrap">
+        <article class="hero-profile-card">
+            <div class="hero-profile-media">
+                <div class="hero-profile-image-accent" aria-hidden="true"></div>
                 {hero_photo_markup}
             </div>
-            <div class="hero-profile-content">
-                <div class="hero-profile-name">Peter Atef</div>
-                <div class="hero-profile-role">Junior Data Engineer</div>
-                <div class="profile-availability"><span class="profile-status-dot"></span>Open to Junior Data Engineer Opportunities</div>
-                <div class="hero-profile-location">{html.escape(PROFILE["location"])}</div>
+            <div class="hero-profile-identity">
+                <div class="hero-profile-heading">
+                    <h2 class="hero-profile-name">Peter Atef</h2>
+                    <p class="hero-profile-role">Junior Data Engineer</p>
+                </div>
+                <div class="hero-profile-meta">
+                    <span class="hero-profile-status">
+                        <span class="hero-profile-status-dot" aria-hidden="true"></span>
+                        Open to opportunities
+                    </span>
+                    <span class="hero-profile-location">
+                        <span class="hero-profile-location-icon" aria-hidden="true"></span>
+                        {html.escape(PROFILE["location"])}
+                    </span>
+                </div>
             </div>
-        </div>
+        </article>
     </section>
     <section class="project-proof-console" aria-label="Project evidence">
         <div class="proof-console-status">PROJECT EVIDENCE</div>

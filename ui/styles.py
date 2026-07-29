@@ -775,87 +775,137 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             position: relative;
             justify-self: center;
             width: min(100%, 360px);
-            padding: .85rem;
-            border: 1px solid rgba(37, 99, 235, .20);
+            padding: 0;
+            border: 1px solid rgba(37, 99, 235, .24);
             border-radius: 24px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.86));
-            box-shadow: 0 12px 30px rgba(15, 23, 42, .10);
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.88));
+            box-shadow: 0 16px 38px rgba(15, 23, 42, .09);
             overflow: hidden;
             transform: translateZ(0);
             transform-origin: center center;
             transition:
-                transform 240ms ease,
-                border-color 240ms ease,
-                box-shadow 240ms ease;
+                transform 220ms ease,
+                border-color 220ms ease,
+                box-shadow 220ms ease;
         }}
         .hero-profile-card:focus-within {{
             border-color: rgba(37, 99, 235, 0.72);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
         }}
-        .hero-profile-image-wrap {{
+        .hero-profile-media {{
             position: relative;
-            aspect-ratio: 1;
-            border-radius: 18px;
-            overflow: hidden;
-            background: rgba(239, 246, 255, .76);
+            padding: 14px 14px 0;
+            background: transparent;
+        }}
+        .hero-profile-image-accent {{
+            position: absolute;
+            inset: 6px 24px auto;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.45), rgba(6, 182, 212, 0.35), transparent);
+            pointer-events: none;
         }}
         .hero-profile-image {{
             display: block;
             width: 100%;
-            height: 100%;
+            aspect-ratio: 4 / 4.15;
             object-fit: cover;
-            object-position: center top;
+            object-position: center 28%;
             border-radius: 18px;
-            border: 1px solid rgba(37, 99, 235, .16);
-            box-shadow: var(--shadow);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            background: #E2E8F0;
+            box-shadow: none;
             transform: none;
             animation: none;
         }}
-        .hero-profile-content {{
-            padding: .9rem .15rem .05rem;
-            text-align: center;
+        .hero-profile-identity {{
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 20px 22px 18px;
+            text-align: left;
+            border-top: 1px solid rgba(148, 163, 184, 0.16);
+        }}
+        .hero-profile-heading {{
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
         }}
         .hero-profile-name {{
-            color: var(--text);
-            font-size: 1.12rem;
-            font-weight: 850;
-            line-height: 1.15;
-            transition: color 240ms ease;
+            margin: 0;
+            color: #0F172A;
+            font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+            font-weight: 750;
+            line-height: 1.2;
         }}
         .hero-profile-role {{
-            color: var(--accent);
-            font-size: .92rem;
-            font-weight: 800;
-            margin-top: .16rem;
+            margin: 0;
+            color: #2563EB;
+            font-size: .96rem;
+            font-weight: 650;
+            line-height: 1.35;
         }}
-        .profile-availability {{
+        .hero-profile-meta {{
             display: flex;
             align-items: center;
-            gap: .42rem;
-            color: var(--tag-text);
-            font-size: .74rem;
-            font-weight: 750;
-            margin-top: .55rem;
-            line-height: 1.25;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 8px;
         }}
-        .profile-status-dot {{
-            width: .5rem;
-            height: .5rem;
-            flex: 0 0 auto;
+        .hero-profile-status {{
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            min-height: 30px;
+            padding: 5px 10px;
+            border: 1px solid rgba(16, 185, 129, 0.22);
             border-radius: 999px;
-            background: var(--positive);
-            box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 20%, transparent);
-            animation: profile-status-dot-pulse 2.8s ease-in-out infinite;
+            background: rgba(16, 185, 129, 0.08);
+            color: #047857;
+            font-size: .76rem;
+            font-weight: 650;
+            line-height: 1.2;
+            white-space: nowrap;
+        }}
+        .hero-profile-status-dot {{
+            width: 7px;
+            height: 7px;
+            flex: 0 0 7px;
+            border-radius: 50%;
+            background: #10B981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
         }}
         .hero-profile-location {{
-            color: var(--muted);
-            font-size: .72rem;
-            font-weight: 700;
-            margin-top: .35rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 30px;
+            padding: 5px 10px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            border-radius: 999px;
+            background: rgba(248, 250, 252, 0.92);
+            color: #475569;
+            font-size: .76rem;
+            font-weight: 600;
+            line-height: 1.2;
+            white-space: nowrap;
         }}
-        @keyframes profile-status-dot-pulse {{
-            0%, 100% {{ box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 18%, transparent); }}
-            50% {{ box-shadow: 0 0 0 5px color-mix(in srgb, var(--positive) 10%, transparent), 0 0 12px color-mix(in srgb, var(--positive) 32%, transparent); }}
+        .hero-profile-location-icon {{
+            position: relative;
+            width: 9px;
+            height: 9px;
+            flex: 0 0 9px;
+            border: 1.6px solid currentColor;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+        }}
+        .hero-profile-location-icon::after {{
+            content: "";
+            position: absolute;
+            inset: 2px;
+            border-radius: 999px;
+            background: currentColor;
         }}
         .project-proof-console {{
             position: relative;
@@ -1143,14 +1193,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 box-shadow: 0 10px 22px rgba(37, 99, 235, 0.12);
             }}
             .hero-profile-card:hover {{
-                transform: translateY(-6px) scale(1.025);
-                border-color: rgba(37, 99, 235, 0.70);
+                transform: translateY(-5px) scale(1.018);
+                border-color: rgba(37, 99, 235, 0.58);
                 box-shadow:
-                    0 20px 44px rgba(37, 99, 235, 0.18),
-                    0 0 0 3px rgba(6, 182, 212, 0.06);
-            }}
-            .hero-profile-card:hover .hero-profile-name {{
-                color: var(--accent);
+                    0 22px 46px rgba(37, 99, 235, 0.16),
+                    0 0 0 3px rgba(6, 182, 212, 0.05);
             }}
             .home-profile-info-card:hover,
             .home-profile-info-card:focus-within {{
@@ -1361,9 +1408,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             grid-template-columns: minmax(0, 1fr) auto;
             align-items: center;
             gap: 1rem;
-            padding: .78rem 1rem;
+            height: auto;
+            padding: .8rem 1rem;
             margin-top: 1rem;
             min-height: 0;
+        }}
+        .contact-hover-card.contact-resume-strip {{
+            min-height: 0;
+            height: auto;
         }}
         .contact-resume-strip .section-copy {{
             font-size: .88rem;
@@ -1703,8 +1755,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             margin-top: .55rem;
             padding-left: 1.2rem;
         }}
-        .about-hover-card,
-        .experience-hover-card {{
+        .about-hover-card {{
             transform-origin: center;
             outline: none;
             overflow: visible;
@@ -1716,16 +1767,29 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 background-color 220ms ease,
                 box-shadow 220ms ease;
         }}
-        .about-hover-card .section-title,
-        .experience-hover-card .project-title {{
+        .experience-hover-card {{
+            transform-origin: center;
+            outline: none;
+            overflow: visible;
+            margin-top: .85rem;
+            margin-bottom: 1.15rem;
+            transition:
+                transform 230ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 230ms ease,
+                background-color 230ms ease,
+                box-shadow 230ms ease;
+        }}
+        .about-hover-card .section-title {{
             transform-origin: left center;
             transition: color 220ms ease, font-size 220ms ease, transform 220ms ease;
         }}
+        .experience-hover-card .project-title {{
+            transform-origin: left center;
+            transition: color 230ms ease;
+        }}
         @media (hover: hover) and (pointer: fine) {{
             .about-hover-card:hover,
-            .about-hover-card:focus-within,
-            .experience-hover-card:hover,
-            .experience-hover-card:focus-within {{
+            .about-hover-card:focus-within {{
                 transform: translateY(-3px) scale(1.018);
                 border-color: rgba(37, 99, 235, 0.45);
                 background-color: rgba(239, 246, 255, 0.65);
@@ -1733,12 +1797,23 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 position: relative;
                 z-index: 2;
             }}
+            .experience-hover-card:hover,
+            .experience-hover-card:focus-within {{
+                transform: translateY(-4px) scale(1.015);
+                border-color: rgba(37, 99, 235, 0.38);
+                background-color: rgba(239, 246, 255, 0.62);
+                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.13);
+                position: relative;
+                z-index: 2;
+            }}
             .about-hover-card:hover .section-title,
-            .about-hover-card:focus-within .section-title,
+            .about-hover-card:focus-within .section-title {{
+                color: var(--accent);
+                font-size: 1.12rem;
+            }}
             .experience-hover-card:hover .project-title,
             .experience-hover-card:focus-within .project-title {{
                 color: var(--accent);
-                font-size: 1.12rem;
             }}
         }}
         @media (hover: none), (pointer: coarse), (max-width: 760px) {{
@@ -1766,10 +1841,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .about-hover-card:hover .section-title,
             .about-hover-card:focus-within .section-title {{
                 font-size: 1.08rem;
-            }}
-            .experience-hover-card:hover .project-title,
-            .experience-hover-card:focus-within .project-title {{
-                font-size: 1.12rem;
             }}
         }}
         [data-testid="stVerticalBlockBorderWrapper"] {{
@@ -1853,7 +1924,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             transition: color 240ms ease;
         }}
         .job-intelligence-hover-card,
-        .contact-hover-card,
         .data-quality-hover-card,
         .home-about-card,
         .home-skill-card,
@@ -1874,9 +1944,20 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 box-shadow 250ms ease;
         }}
         .contact-hover-card {{
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transform-origin: center;
+            overflow: visible;
             padding: 1rem;
             margin: .7rem 0 1rem;
             min-height: 210px;
+            transition:
+                transform 230ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 230ms ease,
+                background-color 230ms ease,
+                box-shadow 230ms ease;
         }}
         .data-quality-hover-card {{
             padding: 1rem;
@@ -1981,7 +2062,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .job-intelligence-hover-card .section-title,
         .job-intelligence-hover-card strong,
-        .contact-hover-card .section-title,
         .data-quality-hover-card .section-title,
         .home-about-card .section-title,
         .home-skill-card .section-title,
@@ -1989,6 +2069,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-project-card h2,
         .pipeline-step-card .pipeline-step-name {{
             transition: color 250ms ease;
+        }}
+        .contact-hover-card .section-title {{
+            transition: color 230ms ease;
         }}
         .contact-card-action {{
             display: inline-flex;
@@ -2056,8 +2139,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .job-intelligence-hover-card:hover,
             .job-intelligence-hover-card:focus-within,
-            .contact-hover-card:hover,
-            .contact-hover-card:focus-within,
             .data-quality-hover-card:hover,
             .data-quality-hover-card:focus-within,
             .home-about-card:hover,
@@ -2077,12 +2158,26 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 position: relative;
                 z-index: 2;
             }}
+            .contact-hover-card:hover,
+            .contact-hover-card:focus-within {{
+                transform: translateY(-4px) scale(1.015);
+                border-color: rgba(37, 99, 235, 0.38);
+                background-color: rgba(239, 246, 255, 0.62);
+                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.13);
+                position: relative;
+                z-index: 2;
+            }}
+            .contact-hover-card.contact-resume-strip:hover,
+            .contact-hover-card.contact-resume-strip:focus-within {{
+                transform: translateY(-2px);
+                border-color: rgba(37, 99, 235, 0.38);
+                background-color: rgba(239, 246, 255, 0.62);
+                box-shadow: 0 12px 24px rgba(37, 99, 235, 0.11);
+            }}
             .job-intelligence-hover-card:hover .section-title,
             .job-intelligence-hover-card:focus-within .section-title,
             .job-intelligence-hover-card:hover strong,
             .job-intelligence-hover-card:focus-within strong,
-            .contact-hover-card:hover .section-title,
-            .contact-hover-card:focus-within .section-title,
             .data-quality-hover-card:hover .section-title,
             .data-quality-hover-card:focus-within .section-title,
             .home-about-card:hover .section-title,
@@ -2095,6 +2190,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .featured-project-card:focus-within h2,
             .pipeline-step-card:hover .pipeline-step-name,
             .pipeline-step-card:focus-within .pipeline-step-name {{
+                color: var(--accent);
+            }}
+            .contact-hover-card:hover .section-title,
+            .contact-hover-card:focus-within .section-title {{
                 color: var(--accent);
             }}
         }}
@@ -2685,8 +2784,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-profile-card {{
                 width: min(100%, 310px);
                 margin: .35rem auto 0;
-                padding: .75rem;
                 transform: none;
+            }}
+            .hero-profile-identity {{
+                text-align: center;
+                padding: 16px 16px 15px;
+            }}
+            .hero-profile-meta {{
+                justify-content: center;
             }}
             .project-proof-console {{
                 margin-top: .85rem;
@@ -2917,7 +3022,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .hero-profile-card,
             .hero-profile-card:hover,
-            .profile-status-dot,
+            .hero-profile-status-dot,
             .project-proof-console,
             .proof-console-item,
             .hero-skill-node,

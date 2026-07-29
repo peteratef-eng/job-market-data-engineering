@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import base64
+import html
 from pathlib import Path
 
 import streamlit as st
@@ -27,45 +29,67 @@ github_url = PROFILE.get("github_url", "")
 
 cards = st.columns(3)
 with cards[0]:
-    with st.container(border=True, key="contact_email_card"):
-        st.markdown('<span class="contact-hover-card"></span>', unsafe_allow_html=True)
-        st.subheader("Email")
-        st.caption("Send me a message")
-        st.markdown(PROFILE["email"])
-        st.link_button("Send Email", send_email_url, type="primary")
+    st.markdown(
+        f"""
+        <div class="contact-hover-card" tabindex="0">
+            <div class="section-title">Email</div>
+            <div class="section-copy">Send me a message</div>
+            <p>{html.escape(PROFILE["email"])}</p>
+            <a class="contact-card-action" href="{html.escape(send_email_url)}" target="_blank" rel="noreferrer">Send Email</a>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 with cards[1]:
-    with st.container(border=True, key="contact_linkedin_card"):
-        st.markdown('<span class="contact-hover-card"></span>', unsafe_allow_html=True)
-        st.subheader("LinkedIn")
-        st.caption("Connect professionally")
-        st.markdown("peter-atef-eng")
-        if linkedin_url.startswith("https://"):
-            st.link_button("View LinkedIn", linkedin_url, type="primary")
+    linkedin_action = (
+        f'<a class="contact-card-action" href="{html.escape(linkedin_url)}" target="_blank" rel="noreferrer">View LinkedIn</a>'
+        if linkedin_url.startswith("https://")
+        else ""
+    )
+    st.markdown(
+        f"""
+        <div class="contact-hover-card" tabindex="0">
+            <div class="section-title">LinkedIn</div>
+            <div class="section-copy">Connect professionally</div>
+            <p>peter-atef-eng</p>
+            {linkedin_action}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 with cards[2]:
-    with st.container(border=True, key="contact_github_card"):
-        st.markdown('<span class="contact-hover-card"></span>', unsafe_allow_html=True)
-        st.subheader("GitHub")
-        st.caption("Explore my repositories")
-        st.markdown("peteratef-eng")
-        if github_url.startswith("https://"):
-            st.link_button("View GitHub", github_url, type="primary")
+    github_action = (
+        f'<a class="contact-card-action" href="{html.escape(github_url)}" target="_blank" rel="noreferrer">View GitHub</a>'
+        if github_url.startswith("https://")
+        else ""
+    )
+    st.markdown(
+        f"""
+        <div class="contact-hover-card" tabindex="0">
+            <div class="section-title">GitHub</div>
+            <div class="section-copy">Explore my repositories</div>
+            <p>peteratef-eng</p>
+            {github_action}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 resume_path = Path(PROFILE["resume_path"])
 if resume_path.exists():
-    with st.container(border=True, key="contact_resume_card"):
-        st.markdown('<span class="contact-hover-card"></span>', unsafe_allow_html=True)
-        st.subheader("Want the full overview?")
-        st.markdown("Download my resume for experience, skills, and project details.")
-        with resume_path.open("rb") as resume_file:
-            st.download_button(
-                "Download Resume",
-                resume_file,
-                file_name="Peter_Atef_Resume_2026.pdf",
-                mime="application/pdf",
-                type="primary",
-            )
+    encoded_resume = base64.b64encode(resume_path.read_bytes()).decode("ascii")
+    st.markdown(
+        f"""
+        <div class="contact-hover-card" tabindex="0">
+            <div class="section-title">Want the full overview?</div>
+            <div class="section-copy">Download my resume for experience, skills, and project details.</div>
+            <a class="contact-card-action" href="data:application/pdf;base64,{encoded_resume}" download="Peter_Atef_Resume_2026.pdf">Download Resume</a>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 st.divider()
 st.markdown("Peter - Junior Data Engineer")

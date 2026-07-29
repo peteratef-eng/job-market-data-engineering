@@ -546,8 +546,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             transition: color 240ms ease;
         }}
         .job-intelligence-hover-card,
-        [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card),
-        [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card) {{
+        .contact-hover-card,
+        .data-quality-hover-card {{
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
             transform-origin: center;
             overflow: visible;
             will-change: transform;
@@ -557,15 +561,60 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 background-color 250ms ease,
                 box-shadow 250ms ease;
         }}
-        .contact-hover-card,
+        .contact-hover-card {{
+            padding: 1rem;
+            margin: .7rem 0 1rem;
+            min-height: 210px;
+        }}
         .data-quality-hover-card {{
-            display: none;
+            padding: 1rem;
+            margin: .7rem 0 1rem;
         }}
         .job-intelligence-hover-card .section-title,
         .job-intelligence-hover-card strong,
-        [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card) h3,
-        [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card) h3 {{
+        .contact-hover-card .section-title,
+        .data-quality-hover-card .section-title {{
             transition: color 250ms ease;
+        }}
+        .contact-card-action {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.45rem;
+            padding: .58rem .85rem;
+            border-radius: 10px;
+            border: 1px solid var(--accent);
+            background: var(--accent);
+            color: var(--on-accent) !important;
+            font-weight: 600;
+            line-height: 1.15;
+            text-decoration: none;
+            box-shadow: var(--shadow-accent);
+            margin-top: .55rem;
+        }}
+        .quality-metric-grid {{
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: .7rem;
+            margin: .8rem 0 .65rem;
+        }}
+        .quality-metric {{
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface-2);
+            padding: .65rem .7rem;
+        }}
+        .quality-metric-label {{
+            color: var(--muted);
+            font-size: .78rem;
+            line-height: 1.25;
+        }}
+        .quality-metric-value {{
+            color: var(--text);
+            font-size: 1.22rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-top: .22rem;
         }}
         @media (hover: hover) and (pointer: fine) {{
             .home-card:hover,
@@ -593,10 +642,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .job-intelligence-hover-card:hover,
             .job-intelligence-hover-card:focus-within,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):hover,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):focus-within,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):hover,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):focus-within {{
+            .contact-hover-card:hover,
+            .contact-hover-card:focus-within,
+            .data-quality-hover-card:hover,
+            .data-quality-hover-card:focus-within {{
                 transform: translateY(-5px) scale(1.015);
                 border-color: rgba(37, 99, 235, 0.45);
                 background-color: rgba(239, 246, 255, 0.75);
@@ -608,10 +657,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .job-intelligence-hover-card:focus-within .section-title,
             .job-intelligence-hover-card:hover strong,
             .job-intelligence-hover-card:focus-within strong,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):hover h3,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):focus-within h3,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):hover h3,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):focus-within h3 {{
+            .contact-hover-card:hover .section-title,
+            .contact-hover-card:focus-within .section-title,
+            .data-quality-hover-card:hover .section-title,
+            .data-quality-hover-card:focus-within .section-title {{
                 color: var(--accent);
             }}
         }}
@@ -620,8 +669,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .skill-card,
             .pipeline-card,
             .job-intelligence-hover-card,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card),
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card) {{
+            .contact-hover-card,
+            .data-quality-hover-card {{
                 transform: none;
                 will-change: auto;
             }}
@@ -921,6 +970,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         @media (max-width: 860px) {{
             .dataset-metrics {{ grid-template-columns: 1fr; }}
+            .quality-metric-grid {{ grid-template-columns: 1fr; }}
         }}
         @media (max-width: 560px) {{
             .block-container {{ padding: .35rem 1rem 2.5rem; }}
@@ -949,10 +999,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .pipeline-card:focus-within,
             .job-intelligence-hover-card:hover,
             .job-intelligence-hover-card:focus-within,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):hover,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.contact-hover-card):focus-within,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):hover,
-            [data-testid="stVerticalBlockBorderWrapper"]:has(.data-quality-hover-card):focus-within {{
+            .contact-hover-card:hover,
+            .contact-hover-card:focus-within,
+            .data-quality-hover-card:hover,
+            .data-quality-hover-card:focus-within {{
                 transform: none;
             }}
         }}

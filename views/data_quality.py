@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html
 from pathlib import Path
 
 import streamlit as st
@@ -97,15 +98,26 @@ checks = [
 ]
 
 for index, check in enumerate(checks):
-    with st.container(border=True, key=f"data_quality_check_card_{index}"):
-        st.markdown('<span class="data-quality-hover-card"></span>', unsafe_allow_html=True)
-        st.subheader(check["title"])
-        st.caption(check["state"])
-        st.markdown(check["body"])
-        columns = st.columns(min(3, len(check["metrics"])))
-        for index, (label, value) in enumerate(check["metrics"]):
-            with columns[index % len(columns)]:
-                st.metric(label, value)
-        st.caption(check["caption"])
+    metrics_markup = "".join(
+        (
+            '<div class="quality-metric">'
+            f'<div class="quality-metric-label">{html.escape(label)}</div>'
+            f'<div class="quality-metric-value">{html.escape(value)}</div>'
+            '</div>'
+        )
+        for label, value in check["metrics"]
+    )
+    st.markdown(
+        f"""
+        <div class="data-quality-hover-card" tabindex="0">
+            <div class="section-title">{html.escape(check["title"])}</div>
+            <div class="project-meta">{html.escape(check["state"])}</div>
+            <div class="section-copy">{html.escape(check["body"])}</div>
+            <div class="quality-metric-grid">{metrics_markup}</div>
+            <div class="muted">{html.escape(check["caption"])}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 footer()

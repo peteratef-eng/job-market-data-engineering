@@ -1167,8 +1167,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 box-shadow: 0 0 0 4px color-mix(in srgb, var(--positive) 24%, transparent), 0 0 14px color-mix(in srgb, var(--positive) 45%, transparent);
             }}
         }}
-        .pipeline-step-grid,
-        .case-study-links {{
+        .pipeline-step-grid {{
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: .85rem;
@@ -1206,15 +1205,129 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .home-contact-cta .contact-cta-actions {{
             margin-top: 0;
         }}
-        .case-study-links {{
-            grid-template-columns: repeat(4, max-content);
-            justify-content: start;
+        .project-overview-header {{
+            margin: .25rem 0 1.85rem;
+            max-width: 920px;
+        }}
+        .project-overview-badges {{
+            display: flex;
+            flex-wrap: wrap;
             align-items: center;
-            margin: 1rem 0 0;
+            gap: .5rem;
+            margin-bottom: 1rem;
+        }}
+        .project-verified-badge,
+        .project-scale-badge {{
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 30px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: .76rem;
+            font-weight: 750;
+            line-height: 1.1;
+        }}
+        .project-verified-badge {{
+            border: 1px solid rgba(16, 185, 129, 0.24);
+            background: rgba(16, 185, 129, 0.08);
+            color: #047857;
+        }}
+        .project-verified-badge span {{
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: #10B981;
+        }}
+        .project-scale-badge {{
+            border: 1px solid rgba(37, 99, 235, 0.20);
+            background: rgba(239, 246, 255, 0.82);
+            color: var(--data-blue);
+        }}
+        .project-overview-header h1 {{
+            color: var(--text);
+            font-size: clamp(2rem, 5vw, 3.7rem);
+            line-height: 1.02;
+            font-weight: 760;
+            margin: 0;
+        }}
+        .project-overview-header p {{
+            color: var(--text-2);
+            max-width: 760px;
+            font-size: 1.02rem;
+            line-height: 1.65;
+            margin: 1.05rem 0 0;
+        }}
+        .project-tech-stack {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 1rem;
+        }}
+        .project-tech-pill {{
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 9px;
+            border: 1px solid rgba(37, 99, 235, 0.16);
+            border-radius: 999px;
+            background: rgba(239, 246, 255, 0.68);
+            color: var(--data-blue);
+            font-size: .78rem;
+            font-weight: 650;
+            line-height: 1.15;
+        }}
+        .project-header-actions {{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-top: 1rem;
+        }}
+        .project-header-secondary-action {{
+            background: transparent;
+        }}
+        .project-evidence-compact {{
+            display: inline-grid;
+            grid-template-columns: repeat(2, auto);
+            align-items: center;
+            gap: 28px;
+            margin-top: 1.5rem;
+            padding: 12px 16px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.82);
+        }}
+        .project-evidence-item {{
+            display: flex;
+            align-items: baseline;
+            gap: 7px;
+            min-width: 0;
+        }}
+        .project-evidence-item strong {{
+            color: var(--text);
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }}
+        .project-evidence-item span {{
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 700;
+            white-space: nowrap;
         }}
         .project-overview-architecture-link {{
+            display: inline-flex;
+            align-items: center;
+            color: var(--data-blue);
+            font-size: .9rem;
+            font-weight: 750;
+            text-decoration: none;
             width: fit-content;
-            margin: .1rem 0 .8rem;
+            margin: .25rem 0 .95rem;
+        }}
+        .project-overview-architecture-link:hover {{
+            color: var(--accent-hover);
+            text-decoration: underline;
         }}
         .pipeline-info-grid {{
             display: grid;
@@ -1691,111 +1804,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             gap: 1rem;
             padding: .95rem 1rem;
             margin: 1rem 0;
-        }}
-        .data-lineage {{
-            --lineage-source: #64748B;
-            --lineage-model: #2563EB;
-            --lineage-quality: #10B981;
-            --lineage-serve: #4F46E5;
-            --lineage-flow: #06B6D4;
-            display: inline-flex;
-            flex-direction: column;
-            gap: 8px;
-            max-width: 100%;
-            margin: .25rem 0 1.1rem;
-            padding: 12px 14px;
-            border: 1px solid rgba(148, 163, 184, 0.24);
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.78);
-            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
-        }}
-        .data-lineage-heading {{
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: .48rem;
-        }}
-        .data-lineage-label {{
-            color: #64748B;
-            font-size: .68rem;
-            font-weight: 700;
-            letter-spacing: .10em;
-            text-transform: uppercase;
-        }}
-        .data-lineage-context {{
-            color: #334155;
-            font-size: .72rem;
-            font-weight: 700;
-        }}
-        .data-lineage-badge {{
-            color: #92400E;
-            background: rgba(245, 158, 11, .12);
-            border: 1px solid rgba(245, 158, 11, .24);
-            border-radius: 999px;
-            padding: .15rem .42rem;
-            font-size: .66rem;
-            font-weight: 750;
-        }}
-        .data-lineage-stages {{
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: .36rem;
-        }}
-        .data-lineage-stage {{
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            min-height: 30px;
-            padding: 5px 8px;
-            border: 1px solid transparent;
-            border-radius: 9px;
-            color: #334155;
-            font-size: .72rem;
-            font-weight: 650;
-            line-height: 1.15;
-            white-space: nowrap;
-        }}
-        .data-lineage-icon {{
-            width: 15px;
-            height: 15px;
-            flex: 0 0 auto;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 1.9;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }}
-        .data-lineage-stage--source {{
-            color: var(--lineage-source);
-            background: rgba(100, 116, 139, 0.08);
-        }}
-        .data-lineage-stage--model {{
-            color: var(--lineage-model);
-            background: rgba(37, 99, 235, 0.08);
-        }}
-        .data-lineage-stage--quality {{
-            color: var(--lineage-quality);
-            background: rgba(16, 185, 129, 0.09);
-        }}
-        .data-lineage-stage--serve {{
-            color: var(--lineage-serve);
-            background: rgba(79, 70, 229, 0.08);
-        }}
-        .data-lineage-stage.is-active {{
-            border-color: currentColor;
-            box-shadow: 0 5px 12px rgba(15, 23, 42, 0.07);
-        }}
-        .data-lineage-connector {{
-            color: rgba(6, 182, 212, 0.72);
-            font-size: .78rem;
-            font-weight: 800;
-            line-height: 1;
-        }}
-        .data-lineage-caption {{
-            color: #64748B;
-            font-size: .72rem;
-            line-height: 1.35;
         }}
         .dataset-metrics {{
             display: grid;
@@ -2712,9 +2720,28 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-about-grid,
             .home-skills-grid,
             .pipeline-step-grid,
-            .case-study-links,
             .pipeline-info-grid {{
                 grid-template-columns: 1fr;
+            }}
+            .project-overview-header {{
+                margin-bottom: 1.45rem;
+            }}
+            .project-header-actions {{
+                gap: .65rem;
+            }}
+            .project-header-actions .portfolio-button {{
+                flex: 1 1 13rem;
+            }}
+            .project-evidence-compact {{
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: .6rem;
+                width: 100%;
+            }}
+            .project-evidence-item {{
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
             }}
             .contact-cta {{
                 grid-template-columns: 1fr;
@@ -2731,28 +2758,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .contact-resume-strip .contact-card-action {{
                 width: 100%;
-            }}
-            .data-lineage {{
-                width: 100%;
-                padding: 11px 12px;
-            }}
-            .data-lineage-stages {{
-                display: grid;
-                grid-template-columns: 1fr;
-                align-items: start;
-                gap: .34rem;
-            }}
-            .data-lineage-stage {{
-                width: 100%;
-                justify-content: flex-start;
-            }}
-            .data-lineage-connector {{
-                padding-left: 13px;
-                transform: rotate(90deg);
-                transform-origin: left center;
-            }}
-            .data-lineage-caption {{
-                display: none;
             }}
             .st-key-dashboard_filter_panel {{
                 padding: .8rem .85rem .35rem;

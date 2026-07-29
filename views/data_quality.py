@@ -6,7 +6,6 @@ from pathlib import Path
 import streamlit as st
 
 from dashboard.data_loader import load_dashboard_data
-from ui.components import data_lineage
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -14,7 +13,6 @@ from ui.theme import current_theme
 inject_global_styles(current_theme())
 
 st.title("Data Quality")
-data_lineage("quality", limitation=True)
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / "job_market_dbt" / "models" / "staging" / "schema.yml"

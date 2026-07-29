@@ -17,7 +17,7 @@ from dashboard.transformations import (
     top_counts,
     top_skills,
 )
-from ui.components import app_header, chart_card, data_lineage
+from ui.components import app_header, chart_card
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -228,7 +228,6 @@ app_header(
     "Explore hiring demand, salaries, technical skills, remote-work patterns, and market trends across the hosted job-posting sample.",
     "dashboard",
 )
-data_lineage("dashboard")
 initialize_market_dashboard_chart_reveal()
 
 

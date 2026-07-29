@@ -263,6 +263,147 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             background: var(--border);
             margin: .75rem 0 .35rem;
         }}
+        .sidebar-projects-label {{
+            margin: 1.1rem 0 .5rem;
+            color: var(--text-2);
+            font-size: .66rem;
+            font-weight: 750;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+        }}
+        .sidebar-projects-shell {{
+            width: 100%;
+            max-width: 100%;
+            margin: 0 0 .5rem;
+        }}
+        .sidebar-project-card {{
+            position: relative;
+            width: 100%;
+            min-height: 92px;
+            padding: .75rem;
+            border: 1px solid rgba(37, 99, 235, .18);
+            border-radius: 11px;
+            background:
+                radial-gradient(circle at 85% 15%, rgba(6, 182, 212, .09), transparent 38%),
+                linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(239, 246, 255, .86));
+            box-shadow: 0 8px 20px rgba(15, 23, 42, .06);
+            overflow: hidden;
+            transition:
+                transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 220ms ease,
+                box-shadow 220ms ease;
+        }}
+        .sidebar-project-card-active {{
+            border-color: rgba(37, 99, 235, .34);
+            background:
+                radial-gradient(circle at 85% 15%, rgba(6, 182, 212, .12), transparent 38%),
+                rgba(239, 246, 255, .92);
+        }}
+        .sidebar-project-card-header {{
+            display: flex;
+            align-items: center;
+            gap: .62rem;
+            min-width: 0;
+        }}
+        .sidebar-project-icon {{
+            width: 30px;
+            height: 30px;
+            flex: 0 0 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            color: var(--data-blue);
+            background: rgba(37, 99, 235, .10);
+            border: 1px solid rgba(37, 99, 235, .16);
+        }}
+        .sidebar-project-icon svg {{
+            width: 17px;
+            height: 17px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }}
+        .sidebar-project-copy {{
+            min-width: 0;
+        }}
+        .sidebar-project-name {{
+            color: var(--text);
+            font-size: .86rem;
+            font-weight: 800;
+            line-height: 1.16;
+            overflow-wrap: normal;
+        }}
+        .sidebar-project-type {{
+            color: var(--muted);
+            font-size: .7rem;
+            font-weight: 650;
+            line-height: 1.2;
+            margin-top: .18rem;
+        }}
+        .sidebar-project-mini-lineage {{
+            position: relative;
+            display: grid;
+            grid-template-columns: 10px minmax(0, 1fr) 10px minmax(0, 1fr) 10px;
+            align-items: center;
+            gap: .25rem;
+            height: 22px;
+            margin-top: .62rem;
+            opacity: .82;
+        }}
+        .sidebar-mini-stage {{
+            position: relative;
+            z-index: 3;
+            width: 10px;
+            height: 10px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, .95);
+            border: 1px solid rgba(37, 99, 235, .26);
+        }}
+        .sidebar-mini-mart {{
+            border-color: rgba(6, 182, 212, .35);
+            background: rgba(236, 254, 255, .95);
+        }}
+        .sidebar-mini-track {{
+            position: relative;
+            z-index: 1;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(37, 99, 235, .24), rgba(6, 182, 212, .26));
+        }}
+        .sidebar-mini-packet {{
+            position: absolute;
+            z-index: 2;
+            left: 3px;
+            top: 50%;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #2563eb;
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, .10),
+                0 0 7px rgba(37, 99, 235, .26);
+            transform: translate3d(0, -50%, 0);
+            animation: sidebar-mini-packet-flow 3.8s linear infinite;
+            pointer-events: none;
+        }}
+        @keyframes sidebar-mini-packet-flow {{
+            0% {{ left: 3px; opacity: 0; background: #2563eb; }}
+            8% {{ opacity: 1; }}
+            72% {{ opacity: 1; background: #2563eb; }}
+            88% {{ opacity: 1; background: #06b6d4; }}
+            96%, 100% {{ left: calc(100% - 8px); opacity: 0; background: #06b6d4; }}
+        }}
+        @media (hover: hover) and (pointer: fine) {{
+            .sidebar-project-card:hover,
+            .sidebar-project-card:focus-within {{
+                transform: translateY(-2px);
+                border-color: rgba(37, 99, 235, .38);
+                box-shadow: 0 10px 24px rgba(37, 99, 235, .10);
+            }}
+        }}
 
         .page-header {{
             position: relative;
@@ -1040,25 +1181,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-project-card {{
             position: relative;
             display: grid;
-            grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
-            gap: 1.25rem;
+            grid-template-columns: minmax(0, 1.05fr) minmax(560px, 1.15fr);
+            gap: clamp(2rem, 3vw, 3.25rem);
             align-items: center;
             padding: 1.25rem;
             margin: 1.4rem 0 2rem;
             overflow: visible;
-        }}
-        .featured-project-card::before {{
-            content: "";
-            position: absolute;
-            inset: 1rem auto auto 1rem;
-            width: 8.5rem;
-            height: 4.5rem;
-            opacity: .045;
-            pointer-events: none;
-            background:
-                linear-gradient(var(--data-navy) 1px, transparent 1px),
-                linear-gradient(90deg, var(--data-navy) 1px, transparent 1px);
-            background-size: 100% 1.1rem, 2.7rem 100%;
         }}
         .featured-project-copy h2,
         .home-section h2,
@@ -1117,9 +1245,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .featured-lineage-preview {{
             position: relative;
-            min-height: 360px;
-            height: 100%;
-            padding: .9rem;
+            width: 100%;
+            min-height: 0;
+            height: auto;
+            padding: 1rem 1rem 1.1rem;
+            border-radius: 16px;
             overflow: hidden;
         }}
         .featured-lineage-header {{
@@ -1128,8 +1258,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: .65rem;
-            margin-bottom: .75rem;
+            gap: 1rem;
+            margin-bottom: .9rem;
         }}
         .featured-lineage-header span {{
             color: var(--data-blue);
@@ -1139,25 +1269,33 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             text-transform: uppercase;
         }}
         .featured-lineage-header small {{
+            display: inline-flex;
+            align-items: center;
+            gap: .38rem;
             color: var(--muted);
             font-size: .72rem;
             font-weight: 700;
             white-space: nowrap;
         }}
+        .featured-lineage-header small span {{
+            width: .42rem;
+            height: .42rem;
+            border-radius: 999px;
+            background: var(--data-green);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, .10);
+        }}
         .featured-lineage-canvas {{
             position: relative;
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr) minmax(0, 1.12fr);
-            gap: 1.15rem;
-            min-height: 300px;
+            display: block;
+            height: clamp(330px, 27vw, 390px);
             isolation: isolate;
         }}
         .featured-lineage-svg {{
             position: absolute;
-            inset: 1.5rem .2rem .2rem;
+            inset: 0;
             z-index: 1;
-            width: calc(100% - .4rem);
-            height: calc(100% - 1.7rem);
+            width: 100%;
+            height: 100%;
             pointer-events: none;
         }}
         .featured-lineage-svg marker path {{
@@ -1165,40 +1303,55 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .featured-lineage-connector {{
             fill: none;
-            stroke: rgba(148, 163, 184, .42);
-            stroke-width: 2;
+            stroke: rgba(100, 116, 139, .25);
+            stroke-width: 1.5;
             marker-end: url(#featured-lineage-arrow);
         }}
         .featured-lineage-route {{
             fill: none;
-            stroke: rgba(37, 99, 235, .62);
-            stroke-width: 3;
+            stroke: url(#featuredLineageFlowGradient);
+            stroke-width: 2.4;
             stroke-linecap: round;
-            stroke-dasharray: 72 420;
-            stroke-dashoffset: 420;
+            stroke-dasharray: 82 460;
+            stroke-dashoffset: 460;
             opacity: 0;
             animation: featured-lineage-route-flow 6s linear infinite;
         }}
         .featured-lineage-route-skill {{
-            stroke: rgba(6, 182, 212, .66);
-            animation-delay: 1.2s;
+            animation-delay: 3s;
         }}
         .featured-lineage-packet {{
-            fill: var(--data-cyan);
+            fill: var(--data-blue);
             stroke: #FFFFFF;
             stroke-width: 2;
-            filter: drop-shadow(0 2px 5px rgba(37, 99, 235, .24));
+            filter: drop-shadow(0 0 4px rgba(37, 99, 235, .34)) drop-shadow(0 0 8px rgba(37, 99, 235, .18));
         }}
         .featured-lineage-packet-skill {{
-            fill: #10B981;
+            fill: var(--data-cyan);
         }}
         .featured-lineage-column {{
-            position: relative;
+            position: absolute;
             z-index: 3;
             display: flex;
             flex-direction: column;
-            gap: .48rem;
+            gap: .52rem;
             min-width: 0;
+        }}
+        .featured-lineage-column-staging {{
+            left: 0;
+            top: 0;
+            width: 29%;
+        }}
+        .featured-lineage-column-intermediate {{
+            left: 34%;
+            top: 50%;
+            width: 31%;
+            transform: translateY(-50%);
+        }}
+        .featured-lineage-column-mart {{
+            right: 0;
+            top: 0;
+            width: 34%;
         }}
         .featured-lineage-column-title {{
             color: var(--muted);
@@ -1208,43 +1361,50 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             text-transform: uppercase;
             margin-bottom: .12rem;
         }}
-        .featured-lineage-column-intermediate {{
-            justify-content: center;
-        }}
         .featured-lineage-node {{
             position: relative;
             z-index: 4;
             display: grid;
             grid-template-columns: auto minmax(0, 1fr);
-            column-gap: .42rem;
-            row-gap: .12rem;
+            column-gap: .48rem;
+            row-gap: .22rem;
             align-items: center;
-            min-height: 42px;
-            padding: .44rem .5rem;
+            min-height: 52px;
+            padding: .55rem .65rem;
             border: 1px solid rgba(148, 163, 184, .28);
-            border-radius: 10px;
+            border-radius: 11px;
             background: rgba(255, 255, 255, .95);
             color: var(--text);
-            box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
+            box-shadow: 0 7px 16px rgba(15, 23, 42, .045);
             transition:
                 transform 180ms ease,
                 border-color 180ms ease,
+                background-color 180ms ease,
                 box-shadow 180ms ease;
         }}
-        .featured-lineage-node span:not(.featured-lineage-node-icon) {{
+        .featured-lineage-node-intermediate {{
+            min-height: 60px;
+        }}
+        .featured-lineage-node-mart {{
+            min-height: 54px;
+        }}
+        .featured-lineage-model-name {{
             min-width: 0;
             color: var(--text);
-            font-size: clamp(.68rem, 1vw, .76rem);
-            font-weight: 800;
+            font-size: clamp(.72rem, .9vw, .84rem);
+            font-weight: 750;
             line-height: 1.12;
-            overflow-wrap: anywhere;
+            overflow-wrap: normal;
+            word-break: normal;
+            hyphens: none;
         }}
-        .featured-lineage-node small {{
+        .featured-lineage-model-type {{
             grid-column: 2;
             color: var(--muted);
-            font-size: .55rem;
+            margin-top: .22rem;
+            font-size: .57rem;
             font-weight: 800;
-            letter-spacing: .06em;
+            letter-spacing: .07em;
             line-height: 1;
         }}
         .featured-lineage-node-icon {{
@@ -1278,29 +1438,31 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-lineage-node-skill-intermediate,
         .featured-lineage-node-skill-mart {{
             animation: featured-lineage-node-skill 6s ease-in-out infinite;
+            animation-delay: 3s;
         }}
         @media (hover: hover) and (pointer: fine) {{
             .featured-lineage-node:hover {{
                 transform: translateY(-2px);
                 border-color: rgba(37, 99, 235, 0.45);
+                background-color: rgba(239, 246, 255, .98);
                 box-shadow: 0 8px 20px rgba(37, 99, 235, 0.12);
             }}
         }}
         @keyframes featured-lineage-route-flow {{
-            0%, 8% {{ opacity: 0; stroke-dashoffset: 420; }}
+            0%, 8% {{ opacity: 0; stroke-dashoffset: 460; }}
             12%, 72% {{ opacity: 1; }}
             82% {{ opacity: 0; stroke-dashoffset: 0; }}
             100% {{ opacity: 0; stroke-dashoffset: 0; }}
         }}
         @keyframes featured-lineage-node-job {{
-            0%, 9%, 82%, 100% {{ border-color: rgba(148, 163, 184, .28); box-shadow: 0 8px 18px rgba(15, 23, 42, .05); }}
-            14%, 32% {{ border-color: rgba(37, 99, 235, .45); box-shadow: 0 8px 18px rgba(37, 99, 235, .11); }}
-            48%, 72% {{ border-color: rgba(6, 182, 212, .38); box-shadow: 0 8px 18px rgba(6, 182, 212, .10); }}
+            0%, 10%, 88%, 100% {{ border-color: rgba(148, 163, 184, .28); background-color: rgba(255, 255, 255, .95); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); }}
+            16%, 34% {{ border-color: rgba(37, 99, 235, .55); background-color: rgba(239, 246, 255, .98); box-shadow: 0 8px 20px rgba(37, 99, 235, .14); }}
+            58%, 76% {{ border-color: rgba(6, 182, 212, .55); background-color: rgba(236, 254, 255, .96); box-shadow: 0 8px 20px rgba(6, 182, 212, .12); }}
         }}
         @keyframes featured-lineage-node-skill {{
-            0%, 22%, 92%, 100% {{ border-color: rgba(148, 163, 184, .28); box-shadow: 0 8px 18px rgba(15, 23, 42, .05); }}
-            28%, 48% {{ border-color: rgba(37, 99, 235, .42); box-shadow: 0 8px 18px rgba(37, 99, 235, .10); }}
-            62%, 84% {{ border-color: rgba(16, 185, 129, .38); box-shadow: 0 8px 18px rgba(16, 185, 129, .10); }}
+            0%, 10%, 88%, 100% {{ border-color: rgba(148, 163, 184, .28); background-color: rgba(255, 255, 255, .95); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); }}
+            16%, 34% {{ border-color: rgba(37, 99, 235, .55); background-color: rgba(239, 246, 255, .98); box-shadow: 0 8px 20px rgba(37, 99, 235, .14); }}
+            58%, 76% {{ border-color: rgba(6, 182, 212, .55); background-color: rgba(236, 254, 255, .96); box-shadow: 0 8px 20px rgba(6, 182, 212, .12); }}
         }}
         .home-section {{
             margin: 1.55rem 0;
@@ -3091,17 +3253,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 grid-template-columns: 1fr;
                 gap: .65rem;
                 min-height: 0;
+                height: auto;
             }}
             .featured-lineage-svg {{
                 display: none;
             }}
             .featured-lineage-column {{
+                position: relative;
+                left: auto;
+                right: auto;
+                top: auto;
+                width: 100%;
+                transform: none;
                 gap: .42rem;
                 padding-left: .75rem;
                 border-left: 2px solid rgba(6, 182, 212, .26);
-            }}
-            .featured-lineage-column-intermediate {{
-                justify-content: flex-start;
             }}
             .featured-lineage-column-title {{
                 margin-bottom: .05rem;
@@ -3237,6 +3403,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .about-hover-card:focus-within,
             .experience-hover-card:hover,
             .experience-hover-card:focus-within,
+            .sidebar-project-card,
+            .sidebar-project-card:hover,
+            .sidebar-project-card:focus-within,
+            .sidebar-mini-packet,
             .st-key-home_profile_photo_shell,
             .st-key-home_profile_photo_shell img,
             .st-key-home_profile_info_card,
@@ -3339,6 +3509,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 opacity: 0 !important;
             }}
             .featured-lineage-packet {{
+                display: none;
+            }}
+            .sidebar-mini-packet {{
                 display: none;
             }}
             .hero-skill-packet-track {{

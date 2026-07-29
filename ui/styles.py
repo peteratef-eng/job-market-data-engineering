@@ -427,9 +427,45 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-size: 3rem;
             font-weight: 800;
         }}
-        .st-key-home_profile_card {{
+        .st-key-home_profile_photo_shell,
+        .st-key-home_profile_info_card {{
             width: min(100%, 360px);
-            margin: 1rem auto 0;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: visible;
+        }}
+        .st-key-home_profile_photo_shell {{
+            margin-top: 1rem;
+            transform: none;
+            animation: none;
+        }}
+        .st-key-home_profile_info_card {{
+            margin-top: .75rem;
+        }}
+        .st-key-home_profile_photo_shell [data-testid="stImage"] {{
+            margin: 0 auto;
+            transform: none;
+            animation: none;
+        }}
+        .st-key-home_profile_photo_shell img {{
+            display: block;
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 18px;
+            border: 1px solid rgba(37, 99, 235, .18);
+            box-shadow: 0 18px 38px rgba(37, 99, 235, .12);
+            transform: none;
+            animation: none;
+        }}
+        .st-key-home_profile_photo_shell:hover,
+        .st-key-home_profile_photo_shell:focus-within,
+        .st-key-home_profile_photo_shell:hover img,
+        .st-key-home_profile_photo_shell [data-testid="stImage"]:hover img {{
+            transform: none;
+        }}
+        .home-profile-info-card {{
             padding: 1rem 1rem 1.05rem;
             border: 1px solid rgba(37, 99, 235, .22);
             border-radius: 18px;
@@ -440,42 +476,28 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             overflow: hidden;
             transform-origin: center center;
             transition:
-                transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 260ms ease,
-                box-shadow 260ms ease;
+                transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 250ms ease,
+                box-shadow 250ms ease;
         }}
-        .st-key-home_profile_card [data-testid="stImage"] {{
-            margin: 0 auto;
-        }}
-        .st-key-home_profile_card img {{
-            display: block;
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            object-position: center top;
-            border-radius: 14px;
-            border: 1px solid rgba(37, 99, 235, .16);
-            box-shadow: var(--shadow);
-            transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-        }}
-        .home-profile-copy {{
+        .home-profile-info-card {{
             text-align: center;
-            padding-top: .85rem;
         }}
-        .home-profile-name {{
+        .home-profile-info-name {{
             color: var(--text);
             font-size: 1.22rem;
             line-height: 1.2;
             font-weight: 800;
-            transition: color 260ms ease;
+            transition: color 250ms ease;
         }}
-        .home-profile-role {{
-            color: var(--text-2);
+        .home-profile-info-role {{
+            color: var(--accent);
             font-size: .94rem;
+            font-weight: 700;
             line-height: 1.35;
             margin-top: .18rem;
         }}
-        .home-profile-status {{
+        .home-profile-info-status {{
             display: inline-flex;
             align-items: center;
             gap: .38rem;
@@ -488,13 +510,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 700;
             margin-top: .7rem;
         }}
-        .home-profile-status span {{
+        .home-profile-info-status span {{
             width: .48rem;
             height: .48rem;
             border-radius: 999px;
             background: var(--positive);
             box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 20%, transparent);
-            transition: box-shadow 260ms ease;
+            transition: box-shadow 250ms ease;
         }}
         .project-evidence-strip {{
             display: grid;
@@ -725,18 +747,27 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             box-shadow: 0 0 12px rgba(37, 99, 235, .44);
             transform: translate(-50%, -50%);
             animation: home-pipeline-particle-flow 10s linear infinite;
+            animation-delay: var(--flow-delay, 0s);
         }}
-        .pipeline-stage-1,
-        .pipeline-connector-1 .home-pipeline-particle {{ animation-delay: 0s; }}
-        .pipeline-stage-2,
-        .pipeline-connector-2 .home-pipeline-particle {{ animation-delay: 1.65s; }}
-        .pipeline-stage-3,
-        .pipeline-connector-3 .home-pipeline-particle {{ animation-delay: 3.3s; }}
-        .pipeline-stage-4,
-        .pipeline-connector-4 .home-pipeline-particle {{ animation-delay: 4.95s; }}
-        .pipeline-stage-5,
-        .pipeline-connector-5 .home-pipeline-particle {{ animation-delay: 6.6s; }}
+        .home-pipeline-particle-2 {{
+            animation-delay: calc(var(--flow-delay, 0s) + .22s);
+            opacity: .86;
+        }}
+        .home-pipeline-particle-3 {{
+            animation-delay: calc(var(--flow-delay, 0s) + .44s);
+            opacity: .72;
+        }}
+        .pipeline-stage-1 {{ animation-delay: 0s; }}
+        .pipeline-stage-2 {{ animation-delay: 1.65s; }}
+        .pipeline-stage-3 {{ animation-delay: 3.3s; }}
+        .pipeline-stage-4 {{ animation-delay: 4.95s; }}
+        .pipeline-stage-5 {{ animation-delay: 6.6s; }}
         .pipeline-stage-6 {{ animation-delay: 8.25s; }}
+        .pipeline-connector-1 {{ --flow-delay: 0s; }}
+        .pipeline-connector-2 {{ --flow-delay: 1.65s; }}
+        .pipeline-connector-3 {{ --flow-delay: 3.3s; }}
+        .pipeline-connector-4 {{ --flow-delay: 4.95s; }}
+        .pipeline-connector-5 {{ --flow-delay: 6.6s; }}
         @keyframes home-pipeline-stage-cycle {{
             0%, 16%, 100% {{
                 opacity: .82;
@@ -771,22 +802,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
         }}
         @media (hover: hover) and (pointer: fine) {{
-            .st-key-home_profile_card:hover,
-            .st-key-home_profile_card:focus-within {{
-                transform: translateY(-6px) scale(1.025);
+            .home-profile-info-card:hover,
+            .home-profile-info-card:focus-within {{
+                transform: translateY(-5px) scale(1.025);
                 border-color: rgba(37, 99, 235, 0.50);
-                box-shadow: 0 20px 44px rgba(37, 99, 235, 0.18);
+                box-shadow: 0 18px 38px rgba(37, 99, 235, 0.17);
             }}
-            .st-key-home_profile_card:hover img,
-            .st-key-home_profile_card:focus-within img {{
-                transform: scale(1.015);
-            }}
-            .st-key-home_profile_card:hover .home-profile-name,
-            .st-key-home_profile_card:focus-within .home-profile-name {{
+            .home-profile-info-card:hover .home-profile-info-name,
+            .home-profile-info-card:focus-within .home-profile-info-name {{
                 color: var(--accent);
             }}
-            .st-key-home_profile_card:hover .home-profile-status span,
-            .st-key-home_profile_card:focus-within .home-profile-status span {{
+            .home-profile-info-card:hover .home-profile-info-status span,
+            .home-profile-info-card:focus-within .home-profile-info-status span {{
                 box-shadow: 0 0 0 4px color-mix(in srgb, var(--positive) 24%, transparent), 0 0 14px color-mix(in srgb, var(--positive) 45%, transparent);
             }}
             .home-pipeline-stage:hover,
@@ -1599,8 +1626,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 order: -1;
                 width: min(100%, 300px);
             }}
-            .st-key-home_profile_card {{
+            .st-key-home_profile_photo_shell,
+            .st-key-home_profile_info_card {{
                 width: min(100%, 300px);
+                transform: none;
+            }}
+            .home-profile-info-card {{
                 transform: none;
             }}
             .home-pipeline-stage {{
@@ -1699,10 +1730,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .about-hover-card:focus-within,
             .experience-hover-card:hover,
             .experience-hover-card:focus-within,
-            .st-key-home_profile_card,
-            .st-key-home_profile_card:hover,
-            .st-key-home_profile_card:focus-within,
-            .st-key-home_profile_card img,
+            .st-key-home_profile_photo_shell,
+            .st-key-home_profile_photo_shell img,
+            .st-key-home_profile_info_card,
+            .home-profile-info-card,
+            .home-profile-info-card:hover,
+            .home-profile-info-card:focus-within,
             .home-pipeline-stage,
             .home-pipeline-stage:hover,
             .home-pipeline-stage:focus-within,
@@ -1755,7 +1788,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 scale: 1 !important;
             }}
             .home-pipeline-stage,
-            .st-key-home_profile_card {{
+            .home-profile-info-card,
+            .st-key-home_profile_photo_shell,
+            .st-key-home_profile_info_card {{
                 opacity: 1 !important;
             }}
             .home-pipeline-particle {{

@@ -93,18 +93,19 @@ with hero_cols[0]:
     )
 
 with hero_cols[1]:
-    with st.container(key="home_profile_card"):
+    with st.container(key="home_profile_photo_shell"):
         if HERO_PHOTO_PATH.exists():
             st.markdown('<span class="sr-only">Portrait of Peter Atef, Junior Data Engineer</span>', unsafe_allow_html=True)
             st.image(str(HERO_PHOTO_PATH), width="stretch")
         else:
             st.markdown('<div class="hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>', unsafe_allow_html=True)
+    with st.container(key="home_profile_info_card"):
         st.markdown(
             """
-            <div class="home-profile-copy">
-                <div class="home-profile-name">Peter Atef</div>
-                <div class="home-profile-role">Junior Data Engineer</div>
-                <div class="home-profile-status"><span></span>Open to Opportunities</div>
+            <div class="home-profile-info-card" tabindex="0">
+                <div class="home-profile-info-name">Peter Atef</div>
+                <div class="home-profile-info-role">Junior Data Engineer</div>
+                <div class="home-profile-info-status"><span></span>Open to Junior Data Engineer Opportunities</div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -207,6 +208,8 @@ for index, (title, body, icon) in enumerate(live_pipeline_steps, start=1):
         live_pipeline_markup += (
             f'<div class="home-pipeline-connector pipeline-connector-{index}" aria-hidden="true">'
             '<span class="home-pipeline-particle"></span>'
+            '<span class="home-pipeline-particle home-pipeline-particle-2"></span>'
+            '<span class="home-pipeline-particle home-pipeline-particle-3"></span>'
             '</div>'
         )
 

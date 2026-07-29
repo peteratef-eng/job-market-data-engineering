@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import base64
 import html
-from urllib.parse import quote
 from pathlib import Path
 
 import streamlit as st
@@ -21,17 +20,7 @@ KPI_ICONS = {
     "Salary coverage": "%",
 }
 
-def mailto_url(subject: str | None = None) -> str:
-    email = PROFILE.get("email", "")
-    if not email:
-        return ""
-    url = f"mailto:{email}"
-    if subject:
-        url += f"?subject={quote(subject)}"
-    return url
-
-
-FOOTER_EMAIL_URL = mailto_url()
+FOOTER_EMAIL_URL = PROFILE["mailto_url"]
 PROFILE_PHOTO_PATH = Path(__file__).resolve().parents[1] / "assets" / "profile" / "peter.jpg"
 
 

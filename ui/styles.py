@@ -2059,6 +2059,118 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             text-overflow: ellipsis;
             white-space: nowrap;
         }}
+        .st-key-dashboard_filter_panel {{
+            display: block;
+            padding: .95rem 1rem .45rem;
+            margin: .85rem 0 .7rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            box-shadow: var(--shadow);
+        }}
+        .dashboard-results-status {{
+            display: inline-flex;
+            align-items: center;
+            min-height: 2.35rem;
+            color: var(--tag-text);
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: .42rem .75rem;
+            font-size: .84rem;
+            font-weight: 750;
+            margin: .4rem 0 .75rem;
+        }}
+        .dashboard-primary-kpis {{
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: .75rem;
+            margin: .75rem 0 .75rem;
+        }}
+        .dashboard-primary-kpi {{
+            min-width: 0;
+            min-height: 112px;
+            padding: .9rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            box-shadow: var(--shadow);
+        }}
+        .dashboard-kpi-label {{
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 750;
+            text-transform: uppercase;
+            letter-spacing: .035em;
+        }}
+        .dashboard-kpi-value {{
+            color: var(--text);
+            font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+            font-weight: 850;
+            line-height: 1.1;
+            margin-top: .34rem;
+            overflow-wrap: anywhere;
+        }}
+        .dashboard-kpi-note {{
+            color: var(--muted);
+            font-size: .76rem;
+            line-height: 1.3;
+            margin-top: .38rem;
+        }}
+        .dashboard-metadata-strip {{
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            margin: 0 0 1.2rem;
+            padding: .65rem .85rem;
+            border: 1px solid rgba(37, 99, 235, .16);
+            border-radius: 12px;
+            background: rgba(239, 246, 255, .55);
+        }}
+        .dashboard-meta-item {{
+            min-width: 0;
+            padding: .15rem .85rem;
+            border-left: 1px solid rgba(37, 99, 235, .16);
+        }}
+        .dashboard-meta-item:first-child {{
+            border-left: 0;
+            padding-left: 0;
+        }}
+        .dashboard-meta-item span {{
+            display: block;
+            color: var(--muted);
+            font-size: .72rem;
+            font-weight: 750;
+            text-transform: uppercase;
+            letter-spacing: .035em;
+        }}
+        .dashboard-meta-item strong {{
+            display: block;
+            color: var(--text);
+            font-size: .94rem;
+            line-height: 1.2;
+            margin-top: .18rem;
+            overflow-wrap: anywhere;
+        }}
+        .dashboard-methodology {{
+            color: var(--text-2);
+            font-size: .9rem;
+            line-height: 1.55;
+        }}
+        .dashboard-methodology p {{
+            margin: .35rem 0;
+        }}
+        .dashboard-compact-footer {{
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+            margin-top: 1.6rem;
+            padding-top: .75rem;
+            font-size: .82rem;
+        }}
+        .dashboard-compact-footer a {{
+            color: var(--accent);
+            font-weight: 750;
+            text-decoration: none;
+        }}
 
         .kpi-card {{
             min-height: 132px;
@@ -2368,6 +2480,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .project-evidence-strip {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
             .featured-project-card {{ grid-template-columns: 1fr; }}
             .featured-preview img {{ max-height: 320px; }}
+            .dashboard-primary-kpis,
+            .dashboard-metadata-strip {{
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }}
+            .dashboard-meta-item-1,
+            .dashboard-meta-item-3 {{
+                border-left: 0;
+                padding-left: 0;
+            }}
         }}
         @media (max-width: 760px) {{
             .project-card-featured {{ max-width: 100%; }}
@@ -2506,6 +2627,27 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-cta-actions .portfolio-button,
             .hero-actions .portfolio-button {{
                 flex: 1 1 13rem;
+            }}
+            .st-key-dashboard_filter_panel {{
+                padding: .8rem .85rem .35rem;
+            }}
+            .dashboard-primary-kpis,
+            .dashboard-metadata-strip {{
+                grid-template-columns: 1fr;
+            }}
+            .dashboard-meta-item {{
+                border-left: 0;
+                border-top: 1px solid rgba(37, 99, 235, .14);
+                padding: .55rem 0;
+            }}
+            .dashboard-meta-item:first-child {{
+                border-top: 0;
+                padding-top: .15rem;
+            }}
+            .dashboard-results-status {{
+                width: 100%;
+                justify-content: center;
+                border-radius: 12px;
             }}
             .st-key-market_dashboard_chart_job_title_demand,
             .st-key-market_dashboard_chart_company_activity,

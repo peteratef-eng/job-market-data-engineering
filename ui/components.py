@@ -18,7 +18,7 @@ KPI_ICONS = {
     "Salary coverage": "%",
 }
 
-FOOTER_EMAIL_URL = "https://mail.google.com/mail/?view=cm&fs=1&to=peterattef763@gmail.com"
+FOOTER_EMAIL_URL = "https://mail.google.com/mail/?view=cm&fs=1&to=petterattef763@gmail.com"
 
 
 def sidebar_brand() -> None:

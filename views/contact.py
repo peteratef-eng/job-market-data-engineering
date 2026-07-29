@@ -20,8 +20,8 @@ with badge_cols[0]:
 with badge_cols[1]:
     st.caption(f"Based in {PROFILE['location']}")
 
-footer_email_url = "https://mail.google.com/mail/?view=cm&fs=1&to=peterattef763@gmail.com"
-send_email_url = "https://mail.google.com/mail/?view=cm&fs=1&to=peterattef763@gmail.com"
+footer_email_url = "https://mail.google.com/mail/?view=cm&fs=1&to=petterattef763@gmail.com"
+send_email_url = "https://mail.google.com/mail/?view=cm&fs=1&to=petterattef763@gmail.com"
 linkedin_url = PROFILE.get("linkedin_url", "")
 github_url = PROFILE.get("github_url", "")
 

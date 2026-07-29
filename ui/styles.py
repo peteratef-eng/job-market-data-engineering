@@ -512,6 +512,111 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             overflow: visible;
             height: auto;
         }}
+        .home-card,
+        .skill-card,
+        .pipeline-card {{
+            transform-origin: center;
+            will-change: transform;
+            transition:
+                transform 240ms ease,
+                border-color 240ms ease,
+                background-color 240ms ease,
+                box-shadow 240ms ease;
+        }}
+        .home-card .section-title,
+        .skill-card .section-title,
+        .pipeline-card .section-title,
+        .pipeline-card strong {{
+            transition: color 240ms ease;
+        }}
+        .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"],
+        .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"],
+        .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"],
+        .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"],
+        [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"] {{
+            transform-origin: center;
+            overflow: visible;
+            will-change: transform;
+            transition:
+                transform 240ms ease,
+                border-color 240ms ease,
+                background-color 240ms ease,
+                box-shadow 240ms ease;
+        }}
+        .st-key-contact_email_card h3,
+        .st-key-contact_linkedin_card h3,
+        .st-key-contact_github_card h3,
+        .st-key-contact_resume_card h3,
+        [class*="st-key-data_quality_check_card_"] h3 {{
+            transition: color 240ms ease;
+        }}
+        @media (hover: hover) and (pointer: fine) {{
+            .home-card:hover,
+            .home-card:focus-within,
+            .skill-card:hover,
+            .skill-card:focus-within,
+            .pipeline-card:hover,
+            .pipeline-card:focus-within {{
+                transform: translateY(-5px) scale(1.015);
+                border-color: rgba(37, 99, 235, 0.45);
+                background-color: rgba(239, 246, 255, 0.75);
+                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.14);
+                position: relative;
+                z-index: 2;
+            }}
+            .home-card:hover .section-title,
+            .home-card:focus-within .section-title,
+            .skill-card:hover .section-title,
+            .skill-card:focus-within .section-title,
+            .pipeline-card:hover .section-title,
+            .pipeline-card:focus-within .section-title,
+            .pipeline-card:hover strong,
+            .pipeline-card:focus-within strong {{
+                color: var(--accent);
+            }}
+            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
+            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
+            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
+            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
+            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
+            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
+            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
+            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
+            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:hover,
+            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:focus-within {{
+                transform: translateY(-5px) scale(1.015);
+                border-color: rgba(37, 99, 235, 0.45);
+                background-color: rgba(239, 246, 255, 0.75);
+                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.14);
+                position: relative;
+                z-index: 2;
+            }}
+            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:hover h3,
+            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within h3,
+            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:hover h3,
+            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within h3,
+            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:hover h3,
+            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within h3,
+            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:hover h3,
+            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within h3,
+            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:hover h3,
+            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:focus-within h3 {{
+                color: var(--accent);
+            }}
+        }}
+        @media (hover: none), (pointer: coarse), (max-width: 760px) {{
+            .home-card,
+            .skill-card,
+            .pipeline-card,
+            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"],
+            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"],
+            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"],
+            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"],
+            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"] {{
+                transform: none;
+                will-change: auto;
+            }}
+        }}
         .skill-chip-wrap {{
             display: flex;
             flex-wrap: wrap;
@@ -824,7 +929,23 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .about-hover-card:hover,
             .about-hover-card:focus-within,
             .experience-hover-card:hover,
-            .experience-hover-card:focus-within {{
+            .experience-hover-card:focus-within,
+            .home-card:hover,
+            .home-card:focus-within,
+            .skill-card:hover,
+            .skill-card:focus-within,
+            .pipeline-card:hover,
+            .pipeline-card:focus-within,
+            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
+            .st-key-contact_email_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
+            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
+            .st-key-contact_linkedin_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
+            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
+            .st-key-contact_github_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
+            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:hover,
+            .st-key-contact_resume_card [data-testid="stVerticalBlockBorderWrapper"]:focus-within,
+            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:hover,
+            [class*="st-key-data_quality_check_card_"] [data-testid="stVerticalBlockBorderWrapper"]:focus-within {{
                 transform: none;
             }}
         }}

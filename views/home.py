@@ -45,11 +45,11 @@ if resume_path.exists():
 st.subheader("What I Build")
 cols = st.columns(3)
 with cols[0]:
-    section_card("Reliable Pipelines", "ETL workflows that move raw records into structured, trusted datasets.", class_name="home-hover-card")
+    section_card("Reliable Pipelines", "ETL workflows that move raw records into structured, trusted datasets.", class_name="home-card")
 with cols[1]:
-    section_card("Analytics-Ready Models", "Clean staging layers, reusable joins, and marts designed around business questions.", class_name="home-hover-card")
+    section_card("Analytics-Ready Models", "Clean staging layers, reusable joins, and marts designed around business questions.", class_name="home-card")
 with cols[2]:
-    section_card("Quality Checks", "Validation for row counts, nulls, duplicates, joins, and calculation logic.", class_name="home-hover-card")
+    section_card("Quality Checks", "Validation for row counts, nulls, duplicates, joins, and calculation logic.", class_name="home-card")
 
 st.subheader("Featured Project")
 project_card(PROJECTS[0])

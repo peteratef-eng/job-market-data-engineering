@@ -129,7 +129,7 @@ def kpi_grid(values: dict[str, str]) -> None:
             )
 
 
-def pipeline_visual() -> None:
+def pipeline_visual(class_name: str = "") -> None:
     steps = [
         ("01", "Raw CSVs", "Input tables"),
         ("02", "Python / Pandas", "Prepared sample"),
@@ -139,9 +139,11 @@ def pipeline_visual() -> None:
         ("06", "Analytics Marts", "Business-ready marts"),
         ("07", "Streamlit Dashboard", "Interactive portfolio"),
     ]
+    step_classes = " ".join(["pipeline-step", class_name]).strip()
+    tabindex = ' tabindex="0"' if class_name else ""
     markup = "".join(
         (
-            '<div class="pipeline-step">'
+            f'<div class="{html.escape(step_classes)}"{tabindex}>'
             f'<span>{number}</span>'
             f'<strong>{html.escape(label)}</strong>'
             f'<small>{html.escape(output)}</small>'

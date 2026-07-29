@@ -127,7 +127,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             overflow-x: clip;
         }}
         [data-testid="stSidebar"] > div:first-child {{
-            padding: 1rem .85rem;
+            padding: .85rem .9rem 1.1rem;
             max-width: 100%;
             min-width: 0;
         }}
@@ -140,12 +140,28 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: 100%;
             max-width: 100%;
             min-width: 0;
-            border-radius: 10px;
+            border-radius: 8px;
             color: var(--text-2);
             font-weight: 500;
-            padding: .48rem .65rem;
-            margin: .08rem 0;
+            padding: .42rem .55rem;
+            margin: .02rem 0;
             transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+        }}
+        [data-testid="stSidebarNav"] {{
+            margin-top: .2rem;
+        }}
+        [data-testid="stSidebarNav"] ul {{
+            gap: .08rem;
+        }}
+        [data-testid="stSidebarNav"] [role="heading"],
+        [data-testid="stSidebarNav"] summary,
+        [data-testid="stSidebarNav"] p {{
+            color: var(--text);
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            margin: .75rem 0 .25rem;
         }}
         [data-testid="stSidebarNav"] a:hover {{
             background: var(--hover);
@@ -163,9 +179,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             gap: .75rem;
             border: 1px solid var(--border);
             background: var(--surface);
-            border-radius: 10px;
-            padding: .68rem .72rem;
-            margin: .2rem 0 1rem;
+            border-radius: 8px;
+            padding: .65rem .7rem;
+            margin: .15rem 0 .65rem;
             box-shadow: var(--shadow);
             width: 100%;
             max-width: 100%;
@@ -187,26 +203,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             flex: 0 0 auto;
         }}
         .brand-photo {{
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            flex: 0 0 44px;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            flex: 0 0 42px;
             object-fit: cover;
             object-position: center top;
             display: block;
         }}
         .brand-title {{ color: var(--text); font-weight: 700; line-height: 1.15; }}
         .brand-subtitle {{ color: var(--muted); font-size: .82rem; margin-top: .12rem; }}
-        .sidebar-bottom {{
-            border-top: 1px solid var(--border);
-            margin-top: clamp(1rem, 4vh, 2rem);
-            padding-top: .85rem;
-            width: 100%;
-            max-width: 100%;
-            min-width: 0;
-        }}
         .sidebar-links {{
-            margin-top: .7rem;
+            margin: 0 0 .65rem;
             color: var(--muted);
             font-size: .84rem;
         }}
@@ -216,10 +224,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 500;
             transition: color 180ms ease, opacity 180ms ease;
         }}
-        .sidebar-signature {{
-            color: var(--muted);
-            font-size: .78rem;
-            margin-top: .55rem;
+        .sidebar-divider {{
+            height: 1px;
+            background: var(--border);
+            margin: .75rem 0 .35rem;
         }}
 
         .page-header {{

@@ -68,7 +68,6 @@ def app_header(kicker: str, title: str, subtitle: str, location: str) -> dict[st
 
 
 def sidebar_bottom() -> None:
-    st.sidebar.markdown('<div class="sidebar-bottom">', unsafe_allow_html=True)
     sidebar_brand()
     links = []
     if PROFILE.get("github_url"):
@@ -79,11 +78,10 @@ def sidebar_bottom() -> None:
     st.sidebar.markdown(
         f"""
         <div class="sidebar-links">{links_markup}</div>
-        <div class="sidebar-signature">Peter | Junior Data Engineer</div>
+        <div class="sidebar-divider"></div>
         """,
         unsafe_allow_html=True,
     )
-    st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
 
 def section_card(title: str, body: str) -> None:

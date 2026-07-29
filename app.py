@@ -24,6 +24,6 @@ theme = current_theme()
 inject_global_styles(theme)
 initialize_analytics()
 
-navigation = portfolio_navigation()
 sidebar_bottom()
+navigation = portfolio_navigation()
 navigation.run()

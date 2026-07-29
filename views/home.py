@@ -19,7 +19,6 @@ inject_global_styles(theme)
 
 ROOT = Path(__file__).resolve().parents[1]
 HERO_PHOTO_PATH = ROOT / "assets" / "profile" / "peter-atef-hero.jpg"
-PROJECT_PREVIEW_PATH = ROOT / "images" / "dbt_lineage.png"
 RESUME_PATH = ROOT / PROFILE["resume_path"]
 
 
@@ -46,7 +45,6 @@ try:
 except Exception:
     unique_skills = None
 
-preview_image = asset_data_uri(PROJECT_PREVIEW_PATH, "image/png")
 resume_href = asset_data_uri(RESUME_PATH, "application/pdf")
 resume_attr = ' download="Peter_Atef_Resume_2026.pdf"' if resume_href else ""
 resume_link = resume_href or html.escape(PROFILE["resume_path"])
@@ -208,9 +206,65 @@ repository_button = (
     else ""
 )
 preview_markup = (
-    f'<img src="{preview_image}" alt="dbt lineage screenshot for the Job Market Intelligence project">'
-    if preview_image
-    else '<div class="featured-preview-fallback">dbt lineage preview</div>'
+    """
+    <div class="featured-lineage-preview" aria-label="Data lineage showing staging job and skill models flowing through enriched intermediate models into analytics marts.">
+        <div class="featured-lineage-header">
+            <span>Live Data Lineage</span>
+            <small>dbt models connected</small>
+        </div>
+        <div class="featured-lineage-canvas">
+            <svg class="featured-lineage-svg" viewBox="0 0 640 360" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                    <marker id="featured-lineage-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                        <path d="M0,0 L8,4 L0,8 Z"></path>
+                    </marker>
+                </defs>
+                <path class="featured-lineage-connector" d="M128 68 C184 68 202 120 272 120"></path>
+                <path class="featured-lineage-connector" d="M128 126 C184 126 202 120 272 120"></path>
+                <path class="featured-lineage-connector" d="M128 216 C184 216 202 238 272 238"></path>
+                <path class="featured-lineage-connector" d="M128 274 C184 274 202 238 272 238"></path>
+                <path class="featured-lineage-connector" d="M368 120 C430 90 452 66 512 66"></path>
+                <path class="featured-lineage-connector" d="M368 120 C430 116 452 122 512 122"></path>
+                <path class="featured-lineage-connector" d="M368 120 C430 142 452 178 512 178"></path>
+                <path class="featured-lineage-connector" d="M368 120 C430 166 452 234 512 234"></path>
+                <path class="featured-lineage-connector" d="M368 120 C430 190 452 290 512 290"></path>
+                <path class="featured-lineage-connector" d="M368 238 C430 254 452 290 512 290"></path>
+                <path id="featured-lineage-job-route" class="featured-lineage-route" d="M128 126 C184 126 202 120 272 120 C348 120 386 154 512 178"></path>
+                <path id="featured-lineage-skill-route" class="featured-lineage-route featured-lineage-route-skill" d="M128 274 C184 274 202 238 272 238 C360 238 410 282 512 290"></path>
+                <circle class="featured-lineage-packet featured-lineage-packet-job" r="5">
+                    <animateMotion dur="6s" repeatCount="indefinite">
+                        <mpath href="#featured-lineage-job-route"></mpath>
+                    </animateMotion>
+                </circle>
+                <circle class="featured-lineage-packet featured-lineage-packet-skill" r="5">
+                    <animateMotion dur="6s" begin="1.2s" repeatCount="indefinite">
+                        <mpath href="#featured-lineage-skill-route"></mpath>
+                    </animateMotion>
+                </circle>
+            </svg>
+            <div class="featured-lineage-column featured-lineage-column-staging">
+                <div class="featured-lineage-column-title">Staging</div>
+                <div class="featured-lineage-node featured-lineage-node-staging featured-lineage-node-job-source"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>stg_companies</span><small>STAGING MODEL</small></div>
+                <div class="featured-lineage-node featured-lineage-node-staging featured-lineage-node-job-source"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>stg_job_postings</span><small>STAGING MODEL</small></div>
+                <div class="featured-lineage-node featured-lineage-node-staging featured-lineage-node-skill-source"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>stg_job_skills</span><small>STAGING MODEL</small></div>
+                <div class="featured-lineage-node featured-lineage-node-staging featured-lineage-node-skill-source"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>stg_skills</span><small>STAGING MODEL</small></div>
+            </div>
+            <div class="featured-lineage-column featured-lineage-column-intermediate">
+                <div class="featured-lineage-column-title">Intermediate</div>
+                <div class="featured-lineage-node featured-lineage-node-intermediate featured-lineage-node-job-intermediate"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>int_job_postings_enriched</span><small>INTERMEDIATE MODEL</small></div>
+                <div class="featured-lineage-node featured-lineage-node-intermediate featured-lineage-node-skill-intermediate"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>int_job_skills_enriched</span><small>INTERMEDIATE MODEL</small></div>
+            </div>
+            <div class="featured-lineage-column featured-lineage-column-mart">
+                <div class="featured-lineage-column-title">Marts</div>
+                <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-job-mart"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>mart_company_leaderboard</span><small>MART MODEL</small></div>
+                <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-job-mart"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>mart_monthly_job_trends</span><small>MART MODEL</small></div>
+                <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-job-mart"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>mart_remote_work_trends</span><small>MART MODEL</small></div>
+                <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-job-mart"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>mart_salary_trends</span><small>MART MODEL</small></div>
+                <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-skill-mart"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span>mart_skill_demand_by_role</span><small>MART MODEL</small></div>
+            </div>
+        </div>
+    </div>
+    """
 )
 st.markdown(
     f"""

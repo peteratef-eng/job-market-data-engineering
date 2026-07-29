@@ -1073,7 +1073,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-preview {{
             border: 1px solid var(--border);
             border-radius: 10px;
-            background: var(--surface-2);
+            background:
+                radial-gradient(circle at 55% 45%, rgba(37, 99, 235, 0.10), transparent 48%),
+                linear-gradient(145deg, rgba(255,255,255,0.98), rgba(239,246,255,0.88));
             overflow: hidden;
             min-height: 230px;
         }}
@@ -1092,6 +1094,193 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             justify-content: center;
             color: var(--muted);
             font-weight: 700;
+        }}
+        .featured-lineage-preview {{
+            position: relative;
+            min-height: 360px;
+            height: 100%;
+            padding: .9rem;
+            overflow: hidden;
+        }}
+        .featured-lineage-header {{
+            position: relative;
+            z-index: 4;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .65rem;
+            margin-bottom: .75rem;
+        }}
+        .featured-lineage-header span {{
+            color: var(--data-blue);
+            font-size: .72rem;
+            font-weight: 850;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }}
+        .featured-lineage-header small {{
+            color: var(--muted);
+            font-size: .72rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }}
+        .featured-lineage-canvas {{
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr) minmax(0, 1.12fr);
+            gap: 1.15rem;
+            min-height: 300px;
+            isolation: isolate;
+        }}
+        .featured-lineage-svg {{
+            position: absolute;
+            inset: 1.5rem .2rem .2rem;
+            z-index: 1;
+            width: calc(100% - .4rem);
+            height: calc(100% - 1.7rem);
+            pointer-events: none;
+        }}
+        .featured-lineage-svg marker path {{
+            fill: rgba(37, 99, 235, .44);
+        }}
+        .featured-lineage-connector {{
+            fill: none;
+            stroke: rgba(148, 163, 184, .42);
+            stroke-width: 2;
+            marker-end: url(#featured-lineage-arrow);
+        }}
+        .featured-lineage-route {{
+            fill: none;
+            stroke: rgba(37, 99, 235, .62);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 72 420;
+            stroke-dashoffset: 420;
+            opacity: 0;
+            animation: featured-lineage-route-flow 6s linear infinite;
+        }}
+        .featured-lineage-route-skill {{
+            stroke: rgba(6, 182, 212, .66);
+            animation-delay: 1.2s;
+        }}
+        .featured-lineage-packet {{
+            fill: var(--data-cyan);
+            stroke: #FFFFFF;
+            stroke-width: 2;
+            filter: drop-shadow(0 2px 5px rgba(37, 99, 235, .24));
+        }}
+        .featured-lineage-packet-skill {{
+            fill: #10B981;
+        }}
+        .featured-lineage-column {{
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: .48rem;
+            min-width: 0;
+        }}
+        .featured-lineage-column-title {{
+            color: var(--muted);
+            font-size: .66rem;
+            font-weight: 850;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            margin-bottom: .12rem;
+        }}
+        .featured-lineage-column-intermediate {{
+            justify-content: center;
+        }}
+        .featured-lineage-node {{
+            position: relative;
+            z-index: 4;
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            column-gap: .42rem;
+            row-gap: .12rem;
+            align-items: center;
+            min-height: 42px;
+            padding: .44rem .5rem;
+            border: 1px solid rgba(148, 163, 184, .28);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .95);
+            color: var(--text);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
+            transition:
+                transform 180ms ease,
+                border-color 180ms ease,
+                box-shadow 180ms ease;
+        }}
+        .featured-lineage-node span:not(.featured-lineage-node-icon) {{
+            min-width: 0;
+            color: var(--text);
+            font-size: clamp(.68rem, 1vw, .76rem);
+            font-weight: 800;
+            line-height: 1.12;
+            overflow-wrap: anywhere;
+        }}
+        .featured-lineage-node small {{
+            grid-column: 2;
+            color: var(--muted);
+            font-size: .55rem;
+            font-weight: 800;
+            letter-spacing: .06em;
+            line-height: 1;
+        }}
+        .featured-lineage-node-icon {{
+            grid-row: 1 / span 2;
+            width: .62rem;
+            height: .62rem;
+            border-radius: 3px;
+            background: currentColor;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
+        }}
+        .featured-lineage-node-staging {{
+            color: #64748B;
+            background: rgba(248, 250, 252, .96);
+        }}
+        .featured-lineage-node-intermediate {{
+            color: var(--data-blue);
+            border-color: rgba(37, 99, 235, .28);
+            background: rgba(239, 246, 255, .96);
+        }}
+        .featured-lineage-node-mart {{
+            color: var(--data-cyan);
+            border-color: rgba(6, 182, 212, .22);
+            background: rgba(240, 253, 250, .92);
+        }}
+        .featured-lineage-node-job-source,
+        .featured-lineage-node-job-intermediate,
+        .featured-lineage-node-job-mart {{
+            animation: featured-lineage-node-job 6s ease-in-out infinite;
+        }}
+        .featured-lineage-node-skill-source,
+        .featured-lineage-node-skill-intermediate,
+        .featured-lineage-node-skill-mart {{
+            animation: featured-lineage-node-skill 6s ease-in-out infinite;
+        }}
+        @media (hover: hover) and (pointer: fine) {{
+            .featured-lineage-node:hover {{
+                transform: translateY(-2px);
+                border-color: rgba(37, 99, 235, 0.45);
+                box-shadow: 0 8px 20px rgba(37, 99, 235, 0.12);
+            }}
+        }}
+        @keyframes featured-lineage-route-flow {{
+            0%, 8% {{ opacity: 0; stroke-dashoffset: 420; }}
+            12%, 72% {{ opacity: 1; }}
+            82% {{ opacity: 0; stroke-dashoffset: 0; }}
+            100% {{ opacity: 0; stroke-dashoffset: 0; }}
+        }}
+        @keyframes featured-lineage-node-job {{
+            0%, 9%, 82%, 100% {{ border-color: rgba(148, 163, 184, .28); box-shadow: 0 8px 18px rgba(15, 23, 42, .05); }}
+            14%, 32% {{ border-color: rgba(37, 99, 235, .45); box-shadow: 0 8px 18px rgba(37, 99, 235, .11); }}
+            48%, 72% {{ border-color: rgba(6, 182, 212, .38); box-shadow: 0 8px 18px rgba(6, 182, 212, .10); }}
+        }}
+        @keyframes featured-lineage-node-skill {{
+            0%, 22%, 92%, 100% {{ border-color: rgba(148, 163, 184, .28); box-shadow: 0 8px 18px rgba(15, 23, 42, .05); }}
+            28%, 48% {{ border-color: rgba(37, 99, 235, .42); box-shadow: 0 8px 18px rgba(37, 99, 235, .10); }}
+            62%, 84% {{ border-color: rgba(16, 185, 129, .38); box-shadow: 0 8px 18px rgba(16, 185, 129, .10); }}
         }}
         .home-section {{
             margin: 1.55rem 0;
@@ -2702,6 +2891,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .project-evidence-strip {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
             .featured-project-card {{ grid-template-columns: 1fr; }}
             .featured-preview img {{ max-height: 320px; }}
+            .featured-lineage-preview {{ min-height: 330px; }}
             .hero-skill-pipeline {{
                 grid-template-columns: minmax(0, 12.5rem);
                 justify-content: start;
@@ -2828,6 +3018,51 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .pipeline-step-grid,
             .pipeline-info-grid {{
                 grid-template-columns: 1fr;
+            }}
+            .featured-lineage-preview {{
+                min-height: auto;
+                padding: .85rem;
+            }}
+            .featured-lineage-header {{
+                align-items: flex-start;
+                flex-direction: column;
+                gap: .15rem;
+            }}
+            .featured-lineage-canvas {{
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: .65rem;
+                min-height: 0;
+            }}
+            .featured-lineage-svg {{
+                display: none;
+            }}
+            .featured-lineage-column {{
+                gap: .42rem;
+                padding-left: .75rem;
+                border-left: 2px solid rgba(6, 182, 212, .26);
+            }}
+            .featured-lineage-column-intermediate {{
+                justify-content: flex-start;
+            }}
+            .featured-lineage-column-title {{
+                margin-bottom: .05rem;
+            }}
+            .featured-lineage-column:not(:last-child)::after {{
+                content: "";
+                width: 7px;
+                height: 7px;
+                border-right: 2px solid rgba(6, 182, 212, .65);
+                border-bottom: 2px solid rgba(6, 182, 212, .65);
+                transform: rotate(45deg);
+                margin: .1rem 0 .05rem .2rem;
+            }}
+            .featured-lineage-node {{
+                min-height: 0;
+                padding: .48rem .55rem;
+            }}
+            .featured-lineage-node small {{
+                display: none;
             }}
             .project-overview-header {{
                 margin-bottom: 1.45rem;
@@ -3028,11 +3263,25 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .proof-console-item,
             .hero-skill-node,
             .hero-skill-packet-track,
-            .hero-skill-packet {{
+            .hero-skill-packet,
+            .featured-lineage-route,
+            .featured-lineage-node-job-source,
+            .featured-lineage-node-job-intermediate,
+            .featured-lineage-node-job-mart,
+            .featured-lineage-node-skill-source,
+            .featured-lineage-node-skill-intermediate,
+            .featured-lineage-node-skill-mart {{
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;
                 opacity: 1 !important;
+            }}
+            .featured-lineage-route {{
+                stroke-dashoffset: 0 !important;
+                opacity: 0 !important;
+            }}
+            .featured-lineage-packet {{
+                display: none;
             }}
             .hero-skill-packet-track {{
                 display: none;

@@ -186,6 +186,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 700;
             flex: 0 0 auto;
         }}
+        .brand-photo {{
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            flex: 0 0 44px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }}
         .brand-title {{ color: var(--text); font-weight: 700; line-height: 1.15; }}
         .brand-subtitle {{ color: var(--muted); font-size: .82rem; margin-top: .12rem; }}
         .sidebar-bottom {{

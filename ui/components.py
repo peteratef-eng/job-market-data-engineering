@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import base64
 import html
+from pathlib import Path
 
 import streamlit as st
 
@@ -19,13 +21,28 @@ KPI_ICONS = {
 }
 
 FOOTER_EMAIL_URL = "https://mail.google.com/mail/?view=cm&fs=1&to=petterattef763@gmail.com"
+PROFILE_PHOTO_PATH = Path(__file__).resolve().parents[1] / "assets" / "profile" / "peter.jpg"
+
+
+def _profile_photo_markup() -> str:
+    if not PROFILE_PHOTO_PATH.exists():
+        return '<div class="brand-icon">P</div>'
+
+    encoded_photo = base64.b64encode(PROFILE_PHOTO_PATH.read_bytes()).decode("ascii")
+    return (
+        '<img class="brand-photo" '
+        'src="data:image/jpeg;base64,'
+        f'{encoded_photo}" '
+        'alt="Peter profile photo">'
+    )
 
 
 def sidebar_brand() -> None:
+    profile_photo = _profile_photo_markup()
     st.sidebar.markdown(
-        """
+        f"""
         <div class="sidebar-brand">
-            <div class="brand-icon">P</div>
+            {profile_photo}
             <div>
                 <div class="brand-title">Peter</div>
                 <div class="brand-subtitle">Junior Data Engineer</div>

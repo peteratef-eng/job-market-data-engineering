@@ -84,10 +84,12 @@ def sidebar_bottom() -> None:
     )
 
 
-def section_card(title: str, body: str) -> None:
+def section_card(title: str, body: str, class_name: str = "") -> None:
+    classes = " ".join(["section-card", class_name]).strip()
+    tabindex = ' tabindex="0"' if class_name else ""
     st.markdown(
         f"""
-        <div class="section-card">
+        <div class="{html.escape(classes)}"{tabindex}>
             <div class="section-title">{html.escape(title)}</div>
             <div class="section-copy">{html.escape(body)}</div>
         </div>
@@ -293,16 +295,18 @@ def project_card(project: dict, *, actions: bool = False, featured: bool = False
     )
 
 
-def timeline_entry(entry: dict) -> None:
+def timeline_entry(entry: dict, class_name: str = "") -> None:
     responsibilities = "".join(
         f"<li>{html.escape(item)}</li>" for item in entry.get("responsibilities", [])
     )
     technologies = "".join(
         f'<span class="meta-pill">{html.escape(item)}</span>' for item in entry.get("technologies", [])
     )
+    classes = " ".join(["timeline-card", class_name]).strip()
+    tabindex = ' tabindex="0"' if class_name else ""
     st.markdown(
         f"""
-        <div class="timeline-card">
+        <div class="{html.escape(classes)}"{tabindex}>
             <div class="timeline-date">{html.escape(entry["start_date"])} - {html.escape(entry["end_date"])}</div>
             <div class="project-title">{html.escape(entry["role"])}</div>
             <div class="project-meta">{html.escape(entry["company"])} | {html.escape(entry.get("location", ""))}</div>

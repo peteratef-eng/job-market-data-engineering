@@ -13,6 +13,6 @@ inject_global_styles(current_theme())
 st.title("Experience")
 
 for entry in EXPERIENCE:
-    timeline_entry(entry)
+    timeline_entry(entry, class_name="experience-hover-card")
 
 footer()

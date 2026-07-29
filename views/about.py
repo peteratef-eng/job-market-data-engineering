@@ -18,11 +18,12 @@ project = PROJECTS[0]
 
 cols = st.columns(2)
 with cols[0]:
-    section_card("Professional Story", PROFILE["bio"])
+    section_card("Professional Story", PROFILE["bio"], class_name="about-hover-card")
 with cols[1]:
     section_card(
         "Current Focus",
         "I am targeting Junior Data Engineer opportunities where I can build dependable pipelines, improve data quality, and create models that make analysis easier for teams.",
+        class_name="about-hover-card",
     )
 
 cols = st.columns(2)
@@ -30,6 +31,7 @@ with cols[0]:
     section_card(
         "Background",
         "My experience includes data annotation leadership, quality assurance, structured dataset preparation, API integrations, automation, and cross-functional data workflows.",
+        class_name="about-hover-card",
     )
 with cols[1]:
     evidence = []
@@ -40,6 +42,6 @@ with cols[1]:
     if sample_rows:
         evidence.append(f"{sample_rows:,} hosted sample postings")
     evidence.append(", ".join(project["technologies"][:6]))
-    section_card("Project Evidence", " | ".join(evidence))
+    section_card("Project Evidence", " | ".join(evidence), class_name="about-hover-card")
 
 footer()

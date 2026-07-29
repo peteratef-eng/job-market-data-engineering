@@ -380,6 +380,73 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             margin-top: .55rem;
             padding-left: 1.2rem;
         }}
+        .about-hover-card,
+        .experience-hover-card {{
+            transform-origin: center;
+            outline: none;
+            overflow: visible;
+            margin-top: .85rem;
+            margin-bottom: 1.15rem;
+            transition:
+                transform 220ms ease,
+                border-color 220ms ease,
+                background-color 220ms ease,
+                box-shadow 220ms ease;
+        }}
+        .about-hover-card .section-title,
+        .experience-hover-card .project-title {{
+            transition: color 220ms ease, font-size 220ms ease;
+        }}
+        @media (hover: hover) and (pointer: fine) {{
+            .about-hover-card:hover,
+            .about-hover-card:focus-within,
+            .experience-hover-card:hover,
+            .experience-hover-card:focus-within {{
+                transform: translateY(-3px) scale(1.018);
+                border-color: rgba(37, 99, 235, 0.45);
+                background-color: rgba(239, 246, 255, 0.65);
+                box-shadow: 0 12px 28px rgba(37, 99, 235, 0.14);
+                position: relative;
+                z-index: 2;
+            }}
+            .about-hover-card:hover .section-title,
+            .about-hover-card:focus-within .section-title,
+            .experience-hover-card:hover .project-title,
+            .experience-hover-card:focus-within .project-title {{
+                color: var(--accent);
+                font-size: 1.12rem;
+            }}
+        }}
+        @media (hover: none), (pointer: coarse), (max-width: 760px) {{
+            .about-hover-card,
+            .experience-hover-card {{
+                transform: none;
+                transition: none;
+            }}
+            .about-hover-card:hover,
+            .about-hover-card:focus-within,
+            .experience-hover-card:hover,
+            .experience-hover-card:focus-within {{
+                transform: none;
+                border-color: var(--border);
+                background-color: var(--surface);
+                box-shadow: var(--shadow);
+            }}
+            .about-hover-card:hover .section-title,
+            .about-hover-card:focus-within .section-title,
+            .experience-hover-card:hover .project-title,
+            .experience-hover-card:focus-within .project-title {{
+                color: var(--text);
+            }}
+            .about-hover-card:hover .section-title,
+            .about-hover-card:focus-within .section-title {{
+                font-size: 1.08rem;
+            }}
+            .experience-hover-card:hover .project-title,
+            .experience-hover-card:focus-within .project-title {{
+                font-size: 1.12rem;
+            }}
+        }}
         [data-testid="stVerticalBlockBorderWrapper"] {{
             border-color: var(--border);
             border-radius: 16px;
@@ -763,6 +830,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 scroll-behavior: auto !important;
+            }}
+            .about-hover-card:hover,
+            .about-hover-card:focus-within,
+            .experience-hover-card:hover,
+            .experience-hover-card:focus-within {{
+                transform: none;
             }}
         }}
         </style>

@@ -2336,6 +2336,20 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             padding-top: .25rem;
             padding-bottom: .25rem;
         }}
+        .st-key-dashboard_filter_panel [data-baseweb="select"] > div:focus-within {{
+            outline: 0 !important;
+            border-color: rgba(37, 99, 235, 0.70) !important;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+        }}
+        .st-key-dashboard_filter_panel [data-baseweb="select"] input,
+        .st-key-dashboard_filter_panel [data-baseweb="select"] input:focus,
+        .st-key-dashboard_filter_panel [data-baseweb="select"] input:focus-visible {{
+            border: 0 !important;
+            outline: 0 !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            border-radius: 0 !important;
+        }}
         [data-baseweb="popover"], [data-baseweb="menu"], [role="listbox"] {{
             background: var(--surface-elevated);
             color: var(--text);

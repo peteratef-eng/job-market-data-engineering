@@ -69,8 +69,8 @@ with filter_head_cols[2]:
 with filter_head_cols[3]:
     st.toggle("Show filters", key="show_filter_panel")
 
-st.markdown('<div class="filter-panel">', unsafe_allow_html=True)
 if st.session_state.show_filter_panel:
+    st.markdown('<div class="filter-panel">', unsafe_allow_html=True)
     row_one = st.columns(4)
     with row_one[0]:
         job_titles = st.multiselect("Job title", sorted(jobs["job_title_short"].dropna().unique()), key="job_titles")
@@ -112,6 +112,7 @@ if st.session_state.show_filter_panel:
             max_value=date_max,
             key="selected_dates",
         )
+    st.markdown("</div>", unsafe_allow_html=True)
 else:
     job_titles = st.session_state.get("job_titles", [])
     countries = st.session_state.get("countries", [])
@@ -120,7 +121,6 @@ else:
     remote_statuses = st.session_state.get("remote_statuses", [])
     salary_range = st.session_state.get("salary_range", (salary_min, salary_max) if salary_max > salary_min else None)
     selected_dates = st.session_state.get("selected_dates", (date_min, date_max))
-st.markdown("</div>", unsafe_allow_html=True)
 
 date_range = None
 if isinstance(selected_dates, tuple) and len(selected_dates) == 2:

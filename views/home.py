@@ -82,6 +82,10 @@ def validate_html_fragment(markup: str, *, expected_start: str, expected_end: st
         raise ValueError(f"Unclosed HTML tags: {parser.stack}.")
 
 
+def collapse_html_fragment(markup: str) -> str:
+    return " ".join(line.strip() for line in markup.splitlines() if line.strip())
+
+
 project = PROJECTS[0]
 metadata = load_dashboard_metadata()
 source_rows = metadata.get("source_job_postings_rows")
@@ -339,6 +343,7 @@ preview_markup = dedent(
     </div>
     """
 ).strip()
+preview_markup = collapse_html_fragment(preview_markup)
 validate_html_fragment(
     preview_markup,
     expected_start='<div class="featured-lineage-preview"',
@@ -375,6 +380,7 @@ featured_project_markup = (
         """
     ).strip()
 )
+featured_project_markup = collapse_html_fragment(featured_project_markup)
 validate_html_fragment(
     featured_project_markup,
     expected_start='<section class="featured-project-card"',

@@ -81,16 +81,19 @@ def sidebar_projects() -> None:
         project_open = any(page["route"] == current_path for page in project["pages"])
         project_active_class = " is-active" if project_open else ""
         project_open_attr = " open" if project_open else ""
-        page_links = "".join(
-            (
+        page_links_markup = []
+        for page in project["pages"]:
+            page_active = page["route"] == current_path
+            page_active_class = " sidebar-project-link-active" if page_active else ""
+            aria_current_attr = ' aria-current="page"' if page_active else ""
+            page_links_markup.append(
                 '<a class="sidebar-project-link'
-                f'{" sidebar-project-link-active" if page["route"] == current_path else ""}" '
+                f'{page_active_class}" '
                 f'href="{html.escape(page["route"])}"'
-                f'{" aria-current=\"page\"" if page["route"] == current_path else ""}>'
+                f'{aria_current_attr}>'
                 f'{html.escape(page["label"])}</a>'
             )
-            for page in project["pages"]
-        )
+        page_links = "".join(page_links_markup)
         cards.append(
             f"""
             <details class="sidebar-project-expander{project_active_class}"{project_open_attr}>

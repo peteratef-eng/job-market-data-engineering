@@ -13,6 +13,15 @@ from ui.theme import current_theme
 
 inject_global_styles(current_theme())
 
+
+@st.cache_data(show_spinner=False)
+def resume_data_uri(path_value: str) -> str:
+    resume_file = Path(path_value)
+    if not resume_file.exists():
+        return ""
+    encoded = base64.b64encode(resume_file.read_bytes()).decode("ascii")
+    return f"data:application/pdf;base64,{encoded}"
+
 st.title("Let's Build Something Reliable")
 st.markdown("I'm open to Junior Data Engineer opportunities where I can build dependable pipelines, improve data quality, and make analytics easier for teams.")
 
@@ -73,9 +82,8 @@ with cards[2]:
         unsafe_allow_html=True,
     )
 
-resume_path = Path(PROFILE["resume_path"])
-if resume_path.exists():
-    encoded_resume = base64.b64encode(resume_path.read_bytes()).decode("ascii")
+encoded_resume = resume_data_uri(PROFILE["resume_path"])
+if encoded_resume:
     st.markdown(
         f"""
         <div class="contact-hover-card contact-resume-strip" tabindex="0">
@@ -83,7 +91,7 @@ if resume_path.exists():
                 <div class="section-title">Want the full overview?</div>
                 <div class="section-copy">Download my resume for experience, skills, and project details.</div>
             </div>
-            <a class="contact-card-action" href="data:application/pdf;base64,{encoded_resume}" download="Peter_Atef_Resume_2026.pdf">Download Resume</a>
+            <a class="contact-card-action" href="{encoded_resume}" download="Peter_Atef_Resume_2026.pdf">Download Resume</a>
         </div>
         """,
         unsafe_allow_html=True,

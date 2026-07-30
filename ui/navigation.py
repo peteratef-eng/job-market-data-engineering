@@ -33,6 +33,11 @@ def route_from_page(page: Any) -> str:
     return f"/{url_path.strip('/')}" if url_path else "/"
 
 
+def route_href(route: str) -> str:
+    route_path = route.strip("/")
+    return "./" if not route_path else f"./{route_path}"
+
+
 def portfolio_navigation() -> st.navigation:
     project_pages = [
         st.Page(page["path"], title=page["label"], url_path=page["url_path"], visibility="hidden")

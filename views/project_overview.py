@@ -6,6 +6,7 @@ import streamlit as st
 from dashboard.data_loader import load_dashboard_metadata
 from portfolio.content.projects import PROJECTS
 from ui.components import section_card
+from ui.navigation import route_href
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -14,6 +15,8 @@ theme = current_theme()
 inject_global_styles(theme)
 
 project = PROJECTS[0]
+data_pipeline_href = route_href("/data_pipeline")
+market_dashboard_href = route_href("/market_dashboard")
 
 metadata = {}
 try:
@@ -47,7 +50,7 @@ st.markdown(
         <p>Explore hiring demand, salaries, technical skills, remote-work patterns, and market trends across 1.6M+ job postings.</p>
         <div class="project-tech-stack">{tech_markup}</div>
         <div class="project-header-actions">
-            <a class="portfolio-button portfolio-button-primary" href="/market_dashboard" target="_self">Explore Dashboard</a>
+            <a class="portfolio-button portfolio-button-primary" href="{market_dashboard_href}" target="_self">Explore Dashboard</a>
             <a class="portfolio-button project-header-secondary-action" href="{html.escape(project["repository_url"])}" rel="noreferrer">View on GitHub</a>
         </div>
         <div class="project-evidence-compact" aria-label="Project evidence">
@@ -81,7 +84,7 @@ for col, (title, body) in zip(problem_cols, problem_solution):
         section_card(title, body, class_name="job-intelligence-hover-card")
 
 st.markdown(
-    '<a class="project-overview-architecture-link" href="/data_pipeline" target="_self">View technical architecture -&gt;</a>',
+    f'<a class="project-overview-architecture-link" href="{data_pipeline_href}" target="_self">View technical architecture -&gt;</a>',
     unsafe_allow_html=True,
 )
 

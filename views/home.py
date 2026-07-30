@@ -12,6 +12,7 @@ from dashboard.data_loader import load_dashboard_metadata
 from portfolio.content.profile import PROFILE
 from portfolio.content.projects import PROJECTS
 from portfolio.content.skills import SKILL_GROUPS
+from ui.navigation import route_href
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -24,7 +25,9 @@ HERO_PHOTO_PATH = ROOT / "assets" / "profile" / "peter-atef-hero.jpg"
 RESUME_PATH = ROOT / PROFILE["resume_path"]
 
 
-def asset_data_uri(path: Path, mime_type: str) -> str:
+@st.cache_data(show_spinner=False)
+def asset_data_uri(path_value: str, mime_type: str) -> str:
+    path = Path(path_value)
     if not path.exists():
         return ""
     encoded = base64.b64encode(path.read_bytes()).decode("ascii")
@@ -90,11 +93,14 @@ project = PROJECTS[0]
 metadata = load_dashboard_metadata()
 source_rows = metadata.get("source_job_postings_rows")
 
-resume_href = asset_data_uri(RESUME_PATH, "application/pdf")
+resume_href = asset_data_uri(str(RESUME_PATH), "application/pdf")
 resume_attr = ' download="Peter_Atef_Resume_2026.pdf"' if resume_href else ""
 resume_link = resume_href or html.escape(PROFILE["resume_path"])
+contact_href = route_href("/contact")
+market_dashboard_href = route_href("/market_dashboard")
+project_overview_href = route_href("/project_overview")
 tech_stack = " - ".join(project["technologies"][:6])
-hero_photo_src = asset_data_uri(HERO_PHOTO_PATH, "image/jpeg")
+hero_photo_src = asset_data_uri(str(HERO_PHOTO_PATH), "image/jpeg")
 hero_photo_markup = (
     f'<img class="hero-profile-image" src="{hero_photo_src}" alt="Portrait of Peter Atef, Junior Data Engineer">'
     if hero_photo_src
@@ -157,9 +163,9 @@ st.markdown(
             </div>
             <span class="hero-value-accessible-summary sr-only">Building reliable pipelines, transforming messy data, validating trusted models, and delivering analytics-ready insights.</span>
             <div class="hero-actions">
-                <a class="portfolio-button portfolio-button-primary hero-primary-action" href="/project_overview" target="_self">EXPLORE MY PROJECT<span aria-hidden="true">-&gt;</span></a>
+                <a class="portfolio-button portfolio-button-primary hero-primary-action" href="{project_overview_href}" target="_self">EXPLORE MY PROJECT<span aria-hidden="true">-&gt;</span></a>
                 <a class="portfolio-button" href="{resume_link}"{resume_attr}>DOWNLOAD RESUME</a>
-                <a class="portfolio-button portfolio-button-quiet" href="/contact" target="_self">CONTACT ME</a>
+                <a class="portfolio-button portfolio-button-quiet" href="{contact_href}" target="_self">CONTACT ME</a>
             </div>
         </div>
         <article class="hero-profile-card">
@@ -363,7 +369,7 @@ featured_project_markup = (
                     <span>{format_int(source_rows)} source postings</span>
                 </div>
                 <div class="hero-actions">
-                    <a class="portfolio-button portfolio-button-primary" href="/market_dashboard" target="_self">VIEW LIVE PROJECT</a>
+                    <a class="portfolio-button portfolio-button-primary" href="{market_dashboard_href}" target="_self">VIEW LIVE PROJECT</a>
                     {repository_button}
                 </div>
             </div>
@@ -395,7 +401,7 @@ st.markdown(
             <p>Open to Junior Data Engineer opportunities.</p>
         </div>
         <div class="contact-cta-actions">
-            <a class="portfolio-button portfolio-button-primary" href="/contact" target="_self">CONTACT ME</a>
+            <a class="portfolio-button portfolio-button-primary" href="{contact_href}" target="_self">CONTACT ME</a>
         </div>
     </section>
     """,

@@ -7,7 +7,7 @@ from textwrap import dedent
 
 import streamlit as st
 
-from dashboard.data_loader import load_dashboard_data, load_dashboard_metadata
+from dashboard.data_loader import load_dashboard_metadata
 from portfolio.content.profile import PROFILE
 from portfolio.content.projects import PROJECTS
 from portfolio.content.skills import SKILL_GROUPS
@@ -37,14 +37,6 @@ def format_int(value: int | str | None) -> str:
 project = PROJECTS[0]
 metadata = load_dashboard_metadata()
 source_rows = metadata.get("source_job_postings_rows")
-sample_rows = metadata.get("sample_job_postings_rows")
-sample_skill_rows = metadata.get("sample_job_skills_rows")
-
-try:
-    jobs, skills, _ = load_dashboard_data()
-    unique_skills = int(skills["clean_skill_name"].dropna().nunique())
-except Exception:
-    unique_skills = None
 
 resume_href = asset_data_uri(RESUME_PATH, "application/pdf")
 resume_attr = ' download="Peter_Atef_Resume_2026.pdf"' if resume_href else ""
@@ -55,22 +47,6 @@ hero_photo_markup = (
     f'<img class="hero-profile-image" src="{hero_photo_src}" alt="Portrait of Peter Atef, Junior Data Engineer">'
     if hero_photo_src
     else '<div class="hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>'
-)
-
-proof_items = [
-    ("Source Job Postings", format_int(source_rows)),
-    ("Hosted Sample", format_int(sample_rows)),
-    ("Job-Skill Rows", format_int(sample_skill_rows)),
-    ("Distinct Skills", format_int(unique_skills)),
-]
-proof_markup = "".join(
-    (
-        f'<div class="proof-console-item proof-console-item-{index}">'
-        f'<div class="proof-console-value">{value}</div>'
-        f'<div class="proof-console-label">{html.escape(label)}</div>'
-        '</div>'
-    )
-    for index, (label, value) in enumerate(proof_items, start=1)
 )
 
 skill_pipeline_steps = ["ETL Pipelines", "Python / Pandas", "SQL / PostgreSQL", "dbt", "Analytics-Ready Data"]
@@ -142,10 +118,6 @@ st.markdown(
                 {skill_pipeline_markup}
             </div>
         </div>
-    </section>
-    <section class="project-proof-console" aria-label="Project evidence">
-        <div class="proof-console-status">PROJECT EVIDENCE</div>
-        <div class="proof-console-grid">{proof_markup}</div>
     </section>
     """,
     unsafe_allow_html=True,

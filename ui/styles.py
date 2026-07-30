@@ -714,8 +714,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-value-rotator,
         .hero-actions,
         .hero-skill-section,
-        .hero-profile-card,
-        .project-proof-console {{
+        .hero-profile-card {{
             animation: home-entrance-rise 520ms ease-out both;
         }}
         .hero-kicker {{ animation-delay: 40ms; }}
@@ -725,7 +724,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-actions {{ animation-delay: 360ms; }}
         .hero-profile-card {{ animation-delay: 440ms; }}
         .hero-skill-section {{ animation-delay: 520ms; }}
-        .project-proof-console {{ animation-delay: 660ms; }}
         @keyframes home-entrance-rise {{
             from {{ opacity: 0; transform: translateY(.65rem); }}
             to {{ opacity: 1; transform: translateY(0); }}
@@ -1241,84 +1239,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border-radius: 999px;
             background: currentColor;
         }}
-        .project-proof-console {{
-            position: relative;
-            border: 1px solid rgba(37, 99, 235, .16);
-            border-radius: 16px;
-            background:
-                linear-gradient(90deg, rgba(239, 246, 255, .85), rgba(255, 255, 255, .92));
-            box-shadow: var(--shadow);
-            margin: 1rem 0 .9rem;
-            overflow: hidden;
-        }}
-        .project-proof-console::before {{
-            content: "";
-            display: block;
-            height: 3px;
-            background: linear-gradient(90deg, rgba(6, 182, 212, .34), rgba(37, 99, 235, .66), rgba(6, 182, 212, .34));
-        }}
-        .project-proof-console::after {{
-            content: "";
-            position: absolute;
-            inset: 10px 1rem auto auto;
-            width: 9rem;
-            height: 4.8rem;
-            opacity: .055;
-            pointer-events: none;
-            background:
-                linear-gradient(var(--data-navy) 1px, transparent 1px),
-                linear-gradient(90deg, var(--data-navy) 1px, transparent 1px);
-            background-size: 100% 1.2rem, 3rem 100%;
-        }}
-        .proof-console-status {{
-            color: var(--accent);
-            font-size: .72rem;
-            font-weight: 850;
-            letter-spacing: .11em;
-            padding: .72rem 1rem .15rem;
-        }}
-        .proof-console-grid {{
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            padding: .35rem 1rem .95rem;
-        }}
-        .proof-console-item {{
-            min-width: 0;
-            padding: .25rem 1rem;
-            border-left: 1px solid rgba(37, 99, 235, .14);
-            animation: proof-console-enter 520ms ease-out both;
-        }}
-        .proof-console-item-1 {{
-            border-left: 0;
-            padding-left: 0;
-        }}
-        .proof-console-value {{
-            color: var(--text);
-            font-size: clamp(1.15rem, 2vw, 1.55rem);
-            font-weight: 850;
-            line-height: 1.1;
-            overflow-wrap: anywhere;
-        }}
-        .proof-console-label {{
-            color: var(--muted);
-            font-size: .74rem;
-            font-weight: 750;
-            text-transform: uppercase;
-            letter-spacing: .035em;
-            margin-top: .22rem;
-        }}
-        @keyframes proof-console-enter {{
-            from {{ opacity: 0; transform: translateY(.45rem); }}
-            to {{ opacity: 1; transform: translateY(0); }}
-        }}
-        .project-evidence-strip {{
-            display: grid;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: .8rem;
-            margin: 1.35rem 0 2rem;
-            overflow: visible;
-        }}
-        .project-evidence-card,
         .featured-project-card,
         .pipeline-step-card,
         .contact-cta {{
@@ -1326,30 +1246,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border: 1px solid var(--border);
             border-radius: 12px;
             box-shadow: var(--shadow);
-        }}
-        .project-evidence-card {{
-            padding: .95rem;
-            min-height: 132px;
-        }}
-        .evidence-value {{
-            color: var(--text);
-            font-size: clamp(1.18rem, 2.2vw, 1.55rem);
-            font-weight: 800;
-            line-height: 1.15;
-            overflow-wrap: anywhere;
-        }}
-        .evidence-label {{
-            color: var(--text);
-            font-size: .86rem;
-            font-weight: 700;
-            line-height: 1.25;
-            margin-top: .35rem;
-        }}
-        .evidence-note {{
-            color: var(--muted);
-            font-size: .78rem;
-            line-height: 1.45;
-            margin-top: .45rem;
         }}
         .featured-project-card {{
             position: relative;
@@ -1882,6 +1778,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .home-section {{
             margin: 1.55rem 0;
+        }}
+        .home-about-section {{
+            margin-top: 2.25rem;
         }}
         .home-section-copy {{
             color: var(--text-2);
@@ -2712,7 +2611,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .data-quality-hover-card,
         .home-about-card,
         .home-skill-card,
-        .project-evidence-card,
         .featured-project-card,
         .pipeline-step-card {{
             background: var(--surface);
@@ -2850,7 +2748,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .data-quality-hover-card .section-title,
         .home-about-card .section-title,
         .home-skill-card .section-title,
-        .project-evidence-card .evidence-label,
         .featured-project-card h2,
         .pipeline-step-card .pipeline-step-name {{
             transition: color 250ms ease;
@@ -2930,8 +2827,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-about-card:focus-within,
             .home-skill-card:hover,
             .home-skill-card:focus-within,
-            .project-evidence-card:hover,
-            .project-evidence-card:focus-within,
             .featured-project-card:hover,
             .featured-project-card:focus-within,
             .pipeline-step-card:hover,
@@ -2969,8 +2864,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-about-card:focus-within .section-title,
             .home-skill-card:hover .section-title,
             .home-skill-card:focus-within .section-title,
-            .project-evidence-card:hover .evidence-label,
-            .project-evidence-card:focus-within .evidence-label,
             .featured-project-card:hover h2,
             .featured-project-card:focus-within h2,
             .pipeline-step-card:hover .pipeline-step-name,
@@ -2991,7 +2884,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .data-quality-hover-card,
             .home-about-card,
             .home-skill-card,
-            .project-evidence-card,
             .featured-project-card,
             .pipeline-step-card {{
                 transform: none;
@@ -3526,7 +3418,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         @media (max-width: 1024px) {{
             .pipeline {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
-            .project-evidence-strip {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
             .featured-preview img {{ max-height: 320px; }}
             .featured-lineage-preview {{ min-height: 0; }}
             .st-key-market_basic_filters_grid [data-testid="stHorizontalBlock"] {{
@@ -3652,18 +3543,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 width: 100%;
                 margin-top: 0;
             }}
-            .project-proof-console {{
-                margin-top: .85rem;
-            }}
-            .proof-console-grid {{
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                row-gap: .65rem;
-            }}
-            .proof-console-item-1,
-            .proof-console-item-3 {{
-                border-left: 0;
-                padding-left: 0;
-            }}
             .hero-skill-pipeline {{
                 grid-template-columns: minmax(0, 100%);
                 justify-content: stretch;
@@ -3680,7 +3559,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-profile-info-card {{
                 transform: none;
             }}
-            .project-evidence-strip,
             .home-about-grid,
             .home-skills-grid,
             .pipeline-step-grid,
@@ -3966,8 +3844,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .home-about-card:focus-within,
             .home-skill-card:hover,
             .home-skill-card:focus-within,
-            .project-evidence-card:hover,
-            .project-evidence-card:focus-within,
             .featured-project-card:hover,
             .featured-project-card:focus-within,
             .pipeline-step-card:hover,
@@ -4015,8 +3891,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-profile-card,
             .hero-profile-card:hover,
             .hero-profile-status-dot,
-            .project-proof-console,
-            .proof-console-item,
             .hero-skill-node,
             .hero-skill-packet-track,
             .hero-skill-packet,

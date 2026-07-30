@@ -33,7 +33,17 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             --shadow-accent: {theme["shadow_accent"]};
             --hover: {theme["hover"]};
             --disabled: {theme["disabled"]};
-            --font: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --color-navy: #0f172a;
+            --color-blue: #2563eb;
+            --color-blue-dark: #1d4ed8;
+            --color-cyan: #06b6d4;
+            --color-green: #10b981;
+            --color-background: #f6f8fc;
+            --color-surface: #ffffff;
+            --color-text-muted: #52637a;
+            --color-border: #d8e2ef;
+            --color-border-blue: rgba(37, 99, 235, 0.24);
+            --font: "Source Sans Pro", "Source Sans 3", "Source Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --data-navy: #0F172A;
             --data-blue: #2563EB;
             --data-blue-dark: #1D4ED8;
@@ -213,7 +223,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         @media (hover: hover) and (pointer: fine) {{
             .sidebar-brand:hover,
             .sidebar-brand:focus-within {{
-                transform: translateY(-5px) scale(1.015);
+                transform: translateY(-3px);
                 border-color: rgba(37, 99, 235, 0.45);
                 background-color: rgba(239, 246, 255, 0.75);
                 box-shadow: 0 14px 30px rgba(37, 99, 235, 0.14);
@@ -274,7 +284,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             height: 1px;
             width: 100%;
             background: rgba(148, 163, 184, .28);
-            margin: 1rem 0;
+            margin: .75rem 0;
         }}
         .sidebar-section-expander {{
             width: 100%;
@@ -398,14 +408,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .sidebar-portfolio-links {{
             display: flex;
             flex-direction: column;
-            gap: .12rem;
-            padding: 0 0 .15rem;
+            gap: .08rem;
+            padding: .35rem 0 .25rem .85rem;
+            border-left: 1px solid rgba(37, 99, 235, .20);
         }}
         .sidebar-portfolio-link {{
             display: flex;
             align-items: center;
             min-height: 2.05rem;
-            padding: .38rem .65rem;
+            padding: .38rem .5rem;
             border-radius: 8px;
             color: var(--text-2);
             font-size: .84rem;
@@ -959,19 +970,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             isolation: isolate;
             z-index: 5;
             display: grid;
-            grid-template-columns:
-                minmax(5.8rem, 14fr)
-                minmax(7.1rem, 17fr)
-                minmax(7.4rem, 18fr)
-                minmax(4.2rem, 12fr)
-                minmax(6.1rem, 15fr)
-                minmax(8.2rem, 20fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             align-items: center;
-            gap: .72rem;
+            gap: 1.9rem .72rem;
             width: 100%;
             padding-top: 3.25rem;
             margin-top: 0;
             overflow: visible;
+            container-type: inline-size;
         }}
         .core-workflow-orchestrator {{
             position: absolute;
@@ -1061,8 +1067,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             position: absolute;
             z-index: 1;
             top: calc(3.25rem + 35px);
-            left: 6.5%;
-            right: 6.5%;
+            left: 12%;
+            right: 12%;
             height: 2px;
             transform: translateY(-50%);
             border-radius: 999px;
@@ -1071,14 +1077,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .hero-skill-rail::after {{
             content: "";
-            display: none;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: calc(66px + 1.9rem);
+            display: block;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(148, 163, 184, .38), rgba(37, 99, 235, .48), rgba(6, 182, 212, .38));
         }}
         .hero-skill-packet-track {{
             position: absolute;
             z-index: 2;
             top: calc(3.25rem + 35px);
-            left: 6.5%;
-            right: 6.5%;
+            left: 12%;
+            right: 12%;
             height: 0;
             pointer-events: none;
             will-change: transform;
@@ -1464,9 +1477,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-project-card {{
             position: relative;
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(540px, 1.02fr);
+            grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
             gap: clamp(2rem, 3vw, 3.25rem);
-            align-items: center;
+            align-items: start;
             padding: 1.25rem;
             margin: 1.4rem 0 2rem;
             overflow: visible;
@@ -1510,7 +1523,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 radial-gradient(circle at 55% 45%, rgba(37, 99, 235, 0.10), transparent 48%),
                 linear-gradient(145deg, rgba(255,255,255,0.98), rgba(239,246,255,0.88));
             overflow: hidden;
-            min-height: 230px;
+            min-height: 0;
         }}
         .featured-preview img {{
             width: 100%;
@@ -1586,12 +1599,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             grid-template-rows:
                 auto
                 repeat(6, minmax(52px, auto));
-            align-items: stretch;
+            align-items: start;
             gap: 8px;
             width: 100%;
             max-width: 100%;
             min-width: 0;
-            min-height: 390px;
+            min-height: 0;
             height: auto;
             isolation: isolate;
             overflow: hidden;
@@ -1684,8 +1697,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: 100%;
             max-width: 100%;
             min-width: 0;
-            min-height: 52px;
-            padding: 9px 10px;
+            min-height: 50px;
+            padding: 8px 10px;
             border: 1px solid rgba(148, 163, 184, .28);
             border-radius: 12px;
             background: rgba(255, 255, 255, .95);
@@ -1760,10 +1773,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-lineage-model-name {{
             min-width: 0;
             color: var(--text);
-            font-size: clamp(0.68rem, 0.25vw + 0.61rem, 0.82rem);
+            font-size: clamp(0.72rem, 0.22vw + 0.66rem, 0.84rem);
             font-weight: 750;
             line-height: 1.15;
-            overflow-wrap: anywhere;
+            overflow-wrap: break-word;
             word-break: normal;
             hyphens: none;
         }}
@@ -2107,19 +2120,19 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 transform: translateX(.18rem);
             }}
             .hero-skill-node:hover {{
-                transform: translateY(-2px) scale(1.02);
+                transform: translateY(-2px);
                 border-color: rgba(37, 99, 235, 0.50);
                 background-color: rgba(239, 246, 255, .98);
                 box-shadow: 0 10px 22px rgba(37, 99, 235, 0.10);
             }}
             .hero-profile-card:hover {{
-                transform: translateY(-4px) scale(1.012);
+                transform: translateY(-3px);
                 border-color: rgba(37, 99, 235, 0.42);
                 box-shadow: 0 20px 44px rgba(37, 99, 235, 0.15);
             }}
             .home-profile-info-card:hover,
             .home-profile-info-card:focus-within {{
-                transform: translateY(-5px) scale(1.025);
+                transform: translateY(-3px);
                 border-color: rgba(37, 99, 235, 0.50);
                 box-shadow: 0 18px 38px rgba(37, 99, 235, 0.17);
             }}
@@ -2426,7 +2439,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             background: rgba(255, 255, 255, 0.78);
             color: var(--text);
             opacity: .78;
-            transform: scale(1);
+            transform: none;
             animation: project-pipeline-stage-pulse 8s ease-in-out infinite;
             box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
         }}
@@ -2522,13 +2535,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         @keyframes project-pipeline-stage-pulse {{
             0%, 16%, 100% {{
                 opacity: .78;
-                transform: scale(1);
+                transform: none;
                 border-color: rgba(37, 99, 235, 0.18);
                 box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
             }}
             7%, 11% {{
                 opacity: 1;
-                transform: translateY(-2px) scale(1.025);
+                transform: translateY(-2px);
                 border-color: rgba(37, 99, 235, 0.50);
                 box-shadow: 0 8px 22px rgba(37, 99, 235, 0.16);
             }}
@@ -2536,13 +2549,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         @keyframes project-pipeline-warehouse-pulse {{
             0%, 16%, 100% {{
                 opacity: .82;
-                transform: scale(1);
+                transform: none;
                 border-color: rgba(37, 99, 235, 0.32);
                 box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
             }}
             7%, 11% {{
                 opacity: 1;
-                transform: translateY(-2px) scale(1.03);
+                transform: translateY(-2px);
                 border-color: rgba(37, 99, 235, 0.56);
                 box-shadow: 0 8px 24px rgba(37, 99, 235, 0.20);
             }}
@@ -2708,7 +2721,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         @media (hover: hover) and (pointer: fine) {{
             .about-hover-card:hover,
             .about-hover-card:focus-within {{
-                transform: translateY(-3px) scale(1.018);
+                transform: translateY(-3px);
                 border-color: rgba(37, 99, 235, 0.45);
                 background-color: rgba(239, 246, 255, 0.65);
                 box-shadow: 0 12px 28px rgba(37, 99, 235, 0.14);
@@ -2717,7 +2730,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .experience-hover-card:hover,
             .experience-hover-card:focus-within {{
-                transform: translateY(-4px) scale(1.015);
+                transform: translateY(-4px);
                 border-color: rgba(37, 99, 235, 0.38);
                 background-color: rgba(239, 246, 255, 0.62);
                 box-shadow: 0 14px 30px rgba(37, 99, 235, 0.13);
@@ -2861,6 +2874,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 box-shadow 250ms ease;
         }}
         .contact-hover-card {{
+            display: flex;
+            flex-direction: column;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -3003,7 +3018,19 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             line-height: 1.15;
             text-decoration: none;
             box-shadow: var(--shadow-accent);
-            margin-top: .55rem;
+            margin-top: auto;
+        }}
+        .contact-card-action-secondary {{
+            background: transparent;
+            color: var(--data-blue) !important;
+            box-shadow: none;
+            border-color: rgba(37, 99, 235, .24);
+        }}
+        .contact-card-action-secondary:hover,
+        .contact-card-action-secondary:focus-visible {{
+            background: rgba(239, 246, 255, .82);
+            color: var(--data-blue-dark) !important;
+            box-shadow: none;
         }}
         .quality-metric-grid {{
             display: grid;
@@ -3065,7 +3092,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .featured-project-card:focus-within,
             .pipeline-step-card:hover,
             .pipeline-step-card:focus-within {{
-                transform: translateY(-4px) scale(1.012);
+                transform: translateY(-4px);
                 border-color: rgba(37, 99, 235, 0.30);
                 background-color: rgba(239, 246, 255, 0.58);
                 box-shadow: 0 14px 28px rgba(15, 23, 42, 0.09);
@@ -3074,7 +3101,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .contact-hover-card:hover,
             .contact-hover-card:focus-within {{
-                transform: translateY(-4px) scale(1.015);
+                transform: translateY(-4px);
                 border-color: rgba(37, 99, 235, 0.38);
                 background-color: rgba(239, 246, 255, 0.62);
                 box-shadow: 0 14px 30px rgba(37, 99, 235, 0.13);
@@ -3174,7 +3201,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             line-height: 1.15;
         }}
         .st-key-market_basic_filters_grid [data-testid="stHorizontalBlock"] {{
-            gap: clamp(1.2rem, 1.6vw, 1.5rem);
+            gap: clamp(.75rem, 1vw, 1rem);
         }}
         .st-key-market_basic_filters_grid [data-testid="stWidgetLabel"],
         .st-key-market_advanced_filters [data-testid="stWidgetLabel"] {{
@@ -3339,12 +3366,31 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
 
         .pipeline {{
+            position: relative;
+            isolation: isolate;
             display: grid;
-            grid-template-columns: repeat(7, minmax(0, 1fr));
-            gap: .65rem;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: .85rem;
             margin: 1rem 0 1.25rem;
+            overflow: hidden;
+            container-type: inline-size;
+        }}
+        .pipeline::before {{
+            content: "";
+            position: absolute;
+            z-index: 0;
+            left: 2rem;
+            right: 2rem;
+            top: calc(50% - 1px);
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(148, 163, 184, .34), rgba(37, 99, 235, .42), rgba(6, 182, 212, .34));
+            pointer-events: none;
         }}
         .pipeline-step {{
+            position: relative;
+            z-index: 2;
+            min-height: 7.1rem;
             border: 1px solid var(--border);
             background: var(--surface);
             border-radius: 10px;
@@ -3353,6 +3399,27 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 600;
             color: var(--text);
             box-shadow: var(--shadow);
+        }}
+        .pipeline-step::after {{
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -.55rem;
+            width: .56rem;
+            height: .56rem;
+            border-top: 2px solid rgba(37, 99, 235, .48);
+            border-right: 2px solid rgba(37, 99, 235, .48);
+            transform: translateY(-50%) rotate(45deg);
+        }}
+        .pipeline-step:last-of-type::after {{
+            display: none;
+        }}
+        .pipeline-step-4::after {{
+            top: auto;
+            right: auto;
+            left: 50%;
+            bottom: -.58rem;
+            transform: translateX(-50%) rotate(135deg);
         }}
         .pipeline-step span {{
             display: block;
@@ -3371,6 +3438,23 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-size: .76rem;
             line-height: 1.3;
             margin-top: .28rem;
+        }}
+        .pipeline-flow-packet {{
+            position: absolute;
+            z-index: 1;
+            left: 2rem;
+            top: calc(50% - 3px);
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--data-blue);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, .10), 0 0 10px rgba(37, 99, 235, .28);
+            animation: pipeline-flow-packet 8s linear infinite;
+        }}
+        @keyframes pipeline-flow-packet {{
+            0%, 8% {{ opacity: 0; transform: translate3d(0, 0, 0); }}
+            12%, 82% {{ opacity: 1; }}
+            94%, 100% {{ opacity: 0; transform: translate3d(calc(100cqw - 4.4rem), 0, 0); }}
         }}
 
         .chart-card-heading {{
@@ -3428,7 +3512,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         @media (hover: hover) and (pointer: fine) {{
             .market-chart-reveal-complete:hover {{
-                transform: translate3d(0, -2px, 0) scale(1.006);
+                transform: translate3d(0, -2px, 0);
                 border-color: rgba(37, 99, 235, 0.40);
                 box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12);
                 position: relative;
@@ -3649,6 +3733,25 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         @media (max-width: 1024px) {{
             .pipeline {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
+            .pipeline::before {{
+                left: 1.6rem;
+                right: 1.6rem;
+            }}
+            .pipeline-step-3::after,
+            .pipeline-step-6::after {{
+                top: auto;
+                right: auto;
+                left: 50%;
+                bottom: -.58rem;
+                transform: translateX(-50%) rotate(135deg);
+            }}
+            .pipeline-step-4::after {{
+                top: 50%;
+                right: -.55rem;
+                left: auto;
+                bottom: auto;
+                transform: translateY(-50%) rotate(45deg);
+            }}
             .featured-preview img {{ max-height: 320px; }}
             .featured-lineage-preview {{ min-height: 0; }}
             .st-key-market_basic_filters_grid [data-testid="stHorizontalBlock"] {{
@@ -3962,9 +4065,48 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         @media (max-width: 560px) {{
             .block-container {{ padding: .35rem 1rem 2.5rem; }}
-            .pipeline {{ grid-template-columns: 1fr; }}
+            .pipeline {{
+                grid-template-columns: 1fr;
+                gap: .75rem;
+            }}
+            .pipeline::before {{
+                left: 50%;
+                right: auto;
+                top: 1rem;
+                bottom: 1rem;
+                width: 2px;
+                height: auto;
+                transform: translateX(-50%);
+                background: linear-gradient(180deg, rgba(148, 163, 184, .34), rgba(37, 99, 235, .42), rgba(6, 182, 212, .34));
+            }}
+            .pipeline-step::after {{
+                top: auto;
+                right: auto;
+                left: 50%;
+                bottom: -.52rem;
+                transform: translateX(-50%) rotate(135deg);
+            }}
+            .pipeline-step-3::after,
+            .pipeline-step-4::after,
+            .pipeline-step-6::after {{
+                top: auto;
+                right: auto;
+                left: 50%;
+                bottom: -.52rem;
+                transform: translateX(-50%) rotate(135deg);
+            }}
+            .pipeline-flow-packet {{
+                left: calc(50% - 3px);
+                top: 1rem;
+                animation-name: pipeline-flow-packet-mobile;
+            }}
             .section-card {{ padding: 1rem; }}
             .kpi-card {{ min-height: 118px; }}
+        }}
+        @keyframes pipeline-flow-packet-mobile {{
+            0%, 8% {{ opacity: 0; transform: translate3d(0, 0, 0); }}
+            12%, 82% {{ opacity: 1; }}
+            94%, 100% {{ opacity: 0; transform: translate3d(0, calc(100cqh - 2rem), 0); }}
         }}
         @keyframes hero-skill-packet-run-mobile {{
             0%, 10% {{ opacity: 0; transform: translate3d(-50%, 0, 0); }}
@@ -4018,6 +4160,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-skill-node:hover,
             .hero-skill-packet-track,
             .hero-skill-packet,
+            .pipeline-flow-packet,
             .core-workflow-orchestrator-pulse,
             .data-quality-detail,
             .sidebar-brand:hover,
@@ -4115,6 +4258,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 display: none;
             }}
             .hero-skill-packet-track {{
+                display: none;
+            }}
+            .pipeline-flow-packet {{
                 display: none;
             }}
             .core-workflow-orchestrator-pulse {{

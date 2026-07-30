@@ -41,7 +41,7 @@ with cards[0]:
 
 with cards[1]:
     linkedin_action = (
-        f'<a class="contact-card-action" href="{html.escape(linkedin_url)}" rel="noreferrer">View LinkedIn</a>'
+        f'<a class="contact-card-action contact-card-action-secondary" href="{html.escape(linkedin_url)}" rel="noreferrer">View LinkedIn</a>'
         if linkedin_url.startswith("https://")
         else ""
     )
@@ -58,7 +58,7 @@ with cards[1]:
 
 with cards[2]:
     github_action = (
-        f'<a class="contact-card-action" href="{html.escape(github_url)}" rel="noreferrer">View GitHub</a>'
+        f'<a class="contact-card-action contact-card-action-secondary" href="{html.escape(github_url)}" rel="noreferrer">View GitHub</a>'
         if github_url.startswith("https://")
         else ""
     )

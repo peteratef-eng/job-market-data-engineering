@@ -288,15 +288,18 @@ def pipeline_visual(class_name: str = "") -> None:
     tabindex = ' tabindex="0"' if class_name else ""
     markup = "".join(
         (
-            f'<div class="{html.escape(step_classes)}"{tabindex}>'
+            f'<div class="{html.escape(step_classes)} pipeline-step-{index}"{tabindex}>'
             f'<span>{number}</span>'
             f'<strong>{html.escape(label)}</strong>'
             f'<small>{html.escape(output)}</small>'
             '</div>'
         )
-        for number, label, output in steps
+        for index, (number, label, output) in enumerate(steps, start=1)
     )
-    st.markdown(f'<div class="pipeline">{markup}</div>', unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="pipeline" aria-label="Connected data pipeline">{markup}<span class="pipeline-flow-packet" aria-hidden="true"></span></div>',
+        unsafe_allow_html=True,
+    )
 
 
 def insight(text: str) -> None:

@@ -10,7 +10,7 @@ from ui.theme import current_theme
 
 
 st.set_page_config(
-    page_title="Job Market Intelligence | Data Engineering Portfolio",
+    page_title="Peter Atef | Junior Data Engineer",
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={

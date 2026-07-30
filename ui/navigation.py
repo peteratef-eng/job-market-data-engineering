@@ -26,13 +26,13 @@ def portfolio_navigation() -> st.navigation:
     return st.navigation(
         {
             "PORTFOLIO": [
-                st.Page("views/home.py", title="Home"),
+                st.Page("views/home.py", title="Home", visibility="hidden"),
                 st.Page("views/about.py", title="About Me", visibility="hidden"),
-                st.Page("views/experience.py", title="Experience"),
+                st.Page("views/experience.py", title="Experience", visibility="hidden"),
                 st.Page("views/skills.py", title="Skills", visibility="hidden"),
                 # Restore this sidebar item when a second portfolio project is added.
                 st.Page("views/projects.py", title="Projects", visibility="hidden"),
-                st.Page("views/contact.py", title="Contact"),
+                st.Page("views/contact.py", title="Contact", visibility="hidden"),
             ],
             "PROJECTS": project_pages,
         }

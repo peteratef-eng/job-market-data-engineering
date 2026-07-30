@@ -12,6 +12,12 @@ from portfolio.content.profile import PROFILE
 from ui.navigation import SIDEBAR_PROJECTS
 
 
+SIDEBAR_PORTFOLIO_LINKS = [
+    {"label": "Home", "route": "/"},
+    {"label": "Experience", "route": "/experience"},
+    {"label": "Contact", "route": "/contact"},
+]
+
 KPI_ICONS = {
     "Total postings": "JP",
     "Companies": "CO",
@@ -131,8 +137,8 @@ def sidebar_projects() -> None:
     projects_open_attr = " open" if projects_open else ""
     projects_html = (
         '<section class="sidebar-projects">'
-        f'<details class="sidebar-projects-expander"{projects_open_attr}>'
-        '<summary class="sidebar-projects-summary">'
+        f'<details class="sidebar-section-expander sidebar-projects-expander"{projects_open_attr}>'
+        '<summary class="sidebar-section-toggle">'
         '<span>PROJECTS</span>'
         '<span class="sidebar-expander-chevron" aria-hidden="true">'
         '<svg viewBox="0 0 16 16" focusable="false">'
@@ -140,7 +146,9 @@ def sidebar_projects() -> None:
         '</svg>'
         '</span>'
         '</summary>'
-        f'<div class="sidebar-projects-content">{"".join(cards)}</div>'
+        '<div class="sidebar-section-content sidebar-projects-content">'
+        f'<div class="sidebar-section-content-inner">{"".join(cards)}</div>'
+        '</div>'
         '</details>'
         '</section>'
     )
@@ -148,6 +156,43 @@ def sidebar_projects() -> None:
         projects_html,
         unsafe_allow_html=True,
     )
+
+
+def sidebar_portfolio() -> None:
+    current_path = _current_path()
+    portfolio_routes = {link["route"] for link in SIDEBAR_PORTFOLIO_LINKS}
+    portfolio_open = current_path in portfolio_routes
+    portfolio_open_attr = " open" if portfolio_open else ""
+    links = []
+    for link in SIDEBAR_PORTFOLIO_LINKS:
+        link_active = link["route"] == current_path
+        link_active_class = " sidebar-portfolio-link-active" if link_active else ""
+        aria_current_attr = ' aria-current="page"' if link_active else ""
+        links.append(
+            '<a class="sidebar-portfolio-link'
+            f'{link_active_class}" '
+            f'href="{html.escape(link["route"])}"'
+            f'{aria_current_attr}>'
+            f'{html.escape(link["label"])}</a>'
+        )
+    portfolio_html = (
+        '<section class="sidebar-portfolio">'
+        f'<details class="sidebar-section-expander sidebar-portfolio-expander"{portfolio_open_attr}>'
+        '<summary class="sidebar-section-toggle">'
+        '<span>PORTFOLIO</span>'
+        '<span class="sidebar-expander-chevron" aria-hidden="true">'
+        '<svg viewBox="0 0 16 16" focusable="false">'
+        '<path d="M4 6l4 4 4-4"></path>'
+        '</svg>'
+        '</span>'
+        '</summary>'
+        '<div class="sidebar-section-content sidebar-portfolio-content">'
+        f'<nav class="sidebar-section-content-inner sidebar-portfolio-links">{"".join(links)}</nav>'
+        '</div>'
+        '</details>'
+        '</section>'
+    )
+    st.sidebar.markdown(portfolio_html, unsafe_allow_html=True)
 
 
 def app_header(kicker: str, title: str, subtitle: str, location: str) -> dict[str, str]:
@@ -165,6 +210,8 @@ def app_header(kicker: str, title: str, subtitle: str, location: str) -> dict[st
 
 
 def sidebar_bottom() -> None:
+    sidebar_portfolio()
+    st.sidebar.markdown('<div class="sidebar-divider"></div>', unsafe_allow_html=True)
     sidebar_projects()
     st.sidebar.markdown('<div class="sidebar-profile-divider"></div>', unsafe_allow_html=True)
     sidebar_brand()

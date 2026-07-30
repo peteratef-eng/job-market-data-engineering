@@ -272,51 +272,73 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .sidebar-divider {{
             height: 1px;
-            background: var(--border);
-            margin: .75rem 0 .35rem;
+            width: 100%;
+            background: rgba(148, 163, 184, .28);
+            margin: 1rem 0;
+        }}
+        .sidebar-section-expander {{
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            margin: 0;
+        }}
+        .sidebar-portfolio {{
+            width: 100%;
+            max-width: 100%;
+            margin: .25rem 0 0;
+        }}
+        .sidebar-projects {{
+            width: 100%;
+            max-width: 100%;
+            margin: 0 0 .5rem;
         }}
         .sidebar-projects-expander {{
             width: 100%;
             max-width: 100%;
-            margin: .95rem 0 .5rem;
+            margin: 0;
         }}
-        .sidebar-projects-summary {{
-            min-height: 42px;
+        .sidebar-section-toggle {{
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            min-height: 44px;
+            box-sizing: border-box;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: .75rem;
-            padding: .65rem .7rem;
-            border: 1px solid transparent;
+            gap: 12px;
+            padding: 10px 14px;
+            border: 0;
             border-radius: 10px;
             color: var(--text);
-            font-size: .72rem;
+            background: transparent;
+            font-family: inherit;
+            font-size: .75rem;
             font-weight: 800;
-            letter-spacing: .1em;
+            letter-spacing: .12em;
             text-transform: uppercase;
             cursor: pointer;
             list-style: none;
             user-select: none;
             transition:
                 background-color 180ms ease,
-                border-color 180ms ease,
                 color 180ms ease;
         }}
-        .sidebar-projects-summary::-webkit-details-marker,
+        .sidebar-section-toggle::-webkit-details-marker,
         .sidebar-project-summary::-webkit-details-marker {{
             display: none;
         }}
-        .sidebar-projects-summary::marker,
+        .sidebar-section-toggle::marker,
         .sidebar-project-summary::marker {{
             content: "";
         }}
-        .sidebar-projects-summary:hover,
-        .sidebar-projects-summary:focus-visible {{
+        .sidebar-section-toggle:hover,
+        .sidebar-section-toggle:focus-visible {{
             background: rgba(239, 246, 255, .72);
-            border-color: rgba(37, 99, 235, .20);
             outline: none;
         }}
-        .sidebar-projects-summary:focus-visible,
+        .sidebar-section-toggle:focus-visible,
         .sidebar-project-summary:focus-visible {{
             box-shadow: 0 0 0 3px rgba(37, 99, 235, .16);
         }}
@@ -342,27 +364,72 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             stroke-linecap: round;
             stroke-linejoin: round;
         }}
-        .sidebar-projects-expander[open] > .sidebar-projects-summary .sidebar-expander-chevron,
+        .sidebar-section-expander[open] > .sidebar-section-toggle .sidebar-expander-chevron,
         .sidebar-project-expander[open] > .sidebar-project-summary .sidebar-project-chevron {{
             transform: rotate(180deg);
+        }}
+        .sidebar-section-content {{
+            display: grid;
+            grid-template-rows: 0fr;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            opacity: 0;
+            transition:
+                grid-template-rows 220ms ease,
+                opacity 160ms ease;
+        }}
+        .sidebar-section-expander[open] > .sidebar-section-content {{
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }}
+        .sidebar-section-content-inner {{
+            min-height: 0;
+            overflow: hidden;
+        }}
+        .sidebar-portfolio-content {{
+            margin-top: .5rem;
         }}
         .sidebar-projects-content {{
             width: 100%;
             max-width: 100%;
-            margin-top: .25rem;
+            margin-top: .5rem;
         }}
-        .sidebar-projects-expander[open] > .sidebar-projects-content {{
-            animation: sidebar-project-content-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        .sidebar-portfolio-links {{
+            display: flex;
+            flex-direction: column;
+            gap: .12rem;
+            padding: 0 0 .15rem;
         }}
-        @keyframes sidebar-project-content-in {{
-            from {{
-                opacity: 0;
-                transform: translateY(-4px);
-            }}
-            to {{
-                opacity: 1;
-                transform: translateY(0);
-            }}
+        .sidebar-portfolio-link {{
+            display: flex;
+            align-items: center;
+            min-height: 2.05rem;
+            padding: .38rem .65rem;
+            border-radius: 8px;
+            color: var(--text-2);
+            font-size: .84rem;
+            font-weight: 600;
+            line-height: 1.2;
+            text-decoration: none;
+            transition:
+                background-color 180ms ease,
+                color 180ms ease;
+        }}
+        .sidebar-portfolio-link:hover,
+        .sidebar-portfolio-link:focus-visible {{
+            color: var(--data-blue);
+            background: rgba(239, 246, 255, .82);
+            outline: none;
+            text-decoration: none;
+        }}
+        .sidebar-portfolio-link:focus-visible {{
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .14);
+        }}
+        .sidebar-portfolio-link-active {{
+            color: var(--data-blue);
+            background: rgba(37, 99, 235, .09);
+            font-weight: 700;
         }}
         .sidebar-project-expander {{
             width: 100%;
@@ -464,6 +531,16 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .sidebar-project-expander[open] > .sidebar-project-links {{
             animation: sidebar-project-content-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }}
+        @keyframes sidebar-project-content-in {{
+            from {{
+                opacity: 0;
+                transform: translateY(-4px);
+            }}
+            to {{
+                opacity: 1;
+                transform: translateY(0);
+            }}
         }}
         .sidebar-project-link {{
             position: relative;
@@ -3922,7 +3999,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .sidebar-project-card,
             .sidebar-project-card:hover,
             .sidebar-project-card:focus-within,
+            .sidebar-section-content,
             .sidebar-projects-content,
+            .sidebar-portfolio-content,
             .sidebar-project-links,
             .sidebar-expander-chevron,
             .sidebar-project-chevron,

@@ -96,6 +96,7 @@ def sidebar_projects() -> None:
                 '<a class="sidebar-project-link'
                 f'{page_active_class}" '
                 f'href="{html.escape(page["route"])}"'
+                ' target="_self"'
                 f'{aria_current_attr}>'
                 f'{html.escape(page["label"])}</a>'
             )
@@ -172,6 +173,7 @@ def sidebar_portfolio() -> None:
             '<a class="sidebar-portfolio-link'
             f'{link_active_class}" '
             f'href="{html.escape(link["route"])}"'
+            ' target="_self"'
             f'{aria_current_attr}>'
             f'{html.escape(link["label"])}</a>'
         )
@@ -467,13 +469,14 @@ def project_card(project: dict, *, actions: bool = False, featured: bool = False
         case_study_link = (
             ""
             if featured and project.get("slug") == "job-market-intelligence"
-            else '<a class="project-action project-action-primary" href="/project_overview">View Case Study</a>'
+            else '<a class="project-action project-action-primary" href="/project_overview" target="_self">View Case Study</a>'
         )
         demo_class = "project-action project-action-primary" if not case_study_link else "project-action"
+        demo_target_attr = ' target="_self"' if demo_url.startswith("/") else ""
         action_markup = (
             '<div class="project-actions">'
             f'{case_study_link}'
-            f'<a class="{demo_class}" href="{html.escape(demo_url)}">Live Demo</a>'
+            f'<a class="{demo_class}" href="{html.escape(demo_url)}"{demo_target_attr}>Live Demo</a>'
             f'{repository_link}'
             '</div>'
         )

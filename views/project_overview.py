@@ -47,7 +47,7 @@ st.markdown(
         <p>Explore hiring demand, salaries, technical skills, remote-work patterns, and market trends across 1.6M+ job postings.</p>
         <div class="project-tech-stack">{tech_markup}</div>
         <div class="project-header-actions">
-            <a class="portfolio-button portfolio-button-primary" href="/market_dashboard">Explore Dashboard</a>
+            <a class="portfolio-button portfolio-button-primary" href="/market_dashboard" target="_self">Explore Dashboard</a>
             <a class="portfolio-button project-header-secondary-action" href="{html.escape(project["repository_url"])}" rel="noreferrer">View on GitHub</a>
         </div>
         <div class="project-evidence-compact" aria-label="Project evidence">
@@ -81,7 +81,7 @@ for col, (title, body) in zip(problem_cols, problem_solution):
         section_card(title, body, class_name="job-intelligence-hover-card")
 
 st.markdown(
-    '<a class="project-overview-architecture-link" href="/data_pipeline">View technical architecture -&gt;</a>',
+    '<a class="project-overview-architecture-link" href="/data_pipeline" target="_self">View technical architecture -&gt;</a>',
     unsafe_allow_html=True,
 )
 

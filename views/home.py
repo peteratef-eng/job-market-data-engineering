@@ -157,9 +157,9 @@ st.markdown(
             </div>
             <span class="hero-value-accessible-summary sr-only">Building reliable pipelines, transforming messy data, validating trusted models, and delivering analytics-ready insights.</span>
             <div class="hero-actions">
-                <a class="portfolio-button portfolio-button-primary hero-primary-action" href="/project_overview">EXPLORE MY PROJECT<span aria-hidden="true">-&gt;</span></a>
+                <a class="portfolio-button portfolio-button-primary hero-primary-action" href="/project_overview" target="_self">EXPLORE MY PROJECT<span aria-hidden="true">-&gt;</span></a>
                 <a class="portfolio-button" href="{resume_link}"{resume_attr}>DOWNLOAD RESUME</a>
-                <a class="portfolio-button portfolio-button-quiet" href="/contact">CONTACT ME</a>
+                <a class="portfolio-button portfolio-button-quiet" href="/contact" target="_self">CONTACT ME</a>
             </div>
         </div>
         <article class="hero-profile-card">
@@ -363,7 +363,7 @@ featured_project_markup = (
                     <span>{format_int(source_rows)} source postings</span>
                 </div>
                 <div class="hero-actions">
-                    <a class="portfolio-button portfolio-button-primary" href="/market_dashboard">VIEW LIVE PROJECT</a>
+                    <a class="portfolio-button portfolio-button-primary" href="/market_dashboard" target="_self">VIEW LIVE PROJECT</a>
                     {repository_button}
                 </div>
             </div>
@@ -395,7 +395,7 @@ st.markdown(
             <p>Open to Junior Data Engineer opportunities.</p>
         </div>
         <div class="contact-cta-actions">
-            <a class="portfolio-button portfolio-button-primary" href="/contact">CONTACT ME</a>
+            <a class="portfolio-button portfolio-button-primary" href="/contact" target="_self">CONTACT ME</a>
         </div>
     </section>
     """,

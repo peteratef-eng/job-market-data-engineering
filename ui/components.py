@@ -56,7 +56,7 @@ def sidebar_brand() -> None:
     profile_photo = _profile_photo_markup()
     st.sidebar.markdown(
         f"""
-        <div class="sidebar-brand">
+        <div class="sidebar-brand sidebar-profile-card">
             {profile_photo}
             <div>
                 <div class="brand-title">{html.escape(PROFILE["full_name"])}</div>
@@ -95,61 +95,57 @@ def sidebar_projects() -> None:
             )
         page_links = "".join(page_links_markup)
         cards.append(
-            f"""
-            <details class="sidebar-project-expander{project_active_class}"{project_open_attr}>
-                <summary class="sidebar-project-summary sidebar-project-card sidebar-project-card-active">
-                    <div class="sidebar-project-card-header">
-                        <span class="sidebar-project-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" focusable="false">
-                                <path d="M6 7c0-1.7 12-1.7 12 0v10c0 1.7-12 1.7-12 0V7z"></path>
-                                <path d="M6 7c0 1.7 12 1.7 12 0"></path>
-                                <path d="M6 12c0 1.7 12 1.7 12 0"></path>
-                            </svg>
-                        </span>
-                        <div class="sidebar-project-copy">
-                            <div class="sidebar-project-name">{html.escape(project["name"])}</div>
-                            <div class="sidebar-project-type">{html.escape(project["type"])}</div>
-                        </div>
-                    </div>
-                    <span class="sidebar-project-chevron" aria-hidden="true">
-                        <svg viewBox="0 0 16 16" focusable="false">
-                            <path d="M4 6l4 4 4-4"></path>
-                        </svg>
-                    </span>
-                    <div class="sidebar-project-mini-lineage" aria-hidden="true">
-                        <span class="sidebar-mini-stage sidebar-mini-source"></span>
-                        <span class="sidebar-mini-track"></span>
-                        <span class="sidebar-mini-stage sidebar-mini-model"></span>
-                        <span class="sidebar-mini-track"></span>
-                        <span class="sidebar-mini-stage sidebar-mini-mart"></span>
-                        <span class="sidebar-mini-packet"></span>
-                    </div>
-                </summary>
-                <nav class="sidebar-project-links">
-                    {page_links}
-                </nav>
-            </details>
-            """
+            '<details class="sidebar-project-expander'
+            f'{project_active_class}"{project_open_attr}>'
+            '<summary class="sidebar-project-summary sidebar-project-card sidebar-project-card-active">'
+            '<div class="sidebar-project-card-header">'
+            '<span class="sidebar-project-icon" aria-hidden="true">'
+            '<svg viewBox="0 0 24 24" focusable="false">'
+            '<path d="M6 7c0-1.7 12-1.7 12 0v10c0 1.7-12 1.7-12 0V7z"></path>'
+            '<path d="M6 7c0 1.7 12 1.7 12 0"></path>'
+            '<path d="M6 12c0 1.7 12 1.7 12 0"></path>'
+            '</svg>'
+            '</span>'
+            '<div class="sidebar-project-copy">'
+            f'<div class="sidebar-project-name">{html.escape(project["name"])}</div>'
+            f'<div class="sidebar-project-type">{html.escape(project["type"])}</div>'
+            '</div>'
+            '</div>'
+            '<span class="sidebar-project-chevron" aria-hidden="true">'
+            '<svg viewBox="0 0 16 16" focusable="false">'
+            '<path d="M4 6l4 4 4-4"></path>'
+            '</svg>'
+            '</span>'
+            '<div class="sidebar-project-mini-lineage" aria-hidden="true">'
+            '<span class="sidebar-mini-stage sidebar-mini-source"></span>'
+            '<span class="sidebar-mini-track"></span>'
+            '<span class="sidebar-mini-stage sidebar-mini-model"></span>'
+            '<span class="sidebar-mini-track"></span>'
+            '<span class="sidebar-mini-stage sidebar-mini-mart"></span>'
+            '<span class="sidebar-mini-packet"></span>'
+            '</div>'
+            '</summary>'
+            f'<nav class="sidebar-project-links">{page_links}</nav>'
+            '</details>'
         )
     projects_open_attr = " open" if projects_open else ""
+    projects_html = (
+        '<section class="sidebar-projects">'
+        f'<details class="sidebar-projects-expander"{projects_open_attr}>'
+        '<summary class="sidebar-projects-summary">'
+        '<span>PROJECTS</span>'
+        '<span class="sidebar-expander-chevron" aria-hidden="true">'
+        '<svg viewBox="0 0 16 16" focusable="false">'
+        '<path d="M4 6l4 4 4-4"></path>'
+        '</svg>'
+        '</span>'
+        '</summary>'
+        f'<div class="sidebar-projects-content">{"".join(cards)}</div>'
+        '</details>'
+        '</section>'
+    )
     st.sidebar.markdown(
-        dedent(
-            f"""
-            <details class="sidebar-projects-expander"{projects_open_attr}>
-                <summary class="sidebar-projects-summary">
-                    <span>PROJECTS</span>
-                    <span class="sidebar-expander-chevron" aria-hidden="true">
-                        <svg viewBox="0 0 16 16" focusable="false">
-                            <path d="M4 6l4 4 4-4"></path>
-                        </svg>
-                    </span>
-                </summary>
-                <div class="sidebar-projects-content">
-                {''.join(cards)}
-                </div>
-            </details>
-            """
-        ).strip(),
+        projects_html,
         unsafe_allow_html=True,
     )
 
@@ -169,6 +165,8 @@ def app_header(kicker: str, title: str, subtitle: str, location: str) -> dict[st
 
 
 def sidebar_bottom() -> None:
+    sidebar_projects()
+    st.sidebar.markdown('<div class="sidebar-profile-divider"></div>', unsafe_allow_html=True)
     sidebar_brand()
     links = []
     if PROFILE.get("github_url"):
@@ -178,12 +176,10 @@ def sidebar_bottom() -> None:
     links_markup = " | ".join(links)
     st.sidebar.markdown(
         f"""
-        <div class="sidebar-links">{links_markup}</div>
-        <div class="sidebar-divider"></div>
+        <nav class="sidebar-links sidebar-social-links">{links_markup}</nav>
         """,
         unsafe_allow_html=True,
     )
-    sidebar_projects()
 
 
 def section_card(title: str, body: str, class_name: str = "") -> None:

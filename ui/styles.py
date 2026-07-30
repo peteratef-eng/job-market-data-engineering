@@ -247,10 +247,22 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .brand-title {{ color: var(--text); font-weight: 700; line-height: 1.15; }}
         .brand-subtitle {{ color: var(--muted); font-size: .82rem; margin-top: .12rem; }}
+        .sidebar-profile-divider {{
+            height: 1px;
+            margin: 1rem 0 .85rem;
+            background: rgba(148, 163, 184, .28);
+        }}
+        .sidebar-profile-card {{
+            margin-top: 0;
+            margin-bottom: .65rem;
+        }}
         .sidebar-links {{
             margin: 0 0 .65rem;
             color: var(--muted);
             font-size: .84rem;
+        }}
+        .sidebar-social-links {{
+            display: block;
         }}
         .sidebar-links a {{
             color: var(--accent-bright);

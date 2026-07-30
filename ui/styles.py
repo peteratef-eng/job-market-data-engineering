@@ -263,29 +263,110 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             background: var(--border);
             margin: .75rem 0 .35rem;
         }}
-        .sidebar-projects-label {{
-            margin: 1.1rem 0 .5rem;
-            color: var(--text-2);
-            font-size: .66rem;
-            font-weight: 750;
-            letter-spacing: .11em;
-            text-transform: uppercase;
-        }}
-        .sidebar-projects-shell {{
+        .sidebar-projects-expander {{
             width: 100%;
             max-width: 100%;
-            margin: 0 0 .5rem;
+            margin: .95rem 0 .5rem;
         }}
-        .sidebar-project-group {{
+        .sidebar-projects-summary {{
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .75rem;
+            padding: .65rem .7rem;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            color: var(--text);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+            transition:
+                background-color 180ms ease,
+                border-color 180ms ease,
+                color 180ms ease;
+        }}
+        .sidebar-projects-summary::-webkit-details-marker,
+        .sidebar-project-summary::-webkit-details-marker {{
+            display: none;
+        }}
+        .sidebar-projects-summary::marker,
+        .sidebar-project-summary::marker {{
+            content: "";
+        }}
+        .sidebar-projects-summary:hover,
+        .sidebar-projects-summary:focus-visible {{
+            background: rgba(239, 246, 255, .72);
+            border-color: rgba(37, 99, 235, .20);
+            outline: none;
+        }}
+        .sidebar-projects-summary:focus-visible,
+        .sidebar-project-summary:focus-visible {{
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .16);
+        }}
+        .sidebar-expander-chevron,
+        .sidebar-project-chevron {{
+            width: 16px;
+            height: 16px;
+            flex: 0 0 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--data-blue);
+            transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+            transform-origin: center;
+        }}
+        .sidebar-expander-chevron svg,
+        .sidebar-project-chevron svg {{
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }}
+        .sidebar-projects-expander[open] > .sidebar-projects-summary .sidebar-expander-chevron,
+        .sidebar-project-expander[open] > .sidebar-project-summary .sidebar-project-chevron {{
+            transform: rotate(180deg);
+        }}
+        .sidebar-projects-content {{
+            width: 100%;
+            max-width: 100%;
+            margin-top: .25rem;
+        }}
+        .sidebar-projects-expander[open] > .sidebar-projects-content {{
+            animation: sidebar-project-content-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }}
+        @keyframes sidebar-project-content-in {{
+            from {{
+                opacity: 0;
+                transform: translateY(-4px);
+            }}
+            to {{
+                opacity: 1;
+                transform: translateY(0);
+            }}
+        }}
+        .sidebar-project-expander {{
             width: 100%;
             max-width: 100%;
             min-width: 0;
+        }}
+        .sidebar-project-summary {{
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
         }}
         .sidebar-project-card {{
             position: relative;
             width: 100%;
             min-height: 92px;
-            padding: .75rem;
+            padding: .75rem 2rem .75rem .75rem;
             border: 1px solid rgba(37, 99, 235, .18);
             border-radius: 11px;
             background:
@@ -298,11 +379,22 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 border-color 220ms ease,
                 box-shadow 220ms ease;
         }}
+        .sidebar-project-chevron {{
+            position: absolute;
+            top: .78rem;
+            right: .68rem;
+        }}
         .sidebar-project-card-active {{
             border-color: rgba(37, 99, 235, .34);
             background:
                 radial-gradient(circle at 85% 15%, rgba(6, 182, 212, .12), transparent 38%),
                 rgba(239, 246, 255, .92);
+        }}
+        .sidebar-project-expander.is-active > .sidebar-project-summary {{
+            border-color: rgba(37, 99, 235, .42);
+            background:
+                radial-gradient(circle at 85% 15%, rgba(6, 182, 212, .11), transparent 38%),
+                rgba(239, 246, 255, .94);
         }}
         .sidebar-project-card-header {{
             display: flex;
@@ -333,13 +425,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .sidebar-project-copy {{
             min-width: 0;
+            padding-right: .7rem;
         }}
         .sidebar-project-name {{
             color: var(--text);
             font-size: .86rem;
             font-weight: 800;
             line-height: 1.16;
-            overflow-wrap: normal;
+            overflow-wrap: anywhere;
         }}
         .sidebar-project-type {{
             color: var(--muted);
@@ -353,9 +446,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: flex;
             flex-direction: column;
             gap: .08rem;
-            margin: .35rem 0 0 .7rem;
-            padding-left: .7rem;
-            border-left: 1px solid rgba(37, 99, 235, .18);
+            margin: .25rem 0 .15rem .8rem;
+            padding: .35rem 0 .25rem .85rem;
+            border-left: 1px solid rgba(37, 99, 235, .20);
+        }}
+        .sidebar-project-expander[open] > .sidebar-project-links {{
+            animation: sidebar-project-content-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
         }}
         .sidebar-project-link {{
             position: relative;
@@ -377,10 +473,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .sidebar-project-link::before {{
             content: "";
             position: absolute;
-            left: -.84rem;
+            left: -.98rem;
             top: 50%;
-            width: .34rem;
-            height: .34rem;
+            width: 6px;
+            height: 6px;
             border-radius: 999px;
             background: rgba(37, 99, 235, .26);
             transform: translateY(-50%);
@@ -395,6 +491,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .sidebar-project-link:focus-visible::before {{
             background: var(--data-blue);
         }}
+        .sidebar-project-link-active {{
+            color: var(--data-blue);
+            background: rgba(37, 99, 235, .09);
+            font-weight: 700;
+        }}
+        .sidebar-project-link-active::before {{
+            background: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+        }}
         .sidebar-project-mini-lineage {{
             position: relative;
             display: grid;
@@ -404,6 +509,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             height: 22px;
             margin-top: .62rem;
             opacity: .82;
+            pointer-events: none;
         }}
         .sidebar-mini-stage {{
             position: relative;
@@ -438,7 +544,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 0 0 0 3px rgba(37, 99, 235, .10),
                 0 0 7px rgba(37, 99, 235, .26);
             transform: translate3d(0, -50%, 0);
-            animation: sidebar-mini-packet-flow 3.8s linear infinite;
+            animation: sidebar-mini-packet-flow 4s linear infinite;
             pointer-events: none;
         }}
         @keyframes sidebar-mini-packet-flow {{
@@ -447,6 +553,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             72% {{ opacity: 1; background: #2563eb; }}
             88% {{ opacity: 1; background: #06b6d4; }}
             96%, 100% {{ left: calc(100% - 8px); opacity: 0; background: #06b6d4; }}
+        }}
+        .sidebar-projects-expander:not([open]) .sidebar-mini-packet {{
+            animation-play-state: paused;
         }}
         @media (hover: hover) and (pointer: fine) {{
             .sidebar-project-card:hover,
@@ -3458,6 +3567,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .sidebar-project-card,
             .sidebar-project-card:hover,
             .sidebar-project-card:focus-within,
+            .sidebar-projects-content,
+            .sidebar-project-links,
+            .sidebar-expander-chevron,
+            .sidebar-project-chevron,
             .sidebar-mini-packet,
             .st-key-home_profile_photo_shell,
             .st-key-home_profile_photo_shell img,

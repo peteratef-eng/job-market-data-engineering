@@ -4,6 +4,7 @@ import base64
 import html
 from pathlib import Path
 from textwrap import dedent
+from urllib.parse import urlparse
 
 import streamlit as st
 
@@ -24,6 +25,18 @@ KPI_ICONS = {
 
 FOOTER_EMAIL_URL = PROFILE["mailto_url"]
 PROFILE_PHOTO_PATH = Path(__file__).resolve().parents[1] / "assets" / "profile" / "peter.jpg"
+
+
+def _current_path() -> str:
+    try:
+        context_url = st.context.url
+    except Exception:
+        return "/"
+
+    if not context_url:
+        return "/"
+
+    return urlparse(context_url).path or "/"
 
 
 def _profile_photo_markup() -> str:
@@ -56,20 +69,32 @@ def sidebar_brand() -> None:
 
 
 def sidebar_projects() -> None:
+    current_path = _current_path()
+    project_routes = {
+        page["route"]
+        for project in SIDEBAR_PROJECTS
+        for page in project["pages"]
+    }
+    projects_open = current_path in project_routes
     cards = []
     for project in SIDEBAR_PROJECTS:
+        project_open = any(page["route"] == current_path for page in project["pages"])
+        project_active_class = " is-active" if project_open else ""
+        project_open_attr = " open" if project_open else ""
         page_links = "".join(
             (
-                '<a class="sidebar-project-link" '
-                f'href="{html.escape(page["route"])}">'
+                '<a class="sidebar-project-link'
+                f'{" sidebar-project-link-active" if page["route"] == current_path else ""}" '
+                f'href="{html.escape(page["route"])}"'
+                f'{" aria-current=\"page\"" if page["route"] == current_path else ""}>'
                 f'{html.escape(page["label"])}</a>'
             )
             for page in project["pages"]
         )
         cards.append(
             f"""
-            <div class="sidebar-project-group">
-                <div class="sidebar-project-card sidebar-project-card-active">
+            <details class="sidebar-project-expander{project_active_class}"{project_open_attr}>
+                <summary class="sidebar-project-summary sidebar-project-card sidebar-project-card-active">
                     <div class="sidebar-project-card-header">
                         <span class="sidebar-project-icon" aria-hidden="true">
                             <svg viewBox="0 0 24 24" focusable="false">
@@ -83,6 +108,11 @@ def sidebar_projects() -> None:
                             <div class="sidebar-project-type">{html.escape(project["type"])}</div>
                         </div>
                     </div>
+                    <span class="sidebar-project-chevron" aria-hidden="true">
+                        <svg viewBox="0 0 16 16" focusable="false">
+                            <path d="M4 6l4 4 4-4"></path>
+                        </svg>
+                    </span>
                     <div class="sidebar-project-mini-lineage" aria-hidden="true">
                         <span class="sidebar-mini-stage sidebar-mini-source"></span>
                         <span class="sidebar-mini-track"></span>
@@ -91,20 +121,30 @@ def sidebar_projects() -> None:
                         <span class="sidebar-mini-stage sidebar-mini-mart"></span>
                         <span class="sidebar-mini-packet"></span>
                     </div>
-                </div>
-                <div class="sidebar-project-links">
+                </summary>
+                <nav class="sidebar-project-links">
                     {page_links}
-                </div>
-            </div>
+                </nav>
+            </details>
             """
         )
+    projects_open_attr = " open" if projects_open else ""
     st.sidebar.markdown(
         dedent(
             f"""
-            <div class="sidebar-projects-label">PROJECTS</div>
-            <div class="sidebar-projects-shell">
+            <details class="sidebar-projects-expander"{projects_open_attr}>
+                <summary class="sidebar-projects-summary">
+                    <span>PROJECTS</span>
+                    <span class="sidebar-expander-chevron" aria-hidden="true">
+                        <svg viewBox="0 0 16 16" focusable="false">
+                            <path d="M4 6l4 4 4-4"></path>
+                        </svg>
+                    </span>
+                </summary>
+                <div class="sidebar-projects-content">
                 {''.join(cards)}
-            </div>
+                </div>
+            </details>
             """
         ).strip(),
         unsafe_allow_html=True,

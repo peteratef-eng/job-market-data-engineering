@@ -882,77 +882,193 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             isolation: isolate;
             z-index: 5;
             display: grid;
-            grid-template-columns: minmax(6.2rem, 1fr) minmax(7.2rem, 1fr) minmax(7.4rem, 1fr) minmax(3.4rem, .62fr) minmax(8rem, 1.15fr);
+            grid-template-columns:
+                minmax(5.8rem, 14fr)
+                minmax(7.1rem, 17fr)
+                minmax(7.4rem, 18fr)
+                minmax(4.2rem, 12fr)
+                minmax(6.1rem, 15fr)
+                minmax(8.2rem, 20fr);
             align-items: center;
-            gap: .95rem;
+            gap: .72rem;
             width: 100%;
+            padding-top: 3.25rem;
             margin-top: 0;
             overflow: visible;
         }}
+        .core-workflow-orchestrator {{
+            position: absolute;
+            z-index: 4;
+            top: 0;
+            left: 50%;
+            display: inline-flex;
+            align-items: center;
+            gap: .48rem;
+            min-width: 13.5rem;
+            height: 2.25rem;
+            padding: .38rem .68rem;
+            border: 1px solid rgba(37, 99, 235, .20);
+            border-radius: 999px;
+            background: rgba(239, 246, 255, .92);
+            box-shadow: 0 6px 14px rgba(37, 99, 235, .06);
+            color: var(--data-blue);
+            transform: translateX(-50%);
+            overflow: hidden;
+            pointer-events: none;
+        }}
+        .core-workflow-orchestrator-icon {{
+            position: relative;
+            flex: 0 0 auto;
+            width: .82rem;
+            height: .82rem;
+            border: 2px solid rgba(37, 99, 235, .62);
+            border-radius: 999px;
+        }}
+        .core-workflow-orchestrator-icon::before,
+        .core-workflow-orchestrator-icon::after {{
+            content: "";
+            position: absolute;
+            inset: 50% auto auto 50%;
+            width: .24rem;
+            height: .24rem;
+            border-radius: 999px;
+            background: var(--data-cyan);
+            transform: translate(-50%, -50%);
+        }}
+        .core-workflow-orchestrator-icon::after {{
+            width: 2px;
+            height: .98rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, .45);
+            transform: translate(-50%, -50%) rotate(45deg);
+        }}
+        .core-workflow-orchestrator-label {{
+            display: inline-flex;
+            align-items: baseline;
+            gap: .4rem;
+            white-space: nowrap;
+        }}
+        .core-workflow-orchestrator-label strong {{
+            font-size: .66rem;
+            font-weight: 850;
+            letter-spacing: .09em;
+        }}
+        .core-workflow-orchestrator-label small {{
+            color: var(--text-2);
+            font-size: .62rem;
+            font-weight: 750;
+        }}
+        .core-workflow-orchestrator-pulse {{
+            position: absolute;
+            top: 50%;
+            left: .65rem;
+            width: 5px;
+            height: 5px;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, .62);
+            transform: translate3d(0, -50%, 0);
+            animation: core-workflow-orchestrator-pulse 10s linear infinite;
+        }}
+        .core-workflow-control-line {{
+            position: absolute;
+            z-index: 1;
+            top: 2.25rem;
+            height: .82rem;
+            border-left: 1px dotted rgba(37, 99, 235, .28);
+            pointer-events: none;
+        }}
+        .core-workflow-control-line-1 {{ left: 17%; }}
+        .core-workflow-control-line-2 {{ left: 50%; }}
+        .core-workflow-control-line-3 {{ left: 83%; }}
         .hero-skill-rail {{
             position: absolute;
             z-index: 1;
-            top: 50%;
-            left: 7%;
-            right: 7%;
+            top: calc(3.25rem + 35px);
+            left: 6.5%;
+            right: 6.5%;
             height: 2px;
             transform: translateY(-50%);
             border-radius: 999px;
             background: linear-gradient(90deg, rgba(148, 163, 184, .38), rgba(37, 99, 235, .48), rgba(6, 182, 212, .38));
             pointer-events: none;
         }}
+        .hero-skill-rail::after {{
+            content: "";
+            display: none;
+        }}
         .hero-skill-packet-track {{
             position: absolute;
             z-index: 2;
-            top: 50%;
-            left: 7%;
-            right: 7%;
+            top: calc(3.25rem + 35px);
+            left: 6.5%;
+            right: 6.5%;
             height: 0;
             pointer-events: none;
-            animation: hero-skill-packet-run 4s linear infinite;
             will-change: transform;
         }}
         .hero-skill-node {{
             position: relative;
             z-index: 3;
             min-width: 0;
-            min-height: 2.8rem;
+            min-height: 66px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: .44rem .58rem;
+            padding: .58rem .72rem;
             border: 1px solid rgba(37, 99, 235, .18);
             border-radius: 10px;
             background: rgba(255, 255, 255, .90);
             box-shadow: 0 6px 14px rgba(15, 23, 42, .045);
             color: var(--text);
-            font-size: .76rem;
-            font-weight: 850;
-            line-height: 1.12;
             text-align: center;
             transform-origin: center;
-            animation: home-skill-node-enter 420ms ease-out both;
+            animation:
+                home-skill-node-enter 420ms ease-out both,
+                core-workflow-node-flow 10s ease-in-out infinite;
         }}
         .hero-skill-packet {{
             position: absolute;
             z-index: 1;
             top: 0;
             left: 0;
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background:
                 radial-gradient(circle at center, #FFFFFF 0 28%, var(--data-cyan) 31% 100%);
-            border: 2px solid #FFFFFF;
+            border: 1.5px solid #FFFFFF;
             box-shadow:
-                0 0 0 2px rgba(6, 182, 212, 0.14),
+                0 0 0 2px rgba(6, 182, 212, 0.12),
                 0 2px 7px rgba(37, 99, 235, 0.24);
             transform: translate3d(-50%, -50%, 0);
+            animation: hero-skill-packet-run 10s linear infinite;
             pointer-events: none;
+        }}
+        .hero-skill-packet-secondary {{
+            opacity: 0;
+            animation-delay: 2.8s;
         }}
         .hero-skill-node-content {{
             position: relative;
             z-index: 5;
+            display: grid;
+            gap: .28rem;
+            min-width: 0;
+        }}
+        .core-workflow-stage {{
+            color: var(--text-2);
+            font-size: .62rem;
+            font-weight: 850;
+            letter-spacing: .08em;
+            line-height: 1;
+            text-transform: uppercase;
+        }}
+        .core-workflow-tool {{
+            color: var(--text);
+            font-size: .88rem;
+            font-weight: 850;
+            line-height: 1.2;
+            overflow-wrap: normal;
         }}
         .hero-skill-port {{
             position: absolute;
@@ -969,14 +1085,35 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-skill-port-in {{ left: -3px; }}
         .hero-skill-port-out {{ right: -3px; }}
         .hero-skill-node-1 {{ animation-delay: 560ms; }}
-        .hero-skill-node-2 {{ animation-delay: 620ms; }}
-        .hero-skill-node-3 {{ animation-delay: 680ms; }}
-        .hero-skill-node-4 {{ animation-delay: 740ms; }}
-        .hero-skill-node-5 {{ animation-delay: 800ms; }}
+        .hero-skill-node-2 {{ animation-delay: 620ms, 1.5s; }}
+        .hero-skill-node-3 {{ animation-delay: 680ms, 3s; }}
+        .hero-skill-node-4 {{ animation-delay: 740ms, 4.5s; }}
+        .hero-skill-node-5 {{ animation-delay: 800ms, 6s; }}
+        .hero-skill-node-6 {{ animation-delay: 860ms, 7.5s; }}
+        .hero-skill-node-1 {{ animation-delay: 560ms, 0s; }}
         @keyframes hero-skill-packet-run {{
-            0% {{ opacity: 1; transform: translate3d(0, 0, 0); }}
-            94% {{ opacity: 1; transform: translate3d(100%, 0, 0); }}
-            95%, 100% {{ opacity: 0; transform: translate3d(100%, 0, 0); }}
+            0%, 10% {{ opacity: 0; transform: translate3d(0, 0, 0); }}
+            12%, 88% {{ opacity: 1; }}
+            94% {{ opacity: 0; transform: translate3d(100%, 0, 0); }}
+            100% {{ opacity: 0; transform: translate3d(100%, 0, 0); }}
+        }}
+        @keyframes core-workflow-orchestrator-pulse {{
+            0% {{ opacity: 0; transform: translate3d(0, -50%, 0); }}
+            3%, 14% {{ opacity: .8; }}
+            20% {{ opacity: 0; transform: translate3d(12rem, -50%, 0); }}
+            100% {{ opacity: 0; transform: translate3d(12rem, -50%, 0); }}
+        }}
+        @keyframes core-workflow-node-flow {{
+            0%, 9%, 22%, 100% {{
+                border-color: rgba(37, 99, 235, .18);
+                background-color: rgba(255, 255, 255, .90);
+                box-shadow: 0 6px 14px rgba(15, 23, 42, .045);
+            }}
+            12%, 18% {{
+                border-color: rgba(37, 99, 235, .50);
+                background-color: rgba(239, 246, 255, .98);
+                box-shadow: 0 10px 22px rgba(37, 99, 235, .10);
+            }}
         }}
         .hero-photo-shell {{
             justify-self: center;
@@ -1664,9 +1801,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 transform: translateX(.18rem);
             }}
             .hero-skill-node:hover {{
-                transform: translateY(-2px);
+                transform: translateY(-2px) scale(1.02);
                 border-color: rgba(37, 99, 235, 0.50);
-                box-shadow: 0 10px 22px rgba(37, 99, 235, 0.12);
+                background-color: rgba(239, 246, 255, .98);
+                box-shadow: 0 10px 22px rgba(37, 99, 235, 0.10);
             }}
             .hero-profile-card:hover {{
                 transform: translateY(-4px) scale(1.012);
@@ -3220,46 +3358,56 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 width: 100% !important;
             }}
             .hero-skill-pipeline {{
-                grid-template-columns: minmax(0, 12.5rem);
-                justify-content: start;
-                gap: .7rem;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 1.9rem .72rem;
+                padding-top: 3.45rem;
             }}
+            .core-workflow-orchestrator {{
+                top: 0;
+            }}
+            .core-workflow-control-line {{
+                height: 1rem;
+            }}
+            .core-workflow-control-line-1 {{ left: 18%; }}
+            .core-workflow-control-line-2 {{ left: 50%; }}
+            .core-workflow-control-line-3 {{ left: 82%; }}
             .hero-skill-rail {{
-                top: .5rem;
-                bottom: .5rem;
-                left: 50%;
-                right: auto;
-                width: 2px;
-                height: auto;
-                transform: translateX(-50%);
-                background: linear-gradient(180deg, rgba(148, 163, 184, .38), rgba(37, 99, 235, .48), rgba(6, 182, 212, .38));
+                top: calc(3.45rem + 33px);
+                left: 12%;
+                right: 12%;
+                width: auto;
+                height: 2px;
+                transform: translateY(-50%);
+                background: linear-gradient(90deg, rgba(148, 163, 184, .38), rgba(37, 99, 235, .48), rgba(6, 182, 212, .38));
+            }}
+            .hero-skill-rail::after {{
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: calc(66px + 1.9rem);
+                display: block;
+                height: 2px;
+                border-radius: 999px;
+                background: linear-gradient(90deg, rgba(148, 163, 184, .38), rgba(37, 99, 235, .48), rgba(6, 182, 212, .38));
             }}
             .hero-skill-packet-track {{
-                left: 50%;
-                top: .5rem;
-                right: auto;
-                bottom: .5rem;
-                width: 0;
-                height: auto;
-                animation: hero-skill-packet-run-mobile 4.8s linear infinite;
+                top: calc(3.45rem + 33px);
+                left: 12%;
+                right: 12%;
+                width: auto;
+                height: 0;
             }}
             .hero-skill-packet {{
-                left: 50%;
+                left: 0;
                 top: 0;
                 transform: translate3d(-50%, -50%, 0);
             }}
             .hero-skill-port {{
-                left: 50%;
-                transform: translateX(-50%);
+                top: 50%;
+                transform: translateY(-50%);
             }}
-            .hero-skill-port-in {{
-                top: -3px;
-            }}
-            .hero-skill-port-out {{
-                top: auto;
-                right: auto;
-                bottom: -3px;
-            }}
+            .hero-skill-port-in {{ left: -3px; }}
+            .hero-skill-port-out {{ right: -3px; }}
             .dashboard-primary-kpis,
             .dashboard-metadata-strip {{
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3336,6 +3484,70 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-skill-pipeline {{
                 grid-template-columns: minmax(0, 100%);
                 justify-content: stretch;
+                gap: .74rem;
+                padding-top: 3.4rem;
+            }}
+            .core-workflow-orchestrator {{
+                left: 0;
+                width: 100%;
+                min-width: 0;
+                justify-content: center;
+                transform: none;
+            }}
+            .core-workflow-orchestrator-label {{
+                gap: .32rem;
+            }}
+            .core-workflow-control-line {{
+                top: 2.3rem;
+                left: 50%;
+                height: 1rem;
+            }}
+            .core-workflow-control-line-1,
+            .core-workflow-control-line-3 {{
+                display: none;
+            }}
+            .hero-skill-rail {{
+                top: 3.4rem;
+                bottom: 0;
+                left: 50%;
+                right: auto;
+                width: 2px;
+                height: auto;
+                transform: translateX(-50%);
+                background: linear-gradient(180deg, rgba(148, 163, 184, .38), rgba(37, 99, 235, .48), rgba(6, 182, 212, .38));
+            }}
+            .hero-skill-rail::after {{
+                display: none;
+            }}
+            .hero-skill-packet-track {{
+                left: 50%;
+                top: 3.4rem;
+                right: auto;
+                bottom: 0;
+                width: 0;
+                height: auto;
+            }}
+            .hero-skill-packet {{
+                left: 50%;
+                top: 0;
+                animation-name: hero-skill-packet-run-mobile;
+                transform: translate3d(-50%, -50%, 0);
+            }}
+            .hero-skill-port {{
+                left: 50%;
+                transform: translateX(-50%);
+            }}
+            .hero-skill-port-in {{
+                top: -3px;
+            }}
+            .hero-skill-port-out {{
+                top: auto;
+                right: auto;
+                bottom: -3px;
+            }}
+            .hero-skill-node {{
+                min-height: 66px;
+                width: 100%;
             }}
             .hero-photo-shell {{
                 order: -1;
@@ -3539,9 +3751,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .kpi-card {{ min-height: 118px; }}
         }}
         @keyframes hero-skill-packet-run-mobile {{
-            0% {{ opacity: 1; transform: translate3d(0, 0, 0); }}
-            94% {{ opacity: 1; transform: translate3d(0, 100%, 0); }}
-            95%, 100% {{ opacity: 0; transform: translate3d(0, 100%, 0); }}
+            0%, 10% {{ opacity: 0; transform: translate3d(-50%, 0, 0); }}
+            12%, 88% {{ opacity: 1; }}
+            94% {{ opacity: 0; transform: translate3d(-50%, 100%, 0); }}
+            100% {{ opacity: 0; transform: translate3d(-50%, 100%, 0); }}
         }}
         @media (hover: none), (pointer: coarse) {{
             .hero-skill-node:hover {{
@@ -3587,6 +3800,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-skill-node:hover,
             .hero-skill-packet-track,
             .hero-skill-packet,
+            .core-workflow-orchestrator-pulse,
             .data-quality-detail,
             .sidebar-brand:hover,
             .sidebar-brand:focus-within,
@@ -3683,6 +3897,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 display: none;
             }}
             .hero-skill-packet-track {{
+                display: none;
+            }}
+            .core-workflow-orchestrator-pulse {{
                 display: none;
             }}
         }}

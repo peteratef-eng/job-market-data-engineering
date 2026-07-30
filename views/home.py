@@ -49,19 +49,39 @@ hero_photo_markup = (
     else '<div class="hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>'
 )
 
-skill_pipeline_steps = ["ETL Pipelines", "Python / Pandas", "SQL / PostgreSQL", "dbt", "Analytics-Ready Data"]
+skill_pipeline_steps = [
+    ("DATA SOURCES", "Files / APIs"),
+    ("INGEST & PROCESS", "Python / Pandas"),
+    ("STORE", "SQL / PostgreSQL"),
+    ("TRANSFORM & MODEL", "dbt"),
+    ("VALIDATE", "Data Quality"),
+    ("DELIVER", "Analytics-Ready Data"),
+]
 skill_pipeline_markup = (
+    '<span class="sr-only">Core Data Engineering workflow: Airflow orchestrates data ingestion from files and APIs, processing with Python and Pandas, storage in SQL and PostgreSQL, transformation with dbt, data-quality validation, and delivery of analytics-ready data.</span>'
+    '<div class="core-workflow-orchestrator" aria-hidden="true">'
+    '<span class="core-workflow-orchestrator-icon"></span>'
+    '<span class="core-workflow-orchestrator-label"><strong>AIRFLOW</strong><small>Pipeline Orchestration</small></span>'
+    '<span class="core-workflow-orchestrator-pulse"></span>'
+    '</div>'
+    '<span class="core-workflow-control-line core-workflow-control-line-1" aria-hidden="true"></span>'
+    '<span class="core-workflow-control-line core-workflow-control-line-2" aria-hidden="true"></span>'
+    '<span class="core-workflow-control-line core-workflow-control-line-3" aria-hidden="true"></span>'
     '<span class="hero-skill-rail" aria-hidden="true"></span>'
     '<span class="hero-skill-packet-track" aria-hidden="true">'
     '<span class="hero-skill-packet"></span>'
+    '<span class="hero-skill-packet hero-skill-packet-secondary"></span>'
     '</span>'
 )
-for index, label in enumerate(skill_pipeline_steps, start=1):
+for index, (stage, label) in enumerate(skill_pipeline_steps, start=1):
     input_port = '<span class="hero-skill-port hero-skill-port-in" aria-hidden="true"></span>' if index > 1 else ""
     output_port = '<span class="hero-skill-port hero-skill-port-out" aria-hidden="true"></span>' if index < len(skill_pipeline_steps) else ""
     skill_pipeline_markup += (
         f'<span class="hero-skill-node hero-skill-node-{index}">'
-        f'{input_port}<span class="hero-skill-node-content">{html.escape(label)}</span>{output_port}'
+        f'{input_port}<span class="hero-skill-node-content">'
+        f'<span class="core-workflow-stage">{html.escape(stage)}</span>'
+        f'<strong class="core-workflow-tool">{html.escape(label)}</strong>'
+        f'</span>{output_port}'
         '</span>'
     )
 
@@ -113,8 +133,8 @@ st.markdown(
             </div>
         </article>
         <div class="hero-skill-section">
-            <div class="hero-skill-label">CORE DATA WORKFLOW</div>
-            <div class="hero-skill-pipeline" aria-label="Data Engineering workflow: ingest through ETL pipelines, process with Python and Pandas, store and query with SQL and PostgreSQL, model with dbt, and deliver analytics-ready data.">
+            <div class="hero-skill-label">CORE DATA ENGINEERING WORKFLOW</div>
+            <div class="hero-skill-pipeline" aria-label="Core Data Engineering workflow: Airflow orchestrates data ingestion from files and APIs, processing with Python and Pandas, storage in SQL and PostgreSQL, transformation with dbt, data-quality validation, and delivery of analytics-ready data.">
                 {skill_pipeline_markup}
             </div>
         </div>

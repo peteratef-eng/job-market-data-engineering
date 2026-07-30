@@ -9,14 +9,10 @@ from urllib.parse import urlparse
 import streamlit as st
 
 from portfolio.content.profile import PROFILE
-from ui.navigation import SIDEBAR_PROJECTS
+from ui.navigation import PORTFOLIO_PAGES, SIDEBAR_PROJECTS
 
 
-SIDEBAR_PORTFOLIO_LINKS = [
-    {"label": "Home", "route": "/"},
-    {"label": "Experience", "route": "/experience"},
-    {"label": "Contact", "route": "/contact"},
-]
+SIDEBAR_PORTFOLIO_LINKS = [page for page in PORTFOLIO_PAGES if page.get("sidebar")]
 
 KPI_ICONS = {
     "Total postings": "JP",
@@ -33,7 +29,18 @@ FOOTER_EMAIL_URL = PROFILE["mailto_url"]
 PROFILE_PHOTO_PATH = Path(__file__).resolve().parents[1] / "assets" / "profile" / "peter.jpg"
 
 
-def _current_path() -> str:
+def _normalize_route(route: str | None) -> str:
+    if not route:
+        return "/"
+    parsed_path = urlparse(route).path or "/"
+    normalized = "/" + parsed_path.strip("/")
+    return "/" if normalized == "/" else normalized
+
+
+def _current_path(active_route: str | None = None) -> str:
+    if active_route is not None:
+        return _normalize_route(active_route)
+
     try:
         context_url = st.context.url
     except Exception:
@@ -42,9 +49,10 @@ def _current_path() -> str:
     if not context_url:
         return "/"
 
-    return urlparse(context_url).path or "/"
+    return _normalize_route(context_url)
 
 
+@st.cache_data(show_spinner=False)
 def _profile_photo_markup() -> str:
     if not PROFILE_PHOTO_PATH.exists():
         return '<div class="brand-icon">P</div>'
@@ -74,8 +82,8 @@ def sidebar_brand() -> None:
     )
 
 
-def sidebar_projects() -> None:
-    current_path = _current_path()
+def sidebar_projects(active_route: str | None = None) -> None:
+    current_path = _current_path(active_route)
     project_routes = {
         page["route"]
         for project in SIDEBAR_PROJECTS
@@ -104,7 +112,7 @@ def sidebar_projects() -> None:
         cards.append(
             '<details class="sidebar-project-expander'
             f'{project_active_class}"{project_open_attr}>'
-            '<summary class="sidebar-project-summary sidebar-project-card sidebar-project-card-active">'
+            '<summary class="sidebar-project-summary sidebar-project-card">'
             '<div class="sidebar-project-card-header">'
             '<span class="sidebar-project-icon" aria-hidden="true">'
             '<svg viewBox="0 0 24 24" focusable="false">'
@@ -159,8 +167,8 @@ def sidebar_projects() -> None:
     )
 
 
-def sidebar_portfolio() -> None:
-    current_path = _current_path()
+def sidebar_portfolio(active_route: str | None = None) -> None:
+    current_path = _current_path(active_route)
     portfolio_routes = {link["route"] for link in SIDEBAR_PORTFOLIO_LINKS}
     portfolio_open = current_path in portfolio_routes
     portfolio_open_attr = " open" if portfolio_open else ""
@@ -211,10 +219,10 @@ def app_header(kicker: str, title: str, subtitle: str, location: str) -> dict[st
     return {}
 
 
-def sidebar_bottom() -> None:
-    sidebar_portfolio()
+def sidebar_bottom(active_route: str | None = None) -> None:
+    sidebar_portfolio(active_route)
     st.sidebar.markdown('<div class="sidebar-divider"></div>', unsafe_allow_html=True)
-    sidebar_projects()
+    sidebar_projects(active_route)
     st.sidebar.markdown('<div class="sidebar-profile-divider"></div>', unsafe_allow_html=True)
     sidebar_brand()
     links = []

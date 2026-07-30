@@ -4,7 +4,7 @@ import streamlit as st
 
 from ui.analytics import initialize_analytics
 from ui.components import sidebar_bottom
-from ui.navigation import portfolio_navigation
+from ui.navigation import portfolio_navigation, route_from_page
 from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
@@ -24,6 +24,6 @@ theme = current_theme()
 inject_global_styles(theme)
 initialize_analytics()
 
-sidebar_bottom()
 navigation = portfolio_navigation()
+sidebar_bottom(route_from_page(navigation))
 navigation.run()

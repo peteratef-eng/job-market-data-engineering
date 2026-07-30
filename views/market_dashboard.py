@@ -394,41 +394,43 @@ def render_chart(figure, key: str, *, remove_y_title: bool = True) -> None:
 
 
 with st.container(key="dashboard_filter_panel"):
-    st.markdown('<div class="filter-title">Filters</div>', unsafe_allow_html=True)
-    primary_filter_cols = st.columns(4)
-    with primary_filter_cols[0]:
-        job_titles = st.multiselect("Job title", filter_options["job_titles"], key="job_titles")
-    with primary_filter_cols[1]:
-        countries = st.multiselect("Country", filter_options["countries"], key="countries")
-    with primary_filter_cols[2]:
-        selected_skills = st.multiselect("Skill", filter_options["skills"], key="selected_skills")
-    with primary_filter_cols[3]:
-        remote_statuses = st.multiselect("Work mode", filter_options["remote_statuses"], key="remote_statuses")
+    st.markdown('<div class="filter-title market-filters-heading">Filters</div>', unsafe_allow_html=True)
+    with st.container(key="market_basic_filters_grid"):
+        primary_filter_cols = st.columns(4)
+        with primary_filter_cols[0]:
+            job_titles = st.multiselect("Job title", filter_options["job_titles"], key="job_titles")
+        with primary_filter_cols[1]:
+            countries = st.multiselect("Country", filter_options["countries"], key="countries")
+        with primary_filter_cols[2]:
+            selected_skills = st.multiselect("Skill", filter_options["skills"], key="selected_skills")
+        with primary_filter_cols[3]:
+            remote_statuses = st.multiselect("Work mode", filter_options["remote_statuses"], key="remote_statuses")
 
-    with st.expander("Advanced Filters", expanded=False):
-        advanced_filter_cols = st.columns([1.35, 1, 1])
-        with advanced_filter_cols[0]:
-            companies = st.multiselect("Company", filter_options["companies"], key="companies")
-        with advanced_filter_cols[1]:
-            salary_range = None
-            if salary_max > salary_min:
-                salary_range = st.slider(
-                    "Yearly salary range",
-                    min_value=salary_min,
-                    max_value=salary_max,
-                    value=(salary_min, salary_max),
-                    step=1_000.0,
-                    format="$%.0f",
-                    key="salary_range",
+    with st.container(key="market_advanced_filters"):
+        with st.expander("Advanced Filters", expanded=False):
+            advanced_filter_cols = st.columns([1.35, 1, 1])
+            with advanced_filter_cols[0]:
+                companies = st.multiselect("Company", filter_options["companies"], key="companies")
+            with advanced_filter_cols[1]:
+                salary_range = None
+                if salary_max > salary_min:
+                    salary_range = st.slider(
+                        "Yearly salary range",
+                        min_value=salary_min,
+                        max_value=salary_max,
+                        value=(salary_min, salary_max),
+                        step=1_000.0,
+                        format="$%.0f",
+                        key="salary_range",
+                    )
+            with advanced_filter_cols[2]:
+                selected_dates = st.date_input(
+                    "Posted date range",
+                    value=(date_min, date_max),
+                    min_value=date_min,
+                    max_value=date_max,
+                    key="selected_dates",
                 )
-        with advanced_filter_cols[2]:
-            selected_dates = st.date_input(
-                "Posted date range",
-                value=(date_min, date_max),
-                min_value=date_min,
-                max_value=date_max,
-                key="selected_dates",
-            )
 
 date_range = None
 date_range_values = None

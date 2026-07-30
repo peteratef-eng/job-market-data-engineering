@@ -1467,6 +1467,203 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             height: 350px;
             isolation: isolate;
         }}
+        .featured-lineage-lanes {{
+            display: grid;
+            grid-template-rows: minmax(0, 1.35fr) minmax(0, .85fr);
+            gap: .8rem;
+            height: 100%;
+        }}
+        .featured-lineage-lane {{
+            position: relative;
+            display: grid;
+            grid-template-columns:
+                minmax(0, .9fr)
+                minmax(28px, .16fr)
+                minmax(0, 1fr)
+                minmax(28px, .16fr)
+                minmax(0, 1.18fr);
+            align-items: center;
+            gap: .35rem;
+            min-width: 0;
+            padding: 1.45rem .75rem .75rem;
+            border: 1px solid rgba(148, 163, 184, .18);
+            border-radius: 13px;
+            background: rgba(255, 255, 255, .44);
+            overflow: hidden;
+        }}
+        .featured-lineage-lane-label {{
+            position: absolute;
+            top: .48rem;
+            left: .7rem;
+            color: var(--text-2);
+            font-size: .56rem;
+            font-weight: 800;
+            letter-spacing: .09em;
+            line-height: 1;
+            text-transform: uppercase;
+        }}
+        .featured-lineage-source-group {{
+            position: relative;
+            display: grid;
+            gap: .35rem;
+            min-width: 0;
+            padding: .45rem;
+            border: 1px solid rgba(100, 116, 139, .18);
+            border-radius: 10px;
+            background: rgba(248, 250, 252, .90);
+        }}
+        .featured-lineage-source-group::after {{
+            content: "";
+            position: absolute;
+            right: -.75rem;
+            top: 50%;
+            width: .75rem;
+            height: 1px;
+            background: rgba(100, 116, 139, .24);
+            transform: translateY(-50%);
+        }}
+        .featured-lineage-source-row,
+        .featured-lineage-mart-row {{
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            border-radius: 7px;
+            line-height: 1.12;
+        }}
+        .featured-lineage-source-row {{
+            min-height: 28px;
+            padding: .3rem .38rem;
+            background: rgba(255, 255, 255, .82);
+        }}
+        .featured-lineage-intermediate-card,
+        .featured-lineage-single-mart {{
+            position: relative;
+            z-index: 3;
+            min-width: 0;
+            min-height: 58px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: .55rem .65rem;
+            border-radius: 11px;
+            box-shadow: 0 7px 16px rgba(15, 23, 42, .045);
+            transition:
+                border-color 180ms ease,
+                background-color 180ms ease,
+                box-shadow 180ms ease,
+                opacity 180ms ease;
+        }}
+        .featured-lineage-intermediate-card {{
+            border: 1px solid rgba(37, 99, 235, .30);
+            background: rgba(239, 246, 255, .96);
+            color: var(--data-blue);
+        }}
+        .featured-lineage-mart-group,
+        .featured-lineage-single-mart {{
+            border: 1px solid rgba(6, 182, 212, .30);
+            background: rgba(236, 254, 255, .78);
+            color: var(--data-cyan);
+        }}
+        .featured-lineage-mart-group {{
+            position: relative;
+            z-index: 3;
+            min-width: 0;
+            padding: .5rem;
+            border-radius: 11px;
+        }}
+        .featured-lineage-mart-group::before {{
+            content: "";
+            position: absolute;
+            left: .82rem;
+            top: 2rem;
+            bottom: .7rem;
+            width: 1px;
+            background: rgba(6, 182, 212, .24);
+        }}
+        .featured-lineage-mart-group-title {{
+            margin-bottom: .35rem;
+            color: var(--data-cyan);
+            font-size: .54rem;
+            font-weight: 800;
+            letter-spacing: .07em;
+            line-height: 1;
+            text-transform: uppercase;
+        }}
+        .featured-lineage-mart-row {{
+            position: relative;
+            z-index: 1;
+            min-height: 25px;
+            gap: .35rem;
+            padding: .25rem .3rem;
+            color: var(--text);
+            font-size: .66rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, .55);
+        }}
+        .featured-lineage-connector {{
+            position: relative;
+            z-index: 1;
+            height: 2px;
+            min-width: 28px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(37, 99, 235, .30), rgba(6, 182, 212, .34));
+        }}
+        .featured-lineage-connector::after {{
+            content: "";
+            position: absolute;
+            right: -1px;
+            top: 50%;
+            width: 6px;
+            height: 6px;
+            border-top: 1.5px solid rgba(6, 182, 212, .72);
+            border-right: 1.5px solid rgba(6, 182, 212, .72);
+            transform: translateY(-50%) rotate(45deg);
+        }}
+        .featured-lineage-packet {{
+            position: absolute;
+            z-index: 2;
+            left: 0;
+            top: 50%;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #2563eb;
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, .10),
+                0 0 8px rgba(37, 99, 235, .26);
+            opacity: 0;
+            transform: translate3d(-50%, -50%, 0);
+            pointer-events: none;
+        }}
+        .featured-lineage-connector-out .featured-lineage-packet,
+        .featured-lineage-lane-skills .featured-lineage-packet {{
+            background: #06b6d4;
+        }}
+        .featured-lineage-lane-jobs .featured-lineage-connector-in .featured-lineage-packet {{
+            animation: featured-lineage-packet-in 5.8s linear infinite;
+        }}
+        .featured-lineage-lane-jobs .featured-lineage-connector-out .featured-lineage-packet {{
+            animation: featured-lineage-packet-out 5.8s linear infinite;
+        }}
+        .featured-lineage-lane-skills .featured-lineage-connector-in .featured-lineage-packet {{
+            animation: featured-lineage-packet-skill-in 5.8s linear infinite;
+        }}
+        .featured-lineage-lane-skills .featured-lineage-connector-out .featured-lineage-packet {{
+            animation: featured-lineage-packet-skill-out 5.8s linear infinite;
+        }}
+        .featured-lineage-intermediate-job {{
+            animation: featured-lineage-job-intermediate-state 5.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+        }}
+        .featured-lineage-output-job {{
+            animation: featured-lineage-job-output-state 5.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+        }}
+        .featured-lineage-intermediate-skill {{
+            animation: featured-lineage-skill-intermediate-state 5.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+        }}
+        .featured-lineage-output-skill {{
+            animation: featured-lineage-skill-output-state 5.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+        }}
         .featured-lineage-svg {{
             position: absolute;
             inset: 0;
@@ -1632,6 +1829,46 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             12%, 72% {{ opacity: 1; }}
             82% {{ opacity: 0; stroke-dashoffset: 0; }}
             100% {{ opacity: 0; stroke-dashoffset: 0; }}
+        }}
+        @keyframes featured-lineage-packet-in {{
+            0%, 3% {{ opacity: 0; left: 0; }}
+            5%, 20% {{ opacity: 1; }}
+            24% {{ opacity: 0; left: 100%; }}
+            25%, 100% {{ opacity: 0; left: 100%; }}
+        }}
+        @keyframes featured-lineage-packet-out {{
+            0%, 25% {{ opacity: 0; left: 0; }}
+            27%, 42% {{ opacity: 1; }}
+            46% {{ opacity: 0; left: 100%; }}
+            47%, 100% {{ opacity: 0; left: 100%; }}
+        }}
+        @keyframes featured-lineage-packet-skill-in {{
+            0%, 52% {{ opacity: 0; left: 0; }}
+            54%, 68% {{ opacity: 1; }}
+            72% {{ opacity: 0; left: 100%; }}
+            73%, 100% {{ opacity: 0; left: 100%; }}
+        }}
+        @keyframes featured-lineage-packet-skill-out {{
+            0%, 73% {{ opacity: 0; left: 0; }}
+            75%, 88% {{ opacity: 1; }}
+            92% {{ opacity: 0; left: 100%; }}
+            93%, 100% {{ opacity: 0; left: 100%; }}
+        }}
+        @keyframes featured-lineage-job-intermediate-state {{
+            0%, 20%, 38%, 100% {{ border-color: rgba(37, 99, 235, .30); background-color: rgba(239, 246, 255, .96); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); opacity: 1; }}
+            24%, 34% {{ border-color: rgba(37, 99, 235, .58); background-color: rgba(239, 246, 255, .99); box-shadow: 0 8px 20px rgba(37, 99, 235, .13); opacity: 1; }}
+        }}
+        @keyframes featured-lineage-job-output-state {{
+            0%, 42%, 60%, 100% {{ border-color: rgba(6, 182, 212, .30); background-color: rgba(236, 254, 255, .78); box-shadow: none; opacity: 1; }}
+            46%, 56% {{ border-color: rgba(6, 182, 212, .52); background-color: rgba(236, 254, 255, .92); box-shadow: 0 8px 18px rgba(6, 182, 212, .10); opacity: 1; }}
+        }}
+        @keyframes featured-lineage-skill-intermediate-state {{
+            0%, 68%, 82%, 100% {{ border-color: rgba(37, 99, 235, .30); background-color: rgba(239, 246, 255, .96); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); opacity: 1; }}
+            72%, 80% {{ border-color: rgba(37, 99, 235, .58); background-color: rgba(239, 246, 255, .99); box-shadow: 0 8px 20px rgba(37, 99, 235, .13); opacity: 1; }}
+        }}
+        @keyframes featured-lineage-skill-output-state {{
+            0%, 88%, 100% {{ border-color: rgba(6, 182, 212, .30); background-color: rgba(236, 254, 255, .78); box-shadow: none; opacity: 1; }}
+            92%, 98% {{ border-color: rgba(6, 182, 212, .52); background-color: rgba(236, 254, 255, .92); box-shadow: 0 8px 18px rgba(6, 182, 212, .10); opacity: 1; }}
         }}
         @keyframes featured-lineage-node-job {{
             0%, 10%, 88%, 100% {{ border-color: rgba(148, 163, 184, .28); background-color: rgba(255, 255, 255, .95); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); }}
@@ -2799,12 +3036,26 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .st-key-dashboard_filter_panel {{
             display: block;
-            padding: .95rem 1rem .45rem;
+            padding: 1.25rem 1.3rem 1.1rem;
             margin: .85rem 0 .7rem;
             border: 1px solid var(--border);
             border-radius: 12px;
             background: var(--surface);
             box-shadow: var(--shadow);
+        }}
+        .market-filters-heading {{
+            margin: 0 0 .9rem;
+            line-height: 1.15;
+        }}
+        .st-key-market_basic_filters_grid [data-testid="stHorizontalBlock"] {{
+            gap: clamp(1.2rem, 1.6vw, 1.5rem);
+        }}
+        .st-key-market_basic_filters_grid [data-testid="stWidgetLabel"],
+        .st-key-market_advanced_filters [data-testid="stWidgetLabel"] {{
+            margin-bottom: .45rem;
+        }}
+        .st-key-market_advanced_filters {{
+            margin-top: .7rem;
         }}
         .dashboard-results-status {{
             display: inline-flex;
@@ -2926,7 +3177,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 750;
             text-decoration: none;
         }}
-
         .kpi-card {{
             min-height: 132px;
             padding: .95rem 1rem;
@@ -3279,6 +3529,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .project-evidence-strip {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
             .featured-preview img {{ max-height: 320px; }}
             .featured-lineage-preview {{ min-height: 0; }}
+            .st-key-market_basic_filters_grid [data-testid="stHorizontalBlock"] {{
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                column-gap: 1rem;
+                row-gap: 1rem;
+            }}
+            .st-key-market_basic_filters_grid [data-testid="column"] {{
+                width: 100% !important;
+            }}
             .hero-skill-pipeline {{
                 grid-template-columns: minmax(0, 12.5rem);
                 justify-content: start;
@@ -3444,6 +3703,51 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 min-height: 0;
                 height: auto;
             }}
+            .featured-lineage-lanes {{
+                grid-template-rows: auto auto;
+                gap: .7rem;
+                height: auto;
+            }}
+            .featured-lineage-lane {{
+                grid-template-columns: 1fr;
+                gap: .45rem;
+                padding: 1.45rem .7rem .7rem;
+            }}
+            .featured-lineage-connector {{
+                justify-self: center;
+                width: 2px;
+                min-width: 0;
+                height: 22px;
+                background: linear-gradient(180deg, rgba(37, 99, 235, .30), rgba(6, 182, 212, .34));
+            }}
+            .featured-lineage-connector::after {{
+                right: auto;
+                top: auto;
+                left: 50%;
+                bottom: -1px;
+                transform: translateX(-50%) rotate(135deg);
+            }}
+            .featured-lineage-packet {{
+                left: 50%;
+                top: 0;
+                transform: translate3d(-50%, -50%, 0);
+            }}
+            .featured-lineage-lane-jobs .featured-lineage-connector-in .featured-lineage-packet {{
+                animation-name: featured-lineage-packet-down-in;
+            }}
+            .featured-lineage-lane-jobs .featured-lineage-connector-out .featured-lineage-packet {{
+                animation-name: featured-lineage-packet-down-out;
+            }}
+            .featured-lineage-lane-skills .featured-lineage-connector-in .featured-lineage-packet {{
+                animation-name: featured-lineage-packet-down-skill-in;
+            }}
+            .featured-lineage-lane-skills .featured-lineage-connector-out .featured-lineage-packet {{
+                animation-name: featured-lineage-packet-down-skill-out;
+            }}
+            .featured-lineage-mart-group::before,
+            .featured-lineage-source-group::after {{
+                display: none;
+            }}
             .featured-lineage-svg {{
                 display: none;
             }}
@@ -3514,7 +3818,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 width: 100%;
             }}
             .st-key-dashboard_filter_panel {{
-                padding: .8rem .85rem .35rem;
+                padding: 1.05rem 1rem .95rem;
+            }}
+            .market-filters-heading {{
+                margin-bottom: .9rem;
+            }}
+            .st-key-market_basic_filters_grid [data-testid="stHorizontalBlock"] {{
+                grid-template-columns: 1fr;
+                row-gap: .9rem;
             }}
             .dashboard-primary-kpis,
             .dashboard-metadata-strip {{
@@ -3567,6 +3878,30 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             0% {{ opacity: 1; transform: translate3d(0, 0, 0); }}
             94% {{ opacity: 1; transform: translate3d(0, 100%, 0); }}
             95%, 100% {{ opacity: 0; transform: translate3d(0, 100%, 0); }}
+        }}
+        @keyframes featured-lineage-packet-down-in {{
+            0%, 3% {{ opacity: 0; top: 0; }}
+            5%, 20% {{ opacity: 1; }}
+            24% {{ opacity: 0; top: 100%; }}
+            25%, 100% {{ opacity: 0; top: 100%; }}
+        }}
+        @keyframes featured-lineage-packet-down-out {{
+            0%, 25% {{ opacity: 0; top: 0; }}
+            27%, 42% {{ opacity: 1; }}
+            46% {{ opacity: 0; top: 100%; }}
+            47%, 100% {{ opacity: 0; top: 100%; }}
+        }}
+        @keyframes featured-lineage-packet-down-skill-in {{
+            0%, 52% {{ opacity: 0; top: 0; }}
+            54%, 68% {{ opacity: 1; }}
+            72% {{ opacity: 0; top: 100%; }}
+            73%, 100% {{ opacity: 0; top: 100%; }}
+        }}
+        @keyframes featured-lineage-packet-down-skill-out {{
+            0%, 73% {{ opacity: 0; top: 0; }}
+            75%, 88% {{ opacity: 1; }}
+            92% {{ opacity: 0; top: 100%; }}
+            93%, 100% {{ opacity: 0; top: 100%; }}
         }}
         @media (hover: none), (pointer: coarse) {{
             .hero-skill-node:hover {{
@@ -3691,7 +4026,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .featured-lineage-node-job-mart,
             .featured-lineage-node-skill-source,
             .featured-lineage-node-skill-intermediate,
-            .featured-lineage-node-skill-mart {{
+            .featured-lineage-node-skill-mart,
+            .featured-lineage-intermediate-card,
+            .featured-lineage-mart-group,
+            .featured-lineage-single-mart {{
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;

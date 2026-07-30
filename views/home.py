@@ -4,6 +4,7 @@ import base64
 import html
 from pathlib import Path
 from textwrap import dedent
+from html.parser import HTMLParser
 
 import streamlit as st
 
@@ -32,6 +33,53 @@ def asset_data_uri(path: Path, mime_type: str) -> str:
 
 def format_int(value: int | str | None) -> str:
     return f"{value:,}" if isinstance(value, int) else html.escape(str(value or "Verified"))
+
+
+class _MarkupStructureValidator(HTMLParser):
+    VOID_TAGS = {
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr",
+    }
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.stack: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag not in self.VOID_TAGS:
+            self.stack.append(tag)
+
+    def handle_endtag(self, tag: str) -> None:
+        if not self.stack or self.stack[-1] != tag:
+            expected = self.stack[-1] if self.stack else "none"
+            raise ValueError(f"Unexpected closing tag </{tag}>; expected </{expected}>.")
+        self.stack.pop()
+
+
+def validate_html_fragment(markup: str, *, expected_start: str, expected_end: str) -> None:
+    if markup != markup.strip():
+        raise ValueError("HTML fragment contains leading or trailing whitespace.")
+    if not markup.startswith(expected_start) or not markup.endswith(expected_end):
+        raise ValueError("HTML fragment does not start and end with the expected wrapper.")
+    if "```" in markup or "&lt;" in markup:
+        raise ValueError("HTML fragment contains Markdown fences or escaped HTML.")
+    parser = _MarkupStructureValidator()
+    parser.feed(markup)
+    parser.close()
+    if parser.stack:
+        raise ValueError(f"Unclosed HTML tags: {parser.stack}.")
 
 
 project = PROJECTS[0]
@@ -291,29 +339,47 @@ preview_markup = dedent(
     </div>
     """
 ).strip()
-featured_project_markup = dedent(
-    f"""
-    <section class="featured-project-card" tabindex="0">
-        <div class="featured-project-copy">
-            <div class="section-eyebrow">Featured Project</div>
-            <h2>{html.escape(project["title"])}</h2>
-            <p>{html.escape(project["case_study_sections"]["Business problem"])}</p>
-            <p>{html.escape(project["case_study_sections"]["Project summary"])}</p>
-            <div class="featured-meta">
-                <span>{html.escape(tech_stack)}</span>
-                <span>{format_int(source_rows)} source postings</span>
+validate_html_fragment(
+    preview_markup,
+    expected_start='<div class="featured-lineage-preview"',
+    expected_end="</div>",
+)
+featured_project_markup = (
+    dedent(
+        f"""
+        <section class="featured-project-card" tabindex="0">
+            <div class="featured-project-copy">
+                <div class="section-eyebrow">Featured Project</div>
+                <h2>{html.escape(project["title"])}</h2>
+                <p>{html.escape(project["case_study_sections"]["Business problem"])}</p>
+                <p>{html.escape(project["case_study_sections"]["Project summary"])}</p>
+                <div class="featured-meta">
+                    <span>{html.escape(tech_stack)}</span>
+                    <span>{format_int(source_rows)} source postings</span>
+                </div>
+                <div class="hero-actions">
+                    <a class="portfolio-button portfolio-button-primary" href="/market_dashboard">VIEW LIVE PROJECT</a>
+                    {repository_button}
+                </div>
             </div>
-            <div class="hero-actions">
-                <a class="portfolio-button portfolio-button-primary" href="/market_dashboard">VIEW LIVE PROJECT</a>
-                {repository_button}
+            <div class="featured-preview">
+        """
+    ).strip()
+    + "\n"
+    + preview_markup
+    + "\n"
+    + dedent(
+        """
             </div>
-        </div>
-        <div class="featured-preview">
-            {preview_markup}
-        </div>
-    </section>
-    """
-).strip()
+        </section>
+        """
+    ).strip()
+)
+validate_html_fragment(
+    featured_project_markup,
+    expected_start='<section class="featured-project-card"',
+    expected_end="</section>",
+)
 st.markdown(featured_project_markup, unsafe_allow_html=True)
 
 st.markdown(

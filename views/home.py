@@ -217,7 +217,7 @@ preview_markup = dedent(
             <small><span aria-hidden="true"></span>dbt models connected</small>
         </div>
         <div class="featured-lineage-canvas">
-            <svg class="featured-lineage-svg" viewBox="0 0 640 360" preserveAspectRatio="none" aria-hidden="true">
+            <svg class="featured-lineage-svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                 <defs>
                     <linearGradient id="featuredLineageFlowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stop-color="#2563eb"></stop>
@@ -227,25 +227,25 @@ preview_markup = dedent(
                         <path d="M0,0 L8,4 L0,8 Z"></path>
                     </marker>
                 </defs>
-                <path class="featured-lineage-connector" d="M138 76 C188 76 206 122 268 122"></path>
-                <path class="featured-lineage-connector" d="M138 136 C190 136 208 122 268 122"></path>
-                <path class="featured-lineage-connector" d="M138 224 C190 224 208 242 268 242"></path>
-                <path class="featured-lineage-connector" d="M138 284 C188 284 206 242 268 242"></path>
-                <path class="featured-lineage-connector" d="M384 122 C432 82 454 72 502 72"></path>
-                <path class="featured-lineage-connector" d="M384 122 C432 112 454 128 502 128"></path>
-                <path class="featured-lineage-connector" d="M384 122 C432 142 454 184 502 184"></path>
-                <path class="featured-lineage-connector" d="M384 122 C432 170 454 240 502 240"></path>
-                <path class="featured-lineage-connector" d="M384 122 C432 196 454 296 502 296"></path>
-                <path class="featured-lineage-connector" d="M384 242 C430 258 454 296 502 296"></path>
-                <path id="featured-lineage-job-route" class="featured-lineage-route" d="M138 136 C190 136 208 122 268 122 C350 122 390 160 502 184"></path>
-                <path id="featured-lineage-skill-route" class="featured-lineage-route featured-lineage-route-skill" d="M138 284 C188 284 206 242 268 242 C352 242 410 282 502 296"></path>
-                <circle class="featured-lineage-packet featured-lineage-packet-job" r="7">
-                    <animateMotion dur="6s" repeatCount="indefinite" calcMode="paced">
+                <path class="featured-lineage-connector" d="M290 82 C338 82 350 160 380 160"></path>
+                <path class="featured-lineage-connector" d="M290 164 C336 164 350 160 380 160"></path>
+                <path class="featured-lineage-connector" d="M290 282 C338 282 350 360 380 360"></path>
+                <path class="featured-lineage-connector" d="M290 364 C336 364 350 360 380 360"></path>
+                <path class="featured-lineage-connector" d="M650 160 C704 118 726 88 760 88"></path>
+                <path class="featured-lineage-connector" d="M650 160 C704 136 726 160 760 160"></path>
+                <path class="featured-lineage-connector" d="M650 160 C704 174 726 232 760 232"></path>
+                <path class="featured-lineage-connector" d="M650 160 C704 208 726 304 760 304"></path>
+                <path class="featured-lineage-connector" d="M650 160 C704 240 726 388 760 388"></path>
+                <path class="featured-lineage-connector" d="M650 360 C704 368 726 388 760 388"></path>
+                <path id="featured-lineage-job-route" class="featured-lineage-route" d="M290 164 C336 164 350 160 380 160 C500 160 612 206 760 232"></path>
+                <path id="featured-lineage-skill-route" class="featured-lineage-route featured-lineage-route-skill" d="M290 364 C336 364 350 360 380 360 C500 360 612 376 760 388"></path>
+                <circle class="featured-lineage-packet featured-lineage-packet-job" r="9.5">
+                    <animateMotion dur="5.5s" repeatCount="indefinite" calcMode="paced">
                         <mpath href="#featured-lineage-job-route"></mpath>
                     </animateMotion>
                 </circle>
-                <circle class="featured-lineage-packet featured-lineage-packet-skill" r="7">
-                    <animateMotion dur="6s" begin="3s" repeatCount="indefinite" calcMode="paced">
+                <circle class="featured-lineage-packet featured-lineage-packet-skill" r="9.5">
+                    <animateMotion dur="5.5s" begin="2.75s" repeatCount="indefinite" calcMode="paced">
                         <mpath href="#featured-lineage-skill-route"></mpath>
                     </animateMotion>
                 </circle>

@@ -1342,7 +1342,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-project-card {{
             position: relative;
             display: grid;
-            grid-template-columns: minmax(0, 1.05fr) minmax(560px, 1.15fr);
+            grid-template-columns: minmax(0, 1fr) minmax(540px, 1.02fr);
             gap: clamp(2rem, 3vw, 3.25rem);
             align-items: center;
             padding: 1.25rem;
@@ -1380,6 +1380,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             line-height: 1.25;
         }}
         .featured-preview {{
+            width: min(100%, 670px);
+            justify-self: end;
             border: 1px solid var(--border);
             border-radius: 10px;
             background:
@@ -1406,10 +1408,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .featured-lineage-preview {{
             position: relative;
-            width: 100%;
+            width: min(100%, 670px);
             min-height: 0;
             height: auto;
-            padding: 1rem 1rem 1.1rem;
+            padding: .9rem .95rem 1rem;
             border-radius: 16px;
             overflow: hidden;
         }}
@@ -1420,13 +1422,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             align-items: center;
             justify-content: space-between;
             gap: 1rem;
-            margin-bottom: .9rem;
+            min-height: 24px;
+            margin-bottom: .75rem;
         }}
         .featured-lineage-header span {{
             color: var(--data-blue);
-            font-size: .72rem;
+            font-size: .69rem;
             font-weight: 850;
-            letter-spacing: .08em;
+            letter-spacing: .09em;
             text-transform: uppercase;
         }}
         .featured-lineage-header small {{
@@ -1434,13 +1437,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             align-items: center;
             gap: .38rem;
             color: var(--muted);
-            font-size: .72rem;
+            font-size: .64rem;
             font-weight: 700;
             white-space: nowrap;
         }}
         .featured-lineage-header small span {{
-            width: .42rem;
-            height: .42rem;
+            width: .375rem;
+            height: .375rem;
             border-radius: 999px;
             background: var(--data-green);
             box-shadow: 0 0 0 3px rgba(16, 185, 129, .10);
@@ -1448,7 +1451,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-lineage-canvas {{
             position: relative;
             display: block;
-            height: clamp(330px, 27vw, 390px);
+            width: 100%;
+            height: 350px;
             isolation: isolate;
         }}
         .featured-lineage-svg {{
@@ -1476,16 +1480,16 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             stroke-dasharray: 82 460;
             stroke-dashoffset: 460;
             opacity: 0;
-            animation: featured-lineage-route-flow 6s linear infinite;
+            animation: featured-lineage-route-flow 5.5s linear infinite;
         }}
         .featured-lineage-route-skill {{
-            animation-delay: 3s;
+            animation-delay: 2.75s;
         }}
         .featured-lineage-packet {{
             fill: var(--data-blue);
             stroke: #FFFFFF;
-            stroke-width: 2;
-            filter: drop-shadow(0 0 4px rgba(37, 99, 235, .34)) drop-shadow(0 0 8px rgba(37, 99, 235, .18));
+            stroke-width: 2.2;
+            filter: drop-shadow(0 0 4px rgba(37, 99, 235, .34)) drop-shadow(0 0 9px rgba(37, 99, 235, .20));
         }}
         .featured-lineage-packet-skill {{
             fill: var(--data-cyan);
@@ -1495,32 +1499,34 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             z-index: 3;
             display: flex;
             flex-direction: column;
-            gap: .52rem;
             min-width: 0;
         }}
         .featured-lineage-column-staging {{
             left: 0;
-            top: 0;
+            top: 6%;
             width: 29%;
+            gap: .625rem;
         }}
         .featured-lineage-column-intermediate {{
             left: 34%;
             top: 50%;
             width: 31%;
+            gap: .9rem;
             transform: translateY(-50%);
         }}
         .featured-lineage-column-mart {{
             right: 0;
-            top: 0;
+            top: 4.5%;
             width: 34%;
+            gap: .55rem;
         }}
         .featured-lineage-column-title {{
             color: var(--muted);
-            font-size: .66rem;
+            font-size: .61rem;
             font-weight: 850;
             letter-spacing: .09em;
             text-transform: uppercase;
-            margin-bottom: .12rem;
+            margin-bottom: .08rem;
         }}
         .featured-lineage-node {{
             position: relative;
@@ -1530,10 +1536,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             column-gap: .48rem;
             row-gap: .22rem;
             align-items: center;
-            min-height: 52px;
-            padding: .55rem .65rem;
+            min-height: 46px;
+            padding: .44rem .55rem;
             border: 1px solid rgba(148, 163, 184, .28);
-            border-radius: 11px;
+            border-radius: 10px;
             background: rgba(255, 255, 255, .95);
             color: var(--text);
             box-shadow: 0 7px 16px rgba(15, 23, 42, .045);
@@ -1544,17 +1550,17 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 box-shadow 180ms ease;
         }}
         .featured-lineage-node-intermediate {{
-            min-height: 60px;
+            min-height: 54px;
         }}
         .featured-lineage-node-mart {{
-            min-height: 54px;
+            min-height: 49px;
         }}
         .featured-lineage-model-name {{
             min-width: 0;
             color: var(--text);
-            font-size: clamp(.72rem, .9vw, .84rem);
+            font-size: clamp(.69rem, .78vw, .79rem);
             font-weight: 750;
-            line-height: 1.12;
+            line-height: 1.1;
             overflow-wrap: normal;
             word-break: normal;
             hyphens: none;
@@ -1562,10 +1568,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-lineage-model-type {{
             grid-column: 2;
             color: var(--muted);
-            margin-top: .22rem;
-            font-size: .57rem;
+            margin-top: .18rem;
+            font-size: clamp(.52rem, .55vw, .58rem);
             font-weight: 800;
-            letter-spacing: .07em;
+            letter-spacing: .065em;
             line-height: 1;
         }}
         .featured-lineage-node-icon {{
@@ -1593,13 +1599,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-lineage-node-job-source,
         .featured-lineage-node-job-intermediate,
         .featured-lineage-node-job-mart {{
-            animation: featured-lineage-node-job 6s ease-in-out infinite;
+            animation: featured-lineage-node-job 5.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
         }}
         .featured-lineage-node-skill-source,
         .featured-lineage-node-skill-intermediate,
         .featured-lineage-node-skill-mart {{
-            animation: featured-lineage-node-skill 6s ease-in-out infinite;
-            animation-delay: 3s;
+            animation: featured-lineage-node-skill 5.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+            animation-delay: 2.75s;
         }}
         @media (hover: hover) and (pointer: fine) {{
             .featured-lineage-node:hover {{
@@ -3244,13 +3250,23 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-skill-section {{
                 width: min(100%, 700px);
             }}
+            .featured-project-card {{
+                grid-template-columns: 1fr;
+            }}
+            .featured-preview,
+            .featured-lineage-preview {{
+                width: 100%;
+                justify-self: stretch;
+            }}
+            .featured-lineage-canvas {{
+                height: clamp(335px, 34vw, 360px);
+            }}
         }}
         @media (max-width: 1024px) {{
             .pipeline {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
             .project-evidence-strip {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
-            .featured-project-card {{ grid-template-columns: 1fr; }}
             .featured-preview img {{ max-height: 320px; }}
-            .featured-lineage-preview {{ min-height: 330px; }}
+            .featured-lineage-preview {{ min-height: 0; }}
             .hero-skill-pipeline {{
                 grid-template-columns: minmax(0, 12.5rem);
                 justify-content: start;

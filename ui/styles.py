@@ -1360,205 +1360,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             position: relative;
             display: block;
             width: 100%;
-            height: 350px;
+            height: clamp(420px, 32vw, 455px);
             isolation: isolate;
-        }}
-        .featured-lineage-lanes {{
-            display: grid;
-            grid-template-rows: minmax(0, 1.35fr) minmax(0, .85fr);
-            gap: .8rem;
-            height: 100%;
-        }}
-        .featured-lineage-lane {{
-            position: relative;
-            display: grid;
-            grid-template-columns:
-                minmax(0, .9fr)
-                minmax(28px, .16fr)
-                minmax(0, 1fr)
-                minmax(28px, .16fr)
-                minmax(0, 1.18fr);
-            align-items: center;
-            gap: .35rem;
-            min-width: 0;
-            padding: 1.45rem .75rem .75rem;
-            border: 1px solid rgba(148, 163, 184, .18);
-            border-radius: 13px;
-            background: rgba(255, 255, 255, .44);
-            overflow: hidden;
-        }}
-        .featured-lineage-lane-label {{
-            position: absolute;
-            top: .48rem;
-            left: .7rem;
-            color: var(--text-2);
-            font-size: .56rem;
-            font-weight: 800;
-            letter-spacing: .09em;
-            line-height: 1;
-            text-transform: uppercase;
-        }}
-        .featured-lineage-source-group {{
-            position: relative;
-            display: grid;
-            gap: .35rem;
-            min-width: 0;
-            padding: .45rem;
-            border: 1px solid rgba(100, 116, 139, .18);
-            border-radius: 10px;
-            background: rgba(248, 250, 252, .90);
-        }}
-        .featured-lineage-source-group::after {{
-            content: "";
-            position: absolute;
-            right: -.75rem;
-            top: 50%;
-            width: .75rem;
-            height: 1px;
-            background: rgba(100, 116, 139, .24);
-            transform: translateY(-50%);
-        }}
-        .featured-lineage-source-row,
-        .featured-lineage-mart-row {{
-            min-width: 0;
-            display: flex;
-            align-items: center;
-            gap: .4rem;
-            border-radius: 7px;
-            line-height: 1.12;
-        }}
-        .featured-lineage-source-row {{
-            min-height: 28px;
-            padding: .3rem .38rem;
-            background: rgba(255, 255, 255, .82);
-        }}
-        .featured-lineage-intermediate-card,
-        .featured-lineage-single-mart {{
-            position: relative;
-            z-index: 3;
-            min-width: 0;
-            min-height: 58px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: .55rem .65rem;
-            border-radius: 11px;
-            box-shadow: 0 7px 16px rgba(15, 23, 42, .045);
-            transition:
-                border-color 180ms ease,
-                background-color 180ms ease,
-                box-shadow 180ms ease,
-                opacity 180ms ease;
-        }}
-        .featured-lineage-intermediate-card {{
-            border: 1px solid rgba(37, 99, 235, .30);
-            background: rgba(239, 246, 255, .96);
-            color: var(--data-blue);
-        }}
-        .featured-lineage-mart-group,
-        .featured-lineage-single-mart {{
-            border: 1px solid rgba(6, 182, 212, .30);
-            background: rgba(236, 254, 255, .78);
-            color: var(--data-cyan);
-        }}
-        .featured-lineage-mart-group {{
-            position: relative;
-            z-index: 3;
-            min-width: 0;
-            padding: .5rem;
-            border-radius: 11px;
-        }}
-        .featured-lineage-mart-group::before {{
-            content: "";
-            position: absolute;
-            left: .82rem;
-            top: 2rem;
-            bottom: .7rem;
-            width: 1px;
-            background: rgba(6, 182, 212, .24);
-        }}
-        .featured-lineage-mart-group-title {{
-            margin-bottom: .35rem;
-            color: var(--data-cyan);
-            font-size: .54rem;
-            font-weight: 800;
-            letter-spacing: .07em;
-            line-height: 1;
-            text-transform: uppercase;
-        }}
-        .featured-lineage-mart-row {{
-            position: relative;
-            z-index: 1;
-            min-height: 25px;
-            gap: .35rem;
-            padding: .25rem .3rem;
-            color: var(--text);
-            font-size: .66rem;
-            font-weight: 700;
-            background: rgba(255, 255, 255, .55);
-        }}
-        .featured-lineage-connector {{
-            position: relative;
-            z-index: 1;
-            height: 2px;
-            min-width: 28px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, rgba(37, 99, 235, .30), rgba(6, 182, 212, .34));
-        }}
-        .featured-lineage-connector::after {{
-            content: "";
-            position: absolute;
-            right: -1px;
-            top: 50%;
-            width: 6px;
-            height: 6px;
-            border-top: 1.5px solid rgba(6, 182, 212, .72);
-            border-right: 1.5px solid rgba(6, 182, 212, .72);
-            transform: translateY(-50%) rotate(45deg);
-        }}
-        .featured-lineage-packet {{
-            position: absolute;
-            z-index: 2;
-            left: 0;
-            top: 50%;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #2563eb;
-            box-shadow:
-                0 0 0 3px rgba(37, 99, 235, .10),
-                0 0 8px rgba(37, 99, 235, .26);
-            opacity: 0;
-            transform: translate3d(-50%, -50%, 0);
-            pointer-events: none;
-        }}
-        .featured-lineage-connector-out .featured-lineage-packet,
-        .featured-lineage-lane-skills .featured-lineage-packet {{
-            background: #06b6d4;
-        }}
-        .featured-lineage-lane-jobs .featured-lineage-connector-in .featured-lineage-packet {{
-            animation: featured-lineage-packet-in 5.8s linear infinite;
-        }}
-        .featured-lineage-lane-jobs .featured-lineage-connector-out .featured-lineage-packet {{
-            animation: featured-lineage-packet-out 5.8s linear infinite;
-        }}
-        .featured-lineage-lane-skills .featured-lineage-connector-in .featured-lineage-packet {{
-            animation: featured-lineage-packet-skill-in 5.8s linear infinite;
-        }}
-        .featured-lineage-lane-skills .featured-lineage-connector-out .featured-lineage-packet {{
-            animation: featured-lineage-packet-skill-out 5.8s linear infinite;
-        }}
-        .featured-lineage-intermediate-job {{
-            animation: featured-lineage-job-intermediate-state 5.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-        }}
-        .featured-lineage-output-job {{
-            animation: featured-lineage-job-output-state 5.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-        }}
-        .featured-lineage-intermediate-skill {{
-            animation: featured-lineage-skill-intermediate-state 5.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-        }}
-        .featured-lineage-output-skill {{
-            animation: featured-lineage-skill-output-state 5.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
         }}
         .featured-lineage-svg {{
             position: absolute;
@@ -1582,19 +1385,19 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             stroke: url(#featuredLineageFlowGradient);
             stroke-width: 2.4;
             stroke-linecap: round;
-            stroke-dasharray: 82 460;
-            stroke-dashoffset: 460;
+            stroke-dasharray: 95 860;
+            stroke-dashoffset: 860;
             opacity: 0;
-            animation: featured-lineage-route-flow 5.5s linear infinite;
+            animation: featured-lineage-route-flow 10s linear infinite;
         }}
         .featured-lineage-route-skill {{
-            animation-delay: 2.75s;
+            animation-delay: 5s;
         }}
         .featured-lineage-packet {{
             fill: var(--data-blue);
             stroke: #FFFFFF;
-            stroke-width: 2.2;
-            filter: drop-shadow(0 0 4px rgba(37, 99, 235, .34)) drop-shadow(0 0 9px rgba(37, 99, 235, .20));
+            stroke-width: 1.8;
+            filter: drop-shadow(0 0 3px rgba(37, 99, 235, .34)) drop-shadow(0 0 7px rgba(37, 99, 235, .20));
         }}
         .featured-lineage-packet-skill {{
             fill: var(--data-cyan);
@@ -1608,21 +1411,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .featured-lineage-column-staging {{
             left: 0;
-            top: 6%;
-            width: 29%;
-            gap: .625rem;
+            top: 2%;
+            width: 28%;
+            gap: .68rem;
         }}
         .featured-lineage-column-intermediate {{
-            left: 34%;
+            left: 31%;
             top: 50%;
-            width: 31%;
-            gap: .9rem;
+            width: 30%;
+            gap: 6.9rem;
             transform: translateY(-50%);
         }}
         .featured-lineage-column-mart {{
             right: 0;
-            top: 4.5%;
-            width: 34%;
+            top: 1%;
+            width: 36%;
             gap: .55rem;
         }}
         .featured-lineage-column-title {{
@@ -1633,16 +1436,19 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             text-transform: uppercase;
             margin-bottom: .08rem;
         }}
+        .featured-lineage-mobile-flows {{
+            display: none;
+        }}
         .featured-lineage-node {{
             position: relative;
             z-index: 4;
             display: grid;
             grid-template-columns: auto minmax(0, 1fr);
-            column-gap: .48rem;
+            column-gap: .5rem;
             row-gap: .22rem;
             align-items: center;
-            min-height: 46px;
-            padding: .44rem .55rem;
+            min-height: 54px;
+            padding: .5rem .62rem;
             border: 1px solid rgba(148, 163, 184, .28);
             border-radius: 10px;
             background: rgba(255, 255, 255, .95);
@@ -1655,18 +1461,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 box-shadow 180ms ease;
         }}
         .featured-lineage-node-intermediate {{
-            min-height: 54px;
+            min-height: 68px;
         }}
         .featured-lineage-node-mart {{
-            min-height: 49px;
+            min-height: 54px;
         }}
         .featured-lineage-model-name {{
             min-width: 0;
             color: var(--text);
-            font-size: clamp(.69rem, .78vw, .79rem);
+            font-size: clamp(.78rem, .82vw, .86rem);
             font-weight: 750;
-            line-height: 1.1;
-            overflow-wrap: normal;
+            line-height: 1.18;
+            overflow-wrap: anywhere;
             word-break: normal;
             hyphens: none;
         }}
@@ -1674,7 +1480,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             grid-column: 2;
             color: var(--muted);
             margin-top: .18rem;
-            font-size: clamp(.52rem, .55vw, .58rem);
+            font-size: clamp(.56rem, .58vw, .62rem);
             font-weight: 800;
             letter-spacing: .065em;
             line-height: 1;
@@ -1704,77 +1510,61 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-lineage-node-job-source,
         .featured-lineage-node-job-intermediate,
         .featured-lineage-node-job-mart {{
-            animation: featured-lineage-node-job 5.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+            animation: featured-lineage-node-job 10s cubic-bezier(0.22, 1, 0.36, 1) infinite;
         }}
         .featured-lineage-node-skill-source,
         .featured-lineage-node-skill-intermediate,
         .featured-lineage-node-skill-mart {{
-            animation: featured-lineage-node-skill 5.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-            animation-delay: 2.75s;
+            animation: featured-lineage-node-skill 10s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+            animation-delay: 5s;
+        }}
+        .featured-lineage-node-job-source {{
+            animation-delay: 0s;
+        }}
+        .featured-lineage-node-job-intermediate {{
+            animation-delay: .8s;
+        }}
+        .featured-lineage-node-job-mart {{
+            animation-delay: 1.8s;
+        }}
+        .featured-lineage-node-skill-source {{
+            animation-delay: 5s;
+        }}
+        .featured-lineage-node-skill-intermediate {{
+            animation-delay: 5.8s;
+        }}
+        .featured-lineage-node-skill-mart {{
+            animation-delay: 6.8s;
         }}
         @media (hover: hover) and (pointer: fine) {{
             .featured-lineage-node:hover {{
-                transform: translateY(-2px);
+                transform: translateY(-2px) scale(1.015);
                 border-color: rgba(37, 99, 235, 0.45);
                 background-color: rgba(239, 246, 255, .98);
-                box-shadow: 0 8px 20px rgba(37, 99, 235, 0.12);
+                box-shadow: 0 10px 22px rgba(37, 99, 235, 0.10);
             }}
         }}
         @keyframes featured-lineage-route-flow {{
-            0%, 8% {{ opacity: 0; stroke-dashoffset: 460; }}
-            12%, 72% {{ opacity: 1; }}
-            82% {{ opacity: 0; stroke-dashoffset: 0; }}
+            0%, 5% {{ opacity: 0; stroke-dashoffset: 860; }}
+            8%, 44% {{ opacity: 1; }}
+            50% {{ opacity: 0; stroke-dashoffset: 0; }}
             100% {{ opacity: 0; stroke-dashoffset: 0; }}
         }}
-        @keyframes featured-lineage-packet-in {{
-            0%, 3% {{ opacity: 0; left: 0; }}
-            5%, 20% {{ opacity: 1; }}
-            24% {{ opacity: 0; left: 100%; }}
-            25%, 100% {{ opacity: 0; left: 100%; }}
-        }}
-        @keyframes featured-lineage-packet-out {{
-            0%, 25% {{ opacity: 0; left: 0; }}
-            27%, 42% {{ opacity: 1; }}
-            46% {{ opacity: 0; left: 100%; }}
-            47%, 100% {{ opacity: 0; left: 100%; }}
-        }}
-        @keyframes featured-lineage-packet-skill-in {{
-            0%, 52% {{ opacity: 0; left: 0; }}
-            54%, 68% {{ opacity: 1; }}
-            72% {{ opacity: 0; left: 100%; }}
-            73%, 100% {{ opacity: 0; left: 100%; }}
-        }}
-        @keyframes featured-lineage-packet-skill-out {{
-            0%, 73% {{ opacity: 0; left: 0; }}
-            75%, 88% {{ opacity: 1; }}
-            92% {{ opacity: 0; left: 100%; }}
-            93%, 100% {{ opacity: 0; left: 100%; }}
-        }}
-        @keyframes featured-lineage-job-intermediate-state {{
-            0%, 20%, 38%, 100% {{ border-color: rgba(37, 99, 235, .30); background-color: rgba(239, 246, 255, .96); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); opacity: 1; }}
-            24%, 34% {{ border-color: rgba(37, 99, 235, .58); background-color: rgba(239, 246, 255, .99); box-shadow: 0 8px 20px rgba(37, 99, 235, .13); opacity: 1; }}
-        }}
-        @keyframes featured-lineage-job-output-state {{
-            0%, 42%, 60%, 100% {{ border-color: rgba(6, 182, 212, .30); background-color: rgba(236, 254, 255, .78); box-shadow: none; opacity: 1; }}
-            46%, 56% {{ border-color: rgba(6, 182, 212, .52); background-color: rgba(236, 254, 255, .92); box-shadow: 0 8px 18px rgba(6, 182, 212, .10); opacity: 1; }}
-        }}
-        @keyframes featured-lineage-skill-intermediate-state {{
-            0%, 68%, 82%, 100% {{ border-color: rgba(37, 99, 235, .30); background-color: rgba(239, 246, 255, .96); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); opacity: 1; }}
-            72%, 80% {{ border-color: rgba(37, 99, 235, .58); background-color: rgba(239, 246, 255, .99); box-shadow: 0 8px 20px rgba(37, 99, 235, .13); opacity: 1; }}
-        }}
-        @keyframes featured-lineage-skill-output-state {{
-            0%, 88%, 100% {{ border-color: rgba(6, 182, 212, .30); background-color: rgba(236, 254, 255, .78); box-shadow: none; opacity: 1; }}
-            92%, 98% {{ border-color: rgba(6, 182, 212, .52); background-color: rgba(236, 254, 255, .92); box-shadow: 0 8px 18px rgba(6, 182, 212, .10); opacity: 1; }}
-        }}
         @keyframes featured-lineage-node-job {{
-            0%, 10%, 88%, 100% {{ border-color: rgba(148, 163, 184, .28); background-color: rgba(255, 255, 255, .95); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); }}
-            16%, 34% {{ border-color: rgba(37, 99, 235, .55); background-color: rgba(239, 246, 255, .98); box-shadow: 0 8px 20px rgba(37, 99, 235, .14); }}
-            58%, 76% {{ border-color: rgba(6, 182, 212, .55); background-color: rgba(236, 254, 255, .96); box-shadow: 0 8px 20px rgba(6, 182, 212, .12); }}
+            0%, 8%, 56%, 100% {{ border-color: rgba(148, 163, 184, .28); background-color: rgba(255, 255, 255, .95); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); }}
+            13%, 28% {{ border-color: rgba(37, 99, 235, .55); background-color: rgba(239, 246, 255, .98); box-shadow: 0 8px 20px rgba(37, 99, 235, .14); }}
+            36%, 50% {{ border-color: rgba(6, 182, 212, .55); background-color: rgba(236, 254, 255, .96); box-shadow: 0 8px 20px rgba(6, 182, 212, .12); }}
         }}
         @keyframes featured-lineage-node-skill {{
-            0%, 10%, 88%, 100% {{ border-color: rgba(148, 163, 184, .28); background-color: rgba(255, 255, 255, .95); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); }}
-            16%, 34% {{ border-color: rgba(37, 99, 235, .55); background-color: rgba(239, 246, 255, .98); box-shadow: 0 8px 20px rgba(37, 99, 235, .14); }}
-            58%, 76% {{ border-color: rgba(6, 182, 212, .55); background-color: rgba(236, 254, 255, .96); box-shadow: 0 8px 20px rgba(6, 182, 212, .12); }}
+            0%, 8%, 56%, 100% {{ border-color: rgba(148, 163, 184, .28); background-color: rgba(255, 255, 255, .95); box-shadow: 0 7px 16px rgba(15, 23, 42, .045); }}
+            13%, 28% {{ border-color: rgba(37, 99, 235, .55); background-color: rgba(239, 246, 255, .98); box-shadow: 0 8px 20px rgba(37, 99, 235, .14); }}
+            36%, 50% {{ border-color: rgba(6, 182, 212, .55); background-color: rgba(236, 254, 255, .96); box-shadow: 0 8px 20px rgba(6, 182, 212, .12); }}
+        }}
+        @keyframes featured-lineage-mobile-flow {{
+            0%, 6% {{ opacity: 0; transform: translate(-50%, -50%); }}
+            9%, 43% {{ opacity: 1; }}
+            50% {{ opacity: 0; transform: translate(-50%, 220%); }}
+            100% {{ opacity: 0; transform: translate(-50%, 220%); }}
         }}
         .home-section {{
             margin: 1.55rem 0;
@@ -3581,83 +3371,79 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 min-height: 0;
                 height: auto;
             }}
-            .featured-lineage-lanes {{
-                grid-template-rows: auto auto;
-                gap: .7rem;
-                height: auto;
-            }}
-            .featured-lineage-lane {{
-                grid-template-columns: 1fr;
-                gap: .45rem;
-                padding: 1.45rem .7rem .7rem;
-            }}
-            .featured-lineage-connector {{
-                justify-self: center;
-                width: 2px;
-                min-width: 0;
-                height: 22px;
-                background: linear-gradient(180deg, rgba(37, 99, 235, .30), rgba(6, 182, 212, .34));
-            }}
-            .featured-lineage-connector::after {{
-                right: auto;
-                top: auto;
-                left: 50%;
-                bottom: -1px;
-                transform: translateX(-50%) rotate(135deg);
-            }}
-            .featured-lineage-packet {{
-                left: 50%;
-                top: 0;
-                transform: translate3d(-50%, -50%, 0);
-            }}
-            .featured-lineage-lane-jobs .featured-lineage-connector-in .featured-lineage-packet {{
-                animation-name: featured-lineage-packet-down-in;
-            }}
-            .featured-lineage-lane-jobs .featured-lineage-connector-out .featured-lineage-packet {{
-                animation-name: featured-lineage-packet-down-out;
-            }}
-            .featured-lineage-lane-skills .featured-lineage-connector-in .featured-lineage-packet {{
-                animation-name: featured-lineage-packet-down-skill-in;
-            }}
-            .featured-lineage-lane-skills .featured-lineage-connector-out .featured-lineage-packet {{
-                animation-name: featured-lineage-packet-down-skill-out;
-            }}
-            .featured-lineage-mart-group::before,
-            .featured-lineage-source-group::after {{
-                display: none;
-            }}
             .featured-lineage-svg {{
                 display: none;
             }}
             .featured-lineage-column {{
-                position: relative;
-                left: auto;
-                right: auto;
-                top: auto;
-                width: 100%;
-                transform: none;
+                display: none;
+            }}
+            .featured-lineage-mobile-flows {{
+                display: grid;
+                gap: .8rem;
+                min-width: 0;
+            }}
+            .featured-lineage-mobile-flow {{
+                display: grid;
                 gap: .42rem;
+                min-width: 0;
                 padding-left: .75rem;
-                border-left: 2px solid rgba(6, 182, 212, .26);
+                border-left: 2px solid rgba(6, 182, 212, .24);
             }}
-            .featured-lineage-column-title {{
-                margin-bottom: .05rem;
+            .featured-lineage-mobile-title,
+            .featured-lineage-mobile-group-label {{
+                color: var(--muted);
+                font-size: .61rem;
+                font-weight: 850;
+                letter-spacing: .085em;
+                line-height: 1;
+                text-transform: uppercase;
             }}
-            .featured-lineage-column:not(:last-child)::after {{
+            .featured-lineage-mobile-group {{
+                display: grid;
+                gap: .42rem;
+                min-width: 0;
+            }}
+            .featured-lineage-mobile-connector {{
+                position: relative;
+                justify-self: start;
+                width: 2px;
+                height: 20px;
+                margin-left: 1rem;
+                border-radius: 999px;
+                background: linear-gradient(180deg, rgba(37, 99, 235, .30), rgba(6, 182, 212, .38));
+                overflow: hidden;
+            }}
+            .featured-lineage-mobile-connector::after {{
                 content: "";
+                position: absolute;
+                left: 50%;
+                bottom: 1px;
                 width: 7px;
                 height: 7px;
                 border-right: 2px solid rgba(6, 182, 212, .65);
                 border-bottom: 2px solid rgba(6, 182, 212, .65);
-                transform: rotate(45deg);
-                margin: .1rem 0 .05rem .2rem;
+                transform: translateX(-50%) rotate(45deg);
+            }}
+            .featured-lineage-mobile-connector span {{
+                position: absolute;
+                left: 50%;
+                top: 0;
+                width: 7px;
+                height: 7px;
+                border: 1.8px solid #FFFFFF;
+                border-radius: 999px;
+                background: var(--data-blue);
+                box-shadow: 0 0 0 4px rgba(37, 99, 235, .12), 0 0 8px rgba(37, 99, 235, .22);
+                animation: featured-lineage-mobile-flow 10s linear infinite;
+            }}
+            .featured-lineage-mobile-flow-skill .featured-lineage-mobile-connector span {{
+                background: var(--data-cyan);
+                box-shadow: 0 0 0 4px rgba(6, 182, 212, .12), 0 0 8px rgba(6, 182, 212, .22);
+                animation-delay: 5s;
             }}
             .featured-lineage-node {{
                 min-height: 0;
                 padding: .48rem .55rem;
-            }}
-            .featured-lineage-node small {{
-                display: none;
             }}
             .project-overview-header {{
                 margin-bottom: 1.45rem;
@@ -3756,30 +3542,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             0% {{ opacity: 1; transform: translate3d(0, 0, 0); }}
             94% {{ opacity: 1; transform: translate3d(0, 100%, 0); }}
             95%, 100% {{ opacity: 0; transform: translate3d(0, 100%, 0); }}
-        }}
-        @keyframes featured-lineage-packet-down-in {{
-            0%, 3% {{ opacity: 0; top: 0; }}
-            5%, 20% {{ opacity: 1; }}
-            24% {{ opacity: 0; top: 100%; }}
-            25%, 100% {{ opacity: 0; top: 100%; }}
-        }}
-        @keyframes featured-lineage-packet-down-out {{
-            0%, 25% {{ opacity: 0; top: 0; }}
-            27%, 42% {{ opacity: 1; }}
-            46% {{ opacity: 0; top: 100%; }}
-            47%, 100% {{ opacity: 0; top: 100%; }}
-        }}
-        @keyframes featured-lineage-packet-down-skill-in {{
-            0%, 52% {{ opacity: 0; top: 0; }}
-            54%, 68% {{ opacity: 1; }}
-            72% {{ opacity: 0; top: 100%; }}
-            73%, 100% {{ opacity: 0; top: 100%; }}
-        }}
-        @keyframes featured-lineage-packet-down-skill-out {{
-            0%, 73% {{ opacity: 0; top: 0; }}
-            75%, 88% {{ opacity: 1; }}
-            92% {{ opacity: 0; top: 100%; }}
-            93%, 100% {{ opacity: 0; top: 100%; }}
         }}
         @media (hover: none), (pointer: coarse) {{
             .hero-skill-node:hover {{
@@ -3901,9 +3663,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .featured-lineage-node-skill-source,
             .featured-lineage-node-skill-intermediate,
             .featured-lineage-node-skill-mart,
-            .featured-lineage-intermediate-card,
-            .featured-lineage-mart-group,
-            .featured-lineage-single-mart {{
+            .featured-lineage-mobile-connector span {{
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;
@@ -3914,6 +3674,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 opacity: 0 !important;
             }}
             .featured-lineage-packet {{
+                display: none;
+            }}
+            .featured-lineage-mobile-connector span {{
                 display: none;
             }}
             .sidebar-mini-packet {{

@@ -1453,12 +1453,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .featured-lineage-preview {{
             position: relative;
-            width: min(100%, 670px);
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
             min-height: 0;
             height: auto;
             padding: .9rem .95rem 1rem;
             border-radius: 16px;
             overflow: hidden;
+            container-type: inline-size;
         }}
         .featured-lineage-header {{
             position: relative;
@@ -1495,37 +1498,46 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .featured-lineage-canvas {{
             position: relative;
-            display: block;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns:
+                minmax(138px, .95fr)
+                minmax(32px, .24fr)
+                minmax(152px, 1fr)
+                minmax(32px, .24fr)
+                minmax(168px, 1.12fr);
+            grid-template-rows:
+                auto
+                repeat(6, minmax(52px, auto));
+            align-items: stretch;
+            gap: 8px;
             width: 100%;
-            height: clamp(420px, 32vw, 455px);
+            max-width: 100%;
+            min-width: 0;
+            min-height: 390px;
+            height: auto;
             isolation: isolate;
-        }}
-        .featured-lineage-svg {{
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }}
-        .featured-lineage-svg marker path {{
-            fill: rgba(37, 99, 235, .44);
+            overflow: hidden;
         }}
         .featured-lineage-connector {{
             fill: none;
             stroke: rgba(100, 116, 139, .25);
             stroke-width: 1.5;
-            marker-end: url(#featured-lineage-arrow);
+            vector-effect: non-scaling-stroke;
         }}
         .featured-lineage-route {{
             fill: none;
-            stroke: url(#featuredLineageFlowGradient);
-            stroke-width: 2.4;
+            stroke: url(#featuredLineageFlowGradientA);
+            stroke-width: 2;
             stroke-linecap: round;
-            stroke-dasharray: 95 860;
-            stroke-dashoffset: 860;
+            stroke-dasharray: 28 260;
+            stroke-dashoffset: 260;
+            vector-effect: non-scaling-stroke;
             opacity: 0;
             animation: featured-lineage-route-flow 10s linear infinite;
+        }}
+        .featured-lineage-lane-b .featured-lineage-route {{
+            stroke: url(#featuredLineageFlowGradientB);
         }}
         .featured-lineage-route-skill {{
             animation-delay: 5s;
@@ -1534,60 +1546,71 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             fill: var(--data-blue);
             stroke: #FFFFFF;
             stroke-width: 1.8;
-            filter: drop-shadow(0 0 3px rgba(37, 99, 235, .34)) drop-shadow(0 0 7px rgba(37, 99, 235, .20));
+            vector-effect: non-scaling-stroke;
+            filter: drop-shadow(0 0 3px rgba(37, 99, 235, .22));
         }}
         .featured-lineage-packet-skill {{
             fill: var(--data-cyan);
         }}
-        .featured-lineage-column {{
-            position: absolute;
+        .featured-lineage-lane {{
             z-index: 3;
-            display: flex;
-            flex-direction: column;
+            align-self: stretch;
+            width: 100%;
+            height: 100%;
             min-width: 0;
-        }}
-        .featured-lineage-column-staging {{
-            left: 0;
-            top: 2%;
-            width: 28%;
-            gap: .68rem;
-        }}
-        .featured-lineage-column-intermediate {{
-            left: 31%;
-            top: 50%;
-            width: 30%;
-            gap: 6.9rem;
-            transform: translateY(-50%);
-        }}
-        .featured-lineage-column-mart {{
-            right: 0;
-            top: 1%;
-            width: 36%;
-            gap: .55rem;
+            pointer-events: none;
+            overflow: visible;
         }}
         .featured-lineage-column-title {{
+            align-self: end;
+            min-width: 0;
             color: var(--muted);
             font-size: .61rem;
             font-weight: 850;
             letter-spacing: .09em;
             text-transform: uppercase;
+            line-height: 1;
             margin-bottom: .08rem;
         }}
-        .featured-lineage-mobile-flows {{
+        .featured-lineage-title-staging {{
+            grid-column: 1;
+            grid-row: 1;
+        }}
+        .featured-lineage-title-intermediate {{
+            grid-column: 3;
+            grid-row: 1;
+        }}
+        .featured-lineage-title-marts {{
+            grid-column: 5;
+            grid-row: 1;
+        }}
+        .featured-lineage-branch-title,
+        .featured-lineage-branch-group-label,
+        .featured-lineage-mobile-connector {{
             display: none;
+        }}
+        .featured-lineage-branch {{
+            display: contents;
+        }}
+        .featured-lineage-branch-group {{
+            display: contents;
         }}
         .featured-lineage-node {{
             position: relative;
-            z-index: 4;
+            box-sizing: border-box;
+            z-index: 5;
             display: grid;
             grid-template-columns: auto minmax(0, 1fr);
             column-gap: .5rem;
             row-gap: .22rem;
             align-items: center;
-            min-height: 54px;
-            padding: .5rem .62rem;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            min-height: 52px;
+            padding: 9px 10px;
             border: 1px solid rgba(148, 163, 184, .28);
-            border-radius: 10px;
+            border-radius: 12px;
             background: rgba(255, 255, 255, .95);
             color: var(--text);
             box-shadow: 0 7px 16px rgba(15, 23, 42, .045);
@@ -1598,17 +1621,71 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 box-shadow 180ms ease;
         }}
         .featured-lineage-node-intermediate {{
-            min-height: 68px;
+            min-height: 62px;
         }}
         .featured-lineage-node-mart {{
-            min-height: 54px;
+            min-height: 52px;
+        }}
+        .featured-lineage-node-stg-companies {{
+            grid-column: 1;
+            grid-row: 2;
+        }}
+        .featured-lineage-node-stg-job-postings {{
+            grid-column: 1;
+            grid-row: 3;
+        }}
+        .featured-lineage-node-stg-job-skills {{
+            grid-column: 1;
+            grid-row: 5;
+        }}
+        .featured-lineage-node-stg-skills {{
+            grid-column: 1;
+            grid-row: 6;
+        }}
+        .featured-lineage-node-int-job {{
+            grid-column: 3;
+            grid-row: 2 / 4;
+            align-self: center;
+        }}
+        .featured-lineage-node-int-skill {{
+            grid-column: 3;
+            grid-row: 5 / 7;
+            align-self: center;
+        }}
+        .featured-lineage-node-mart-company {{
+            grid-column: 5;
+            grid-row: 2;
+        }}
+        .featured-lineage-node-mart-monthly {{
+            grid-column: 5;
+            grid-row: 3;
+        }}
+        .featured-lineage-node-mart-remote {{
+            grid-column: 5;
+            grid-row: 4;
+        }}
+        .featured-lineage-node-mart-salary {{
+            grid-column: 5;
+            grid-row: 5;
+        }}
+        .featured-lineage-node-mart-skill-demand {{
+            grid-column: 5;
+            grid-row: 6;
+        }}
+        .featured-lineage-lane-a {{
+            grid-column: 2;
+            grid-row: 2 / 7;
+        }}
+        .featured-lineage-lane-b {{
+            grid-column: 4;
+            grid-row: 2 / 7;
         }}
         .featured-lineage-model-name {{
             min-width: 0;
             color: var(--text);
-            font-size: clamp(.78rem, .82vw, .86rem);
+            font-size: clamp(0.68rem, 0.25vw + 0.61rem, 0.82rem);
             font-weight: 750;
-            line-height: 1.18;
+            line-height: 1.15;
             overflow-wrap: anywhere;
             word-break: normal;
             hyphens: none;
@@ -1617,10 +1694,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             grid-column: 2;
             color: var(--muted);
             margin-top: .18rem;
-            font-size: clamp(.56rem, .58vw, .62rem);
+            font-size: clamp(0.5rem, 0.15vw + 0.46rem, 0.61rem);
             font-weight: 800;
             letter-spacing: .065em;
-            line-height: 1;
+            line-height: 1.2;
         }}
         .featured-lineage-node-icon {{
             grid-row: 1 / span 2;
@@ -1675,14 +1752,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         @media (hover: hover) and (pointer: fine) {{
             .featured-lineage-node:hover {{
-                transform: translateY(-2px) scale(1.015);
+                transform: translateY(-1px);
                 border-color: rgba(37, 99, 235, 0.45);
                 background-color: rgba(239, 246, 255, .98);
-                box-shadow: 0 10px 22px rgba(37, 99, 235, 0.10);
+                box-shadow: 0 8px 18px rgba(37, 99, 235, 0.09);
             }}
         }}
         @keyframes featured-lineage-route-flow {{
-            0%, 5% {{ opacity: 0; stroke-dashoffset: 860; }}
+            0%, 5% {{ opacity: 0; stroke-dashoffset: 260; }}
             8%, 44% {{ opacity: 1; }}
             50% {{ opacity: 0; stroke-dashoffset: 0; }}
             100% {{ opacity: 0; stroke-dashoffset: 0; }}
@@ -1702,6 +1779,158 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             9%, 43% {{ opacity: 1; }}
             50% {{ opacity: 0; transform: translate(-50%, 220%); }}
             100% {{ opacity: 0; transform: translate(-50%, 220%); }}
+        }}
+        @container (max-width: 639px) {{
+            .featured-lineage-canvas {{
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: .75rem;
+                min-height: 0;
+                overflow: hidden;
+            }}
+            .featured-lineage-column-title,
+            .featured-lineage-lane {{
+                display: none;
+            }}
+            .featured-lineage-branch {{
+                box-sizing: border-box;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) minmax(26px, 32px) minmax(0, 1fr) minmax(26px, 32px) minmax(0, 1.15fr);
+                align-items: center;
+                gap: 8px;
+                min-width: 0;
+                padding: .72rem;
+                border: 1px solid rgba(148, 163, 184, .20);
+                border-radius: 14px;
+                background: rgba(255, 255, 255, .48);
+            }}
+            .featured-lineage-branch-title {{
+                display: block;
+                grid-column: 1 / -1;
+                color: var(--data-blue);
+                font-size: .62rem;
+                font-weight: 850;
+                letter-spacing: .085em;
+                line-height: 1;
+                text-transform: uppercase;
+            }}
+            .featured-lineage-branch-group {{
+                display: grid;
+                gap: 8px;
+                min-width: 0;
+            }}
+            .featured-lineage-branch-sources {{
+                grid-column: 1;
+            }}
+            .featured-lineage-branch-marts {{
+                grid-column: 5;
+            }}
+            .featured-lineage-branch-group-label {{
+                display: block;
+                color: var(--muted);
+                font-size: .55rem;
+                font-weight: 850;
+                letter-spacing: .08em;
+                line-height: 1;
+                text-transform: uppercase;
+            }}
+            .featured-lineage-node {{
+                grid-column: auto;
+                grid-row: auto;
+                min-height: 52px;
+                padding: 8px 9px;
+            }}
+            .featured-lineage-node-intermediate {{
+                grid-column: 3;
+            }}
+            .featured-lineage-branch > .featured-lineage-node-mart {{
+                grid-column: 5;
+            }}
+            .featured-lineage-mobile-connector {{
+                position: relative;
+                display: block;
+                justify-self: stretch;
+                align-self: center;
+                width: 100%;
+                height: 2px;
+                border-radius: 999px;
+                background: linear-gradient(90deg, rgba(37, 99, 235, .30), rgba(6, 182, 212, .38));
+                overflow: hidden;
+            }}
+            .featured-lineage-mobile-connector span {{
+                position: absolute;
+                left: 0;
+                top: 50%;
+                width: 6px;
+                height: 6px;
+                border: 1.5px solid #FFFFFF;
+                border-radius: 999px;
+                background: var(--data-blue);
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
+                animation: featured-lineage-branch-flow 10s linear infinite;
+            }}
+            .featured-lineage-branch-skill .featured-lineage-mobile-connector span {{
+                background: var(--data-cyan);
+                box-shadow: 0 0 0 3px rgba(6, 182, 212, .10);
+                animation-delay: 5s;
+            }}
+            .featured-lineage-model-name {{
+                font-size: clamp(.66rem, 0.35vw + .58rem, .78rem);
+            }}
+        }}
+        @container (max-width: 479px) {{
+            .featured-lineage-header {{
+                align-items: flex-start;
+                flex-direction: column;
+                gap: .15rem;
+            }}
+            .featured-lineage-canvas {{
+                gap: .85rem;
+            }}
+            .featured-lineage-branch {{
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: .72rem;
+            }}
+            .featured-lineage-branch-sources,
+            .featured-lineage-branch-marts,
+            .featured-lineage-node-intermediate,
+            .featured-lineage-branch > .featured-lineage-node-mart {{
+                grid-column: 1;
+            }}
+            .featured-lineage-mobile-connector {{
+                justify-self: start;
+                width: 2px;
+                height: 24px;
+                margin-left: 1rem;
+                background: linear-gradient(180deg, rgba(37, 99, 235, .30), rgba(6, 182, 212, .38));
+            }}
+            .featured-lineage-mobile-connector::after {{
+                content: "";
+                position: absolute;
+                left: 50%;
+                bottom: 1px;
+                width: 7px;
+                height: 7px;
+                border-right: 2px solid rgba(6, 182, 212, .65);
+                border-bottom: 2px solid rgba(6, 182, 212, .65);
+                transform: translateX(-50%) rotate(45deg);
+            }}
+            .featured-lineage-mobile-connector span {{
+                left: 50%;
+                top: 0;
+                animation-name: featured-lineage-mobile-flow;
+            }}
+            .featured-lineage-node {{
+                min-height: 52px;
+                padding: 9px 10px;
+            }}
+        }}
+        @keyframes featured-lineage-branch-flow {{
+            0%, 6% {{ opacity: 0; transform: translate(-50%, -50%); }}
+            9%, 43% {{ opacity: 1; }}
+            50% {{ opacity: 0; transform: translate(460%, -50%); }}
+            100% {{ opacity: 0; transform: translate(460%, -50%); }}
         }}
         .home-section {{
             margin: 1.55rem 0;
@@ -3340,9 +3569,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 width: 100%;
                 justify-self: stretch;
             }}
-            .featured-lineage-canvas {{
-                height: clamp(335px, 34vw, 360px);
-            }}
         }}
         @media (max-width: 1024px) {{
             .pipeline {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
@@ -3568,94 +3794,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 grid-template-columns: 1fr;
             }}
             .featured-lineage-preview {{
-                min-height: auto;
                 padding: .85rem;
-            }}
-            .featured-lineage-header {{
-                align-items: flex-start;
-                flex-direction: column;
-                gap: .15rem;
-            }}
-            .featured-lineage-canvas {{
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: .65rem;
-                min-height: 0;
-                height: auto;
-            }}
-            .featured-lineage-svg {{
-                display: none;
-            }}
-            .featured-lineage-column {{
-                display: none;
-            }}
-            .featured-lineage-mobile-flows {{
-                display: grid;
-                gap: .8rem;
-                min-width: 0;
-            }}
-            .featured-lineage-mobile-flow {{
-                display: grid;
-                gap: .42rem;
-                min-width: 0;
-                padding-left: .75rem;
-                border-left: 2px solid rgba(6, 182, 212, .24);
-            }}
-            .featured-lineage-mobile-title,
-            .featured-lineage-mobile-group-label {{
-                color: var(--muted);
-                font-size: .61rem;
-                font-weight: 850;
-                letter-spacing: .085em;
-                line-height: 1;
-                text-transform: uppercase;
-            }}
-            .featured-lineage-mobile-group {{
-                display: grid;
-                gap: .42rem;
-                min-width: 0;
-            }}
-            .featured-lineage-mobile-connector {{
-                position: relative;
-                justify-self: start;
-                width: 2px;
-                height: 20px;
-                margin-left: 1rem;
-                border-radius: 999px;
-                background: linear-gradient(180deg, rgba(37, 99, 235, .30), rgba(6, 182, 212, .38));
-                overflow: hidden;
-            }}
-            .featured-lineage-mobile-connector::after {{
-                content: "";
-                position: absolute;
-                left: 50%;
-                bottom: 1px;
-                width: 7px;
-                height: 7px;
-                border-right: 2px solid rgba(6, 182, 212, .65);
-                border-bottom: 2px solid rgba(6, 182, 212, .65);
-                transform: translateX(-50%) rotate(45deg);
-            }}
-            .featured-lineage-mobile-connector span {{
-                position: absolute;
-                left: 50%;
-                top: 0;
-                width: 7px;
-                height: 7px;
-                border: 1.8px solid #FFFFFF;
-                border-radius: 999px;
-                background: var(--data-blue);
-                box-shadow: 0 0 0 4px rgba(37, 99, 235, .12), 0 0 8px rgba(37, 99, 235, .22);
-                animation: featured-lineage-mobile-flow 10s linear infinite;
-            }}
-            .featured-lineage-mobile-flow-skill .featured-lineage-mobile-connector span {{
-                background: var(--data-cyan);
-                box-shadow: 0 0 0 4px rgba(6, 182, 212, .12), 0 0 8px rgba(6, 182, 212, .22);
-                animation-delay: 5s;
-            }}
-            .featured-lineage-node {{
-                min-height: 0;
-                padding: .48rem .55rem;
             }}
             .project-overview-header {{
                 margin-bottom: 1.45rem;

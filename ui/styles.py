@@ -779,17 +779,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
 
         .portfolio-hero {{
             display: grid;
-            grid-template-columns: minmax(0, 1.45fr) minmax(240px, .62fr);
+            grid-template-columns: minmax(0, 1.5fr) minmax(210px, .48fr);
             align-items: start;
-            column-gap: clamp(1.5rem, 3vw, 2.5rem);
-            row-gap: clamp(1.35rem, 2.6vw, 1.9rem);
+            column-gap: clamp(1.1rem, 2vw, 1.65rem);
+            row-gap: .55rem;
+            height: auto;
+            min-height: 0;
             padding: 0;
             overflow: visible;
         }}
         .data-command-hero {{
             position: relative;
             isolation: isolate;
-            padding: clamp(1rem, 2.2vw, 1.55rem);
+            padding: clamp(.9rem, 1.55vw, 1.18rem);
+            height: auto;
+            min-height: 0;
             margin: .2rem 0 .85rem;
             border: 1px solid rgba(37, 99, 235, .14);
             border-radius: 18px;
@@ -888,12 +892,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .portfolio-hero h1 {{
             color: var(--text);
-            font-size: clamp(3rem, 4.1vw, 3.875rem);
-            line-height: 1.05;
+            font-size: clamp(2.6rem, 4.1vw, 3.18rem);
+            line-height: 1.02;
             font-weight: 750;
             letter-spacing: 0;
-            max-width: 620px;
-            margin: .9rem 0 0;
+            max-width: 560px;
+            margin: .65rem 0 0;
         }}
         .portfolio-hero p,
         .contact-cta p {{
@@ -905,25 +909,25 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .hero-description {{
             max-width: 680px;
-            margin-top: .85rem;
-            line-height: 1.58;
+            margin-top: .68rem;
+            line-height: 1.52;
         }}
         .hero-value-rotator {{
             position: relative;
             width: min(100%, 31rem);
-            min-height: 2rem;
-            margin-top: .8rem;
+            min-height: 1.55rem;
+            margin-top: .45rem;
             border-left: 3px solid rgba(37, 99, 235, .42);
-            padding: .34rem .65rem;
+            padding: .22rem .58rem;
             color: var(--accent);
-            font-size: .9rem;
+            font-size: .84rem;
             font-weight: 800;
             letter-spacing: .01em;
             overflow: hidden;
         }}
         .hero-value-line {{
             position: absolute;
-            inset: .4rem auto auto .75rem;
+            inset: .25rem auto auto .68rem;
             opacity: 0;
             transform: translateY(.55rem);
             animation: hero-value-rotate 16s ease-in-out infinite;
@@ -942,7 +946,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: flex;
             flex-wrap: wrap;
             gap: .7rem;
-            margin-top: 1rem;
+            margin-top: .78rem;
         }}
         .portfolio-button {{
             display: inline-flex;
@@ -1001,7 +1005,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: 100%;
         }}
         .hero-skill-label {{
-            margin-bottom: .55rem;
+            margin-bottom: .36rem;
             color: var(--text-2);
             font-size: .68rem;
             font-weight: 750;
@@ -1013,11 +1017,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             isolation: isolate;
             z-index: 5;
             display: grid;
-            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-template-columns: repeat(6, minmax(104px, 128px));
+            justify-content: center;
             align-items: center;
-            gap: .72rem;
+            gap: .85rem;
             width: 100%;
-            padding-top: 2.4rem;
+            padding-top: 2.05rem;
             margin-top: 0;
             overflow: visible;
             container-type: inline-size;
@@ -1031,8 +1036,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             align-items: center;
             justify-content: center;
             min-width: 0;
-            height: 1.8rem;
-            padding: .28rem .58rem;
+            height: 1.65rem;
+            padding: .22rem .55rem;
             border: 1px solid rgba(37, 99, 235, .20);
             border-radius: 999px;
             background: rgba(239, 246, 255, .92);
@@ -1049,9 +1054,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             white-space: nowrap;
         }}
         .core-workflow-orchestrator-label strong {{
-            font-size: .62rem;
+            font-size: .6rem;
             font-weight: 850;
-            letter-spacing: .09em;
+            letter-spacing: .04em;
         }}
         .core-workflow-orchestrator-label small {{
             color: var(--text-2);
@@ -1060,25 +1065,86 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .core-workflow-orchestration-line {{
             position: absolute;
-            z-index: 1;
-            top: 2rem;
+            z-index: 2;
+            top: 1.65rem;
+            left: 50%;
+            width: 2px;
+            height: .48rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, .28);
+            transform: translateX(-50%);
+            pointer-events: none;
+        }}
+        .pipeline-track {{
+            position: absolute;
             left: 4%;
             right: 4%;
-            height: 1px;
+            top: calc(2.05rem + 39px);
+            z-index: 1;
+            height: 2px;
             border-radius: 999px;
-            background: linear-gradient(90deg, rgba(37, 99, 235, .08), rgba(37, 99, 235, .28), rgba(6, 182, 212, .18));
+            background: linear-gradient(90deg, rgba(37, 99, 235, .20), rgba(6, 182, 212, .65), rgba(37, 99, 235, .20));
             pointer-events: none;
+        }}
+        .pipeline-track::after {{
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid rgba(6, 182, 212, .75);
+            border-right: 2px solid rgba(6, 182, 212, .75);
+            transform: translateY(-50%) rotate(45deg);
+        }}
+        .pipeline-motion-layer {{
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            pointer-events: none;
+        }}
+        .pipeline-ball {{
+            position: absolute;
+            top: calc(2.05rem + 39px);
+            left: 4%;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #06b6d4;
+            box-shadow:
+                0 0 0 4px rgba(6, 182, 212, .14),
+                0 0 14px rgba(6, 182, 212, .8);
+            transform: translate(-50%, -50%);
+            animation: pipeline-data-flow 6s linear infinite;
+            will-change: left, transform;
+        }}
+        .pipeline-ball::after {{
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 6px;
+            width: 30px;
+            height: 3px;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, .55));
+        }}
+        @keyframes pipeline-data-flow {{
+            0% {{ left: 4%; opacity: 0; }}
+            5% {{ opacity: 1; }}
+            95% {{ opacity: 1; }}
+            100% {{ left: 96%; opacity: 0; }}
         }}
         .hero-skill-node {{
             position: relative;
             z-index: 3;
             min-width: 0;
-            min-height: 74px;
+            min-height: 76px;
+            height: 76px;
             display: grid;
             grid-template-columns: auto minmax(0, 1fr);
             align-items: center;
-            gap: .54rem;
-            padding: .72rem .78rem;
+            gap: .46rem;
+            padding: .58rem .62rem;
             border: 1px solid rgba(37, 99, 235, .18);
             border-radius: 9px;
             background: rgba(255, 255, 255, .90);
@@ -1089,11 +1155,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             animation: home-skill-node-enter 420ms ease-out both;
         }}
         .hero-skill-icon {{
-            width: .62rem;
-            height: .62rem;
-            border-radius: 4px;
-            background: var(--data-blue);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, .62);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, .06);
         }}
         .hero-skill-node-content {{
             position: relative;
@@ -1104,7 +1170,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .core-workflow-stage {{
             color: var(--text-2);
-            font-size: .56rem;
+            font-size: .52rem;
             font-weight: 850;
             letter-spacing: .08em;
             line-height: 1;
@@ -1112,7 +1178,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .core-workflow-tool {{
             color: var(--text);
-            font-size: .8rem;
+            font-size: .74rem;
             font-weight: 850;
             line-height: 1.15;
             overflow-wrap: normal;
@@ -1123,46 +1189,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .hero-skill-node-4 {{ animation-delay: 270ms; }}
         .hero-skill-node-5 {{ animation-delay: 320ms; }}
         .hero-skill-node-6 {{ animation-delay: 370ms; }}
-        .hero-skill-connector {{
-            position: absolute;
-            z-index: 2;
-            top: calc(2.4rem + 37px);
-            height: 2px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, rgba(37, 99, 235, .28), rgba(6, 182, 212, .38));
-            overflow: hidden;
-            pointer-events: none;
-        }}
-        .hero-skill-connector::after {{
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 50%;
-            width: 7px;
-            height: 7px;
-            border-right: 2px solid rgba(6, 182, 212, .68);
-            border-top: 2px solid rgba(6, 182, 212, .68);
-            transform: translateY(-50%) rotate(45deg);
-        }}
-        .hero-skill-connector-flow {{
-            position: absolute;
-            inset: 0 auto 0 0;
-            width: 28%;
-            border-radius: 999px;
-            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, .42), transparent);
-            opacity: .72;
-            animation: hero-skill-connector-flow 5.5s linear infinite;
-        }}
-        .hero-skill-connector-1 {{ left: calc((100% / 6) * 1 - 1.2rem); right: calc((100% / 6) * 4 + 1.2rem); }}
-        .hero-skill-connector-2 {{ left: calc((100% / 6) * 2 - 1.2rem); right: calc((100% / 6) * 3 + 1.2rem); }}
-        .hero-skill-connector-3 {{ left: calc((100% / 6) * 3 - 1.2rem); right: calc((100% / 6) * 2 + 1.2rem); }}
-        .hero-skill-connector-4 {{ left: calc((100% / 6) * 4 - 1.2rem); right: calc((100% / 6) * 1 + 1.2rem); }}
-        .hero-skill-connector-5 {{ left: calc((100% / 6) * 5 - 1.2rem); right: 1.2rem; }}
-        @keyframes hero-skill-connector-flow {{
-            0% {{ opacity: 0; transform: translateX(-110%); }}
-            12%, 72% {{ opacity: .72; }}
-            100% {{ opacity: 0; transform: translateX(420%); }}
-        }}
         .hero-photo-shell {{
             justify-self: center;
             width: min(100%, 360px);
@@ -1291,8 +1317,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             align-self: start;
             grid-column: 2;
             grid-row: 1;
-            width: min(100%, 282px);
-            padding: .52rem;
+            width: min(100%, 248px);
+            height: fit-content;
+            min-height: 0;
+            padding: .5rem;
             border: 1px solid rgba(37, 99, 235, .22);
             border-radius: 18px;
             background:
@@ -1316,7 +1344,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             background: transparent;
         }}
         .hero-profile-image-wrap {{
-            aspect-ratio: 1 / .92;
+            height: 145px;
+            aspect-ratio: auto;
             overflow: hidden;
             border-radius: 14px;
             background: #eef2f7;
@@ -1339,26 +1368,26 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: flex;
             flex-direction: column;
             gap: 0;
-            padding: .72rem .2rem .12rem;
+            padding: .46rem .14rem .04rem;
             text-align: left;
             border-top: 0;
         }}
         .hero-profile-heading {{
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
         }}
         .hero-profile-name {{
             margin: 0;
             color: #0F172A;
-            font-size: 1.28rem;
+            font-size: clamp(1.42rem, 1.9vw, 1.62rem);
             font-weight: 800;
-            line-height: 1.15;
+            line-height: 1.05;
         }}
         .hero-profile-role {{
-            margin: .14rem 0 0;
+            margin: .08rem 0 0;
             color: var(--text-2);
-            font-size: .86rem;
+            font-size: .74rem;
             font-weight: 650;
             line-height: 1.3;
         }}
@@ -1367,20 +1396,20 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             align-items: center;
             justify-content: flex-start;
             flex-wrap: wrap;
-            gap: .38rem;
-            margin-top: .58rem;
+            gap: .3rem;
+            margin-top: .24rem;
         }}
         .hero-profile-status {{
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            min-height: 26px;
-            padding: 4px 8px;
+            min-height: 21px;
+            padding: 2px 6px;
             border: 1px solid rgba(16, 185, 129, 0.22);
             border-radius: 999px;
             background: rgba(16, 185, 129, 0.08);
             color: #047857;
-            font-size: .7rem;
+            font-size: .62rem;
             font-weight: 650;
             line-height: 1.2;
             white-space: nowrap;
@@ -1397,13 +1426,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            min-height: 26px;
-            padding: 4px 8px;
+            min-height: 21px;
+            padding: 2px 6px;
             border: 1px solid rgba(148, 163, 184, 0.25);
             border-radius: 999px;
             background: rgba(248, 250, 252, 0.92);
             color: #475569;
-            font-size: .7rem;
+            font-size: .62rem;
             font-weight: 600;
             line-height: 1.2;
             white-space: nowrap;
@@ -3525,52 +3554,57 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 width: 100% !important;
             }}
             .hero-skill-pipeline {{
-                grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr) 32px minmax(0, 1fr);
-                grid-template-rows: auto auto 24px auto;
-                gap: .72rem .55rem;
-                padding-top: 2.45rem;
+                grid-template-columns: repeat(3, minmax(108px, 136px));
+                grid-template-rows: auto auto;
+                justify-content: center;
+                gap: .78rem 1rem;
+                padding-top: 2.05rem;
             }}
             .core-workflow-orchestrator {{
                 top: 0;
             }}
-            .hero-skill-node-1 {{ grid-column: 1; grid-row: 2; }}
-            .hero-skill-connector-1 {{ grid-column: 2; grid-row: 2; }}
-            .hero-skill-node-2 {{ grid-column: 3; grid-row: 2; }}
-            .hero-skill-connector-2 {{ grid-column: 4; grid-row: 2; }}
-            .hero-skill-node-3 {{ grid-column: 5; grid-row: 2; }}
-            .hero-skill-connector-3 {{ grid-column: 5; grid-row: 3; }}
-            .hero-skill-node-4 {{ grid-column: 5; grid-row: 4; }}
-            .hero-skill-connector-4 {{ grid-column: 4; grid-row: 4; }}
-            .hero-skill-node-5 {{ grid-column: 3; grid-row: 4; }}
-            .hero-skill-connector-5 {{ grid-column: 2; grid-row: 4; }}
-            .hero-skill-node-6 {{ grid-column: 1; grid-row: 4; }}
-            .hero-skill-connector {{
-                position: relative;
-                top: auto;
-                left: auto;
-                right: auto;
-                align-self: center;
-                width: 100%;
+            .hero-skill-node-1 {{ grid-column: 1; grid-row: 1; }}
+            .hero-skill-node-2 {{ grid-column: 2; grid-row: 1; }}
+            .hero-skill-node-3 {{ grid-column: 3; grid-row: 1; }}
+            .hero-skill-node-4 {{ grid-column: 3; grid-row: 2; }}
+            .hero-skill-node-5 {{ grid-column: 2; grid-row: 2; }}
+            .hero-skill-node-6 {{ grid-column: 1; grid-row: 2; }}
+            .pipeline-track {{
+                left: calc(50% - 220px);
+                right: calc(50% - 220px);
+                top: calc(2.05rem + 38px);
             }}
-            .hero-skill-connector-3 {{
-                justify-self: center;
+            .pipeline-track::before {{
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
                 width: 2px;
-                height: 100%;
-                min-height: 24px;
-                background: linear-gradient(180deg, rgba(37, 99, 235, .28), rgba(6, 182, 212, .38));
+                height: 88px;
+                border-radius: 999px;
+                background: linear-gradient(180deg, rgba(6, 182, 212, .62), rgba(37, 99, 235, .28));
             }}
-            .hero-skill-connector-3::after {{
-                right: auto;
-                left: 50%;
-                top: auto;
-                bottom: 0;
-                transform: translateX(-50%) rotate(135deg);
-            }}
-            .hero-skill-connector-4::after,
-            .hero-skill-connector-5::after {{
+            .pipeline-track::after {{
                 right: auto;
                 left: 0;
-                transform: translateY(-50%) rotate(-135deg);
+                top: 88px;
+                width: 100%;
+                height: 2px;
+                border: 0;
+                border-radius: 999px;
+                background: linear-gradient(270deg, rgba(37, 99, 235, .20), rgba(6, 182, 212, .58), rgba(37, 99, 235, .20));
+                transform: none;
+            }}
+            .pipeline-ball {{
+                animation-name: pipeline-data-flow-tablet;
+            }}
+            @keyframes pipeline-data-flow-tablet {{
+                0% {{ left: 4%; top: calc(2.05rem + 38px); opacity: 0; }}
+                6% {{ opacity: 1; }}
+                45% {{ left: 96%; top: calc(2.05rem + 38px); opacity: 1; }}
+                52% {{ left: 96%; top: calc(2.05rem + 126px); opacity: 1; }}
+                95% {{ left: 4%; top: calc(2.05rem + 126px); opacity: 1; }}
+                100% {{ left: 4%; top: calc(2.05rem + 126px); opacity: 0; }}
             }}
             .dashboard-primary-kpis,
             .dashboard-metadata-strip {{
@@ -3672,36 +3706,55 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .hero-skill-node {{
                 min-height: 58px;
+                height: 58px;
                 width: 100%;
             }}
-            .hero-skill-connector {{
-                position: relative;
-                top: auto;
-                left: auto;
+            .pipeline-track {{
+                left: 1.08rem;
                 right: auto;
-                justify-self: start;
+                top: 2.35rem;
+                bottom: .7rem;
                 width: 2px;
-                height: 18px;
-                margin-left: 1.1rem;
-                background: linear-gradient(180deg, rgba(37, 99, 235, .28), rgba(6, 182, 212, .38));
+                height: auto;
+                background: linear-gradient(180deg, rgba(37, 99, 235, .20), rgba(6, 182, 212, .62), rgba(37, 99, 235, .20));
             }}
-            .hero-skill-connector-1,
-            .hero-skill-connector-2,
-            .hero-skill-connector-3,
-            .hero-skill-connector-4,
-            .hero-skill-connector-5 {{
-                grid-column: 1;
-                grid-row: auto;
+            .pipeline-track::before {{
+                display: none;
             }}
-            .hero-skill-connector::after,
-            .hero-skill-connector-3::after,
-            .hero-skill-connector-4::after,
-            .hero-skill-connector-5::after {{
+            .pipeline-track::after {{
                 right: auto;
                 left: 50%;
                 top: auto;
                 bottom: 0;
-                transform: translateX(-50%) rotate(135deg);
+                width: 8px;
+                height: 8px;
+                border-top: 0;
+                border-left: 0;
+                border-right: 2px solid rgba(6, 182, 212, .75);
+                border-bottom: 2px solid rgba(6, 182, 212, .75);
+                background: transparent;
+                transform: translateX(-50%) rotate(45deg);
+            }}
+            .pipeline-ball {{
+                left: 1.08rem;
+                top: 2.35rem;
+                animation-name: pipeline-data-flow-mobile;
+            }}
+            .pipeline-ball::after {{
+                top: auto;
+                right: auto;
+                left: 50%;
+                bottom: 6px;
+                width: 3px;
+                height: 28px;
+                transform: translateX(-50%);
+                background: linear-gradient(180deg, transparent, rgba(6, 182, 212, .55));
+            }}
+            @keyframes pipeline-data-flow-mobile {{
+                0% {{ top: 2.35rem; opacity: 0; }}
+                6% {{ opacity: 1; }}
+                95% {{ top: calc(100% - .7rem); opacity: 1; }}
+                100% {{ top: calc(100% - .7rem); opacity: 0; }}
             }}
             .hero-photo-shell {{
                 order: -1;
@@ -3900,7 +3953,6 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-profile-card:hover,
             .hero-skill-node,
             .hero-skill-node:hover,
-            .hero-skill-connector-flow,
             .pipeline-flow-packet,
             .data-quality-detail,
             .sidebar-brand:hover,
@@ -3969,20 +4021,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-profile-card:hover,
             .hero-profile-status-dot,
             .hero-skill-node,
-            .hero-skill-connector-flow,
+            .pipeline-ball,
             .featured-lineage-pulse {{
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;
                 opacity: 1 !important;
             }}
+            .pipeline-ball {{
+                left: 50%;
+                opacity: .8 !important;
+            }}
             .featured-lineage-pulse {{
                 display: none;
             }}
             .sidebar-mini-packet {{
-                display: none;
-            }}
-            .hero-skill-connector-flow {{
                 display: none;
             }}
             .pipeline-flow-packet {{

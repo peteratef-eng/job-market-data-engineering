@@ -116,9 +116,11 @@ skill_pipeline_steps = [
 skill_pipeline_markup = (
     '<span class="sr-only">Core Data Engineering workflow: Airflow orchestrates data ingestion from files and APIs, processing with Python and Pandas, storage in SQL and PostgreSQL, transformation with dbt, data-quality validation, and delivery of analytics-ready data.</span>'
     '<div class="core-workflow-orchestrator" aria-hidden="true">'
-    '<span class="core-workflow-orchestrator-label"><strong>AIRFLOW</strong><span aria-hidden="true">·</span><small>Pipeline Orchestration</small></span>'
+    '<span class="core-workflow-orchestrator-label"><strong>Airflow</strong><span aria-hidden="true">&middot;</span><small>Pipeline Orchestration</small></span>'
     '</div>'
     '<span class="core-workflow-orchestration-line" aria-hidden="true"></span>'
+    '<span class="pipeline-track" aria-hidden="true"></span>'
+    '<span class="pipeline-motion-layer" aria-hidden="true"><span class="pipeline-ball"></span></span>'
 )
 for index, (stage, label) in enumerate(skill_pipeline_steps, start=1):
     skill_pipeline_markup += (
@@ -130,12 +132,6 @@ for index, (stage, label) in enumerate(skill_pipeline_steps, start=1):
         '</span>'
         '</span>'
     )
-    if index < len(skill_pipeline_steps):
-        skill_pipeline_markup += (
-            f'<span class="hero-skill-connector hero-skill-connector-{index}" aria-hidden="true">'
-            '<span class="hero-skill-connector-flow"></span>'
-            '</span>'
-        )
 
 st.markdown(
     f"""

@@ -600,6 +600,49 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             background: #2563eb;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
         }}
+        [data-testid="stSidebar"] [data-testid="stPageLink"] {{
+            width: 100%;
+        }}
+        [data-testid="stSidebar"] [data-testid="stPageLink"] a {{
+            display: flex;
+            align-items: center;
+            min-height: 2.05rem;
+            padding: .38rem .5rem;
+            border-radius: 8px;
+            color: var(--text-2);
+            font-size: .84rem;
+            font-weight: 600;
+            line-height: 1.2;
+            text-decoration: none;
+            transition:
+                background-color 180ms ease,
+                color 180ms ease;
+        }}
+        [data-testid="stSidebar"] [data-testid="stPageLink"] a {{
+            position: relative;
+        }}
+        [data-testid="stSidebar"] [data-testid="stPageLink"] a::before {{
+            content: "";
+            position: absolute;
+            left: -.98rem;
+            top: 50%;
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, .26);
+            transform: translateY(-50%);
+        }}
+        [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover,
+        [data-testid="stSidebar"] [data-testid="stPageLink"] a:focus-visible {{
+            color: var(--data-blue);
+            background: rgba(239, 246, 255, .82);
+            outline: none;
+            text-decoration: none;
+        }}
+        [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover::before,
+        [data-testid="stSidebar"] [data-testid="stPageLink"] a:focus-visible::before {{
+            background: var(--data-blue);
+        }}
         .sidebar-project-mini-lineage {{
             position: relative;
             display: grid;

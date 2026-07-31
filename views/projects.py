@@ -4,11 +4,6 @@ import streamlit as st
 
 from portfolio.content.projects import PROJECTS
 from ui.components import project_card
-from ui.styles import inject_global_styles
-from ui.theme import current_theme
-
-
-inject_global_styles(current_theme())
 
 st.title("Projects")
 

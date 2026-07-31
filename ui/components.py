@@ -29,6 +29,10 @@ FOOTER_EMAIL_URL = PROFILE["mailto_url"]
 PROFILE_PHOTO_PATH = Path(__file__).resolve().parents[1] / "assets" / "profile" / "peter.jpg"
 
 
+def _route_slug(route: str) -> str:
+    return "home" if route == "/" else route.strip("/").replace("_", "-").replace("/", "-")
+
+
 def _normalize_route(route: str | None) -> str:
     if not route:
         return "/"
@@ -50,6 +54,30 @@ def _current_path(active_route: str | None = None) -> str:
         return "/"
 
     return _normalize_route(context_url)
+
+
+def _sidebar_page_link(page: dict[str, object], active: bool, group: str) -> None:
+    route = str(page["route"])
+    key = f"sidebar_{group}_{_route_slug(route)}"
+    if active:
+        st.markdown(
+            f"""
+            <style>
+            .st-key-{key} [data-testid="stPageLink"] a {{
+                color: var(--data-blue) !important;
+                background: rgba(37, 99, 235, .09) !important;
+                font-weight: 700 !important;
+            }}
+            .st-key-{key} [data-testid="stPageLink"] a::before {{
+                background: #2563eb !important;
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, .12) !important;
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+    with st.container(key=key):
+        st.page_link(str(page["path"]), label=str(page["label"]), use_container_width=True)
 
 
 @st.cache_data(show_spinner=False)
@@ -90,119 +118,63 @@ def sidebar_projects(active_route: str | None = None) -> None:
         for page in project["pages"]
     }
     projects_open = current_path in project_routes
-    cards = []
-    for project in SIDEBAR_PROJECTS:
-        project_open = any(page["route"] == current_path for page in project["pages"])
-        project_active_class = " is-active" if project_open else ""
-        project_open_attr = " open" if project_open else ""
-        page_links_markup = []
-        for page in project["pages"]:
-            page_active = page["route"] == current_path
-            page_active_class = " sidebar-project-link-active" if page_active else ""
-            aria_current_attr = ' aria-current="page"' if page_active else ""
-            page_links_markup.append(
-                '<a class="sidebar-project-link'
-                f'{page_active_class}" '
-                f'href="{html.escape(route_href(page["route"]))}"'
-                ' target="_self"'
-                f'{aria_current_attr}>'
-                f'{html.escape(page["label"])}</a>'
-            )
-        page_links = "".join(page_links_markup)
-        cards.append(
-            '<details class="sidebar-project-expander'
-            f'{project_active_class}"{project_open_attr}>'
-            '<summary class="sidebar-project-summary sidebar-project-card">'
-            '<div class="sidebar-project-card-header">'
-            '<span class="sidebar-project-icon" aria-hidden="true">'
-            '<svg viewBox="0 0 24 24" focusable="false">'
-            '<path d="M6 7c0-1.7 12-1.7 12 0v10c0 1.7-12 1.7-12 0V7z"></path>'
-            '<path d="M6 7c0 1.7 12 1.7 12 0"></path>'
-            '<path d="M6 12c0 1.7 12 1.7 12 0"></path>'
-            '</svg>'
-            '</span>'
-            '<div class="sidebar-project-copy">'
-            f'<div class="sidebar-project-name">{html.escape(project["name"])}</div>'
-            f'<div class="sidebar-project-type">{html.escape(project["type"])}</div>'
-            '</div>'
-            '</div>'
-            '<span class="sidebar-project-chevron" aria-hidden="true">'
-            '<svg viewBox="0 0 16 16" focusable="false">'
-            '<path d="M4 6l4 4 4-4"></path>'
-            '</svg>'
-            '</span>'
-            '<div class="sidebar-project-mini-lineage" aria-hidden="true">'
-            '<span class="sidebar-mini-stage sidebar-mini-source"></span>'
-            '<span class="sidebar-mini-track"></span>'
-            '<span class="sidebar-mini-stage sidebar-mini-model"></span>'
-            '<span class="sidebar-mini-track"></span>'
-            '<span class="sidebar-mini-stage sidebar-mini-mart"></span>'
-            '<span class="sidebar-mini-packet"></span>'
-            '</div>'
-            '</summary>'
-            f'<nav class="sidebar-project-links">{page_links}</nav>'
-            '</details>'
-        )
-    projects_open_attr = " open" if projects_open else ""
-    projects_html = (
-        '<section class="sidebar-projects">'
-        f'<details class="sidebar-section-expander sidebar-projects-expander"{projects_open_attr}>'
-        '<summary class="sidebar-section-toggle">'
-        '<span>PROJECTS</span>'
-        '<span class="sidebar-expander-chevron" aria-hidden="true">'
-        '<svg viewBox="0 0 16 16" focusable="false">'
-        '<path d="M4 6l4 4 4-4"></path>'
-        '</svg>'
-        '</span>'
-        '</summary>'
-        '<div class="sidebar-section-content sidebar-projects-content">'
-        f'<div class="sidebar-section-content-inner">{"".join(cards)}</div>'
-        '</div>'
-        '</details>'
-        '</section>'
-    )
     st.sidebar.markdown(
-        projects_html,
+        '<section class="sidebar-projects native-sidebar-projects">',
         unsafe_allow_html=True,
     )
+    with st.sidebar.expander("PROJECTS", expanded=projects_open):
+        for project in SIDEBAR_PROJECTS:
+            project_open = any(page["route"] == current_path for page in project["pages"])
+            project_active_class = " is-active" if project_open else ""
+            st.markdown(
+                '<div class="sidebar-project-expander'
+                f'{project_active_class}">'
+                '<div class="sidebar-project-summary sidebar-project-card">'
+                '<div class="sidebar-project-card-header">'
+                '<span class="sidebar-project-icon" aria-hidden="true">'
+                '<svg viewBox="0 0 24 24" focusable="false">'
+                '<path d="M6 7c0-1.7 12-1.7 12 0v10c0 1.7-12 1.7-12 0V7z"></path>'
+                '<path d="M6 7c0 1.7 12 1.7 12 0"></path>'
+                '<path d="M6 12c0 1.7 12 1.7 12 0"></path>'
+                '</svg>'
+                '</span>'
+                '<div class="sidebar-project-copy">'
+                f'<div class="sidebar-project-name">{html.escape(project["name"])}</div>'
+                f'<div class="sidebar-project-type">{html.escape(project["type"])}</div>'
+                '</div>'
+                '</div>'
+                '<div class="sidebar-project-mini-lineage" aria-hidden="true">'
+                '<span class="sidebar-mini-stage sidebar-mini-source"></span>'
+                '<span class="sidebar-mini-track"></span>'
+                '<span class="sidebar-mini-stage sidebar-mini-model"></span>'
+                '<span class="sidebar-mini-track"></span>'
+                '<span class="sidebar-mini-stage sidebar-mini-mart"></span>'
+                '<span class="sidebar-mini-packet"></span>'
+                '</div>'
+                '</div>'
+                '</div>',
+                unsafe_allow_html=True,
+            )
+            st.markdown('<nav class="sidebar-project-links native-sidebar-links">', unsafe_allow_html=True)
+            for page in project["pages"]:
+                page_active = page["route"] == current_path
+                _sidebar_page_link(page, page_active, "project")
+            st.markdown('</nav>', unsafe_allow_html=True)
+    st.sidebar.markdown('</section>', unsafe_allow_html=True)
 
 
 def sidebar_portfolio(active_route: str | None = None) -> None:
     current_path = _current_path(active_route)
     portfolio_routes = {link["route"] for link in SIDEBAR_PORTFOLIO_LINKS}
     portfolio_open = current_path in portfolio_routes
-    portfolio_open_attr = " open" if portfolio_open else ""
-    links = []
-    for link in SIDEBAR_PORTFOLIO_LINKS:
-        link_active = link["route"] == current_path
-        link_active_class = " sidebar-portfolio-link-active" if link_active else ""
-        aria_current_attr = ' aria-current="page"' if link_active else ""
-        links.append(
-            '<a class="sidebar-portfolio-link'
-            f'{link_active_class}" '
-            f'href="{html.escape(route_href(link["route"]))}"'
-            ' target="_self"'
-            f'{aria_current_attr}>'
-            f'{html.escape(link["label"])}</a>'
-        )
-    portfolio_html = (
-        '<section class="sidebar-portfolio">'
-        f'<details class="sidebar-section-expander sidebar-portfolio-expander"{portfolio_open_attr}>'
-        '<summary class="sidebar-section-toggle">'
-        '<span>PORTFOLIO</span>'
-        '<span class="sidebar-expander-chevron" aria-hidden="true">'
-        '<svg viewBox="0 0 16 16" focusable="false">'
-        '<path d="M4 6l4 4 4-4"></path>'
-        '</svg>'
-        '</span>'
-        '</summary>'
-        '<div class="sidebar-section-content sidebar-portfolio-content">'
-        f'<nav class="sidebar-section-content-inner sidebar-portfolio-links">{"".join(links)}</nav>'
-        '</div>'
-        '</details>'
-        '</section>'
+    st.sidebar.markdown(
+        '<section class="sidebar-portfolio native-sidebar-portfolio">',
+        unsafe_allow_html=True,
     )
-    st.sidebar.markdown(portfolio_html, unsafe_allow_html=True)
+    with st.sidebar.expander("PORTFOLIO", expanded=portfolio_open):
+        for link in SIDEBAR_PORTFOLIO_LINKS:
+            _sidebar_page_link(link, link["route"] == current_path, "portfolio")
+    st.sidebar.markdown('</section>', unsafe_allow_html=True)
 
 
 def app_header(kicker: str, title: str, subtitle: str, location: str) -> dict[str, str]:

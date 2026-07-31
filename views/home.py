@@ -13,12 +13,10 @@ from portfolio.content.profile import PROFILE
 from portfolio.content.projects import PROJECTS
 from portfolio.content.skills import SKILL_GROUPS
 from ui.navigation import route_href
-from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
 
 theme = current_theme()
-inject_global_styles(theme)
 
 ROOT = Path(__file__).resolve().parents[1]
 HERO_PHOTO_PATH = ROOT / "assets" / "profile" / "peter-atef-hero.jpg"

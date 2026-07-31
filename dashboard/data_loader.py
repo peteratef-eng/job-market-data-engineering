@@ -26,8 +26,10 @@ def load_dashboard_metadata(data_dir: str | None = None) -> dict:
 @st.cache_data(show_spinner=False)
 def load_dashboard_data(data_dir: str | None = None) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     base_dir = Path(data_dir or os.getenv("DASHBOARD_DATA_DIR", DEFAULT_DATA_DIR))
-    jobs_path = base_dir / "jobs_sample.csv"
-    skills_path = base_dir / "job_skills_sample.csv"
+    jobs_parquet_path = base_dir / "jobs_sample.parquet"
+    skills_parquet_path = base_dir / "job_skills_sample.parquet"
+    jobs_path = jobs_parquet_path if jobs_parquet_path.exists() else base_dir / "jobs_sample.csv"
+    skills_path = skills_parquet_path if skills_parquet_path.exists() else base_dir / "job_skills_sample.csv"
     metadata_path = base_dir / "metadata.json"
 
     missing = [str(path) for path in (jobs_path, skills_path) if not path.exists()]
@@ -37,30 +39,50 @@ def load_dashboard_data(data_dir: str | None = None) -> tuple[pd.DataFrame, pd.D
             f"from the project root. Missing files: {', '.join(missing)}"
         )
 
-    jobs = pd.read_csv(
-        jobs_path,
-        parse_dates=["job_posted_date", "posted_month"],
-        dtype={
-            "job_id": "Int64",
-            "company_id": "Int64",
-            "job_title_short": "string",
-            "clean_job_title": "string",
-            "clean_job_location": "string",
-            "job_country": "string",
-            "remote_status": "string",
-            "salary_year_avg": "float64",
-            "clean_company_name": "string",
-        },
-    )
-    skills = pd.read_csv(
-        skills_path,
-        dtype={
-            "job_id": "Int64",
-            "skill_id": "Int64",
-            "clean_skill_name": "string",
-            "clean_skill_type": "string",
-        },
-    )
+    if jobs_path.suffix == ".parquet":
+        jobs = pd.read_parquet(jobs_path)
+    else:
+        jobs = pd.read_csv(
+            jobs_path,
+            usecols=[
+                "job_id",
+                "company_id",
+                "job_title_short",
+                "clean_job_title",
+                "clean_job_location",
+                "job_country",
+                "remote_status",
+                "salary_year_avg",
+                "clean_company_name",
+                "job_posted_date",
+                "posted_month",
+            ],
+            parse_dates=["job_posted_date", "posted_month"],
+            dtype={
+                "job_id": "Int64",
+                "company_id": "Int64",
+                "job_title_short": "category",
+                "clean_job_title": "string",
+                "clean_job_location": "string",
+                "job_country": "category",
+                "remote_status": "category",
+                "salary_year_avg": "float64",
+                "clean_company_name": "string",
+            },
+        )
+    if skills_path.suffix == ".parquet":
+        skills = pd.read_parquet(skills_path)
+    else:
+        skills = pd.read_csv(
+            skills_path,
+            usecols=["job_id", "skill_id", "clean_skill_name", "clean_skill_type"],
+            dtype={
+                "job_id": "Int64",
+                "skill_id": "Int64",
+                "clean_skill_name": "category",
+                "clean_skill_type": "category",
+            },
+        )
 
     metadata = load_dashboard_metadata(str(base_dir))
 

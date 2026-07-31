@@ -7,12 +7,10 @@ from dashboard.data_loader import load_dashboard_metadata
 from portfolio.content.projects import PROJECTS
 from ui.components import section_card
 from ui.navigation import route_href
-from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
 
 theme = current_theme()
-inject_global_styles(theme)
 
 project = PROJECTS[0]
 data_pipeline_href = route_href("/data_pipeline")

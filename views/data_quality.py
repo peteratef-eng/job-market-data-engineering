@@ -6,11 +6,6 @@ from pathlib import Path
 import streamlit as st
 
 from dashboard.data_loader import load_dashboard_data
-from ui.styles import inject_global_styles
-from ui.theme import current_theme
-
-
-inject_global_styles(current_theme())
 
 st.title("Data Quality")
 

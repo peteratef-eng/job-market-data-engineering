@@ -6,11 +6,6 @@ from dashboard.data_loader import load_dashboard_metadata
 from portfolio.content.profile import PROFILE
 from portfolio.content.projects import PROJECTS
 from ui.components import section_card
-from ui.styles import inject_global_styles
-from ui.theme import current_theme
-
-
-inject_global_styles(current_theme())
 
 st.title("About Me")
 metadata = load_dashboard_metadata()

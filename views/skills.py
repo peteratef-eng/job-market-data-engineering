@@ -4,11 +4,6 @@ import streamlit as st
 
 from portfolio.content.skills import SKILL_GROUPS
 from ui.components import skill_group_card
-from ui.styles import inject_global_styles
-from ui.theme import current_theme
-
-
-inject_global_styles(current_theme())
 
 st.title("Skills")
 st.caption("Grouped by data engineering workflow areas supported by the project and profile.")

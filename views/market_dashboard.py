@@ -3,7 +3,6 @@ from __future__ import annotations
 import html
 import pandas as pd
 import streamlit as st
-import streamlit.components.v1 as components
 
 from dashboard import charts
 from dashboard.data_loader import filter_jobs, load_dashboard_data, skills_for_jobs
@@ -18,209 +17,10 @@ from dashboard.transformations import (
     top_skills,
 )
 from ui.components import app_header, chart_card
-from ui.styles import inject_global_styles
 from ui.theme import current_theme
 
 
-MARKET_DASHBOARD_CHART_KEYS = (
-    "market_dashboard_chart_job_title_demand",
-    "market_dashboard_chart_company_activity",
-    "market_dashboard_chart_salary_by_job_title",
-    "market_dashboard_chart_salary_by_country",
-    "market_dashboard_chart_remote_salary",
-    "market_dashboard_chart_monthly_posting_trend",
-    "market_dashboard_chart_monthly_growth",
-    "market_dashboard_chart_technical_skill_demand",
-    "market_dashboard_chart_high_salary_skills",
-    "market_dashboard_chart_data_engineer_skill_demand",
-)
-
-
-def initialize_market_dashboard_chart_reveal() -> None:
-    chart_keys = ",\n".join(f'"{key}"' for key in MARKET_DASHBOARD_CHART_KEYS)
-    components.html(
-        f"""
-        <script>
-        (function () {{
-            try {{
-                const parentWindow = window.parent;
-                const parentDocument = parentWindow.document;
-
-                if (!parentWindow || !parentDocument) {{
-                    return;
-                }}
-
-                const chartKeys = [
-                    {chart_keys}
-                ];
-                const keyClasses = chartKeys.map(function (key) {{
-                    return "st-key-" + key;
-                }});
-                const chartSelector = keyClasses.map(function (className) {{
-                    return "." + className;
-                }}).join(",");
-                const readyClass = "market-chart-reveal-ready";
-                const visibleClass = "market-chart-reveal-visible";
-                const completeClass = "market-chart-reveal-complete";
-                const state = parentWindow.__marketDashboardChartReveal || {{
-                    revealedKeys: new Set()
-                }};
-                parentWindow.__marketDashboardChartReveal = state;
-
-                if (state.observer) {{
-                    state.observer.disconnect();
-                }}
-                if (state.mutationObserver) {{
-                    state.mutationObserver.disconnect();
-                }}
-                if (state.failSafeTimer) {{
-                    parentWindow.clearTimeout(state.failSafeTimer);
-                }}
-                state.observerActive = false;
-
-                const reducedMotion = parentWindow.matchMedia &&
-                    parentWindow.matchMedia("(prefers-reduced-motion: reduce)").matches;
-                const observedNodes = new WeakSet();
-
-                function chartKeyFor(element) {{
-                    for (let index = 0; index < chartKeys.length; index += 1) {{
-                        if (element.classList.contains(keyClasses[index])) {{
-                            return chartKeys[index];
-                        }}
-                    }}
-                    return "";
-                }}
-
-                function finishReveal(element, key) {{
-                    if (!element || !key) {{
-                        return;
-                    }}
-                    element.classList.remove(readyClass, visibleClass);
-                    element.classList.add(completeClass);
-                    state.revealedKeys.add(key);
-                    if (state.observer) {{
-                        state.observer.unobserve(element);
-                    }}
-                }}
-
-                function reveal(element, key) {{
-                    if (!element || !key || element.classList.contains(completeClass)) {{
-                        return;
-                    }}
-                    parentWindow.requestAnimationFrame(function () {{
-                        parentWindow.requestAnimationFrame(function () {{
-                            element.classList.remove(readyClass, completeClass);
-                            element.classList.add(visibleClass);
-                            parentWindow.setTimeout(function () {{
-                                finishReveal(element, key);
-                            }}, 700);
-                        }});
-                    }});
-                }}
-
-                function prepareChart(element) {{
-                    const key = chartKeyFor(element);
-                    if (!key) {{
-                        return;
-                    }}
-                    if (reducedMotion || state.revealedKeys.has(key) || !("IntersectionObserver" in parentWindow)) {{
-                        finishReveal(element, key);
-                        return;
-                    }}
-                    if (observedNodes.has(element)) {{
-                        return;
-                    }}
-                    try {{
-                        state.observer.observe(element);
-                        observedNodes.add(element);
-                        element.classList.remove(visibleClass, completeClass);
-                        element.classList.add(readyClass);
-                    }} catch (error) {{
-                        finishReveal(element, key);
-                    }}
-                }}
-
-                function findCharts(root) {{
-                    if (!root || (root.nodeType !== 1 && root.nodeType !== 9)) {{
-                        return [];
-                    }}
-                    const matches = [];
-                    if (root.matches && root.matches(chartSelector)) {{
-                        matches.push(root);
-                    }}
-                    if (root.querySelectorAll) {{
-                        root.querySelectorAll(chartSelector).forEach(function (element) {{
-                            matches.push(element);
-                        }});
-                    }}
-                    return matches;
-                }}
-
-                state.observer = new parentWindow.IntersectionObserver(function (entries) {{
-                    entries.forEach(function (entry) {{
-                        if (entry.isIntersecting || entry.intersectionRatio >= 0.12) {{
-                            const element = entry.target;
-                            reveal(element, chartKeyFor(element));
-                        }}
-                    }});
-                }}, {{
-                    threshold: 0.12,
-                    rootMargin: "0px 0px -5% 0px"
-                }});
-
-                findCharts(parentDocument).forEach(prepareChart);
-
-                const appView = parentDocument.querySelector('[data-testid="stMainBlockContainer"]') ||
-                    parentDocument.querySelector('[data-testid="stAppViewContainer"]') ||
-                    parentDocument.querySelector("main") ||
-                    parentDocument.body;
-                state.mutationObserver = new parentWindow.MutationObserver(function (mutations) {{
-                    mutations.forEach(function (mutation) {{
-                        mutation.addedNodes.forEach(function (node) {{
-                            findCharts(node).forEach(prepareChart);
-                        }});
-                    }});
-                }});
-                state.mutationObserver.observe(appView, {{
-                    childList: true,
-                    subtree: true
-                }});
-                state.observerActive = true;
-                state.failSafeTimer = parentWindow.setTimeout(function () {{
-                    if (!state.observerActive) {{
-                        parentDocument.querySelectorAll("." + readyClass).forEach(function (element) {{
-                            finishReveal(element, chartKeyFor(element));
-                        }});
-                    }}
-                }}, 3000);
-
-                parentWindow.addEventListener("pagehide", function () {{
-                    if (state.observer) {{
-                        state.observer.disconnect();
-                    }}
-                    if (state.mutationObserver) {{
-                        state.mutationObserver.disconnect();
-                    }}
-                }}, {{ once: true }});
-            }} catch (error) {{
-                try {{
-                    const parentDocument = window.parent.document;
-                    parentDocument.querySelectorAll(".market-chart-reveal-ready").forEach(function (element) {{
-                        element.classList.remove("market-chart-reveal-ready", "market-chart-reveal-visible");
-                        element.classList.add("market-chart-reveal-complete");
-                    }});
-                }} catch (fallbackError) {{}}
-            }}
-        }})();
-        </script>
-        """,
-        height=0,
-    )
-
-
 theme = current_theme()
-inject_global_styles(theme)
-
 
 app_header(
     "Market Dashboard",
@@ -228,7 +28,6 @@ app_header(
     "Explore hiring demand, salaries, technical skills, remote-work patterns, and market trends across the hosted job-posting sample.",
     "dashboard",
 )
-initialize_market_dashboard_chart_reveal()
 
 
 @st.cache_data(show_spinner=False)
@@ -259,6 +58,17 @@ def dashboard_results(
     date_range_values: tuple[str, str] | None,
 ) -> dict[str, object]:
     jobs_data, skills_data, metadata_data = load_dashboard_data()
+    no_filters = not any(
+        (
+            job_titles,
+            countries,
+            selected_skills,
+            companies,
+            remote_statuses,
+            salary_range,
+            date_range_values,
+        )
+    )
     date_range_filter = (
         (pd.Timestamp(date_range_values[0]), pd.Timestamp(date_range_values[1]) + pd.Timedelta(days=1))
         if date_range_values is not None
@@ -275,7 +85,7 @@ def dashboard_results(
         salary_range=salary_range,
         date_range=date_range_filter,
     )
-    filtered_skills_data = skills_for_jobs(skills_data, filtered_jobs_data)
+    filtered_skills_data = skills_data if no_filters or filtered_jobs_data is jobs_data else skills_for_jobs(skills_data, filtered_jobs_data)
     coverage_label_data, salary_records_data, total_records_data = salary_coverage(filtered_jobs_data)
     return {
         "filtered_jobs": filtered_jobs_data,
@@ -390,10 +200,15 @@ def render_chart(figure, key: str, *, remove_y_title: bool = True) -> None:
         figure.update_yaxes(title_text=None)
     if figure.layout.height and figure.layout.height > 520:
         figure.update_layout(height=520)
-    st.plotly_chart(figure, width="stretch", key=key)
+    st.plotly_chart(
+        figure,
+        width="stretch",
+        key=key,
+        config={"displayModeBar": False, "responsive": True},
+    )
 
 
-with st.container(key="dashboard_filter_panel"):
+with st.form("market_dashboard_filters", clear_on_submit=False):
     st.markdown('<div class="filter-title market-filters-heading">Filters</div>', unsafe_allow_html=True)
     with st.container(key="market_basic_filters_grid"):
         primary_filter_cols = st.columns(4)
@@ -431,18 +246,23 @@ with st.container(key="dashboard_filter_panel"):
                     max_value=date_max,
                     key="selected_dates",
                 )
+    st.form_submit_button("Apply Filters", type="primary")
+
+if salary_range == (salary_min, salary_max):
+    salary_range = None
 
 date_range = None
 date_range_values = None
 if isinstance(selected_dates, (list, tuple)) and len(selected_dates) == 2:
-    date_range = (
-        pd.Timestamp(selected_dates[0]),
-        pd.Timestamp(selected_dates[1]) + pd.Timedelta(days=1),
-    )
-    date_range_values = (
-        pd.Timestamp(selected_dates[0]).date().isoformat(),
-        pd.Timestamp(selected_dates[1]).date().isoformat(),
-    )
+    if selected_dates[0] != date_min or selected_dates[1] != date_max:
+        date_range = (
+            pd.Timestamp(selected_dates[0]),
+            pd.Timestamp(selected_dates[1]) + pd.Timedelta(days=1),
+        )
+        date_range_values = (
+            pd.Timestamp(selected_dates[0]).date().isoformat(),
+            pd.Timestamp(selected_dates[1]).date().isoformat(),
+        )
 
 results = dashboard_results(
     tuple(job_titles),

@@ -301,47 +301,40 @@ preview_markup = dedent(
                 <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-skill-mart featured-lineage-node-mart-skill-demand" title="mart_skill_demand_by_role" aria-label="mart_skill_demand_by_role, mart model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">mart_skill_demand_<br>by_role</span><small class="featured-lineage-model-type">MART MODEL</small></div>
             </section>
 
-            <svg class="featured-lineage-lane featured-lineage-lane-a" viewBox="0 0 100 360" preserveAspectRatio="none" aria-hidden="true">
+            <svg class="featured-lineage-lane featured-lineage-lane-a" viewBox="0 0 100 244" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
                     <linearGradient id="featuredLineageFlowGradientA" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stop-color="#2563eb"></stop>
                         <stop offset="100%" stop-color="#06b6d4"></stop>
                     </linearGradient>
                 </defs>
-                <path class="featured-lineage-connector" d="M0 26 C32 26 60 56 100 56"></path>
-                <path class="featured-lineage-connector" d="M0 86 C32 86 60 56 100 56"></path>
-                <path class="featured-lineage-connector" d="M0 206 C32 206 60 236 100 236"></path>
-                <path class="featured-lineage-connector" d="M0 266 C32 266 60 236 100 236"></path>
-                <path id="featured-lineage-route-a-job" class="featured-lineage-route" d="M0 86 C32 86 60 56 100 56"></path>
-                <path id="featured-lineage-route-a-skill" class="featured-lineage-route featured-lineage-route-skill" d="M0 266 C32 266 60 236 100 236"></path>
-                <circle class="featured-lineage-packet featured-lineage-packet-job" r="3">
-                    <animateMotion dur="10s" repeatCount="indefinite" calcMode="paced"><mpath href="#featured-lineage-route-a-job"></mpath></animateMotion>
-                </circle>
-                <circle class="featured-lineage-packet featured-lineage-packet-skill" r="3">
-                    <animateMotion dur="10s" begin="5s" repeatCount="indefinite" calcMode="paced"><mpath href="#featured-lineage-route-a-skill"></mpath></animateMotion>
-                </circle>
+                <path class="featured-lineage-connector" d="M10 22 C34 22 66 47 90 47"></path>
+                <path class="featured-lineage-connector" d="M10 72 C34 72 66 47 90 47"></path>
+                <path class="featured-lineage-connector" d="M10 172 C34 172 66 197 90 197"></path>
+                <path class="featured-lineage-connector" d="M10 222 C34 222 66 197 90 197"></path>
+                <path class="featured-lineage-route" d="M10 22 C34 22 66 47 90 47"></path>
+                <path class="featured-lineage-route" d="M10 72 C34 72 66 47 90 47"></path>
+                <path class="featured-lineage-route featured-lineage-route-skill" d="M10 172 C34 172 66 197 90 197"></path>
+                <path class="featured-lineage-route featured-lineage-route-skill" d="M10 222 C34 222 66 197 90 197"></path>
             </svg>
 
-            <svg class="featured-lineage-lane featured-lineage-lane-b" viewBox="0 0 100 360" preserveAspectRatio="none" aria-hidden="true">
+            <svg class="featured-lineage-lane featured-lineage-lane-b" viewBox="0 0 100 244" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
                     <linearGradient id="featuredLineageFlowGradientB" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stop-color="#2563eb"></stop>
                         <stop offset="100%" stop-color="#06b6d4"></stop>
                     </linearGradient>
                 </defs>
-                <path class="featured-lineage-connector" d="M0 56 C38 56 58 26 100 26"></path>
-                <path class="featured-lineage-connector" d="M0 56 C38 56 58 86 100 86"></path>
-                <path class="featured-lineage-connector" d="M0 56 C38 56 58 146 100 146"></path>
-                <path class="featured-lineage-connector" d="M0 56 C38 56 58 206 100 206"></path>
-                <path class="featured-lineage-connector" d="M0 236 C38 236 58 266 100 266"></path>
-                <path id="featured-lineage-route-b-job" class="featured-lineage-route" d="M0 56 C38 56 58 146 100 146"></path>
-                <path id="featured-lineage-route-b-skill" class="featured-lineage-route featured-lineage-route-skill" d="M0 236 C38 236 58 266 100 266"></path>
-                <circle class="featured-lineage-packet featured-lineage-packet-job" r="3">
-                    <animateMotion dur="10s" begin="2.2s" repeatCount="indefinite" calcMode="paced"><mpath href="#featured-lineage-route-b-job"></mpath></animateMotion>
-                </circle>
-                <circle class="featured-lineage-packet featured-lineage-packet-skill" r="3">
-                    <animateMotion dur="10s" begin="7.2s" repeatCount="indefinite" calcMode="paced"><mpath href="#featured-lineage-route-b-skill"></mpath></animateMotion>
-                </circle>
+                <path class="featured-lineage-connector" d="M10 47 C34 47 66 22 90 22"></path>
+                <path class="featured-lineage-connector" d="M10 47 C34 47 66 72 90 72"></path>
+                <path class="featured-lineage-connector" d="M10 47 C34 47 66 122 90 122"></path>
+                <path class="featured-lineage-connector" d="M10 47 C34 47 66 172 90 172"></path>
+                <path class="featured-lineage-connector" d="M10 197 C34 197 66 222 90 222"></path>
+                <path class="featured-lineage-route" d="M10 47 C34 47 66 22 90 22"></path>
+                <path class="featured-lineage-route" d="M10 47 C34 47 66 72 90 72"></path>
+                <path class="featured-lineage-route" d="M10 47 C34 47 66 122 90 122"></path>
+                <path class="featured-lineage-route" d="M10 47 C34 47 66 172 90 172"></path>
+                <path class="featured-lineage-route featured-lineage-route-skill" d="M10 197 C34 197 66 222 90 222"></path>
             </svg>
         </div>
     </div>

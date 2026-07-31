@@ -3523,14 +3523,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .pipeline-stage-5 .pipeline-stage-status {{ animation-delay: 4.2s; }}
         .pipeline-stage-6 .pipeline-stage-status {{ animation-delay: 5.25s; }}
         .data-flow-lane {{
-            height: 32px;
+            height: 42px;
             margin-top: 16px;
             padding: 0 3px;
         }}
         .data-flow-svg {{
             display: block;
             width: 100%;
-            height: 100%;
+            height: 42px;
             overflow: visible;
         }}
         .data-flow-path {{
@@ -3559,11 +3559,29 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .data-flow-svg marker path {{
             fill: rgba(6, 182, 212, .74);
         }}
+        .data-packet,
+        .pulse-trail,
+        .data-flow-pulse {{
+            transform-origin: center;
+            transform-box: fill-box;
+            transition: opacity .2s ease, fill .2s ease;
+        }}
+        .pulse-trail {{
+            fill: #06b6d4;
+            stroke: none;
+        }}
+        .pulse-trail-1 {{
+            opacity: .35;
+        }}
+        .pulse-trail-2 {{
+            opacity: .15;
+        }}
         .data-flow-pulse {{
             fill: #06b6d4;
             stroke: #FFFFFF;
             stroke-width: 1;
             opacity: .96;
+            filter: drop-shadow(0 0 4px rgba(6, 182, 212, .75));
         }}
         @keyframes pipeline-stage-pass {{
             0%, 86%, 100% {{ border-color: rgba(148, 163, 184, .24); background: rgba(255, 255, 255, .95); box-shadow: 0 5px 14px rgba(15, 23, 42, .045); }}
@@ -4238,10 +4256,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 height: 100%;
             }}
             .data-flow-path {{
-                d: path("M500 4 V38");
+                d: path("M16 8 V560");
             }}
             .data-flow-arrow-segments {{
-                d: path("M500 4 V10 M500 10 V17 M500 17 V24 M500 24 V31 M500 31 V38");
+                d: path("M16 8 V118 M16 118 V228 M16 228 V338 M16 338 V448 M16 448 V560");
             }}
             .data-flow-stems {{
                 display: none;

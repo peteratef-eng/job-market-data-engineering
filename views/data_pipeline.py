@@ -19,24 +19,24 @@ pipeline_info = [
         "INPUTS",
         "Source data",
         (
-            f"Source tables include job_postings_fact, company_dim, skills_dim, and skills_job_dim. The verified source dataset contains {source_rows:,} job postings before hosted sampling."
+            f"{source_rows:,} verified source postings. Four relational source tables feed the pipeline."
             if source_rows
-            else "Source tables include job_postings_fact, company_dim, skills_dim, and skills_job_dim before hosted sampling."
+            else "Verified source postings from four relational source tables feed the pipeline."
         ),
     ),
     (
         "PROCESSING",
         "Engineering workflow",
-        "Python/Pandas prepares dashboard-ready files, PostgreSQL supports relational storage, and dbt organizes staging, intermediate, and mart models for analysis.",
+        (
+            f"{sample_rows:,}-posting hosted sample with {skills_rows:,} job-skill relationships. Python/Pandas, PostgreSQL, and dbt prepare the analytics layer."
+            if sample_rows and skills_rows
+            else "Python/Pandas, PostgreSQL, and dbt prepare the hosted analytics layer."
+        ),
     ),
     (
         "OUTPUTS",
         "Analytics delivery",
-        (
-            f"The portfolio dashboard uses a {sample_rows:,}-posting hosted sample with {skills_rows:,} job-skill rows and analytics-ready outputs for recruiter review."
-            if sample_rows and skills_rows
-            else "The hosted dashboard sample is generated from the real project data for faster startup on limited hosting resources."
-        ),
+        "Tested analytics marts power an interactive Streamlit dashboard with recruiter-ready market insights.",
     ),
 ]
 pipeline_info_markup = "".join(

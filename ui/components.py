@@ -258,39 +258,64 @@ def kpi_grid(values: dict[str, str]) -> None:
 
 def pipeline_visual(class_name: str = "") -> None:
     steps = [
-        ("01", "Raw CSVs", "Input tables", "ingest", "M5 4h10l2 2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4z M9 12h6 M9 16h6"),
-        ("02", "Python / Pandas", "Prepared sample", "ingest", "M8 9l-4 3 4 3 M16 9l4 3-4 3 M14 5l-4 14"),
-        ("03", "PostgreSQL", "Warehouse tables", "model", "M5 7c0-2 3.1-4 7-4s7 2 7 4-3.1 4-7 4-7-2-7-4z M5 7v10c0 2 3.1 4 7 4s7-2 7-4V7 M5 12c0 2 3.1 4 7 4s7-2 7-4"),
-        ("04", "dbt Models", "Staging and joins", "model", "M12 3l8 4-8 4-8-4 8-4z M4 12l8 4 8-4 M4 17l8 4 8-4"),
-        ("05", "Quality Checks", "Validation SQL", "deliver", "M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z M9 12l2 2 4-5"),
-        ("06", "Analytics Marts", "Business-ready marts", "deliver", "M4 5h16v14H4z M4 10h16 M9 5v14 M15 5v14"),
-        ("07", "Streamlit Dashboard", "Interactive portfolio", "deliver final", "M4 19V5h16v14H4z M8 15l3-3 2 2 3-5 M8 19v-2 M12 19v-3 M16 19v-6"),
+        ("01", "DATA SOURCES", "Raw CSV Files", "Source tables", "source", "M5 4h10l2 2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4z M9 12h6 M9 16h6"),
+        ("02", "INGEST & PREPARE", "Python / Pandas", "Load, clean, sample", "process", "M8 9l-4 3 4 3 M16 9l4 3-4 3 M14 5l-4 14"),
+        ("03", "DATA WAREHOUSE", "PostgreSQL", "Relational storage", "warehouse", "M5 7c0-2 3.1-4 7-4s7 2 7 4-3.1 4-7 4-7-2-7-4z M5 7v10c0 2 3.1 4 7 4s7-2 7-4V7 M5 12c0 2 3.1 4 7 4s7-2 7-4"),
+        ("04", "TRANSFORM & MODEL", "dbt", "Staging -> marts", "transform", "M12 3l8 4-8 4-8-4 8-4z M4 12l8 4 8-4 M4 17l8 4 8-4"),
+        ("05", "VALIDATE", "dbt Tests + SQL Checks", "Integrity checks", "validate", "M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z M9 12l2 2 4-5"),
+        ("06", "SERVE & EXPLORE", "Streamlit Dashboard", "Interactive insights", "serve", "M4 19V5h16v14H4z M8 15l3-3 2 2 3-5 M8 19v-2 M12 19v-3 M16 19v-6"),
     ]
-    step_classes = " ".join(["pipeline-milestone", class_name]).strip()
+    step_classes = " ".join(["pipeline-architecture-card", class_name]).strip()
     tabindex = ' tabindex="0"' if class_name else ""
     markup = "".join(
         (
-            f'<div class="{html.escape(step_classes)} pipeline-milestone-{index} pipeline-category-{html.escape(category)}"{tabindex}>'
-            '<span class="pipeline-milestone-icon" aria-hidden="true">'
+            f'<div class="{html.escape(step_classes)} pipeline-stage-{index} pipeline-category-{html.escape(category)}"{tabindex}>'
+            '<span class="pipeline-stage-icon" aria-hidden="true">'
             f'<svg viewBox="0 0 24 24" role="img" aria-label="{html.escape(label)} icon">'
             f'<path d="{path}"></path>'
             '</svg>'
             '</span>'
-            f'<span class="pipeline-milestone-number">{number}</span>'
+            f'<span class="pipeline-stage-number">{number}</span>'
+            f'<span class="pipeline-stage-category">{html.escape(category_label)}</span>'
             f'<strong>{html.escape(label)}</strong>'
             f'<small>{html.escape(output)}</small>'
+            '<span class="pipeline-stage-status">Processing</span>'
             '</div>'
         )
-        for index, (number, label, output, category, path) in enumerate(steps, start=1)
+        for index, (number, category_label, label, output, category, path) in enumerate(steps, start=1)
     )
     st.markdown(
         (
-            '<div class="pipeline-rail-shell" aria-label="Connected data pipeline">'
-            '<div class="pipeline-rail-viewport">'
-            '<div class="pipeline pipeline-rail" role="list">'
-            '<span class="pipeline-rail-line" aria-hidden="true"></span>'
-            '<span class="pipeline-rail-pulse" aria-hidden="true"></span>'
+            '<div class="pipeline-architecture-shell" aria-label="Data engineering architecture from source files to dashboard">'
+            '<div class="pipeline-architecture-viewport">'
+            '<div class="pipeline pipeline-architecture" role="list">'
+            '<section class="pipeline-orchestration-band" aria-label="Apache Airflow orchestration layer">'
+            '<div class="pipeline-orchestration-main">'
+            '<span class="pipeline-orchestration-icon" aria-hidden="true">'
+            '<svg viewBox="0 0 24 24"><path d="M4 7h5m6 0h5M9 7a3 3 0 1 0 6 0 3 3 0 0 0-6 0z M6 17h12M8 14l-2 3 2 3M16 14l2 3-2 3"></path></svg>'
+            '</span>'
+            '<span><small>ORCHESTRATION LAYER</small><strong>Apache Airflow</strong><em>Schedules and coordinates pipeline tasks</em></span>'
+            '</div>'
+            '<div class="pipeline-orchestration-status">'
+            '<span>Scheduled DAG</span><span>Task dependencies</span><span>Monitoring &amp; retries</span>'
+            '</div>'
+            '<span class="pipeline-airflow-stem pipeline-airflow-stem-2" aria-hidden="true"></span>'
+            '<span class="pipeline-airflow-stem pipeline-airflow-stem-4" aria-hidden="true"></span>'
+            '<span class="pipeline-airflow-stem pipeline-airflow-stem-5" aria-hidden="true"></span>'
+            '<span class="pipeline-airflow-stem pipeline-airflow-stem-6" aria-hidden="true"></span>'
+            '</section>'
+            '<div class="pipeline-stage-grid">'
             f'{markup}'
+            '</div>'
+            '<div class="data-flow-lane" aria-label="Data flows from source files to the Streamlit dashboard">'
+            '<svg class="data-flow-svg" viewBox="0 0 1000 42" preserveAspectRatio="none" aria-hidden="true">'
+            '<defs><marker id="pipelineDataArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 Z"></path></marker><filter id="pipelinePulseGlow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2" result="blur"></feGaussianBlur><feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter></defs>'
+            '<path id="pipelineDataFlowPath" class="data-flow-path" d="M44 26 H956"></path>'
+            '<path class="data-flow-arrow-segments" d="M44 26 H196 M196 26 H348 M348 26 H500 M500 26 H652 M652 26 H804 M804 26 H956"></path>'
+            '<path class="data-flow-stems" d="M44 4 V26 M196 4 V26 M348 4 V26 M500 4 V26 M652 4 V26 M956 4 V26"></path>'
+            '<circle class="data-flow-pulse" r="4.5" filter="url(#pipelinePulseGlow)"><animateMotion dur="7s" repeatCount="indefinite" keyTimes="0;0.08;0.2;0.32;0.44;0.56;0.68;0.8;0.94;1" keyPoints="0;0;0.166;0.333;0.5;0.666;0.833;1;1;1" calcMode="linear"><mpath href="#pipelineDataFlowPath"></mpath></animateMotion></circle>'
+            '</svg>'
+            '</div>'
             '</div>'
             '</div>'
             '</div>'

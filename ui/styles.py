@@ -3298,106 +3298,157 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             line-height: 1.35;
         }}
 
-        .pipeline-rail-shell {{
+        .pipeline-architecture-shell {{
             position: relative;
-            margin: .55rem 0 1.7rem;
+            margin: .55rem 0 1.65rem;
         }}
-        .pipeline-rail-viewport {{
+        .pipeline-architecture-viewport {{
             position: relative;
             overflow-x: auto;
             overflow-y: hidden;
-            padding: .4rem .15rem .7rem;
+            padding: .35rem .15rem .55rem;
             scrollbar-width: thin;
             mask-image: linear-gradient(90deg, transparent 0, #000 1.2rem, #000 calc(100% - 1.2rem), transparent 100%);
         }}
-        .pipeline.pipeline-rail {{
-            --rail-y: 54px;
+        .pipeline.pipeline-architecture {{
             position: relative;
             isolation: isolate;
-            display: grid;
-            grid-template-columns: repeat(7, minmax(150px, 1fr));
-            gap: 12px;
-            min-width: 1120px;
-            min-height: 184px;
+            display: block;
+            min-width: 1180px;
             margin: 0;
             overflow: visible;
             container-type: inline-size;
         }}
-        .pipeline-rail-line {{
-            position: absolute;
-            z-index: 0;
-            left: 5%;
-            right: 5%;
-            top: var(--rail-y);
-            height: 2px;
+        .pipeline-orchestration-band {{
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr);
+            align-items: center;
+            gap: 1rem;
+            min-height: 78px;
+            padding: .82rem 1rem;
+            margin: 0 0 .72rem;
+            border: 1px solid rgba(37, 99, 235, .16);
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(239, 246, 255, .94), rgba(255, 255, 255, .96));
+            box-shadow: 0 5px 14px rgba(15, 23, 42, .04);
+        }}
+        .pipeline-orchestration-main {{
+            display: flex;
+            align-items: center;
+            gap: .72rem;
+            min-width: 0;
+        }}
+        .pipeline-orchestration-icon {{
+            display: grid;
+            place-items: center;
+            width: 2.2rem;
+            height: 2.2rem;
+            flex: 0 0 2.2rem;
+            border-radius: 11px;
+            color: var(--data-blue);
+            background: rgba(219, 234, 254, .84);
+            border: 1px solid rgba(37, 99, 235, .18);
+        }}
+        .pipeline-orchestration-icon svg {{
+            width: 1.25rem;
+            height: 1.25rem;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }}
+        .pipeline-orchestration-main small {{
+            display: block;
+            color: var(--data-blue);
+            font-size: .62rem;
+            font-weight: 850;
+            letter-spacing: .09em;
+            line-height: 1;
+        }}
+        .pipeline-orchestration-main strong {{
+            display: block;
+            margin-top: .2rem;
+            color: var(--text);
+            font-size: 1rem;
+            line-height: 1.15;
+        }}
+        .pipeline-orchestration-main em {{
+            display: block;
+            margin-top: .16rem;
+            color: var(--text-2);
+            font-size: .78rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.25;
+        }}
+        .pipeline-orchestration-status {{
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: .42rem;
+            min-width: 0;
+        }}
+        .pipeline-orchestration-status span {{
+            display: inline-flex;
+            align-items: center;
+            min-height: 1.65rem;
+            padding: .28rem .52rem;
             border-radius: 999px;
-            background: linear-gradient(90deg, rgba(37, 99, 235, .25), rgba(37, 99, 235, .70), rgba(6, 182, 212, .70));
+            border: 1px solid rgba(37, 99, 235, .14);
+            background: rgba(255, 255, 255, .78);
+            color: var(--text-2);
+            font-size: .7rem;
+            font-weight: 750;
+            white-space: nowrap;
+        }}
+        .pipeline-airflow-stem {{
+            position: absolute;
+            bottom: -.72rem;
+            height: .72rem;
+            width: 0;
+            border-left: 1px dashed rgba(37, 99, 235, .34);
             pointer-events: none;
         }}
-        .pipeline-rail-line::after {{
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(45deg, transparent calc(100% - 7px), rgba(37, 99, 235, .58) calc(100% - 7px), rgba(37, 99, 235, .58) calc(100% - 5px), transparent calc(100% - 5px)),
-                linear-gradient(-45deg, transparent calc(100% - 7px), rgba(37, 99, 235, .58) calc(100% - 7px), rgba(37, 99, 235, .58) calc(100% - 5px), transparent calc(100% - 5px));
-            background-size: calc(100% / 6) 10px;
-            background-repeat: repeat-x;
-            background-position: calc(100% / 12) 50%;
+        .pipeline-airflow-stem-2 {{ left: calc((100% / 6) * 1.5); }}
+        .pipeline-airflow-stem-4 {{ left: calc((100% / 6) * 3.5); }}
+        .pipeline-airflow-stem-5 {{ left: calc((100% / 6) * 4.5); }}
+        .pipeline-airflow-stem-6 {{ left: calc((100% / 6) * 5.5); }}
+        .pipeline-stage-grid {{
+            display: grid;
+            grid-template-columns: repeat(6, minmax(175px, 1fr));
+            gap: 12px;
         }}
-        .pipeline-rail-pulse {{
-            position: absolute;
-            z-index: 4;
-            top: var(--rail-y);
-            left: 5%;
-            width: 9px;
-            height: 9px;
-            border-radius: 999px;
-            background: #06b6d4;
-            box-shadow: 0 0 0 4px rgba(6, 182, 212, .13), 0 0 14px rgba(6, 182, 212, .72);
-            transform: translate(-50%, -50%);
-            animation: pipeline-rail-pulse-flow 7.5s cubic-bezier(.45, 0, .2, 1) infinite;
-            pointer-events: none;
-        }}
-        .pipeline-rail-pulse::after {{
-            content: "";
-            position: absolute;
-            top: 50%;
-            right: 5px;
-            width: 32px;
-            height: 3px;
-            transform: translateY(-50%);
-            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, .55));
-        }}
-        .pipeline-milestone {{
+        .pipeline-architecture-card {{
             position: relative;
             z-index: 2;
             display: grid;
-            justify-items: center;
+            justify-items: start;
             align-content: start;
-            min-height: 118px;
-            padding: 12px 11px 13px;
+            min-height: 122px;
+            padding: 14px 14px 13px;
             border: 1px solid rgba(148, 163, 184, .24);
             border-radius: 13px;
             background: rgba(255, 255, 255, .95);
             color: var(--text);
-            text-align: center;
+            text-align: left;
             box-shadow: 0 5px 14px rgba(15, 23, 42, .045);
-            animation: pipeline-milestone-pass 7.5s ease-in-out infinite;
+            animation: pipeline-stage-pass 7s ease-in-out infinite;
         }}
-        .pipeline-milestone-icon {{
+        .pipeline-stage-icon {{
             display: grid;
             place-items: center;
-            width: 34px;
-            height: 34px;
-            margin: 0 0 .38rem;
-            border-radius: 999px;
+            width: 32px;
+            height: 32px;
+            margin: 0 0 .45rem;
+            border-radius: 10px;
             color: var(--data-blue);
             background: rgba(239, 246, 255, .96);
             border: 1px solid rgba(37, 99, 235, .18);
             transition: border-color 180ms ease, background-color 180ms ease;
         }}
-        .pipeline-milestone-icon svg {{
+        .pipeline-stage-icon svg {{
             width: 18px;
             height: 18px;
             fill: none;
@@ -3406,7 +3457,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             stroke-linecap: round;
             stroke-linejoin: round;
         }}
-        .pipeline-milestone-number {{
+        .pipeline-stage-number {{
             color: var(--data-blue);
             font-size: .62rem;
             font-weight: 850;
@@ -3414,48 +3465,122 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             text-transform: uppercase;
             line-height: 1;
         }}
-        .pipeline-milestone strong {{
+        .pipeline-stage-category {{
             display: block;
-            margin-top: .28rem;
+            margin-top: .16rem;
+            color: var(--muted);
+            font-size: .54rem;
+            font-weight: 850;
+            letter-spacing: .07em;
+            line-height: 1.05;
+        }}
+        .pipeline-architecture-card strong {{
+            display: block;
+            margin-top: .32rem;
             color: var(--text);
-            font-size: .86rem;
+            font-size: .88rem;
             font-weight: 800;
             line-height: 1.16;
         }}
-        .pipeline-milestone small {{
+        .pipeline-architecture-card small {{
             display: block;
             margin-top: .26rem;
             color: var(--muted);
-            font-size: .71rem;
+            font-size: .72rem;
             font-weight: 600;
             line-height: 1.28;
         }}
-        .pipeline-category-model .pipeline-milestone-icon {{
+        .pipeline-stage-status {{
+            position: absolute;
+            right: .65rem;
+            top: .65rem;
+            color: #0891B2;
+            font-size: .58rem;
+            font-weight: 850;
+            opacity: 0;
+            animation: pipeline-stage-status-pass 7s ease-in-out infinite;
+        }}
+        .pipeline-category-warehouse .pipeline-stage-icon,
+        .pipeline-category-transform .pipeline-stage-icon {{
             color: #1D4ED8;
             background: rgba(219, 234, 254, .92);
         }}
-        .pipeline-category-deliver .pipeline-milestone-icon,
-        .pipeline-category-final .pipeline-milestone-icon {{
+        .pipeline-category-validate .pipeline-stage-icon,
+        .pipeline-category-serve .pipeline-stage-icon {{
             color: #0891B2;
             background: rgba(207, 250, 254, .62);
         }}
-        .pipeline-milestone-1 {{ animation-delay: 0s; }}
-        .pipeline-milestone-2 {{ animation-delay: 1.245s; }}
-        .pipeline-milestone-3 {{ animation-delay: 2.49s; }}
-        .pipeline-milestone-4 {{ animation-delay: 3.735s; }}
-        .pipeline-milestone-5 {{ animation-delay: 4.98s; }}
-        .pipeline-milestone-6 {{ animation-delay: 6.225s; }}
-        .pipeline-milestone-7 {{ animation-delay: 7.47s; }}
-        @keyframes pipeline-rail-pulse-flow {{
-            0% {{ left: 5%; opacity: 0; background: #2563eb; }}
-            5% {{ opacity: 1; }}
-            86% {{ opacity: 1; background: #06b6d4; }}
-            94% {{ left: 95%; opacity: 1; background: #06b6d4; }}
-            100% {{ left: 95%; opacity: 0; background: #06b6d4; }}
+        .pipeline-stage-1 {{ animation-delay: 0s; }}
+        .pipeline-stage-2 {{ animation-delay: 1.05s; }}
+        .pipeline-stage-3 {{ animation-delay: 2.1s; }}
+        .pipeline-stage-4 {{ animation-delay: 3.15s; }}
+        .pipeline-stage-5 {{ animation-delay: 4.2s; }}
+        .pipeline-stage-6 {{ animation-delay: 5.25s; }}
+        .pipeline-stage-1 .pipeline-stage-status {{ animation-delay: 0s; }}
+        .pipeline-stage-2 .pipeline-stage-status {{ animation-delay: 1.05s; }}
+        .pipeline-stage-3 .pipeline-stage-status {{ animation-delay: 2.1s; }}
+        .pipeline-stage-4 .pipeline-stage-status {{ animation-delay: 3.15s; }}
+        .pipeline-stage-5 .pipeline-stage-status {{ animation-delay: 4.2s; }}
+        .pipeline-stage-6 .pipeline-stage-status {{ animation-delay: 5.25s; }}
+        .data-flow-lane {{
+            height: 32px;
+            margin-top: 16px;
+            padding: 0 3px;
         }}
-        @keyframes pipeline-milestone-pass {{
-            0%, 91%, 100% {{ border-color: rgba(148, 163, 184, .24); background: rgba(255, 255, 255, .95); box-shadow: 0 5px 14px rgba(15, 23, 42, .045); }}
-            3%, 8% {{ border-color: rgba(6, 182, 212, .52); background: rgba(239, 246, 255, .98); box-shadow: 0 0 0 3px rgba(6, 182, 212, .08); }}
+        .data-flow-svg {{
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }}
+        .data-flow-path {{
+            fill: none;
+            stroke: rgba(37, 99, 235, .30);
+            stroke-width: 2;
+            stroke-linecap: round;
+        }}
+        .data-flow-arrow-segments {{
+            fill: none;
+            stroke: url(#unused);
+            stroke-width: 0;
+            marker-end: url(#pipelineDataArrow);
+        }}
+        .data-flow-arrow-segments,
+        .data-flow-stems {{
+            stroke: rgba(37, 99, 235, .42);
+            stroke-width: 1.4;
+            fill: none;
+            vector-effect: non-scaling-stroke;
+        }}
+        .data-flow-stems {{
+            stroke-dasharray: 2 4;
+            opacity: .74;
+        }}
+        .data-flow-svg marker path {{
+            fill: rgba(6, 182, 212, .74);
+        }}
+        .data-flow-pulse {{
+            fill: #06b6d4;
+            stroke: #FFFFFF;
+            stroke-width: 1;
+            opacity: .96;
+        }}
+        @keyframes pipeline-stage-pass {{
+            0%, 86%, 100% {{ border-color: rgba(148, 163, 184, .24); background: rgba(255, 255, 255, .95); box-shadow: 0 5px 14px rgba(15, 23, 42, .045); }}
+            5%, 13% {{ border-color: rgba(6, 182, 212, .54); background: rgba(239, 246, 255, .98); box-shadow: 0 0 0 3px rgba(6, 182, 212, .08); }}
+        }}
+        @keyframes pipeline-stage-status-pass {{
+            0%, 4%, 15%, 100% {{ opacity: 0; }}
+            6%, 12% {{ opacity: 1; }}
+        }}
+        .pipeline-architecture-card:hover,
+        .pipeline-architecture-card:focus-within {{
+            border-color: rgba(37, 99, 235, .48);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
+        }}
+        .pipeline-architecture-card:hover .pipeline-stage-status,
+        .pipeline-architecture-card:focus-within .pipeline-stage-status {{
+            opacity: 1;
         }}
 
         .chart-card-heading {{
@@ -3733,9 +3858,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
         }}
         @media (max-width: 1024px) {{
-            .pipeline.pipeline-rail {{
-                grid-template-columns: repeat(7, 150px);
-                min-width: 1120px;
+            .pipeline.pipeline-architecture {{
+                min-width: 1180px;
             }}
             .featured-preview img {{ max-height: 320px; }}
             .featured-lineage-preview {{ min-height: 0; }}
@@ -4061,67 +4185,69 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         @media (max-width: 560px) {{
             .block-container {{ padding: .35rem 1rem 2.5rem; }}
-            .pipeline-rail-viewport {{
+            .pipeline-architecture-viewport {{
                 overflow-x: visible;
                 padding: .25rem 0 .45rem;
                 mask-image: none;
             }}
-            .pipeline.pipeline-rail {{
-                --rail-x: 1.05rem;
+            .pipeline.pipeline-architecture {{
+                min-width: 0;
+            }}
+            .pipeline-orchestration-band {{
+                grid-template-columns: 1fr;
+                gap: .6rem;
+                min-height: 0;
+                padding: .75rem;
+            }}
+            .pipeline-orchestration-status {{
+                justify-content: flex-start;
+            }}
+            .pipeline-airflow-stem {{
+                display: none;
+            }}
+            .pipeline-stage-grid {{
                 display: grid;
                 grid-template-columns: 1fr;
                 gap: .62rem;
-                min-width: 0;
-                min-height: 0;
                 padding-left: 2.4rem;
             }}
-            .pipeline-rail-line {{
-                left: var(--rail-x);
-                right: auto;
-                top: .8rem;
-                bottom: .8rem;
-                width: 2px;
-                height: auto;
-                background: linear-gradient(180deg, rgba(37, 99, 235, .25), rgba(37, 99, 235, .70), rgba(6, 182, 212, .70));
-            }}
-            .pipeline-rail-line::after {{
-                display: none;
-            }}
-            .pipeline-rail-pulse {{
-                left: var(--rail-x);
-                top: .8rem;
-                animation-name: pipeline-rail-pulse-flow-mobile;
-            }}
-            .pipeline-rail-pulse::after {{
-                top: auto;
-                right: auto;
-                left: 50%;
-                bottom: 5px;
-                width: 3px;
-                height: 28px;
-                transform: translateX(-50%);
-                background: linear-gradient(180deg, transparent, rgba(6, 182, 212, .55));
-            }}
-            .pipeline-milestone {{
+            .pipeline-architecture-card {{
                 min-height: 96px;
                 justify-items: start;
                 text-align: left;
                 padding: .78rem .85rem;
             }}
-            .pipeline-milestone-icon {{
+            .pipeline-stage-icon {{
                 position: absolute;
                 left: -2.42rem;
                 top: .85rem;
             }}
+            .data-flow-lane {{
+                position: absolute;
+                left: 1.05rem;
+                top: calc(110px + 1rem);
+                bottom: .85rem;
+                width: 32px;
+                height: auto;
+                margin: 0;
+                padding: 0;
+                pointer-events: none;
+            }}
+            .data-flow-svg {{
+                width: 32px;
+                height: 100%;
+            }}
+            .data-flow-path {{
+                d: path("M500 4 V38");
+            }}
+            .data-flow-arrow-segments {{
+                d: path("M500 4 V10 M500 10 V17 M500 17 V24 M500 24 V31 M500 31 V38");
+            }}
+            .data-flow-stems {{
+                display: none;
+            }}
             .section-card {{ padding: 1rem; }}
             .kpi-card {{ min-height: 118px; }}
-        }}
-        @keyframes pipeline-rail-pulse-flow-mobile {{
-            0% {{ top: .8rem; opacity: 0; background: #2563eb; }}
-            5% {{ opacity: 1; }}
-            86% {{ opacity: 1; background: #06b6d4; }}
-            94% {{ top: calc(100% - .8rem); opacity: 1; background: #06b6d4; }}
-            100% {{ top: calc(100% - .8rem); opacity: 0; background: #06b6d4; }}
         }}
         @media (hover: none), (pointer: coarse) {{
             .hero-skill-node:hover {{
@@ -4167,7 +4293,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-profile-card:hover,
             .hero-skill-node,
             .hero-skill-node:hover,
-            .pipeline-rail-pulse,
+            .data-flow-pulse,
             .data-quality-detail,
             .sidebar-brand:hover,
             .sidebar-brand:focus-within,
@@ -4252,9 +4378,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .sidebar-mini-packet {{
                 display: none;
             }}
-            .pipeline-rail-pulse,
             .featured-lineage-pulse {{
                 display: none;
+            }}
+            .data-flow-pulse {{
+                opacity: .75 !important;
             }}
         }}
         </style>

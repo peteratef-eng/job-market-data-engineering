@@ -261,77 +261,75 @@ preview_markup = dedent(
             <small><span aria-hidden="true"></span>dbt models connected</small>
         </div>
         <div class="featured-lineage-canvas">
-            <div class="featured-lineage-column-title featured-lineage-title-staging">Staging</div>
-            <div class="featured-lineage-column-title featured-lineage-title-intermediate">Intermediate</div>
-            <div class="featured-lineage-column-title featured-lineage-title-marts">Marts</div>
+            <div class="featured-lineage-stage-headings" aria-hidden="true">
+                <span>Sources</span>
+                <span>Intermediate</span>
+                <span>Marts</span>
+            </div>
 
-            <section class="featured-lineage-branch featured-lineage-branch-job" aria-label="Job postings lineage">
+            <section class="featured-lineage-group featured-lineage-group-job" aria-label="Job postings lineage">
                 <div class="featured-lineage-branch-title">Job Postings Lineage</div>
-                <div class="featured-lineage-branch-group featured-lineage-branch-sources">
-                    <div class="featured-lineage-branch-group-label">Sources</div>
-                    <div class="featured-lineage-node featured-lineage-node-staging featured-lineage-node-job-source featured-lineage-node-stg-companies" title="stg_companies" aria-label="stg_companies, staging model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">stg_companies</span><small class="featured-lineage-model-type">STAGING MODEL</small></div>
-                    <div class="featured-lineage-node featured-lineage-node-staging featured-lineage-node-job-source featured-lineage-node-stg-job-postings" title="stg_job_postings" aria-label="stg_job_postings, staging model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">stg_job_postings</span><small class="featured-lineage-model-type">STAGING MODEL</small></div>
-                </div>
-                <div class="featured-lineage-mobile-connector" aria-hidden="true"><span></span></div>
-                <div class="featured-lineage-node featured-lineage-node-intermediate featured-lineage-node-job-intermediate featured-lineage-node-int-job" title="int_job_postings_enriched" aria-label="int_job_postings_enriched, intermediate model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">int_job_postings_<br>enriched</span><small class="featured-lineage-model-type">INTERMEDIATE MODEL</small></div>
-                <div class="featured-lineage-mobile-connector" aria-hidden="true"><span></span></div>
-                <div class="featured-lineage-branch-group featured-lineage-branch-marts">
-                    <div class="featured-lineage-branch-group-label">Marts</div>
-                    <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-job-mart featured-lineage-node-mart-company" title="mart_company_leaderboard" aria-label="mart_company_leaderboard, mart model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">mart_company_<br>leaderboard</span><small class="featured-lineage-model-type">MART MODEL</small></div>
-                    <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-job-mart featured-lineage-node-mart-monthly" title="mart_monthly_job_trends" aria-label="mart_monthly_job_trends, mart model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">mart_monthly_<br>job_trends</span><small class="featured-lineage-model-type">MART MODEL</small></div>
-                    <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-job-mart featured-lineage-node-mart-remote" title="mart_remote_work_trends" aria-label="mart_remote_work_trends, mart model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">mart_remote_<br>work_trends</span><small class="featured-lineage-model-type">MART MODEL</small></div>
-                    <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-job-mart featured-lineage-node-mart-salary" title="mart_salary_trends" aria-label="mart_salary_trends, mart model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">mart_salary_<br>trends</span><small class="featured-lineage-model-type">MART MODEL</small></div>
+                <div class="featured-lineage-graph">
+                    <div class="featured-lineage-column featured-lineage-sources">
+                        <div class="featured-lineage-node featured-lineage-node-source" title="stg_companies" aria-label="stg_companies, source model"><span class="featured-lineage-model-name">stg_<br>companies</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-source" title="stg_job_postings" aria-label="stg_job_postings, source model"><span class="featured-lineage-model-name">stg_job_<br>postings</span></div>
+                    </div>
+                    <div class="featured-lineage-column featured-lineage-intermediate">
+                        <div class="featured-lineage-node featured-lineage-node-intermediate" title="int_job_postings_enriched" aria-label="int_job_postings_enriched, intermediate model"><span class="featured-lineage-model-name">int_job_postings_<br>enriched</span></div>
+                    </div>
+                    <div class="featured-lineage-column featured-lineage-marts">
+                        <div class="featured-lineage-node featured-lineage-node-mart" title="mart_company_leaderboard" aria-label="mart_company_leaderboard, mart model"><span class="featured-lineage-model-name">mart_company_<br>leaderboard</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-mart" title="mart_monthly_job_trends" aria-label="mart_monthly_job_trends, mart model"><span class="featured-lineage-model-name">mart_monthly_<br>job_trends</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-mart" title="mart_remote_work_trends" aria-label="mart_remote_work_trends, mart model"><span class="featured-lineage-model-name">mart_remote_<br>work_trends</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-mart" title="mart_salary_trends" aria-label="mart_salary_trends, mart model"><span class="featured-lineage-model-name">mart_salary_<br>trends</span></div>
+                    </div>
+                    <svg class="featured-lineage-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                        <defs>
+                            <marker id="featuredLineageArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+                                <path d="M0,0 L8,4 L0,8 Z"></path>
+                            </marker>
+                        </defs>
+                        <path class="featured-lineage-link" d="M26 32 H35 V50 H43"></path>
+                        <path class="featured-lineage-link" d="M26 68 H35 V50 H43"></path>
+                        <path class="featured-lineage-link" d="M57 50 H66 V16 H74"></path>
+                        <path class="featured-lineage-link" d="M57 50 H66 V39 H74"></path>
+                        <path class="featured-lineage-link" d="M57 50 H66 V61 H74"></path>
+                        <path class="featured-lineage-link" d="M57 50 H66 V84 H74"></path>
+                        <circle class="featured-lineage-pulse" r="1.5">
+                            <animateMotion dur="7s" repeatCount="indefinite" path="M26 32 H35 V50 H43 H57 H66 V39 H74"></animateMotion>
+                        </circle>
+                    </svg>
                 </div>
             </section>
 
-            <section class="featured-lineage-branch featured-lineage-branch-skill" aria-label="Skills lineage">
+            <section class="featured-lineage-group featured-lineage-group-skill" aria-label="Skills lineage">
                 <div class="featured-lineage-branch-title">Skills Lineage</div>
-                <div class="featured-lineage-branch-group featured-lineage-branch-sources">
-                    <div class="featured-lineage-branch-group-label">Sources</div>
-                    <div class="featured-lineage-node featured-lineage-node-staging featured-lineage-node-skill-source featured-lineage-node-stg-job-skills" title="stg_job_skills" aria-label="stg_job_skills, staging model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">stg_job_skills</span><small class="featured-lineage-model-type">STAGING MODEL</small></div>
-                    <div class="featured-lineage-node featured-lineage-node-staging featured-lineage-node-skill-source featured-lineage-node-stg-skills" title="stg_skills" aria-label="stg_skills, staging model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">stg_skills</span><small class="featured-lineage-model-type">STAGING MODEL</small></div>
+                <div class="featured-lineage-graph">
+                    <div class="featured-lineage-column featured-lineage-sources">
+                        <div class="featured-lineage-node featured-lineage-node-source" title="stg_job_skills" aria-label="stg_job_skills, source model"><span class="featured-lineage-model-name">stg_job_<br>skills</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-source" title="stg_skills" aria-label="stg_skills, source model"><span class="featured-lineage-model-name">stg_<br>skills</span></div>
+                    </div>
+                    <div class="featured-lineage-column featured-lineage-intermediate">
+                        <div class="featured-lineage-node featured-lineage-node-intermediate" title="int_job_skills_enriched" aria-label="int_job_skills_enriched, intermediate model"><span class="featured-lineage-model-name">int_job_skills_<br>enriched</span></div>
+                    </div>
+                    <div class="featured-lineage-column featured-lineage-marts featured-lineage-marts-single">
+                        <div class="featured-lineage-node featured-lineage-node-mart" title="mart_skill_demand_by_role" aria-label="mart_skill_demand_by_role, mart model"><span class="featured-lineage-model-name">mart_skill_demand_<br>by_role</span></div>
+                    </div>
+                    <svg class="featured-lineage-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                        <defs>
+                            <marker id="featuredLineageArrowSkill" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+                                <path d="M0,0 L8,4 L0,8 Z"></path>
+                            </marker>
+                        </defs>
+                        <path class="featured-lineage-link" d="M26 32 H35 V50 H43"></path>
+                        <path class="featured-lineage-link" d="M26 68 H35 V50 H43"></path>
+                        <path class="featured-lineage-link" d="M57 50 H74"></path>
+                        <circle class="featured-lineage-pulse" r="1.5">
+                            <animateMotion dur="7s" repeatCount="indefinite" path="M26 68 H35 V50 H43 H57 H74"></animateMotion>
+                        </circle>
+                    </svg>
                 </div>
-                <div class="featured-lineage-mobile-connector" aria-hidden="true"><span></span></div>
-                <div class="featured-lineage-node featured-lineage-node-intermediate featured-lineage-node-skill-intermediate featured-lineage-node-int-skill" title="int_job_skills_enriched" aria-label="int_job_skills_enriched, intermediate model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">int_job_skills_<br>enriched</span><small class="featured-lineage-model-type">INTERMEDIATE MODEL</small></div>
-                <div class="featured-lineage-mobile-connector" aria-hidden="true"><span></span></div>
-                <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-node-skill-mart featured-lineage-node-mart-skill-demand" title="mart_skill_demand_by_role" aria-label="mart_skill_demand_by_role, mart model"><span class="featured-lineage-node-icon" aria-hidden="true"></span><span class="featured-lineage-model-name">mart_skill_demand_<br>by_role</span><small class="featured-lineage-model-type">MART MODEL</small></div>
             </section>
-
-            <svg class="featured-lineage-lane featured-lineage-lane-a" viewBox="0 0 100 244" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                    <linearGradient id="featuredLineageFlowGradientA" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#2563eb"></stop>
-                        <stop offset="100%" stop-color="#06b6d4"></stop>
-                    </linearGradient>
-                </defs>
-                <path class="featured-lineage-connector" d="M10 22 C34 22 66 47 90 47"></path>
-                <path class="featured-lineage-connector" d="M10 72 C34 72 66 47 90 47"></path>
-                <path class="featured-lineage-connector" d="M10 172 C34 172 66 197 90 197"></path>
-                <path class="featured-lineage-connector" d="M10 222 C34 222 66 197 90 197"></path>
-                <path class="featured-lineage-route" d="M10 22 C34 22 66 47 90 47"></path>
-                <path class="featured-lineage-route" d="M10 72 C34 72 66 47 90 47"></path>
-                <path class="featured-lineage-route featured-lineage-route-skill" d="M10 172 C34 172 66 197 90 197"></path>
-                <path class="featured-lineage-route featured-lineage-route-skill" d="M10 222 C34 222 66 197 90 197"></path>
-            </svg>
-
-            <svg class="featured-lineage-lane featured-lineage-lane-b" viewBox="0 0 100 244" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                    <linearGradient id="featuredLineageFlowGradientB" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#2563eb"></stop>
-                        <stop offset="100%" stop-color="#06b6d4"></stop>
-                    </linearGradient>
-                </defs>
-                <path class="featured-lineage-connector" d="M10 47 C34 47 66 22 90 22"></path>
-                <path class="featured-lineage-connector" d="M10 47 C34 47 66 72 90 72"></path>
-                <path class="featured-lineage-connector" d="M10 47 C34 47 66 122 90 122"></path>
-                <path class="featured-lineage-connector" d="M10 47 C34 47 66 172 90 172"></path>
-                <path class="featured-lineage-connector" d="M10 197 C34 197 66 222 90 222"></path>
-                <path class="featured-lineage-route" d="M10 47 C34 47 66 22 90 22"></path>
-                <path class="featured-lineage-route" d="M10 47 C34 47 66 72 90 72"></path>
-                <path class="featured-lineage-route" d="M10 47 C34 47 66 122 90 122"></path>
-                <path class="featured-lineage-route" d="M10 47 C34 47 66 172 90 172"></path>
-                <path class="featured-lineage-route featured-lineage-route-skill" d="M10 197 C34 197 66 222 90 222"></path>
-            </svg>
         </div>
     </div>
     """

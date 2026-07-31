@@ -1436,11 +1436,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             position: relative;
             display: grid;
             grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
-            gap: clamp(1.1rem, 2vw, 1.75rem);
+            grid-auto-rows: max-content;
+            gap: clamp(.9rem, 1.5vw, 1.25rem);
             align-items: start;
+            height: auto;
+            min-height: 0;
             padding: 1rem;
             margin: 1.1rem 0 1.45rem;
             overflow: visible;
+        }}
+        .featured-project-copy,
+        .featured-preview,
+        .featured-lineage-preview {{
+            align-self: start;
+            height: fit-content;
+            min-height: 0;
         }}
         .featured-project-copy h2,
         .home-section h2,
@@ -1506,8 +1516,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: 100%;
             max-width: 100%;
             min-height: 0;
-            height: auto;
-            padding: .62rem .68rem .72rem;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 12px;
             border-radius: 12px;
             overflow: hidden;
             container-type: inline-size;
@@ -1520,7 +1533,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             justify-content: space-between;
             gap: .65rem;
             min-height: 20px;
-            margin-bottom: .45rem;
+            margin-bottom: 0;
         }}
         .featured-lineage-header span {{
             color: var(--data-blue);
@@ -1548,103 +1561,85 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-lineage-canvas {{
             position: relative;
             box-sizing: border-box;
-            display: grid;
-            grid-template-columns:
-                minmax(120px, .94fr)
-                minmax(24px, .18fr)
-                minmax(128px, 1fr)
-                minmax(24px, .18fr)
-                minmax(138px, 1.06fr);
-            grid-template-rows:
-                auto
-                repeat(5, minmax(44px, auto));
+            display: flex;
+            flex-direction: column;
             align-items: start;
-            gap: 6px;
+            gap: 10px;
             width: 100%;
             max-width: 100%;
             min-width: 0;
             min-height: 0;
             height: auto;
             isolation: isolate;
-            overflow: hidden;
-        }}
-        .featured-lineage-connector {{
-            fill: none;
-            stroke: rgba(37, 99, 235, .22);
-            stroke-width: 1.25;
-            vector-effect: non-scaling-stroke;
-        }}
-        .featured-lineage-route {{
-            fill: none;
-            stroke: url(#featuredLineageFlowGradientA);
-            stroke-width: 2.2;
-            stroke-linecap: round;
-            stroke-dasharray: 14 190;
-            stroke-dashoffset: 190;
-            vector-effect: non-scaling-stroke;
-            opacity: 0;
-            filter: drop-shadow(0 0 2px rgba(6, 182, 212, .18));
-            animation: featured-lineage-route-flow 12s linear infinite;
-        }}
-        .featured-lineage-lane-b .featured-lineage-route {{
-            stroke: url(#featuredLineageFlowGradientB);
-        }}
-        .featured-lineage-route-skill {{
-            animation-delay: 5s;
-        }}
-        .featured-lineage-lane {{
-            z-index: 3;
-            align-self: stretch;
-            width: 100%;
-            height: 100%;
-            min-height: 244px;
-            min-width: 0;
-            pointer-events: none;
             overflow: visible;
         }}
-        .featured-lineage-column-title {{
-            align-self: end;
-            min-width: 0;
+        .featured-lineage-stage-headings {{
+            display: grid;
+            grid-template-columns: minmax(94px, .9fr) minmax(118px, 1fr) minmax(132px, 1.1fr);
+            gap: clamp(1.35rem, 4.2vw, 3rem);
+            width: 100%;
             color: var(--muted);
-            font-size: .61rem;
+            font-size: .58rem;
             font-weight: 850;
             letter-spacing: .09em;
             text-transform: uppercase;
             line-height: 1;
-            margin-bottom: .08rem;
+            padding: 0 .18rem;
         }}
-        .featured-lineage-title-staging {{
-            grid-column: 1;
-            grid-row: 1;
+        .featured-lineage-group {{
+            box-sizing: border-box;
+            width: 100%;
+            height: auto;
+            min-height: 0;
+            padding: 10px;
+            border: 1px solid rgba(148, 163, 184, .18);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .54);
         }}
-        .featured-lineage-title-intermediate {{
-            grid-column: 3;
-            grid-row: 1;
+        .featured-lineage-branch-title {{
+            display: block;
+            color: var(--data-blue);
+            font-size: .62rem;
+            font-weight: 850;
+            letter-spacing: .085em;
+            line-height: 1;
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }}
-        .featured-lineage-title-marts {{
-            grid-column: 5;
-            grid-row: 1;
+        .featured-lineage-graph {{
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(94px, .9fr) minmax(118px, 1fr) minmax(132px, 1.1fr);
+            align-items: center;
+            gap: clamp(1.35rem, 4.2vw, 3rem);
+            width: 100%;
+            min-height: 0;
+            overflow: visible;
         }}
-        .featured-lineage-branch-title,
-        .featured-lineage-branch-group-label,
-        .featured-lineage-mobile-connector {{
-            display: none;
+        .featured-lineage-column {{
+            position: relative;
+            z-index: 2;
+            display: grid;
+            gap: 8px;
+            min-width: 0;
         }}
-        .featured-lineage-branch {{
-            display: contents;
+        .featured-lineage-sources,
+        .featured-lineage-intermediate {{
+            align-content: center;
         }}
-        .featured-lineage-branch-group {{
-            display: contents;
+        .featured-lineage-marts {{
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }}
+        .featured-lineage-marts-single {{
+            grid-template-columns: minmax(0, 1fr);
+            align-content: center;
         }}
         .featured-lineage-node {{
             position: relative;
             box-sizing: border-box;
-            z-index: 5;
-            display: grid;
-            grid-template-columns: auto minmax(0, 1fr);
-            column-gap: .5rem;
-            row-gap: .22rem;
+            display: flex;
             align-items: center;
+            justify-content: center;
             width: 100%;
             max-width: 100%;
             min-width: 0;
@@ -1654,102 +1649,22 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border-radius: 8px;
             background: rgba(255, 255, 255, .95);
             color: var(--text);
-            box-shadow: 0 5px 12px rgba(15, 23, 42, .04);
-            transition:
-                transform 180ms ease,
-                border-color 180ms ease,
-                background-color 180ms ease,
-                box-shadow 180ms ease;
-        }}
-        .featured-lineage-node-intermediate {{
-            min-height: 50px;
-        }}
-        .featured-lineage-node-mart {{
-            min-height: 42px;
-        }}
-        .featured-lineage-node-stg-companies {{
-            grid-column: 1;
-            grid-row: 2;
-        }}
-        .featured-lineage-node-stg-job-postings {{
-            grid-column: 1;
-            grid-row: 3;
-        }}
-        .featured-lineage-node-stg-job-skills {{
-            grid-column: 1;
-            grid-row: 5;
-        }}
-        .featured-lineage-node-stg-skills {{
-            grid-column: 1;
-            grid-row: 6;
-        }}
-        .featured-lineage-node-int-job {{
-            grid-column: 3;
-            grid-row: 2 / 4;
-            align-self: center;
-        }}
-        .featured-lineage-node-int-skill {{
-            grid-column: 3;
-            grid-row: 5 / 7;
-            align-self: center;
-        }}
-        .featured-lineage-node-mart-company {{
-            grid-column: 5;
-            grid-row: 2;
-        }}
-        .featured-lineage-node-mart-monthly {{
-            grid-column: 5;
-            grid-row: 3;
-        }}
-        .featured-lineage-node-mart-remote {{
-            grid-column: 5;
-            grid-row: 4;
-        }}
-        .featured-lineage-node-mart-salary {{
-            grid-column: 5;
-            grid-row: 5;
-        }}
-        .featured-lineage-node-mart-skill-demand {{
-            grid-column: 5;
-            grid-row: 6;
-        }}
-        .featured-lineage-lane-a {{
-            grid-column: 2;
-            grid-row: 2 / 7;
-        }}
-        .featured-lineage-lane-b {{
-            grid-column: 4;
-            grid-row: 2 / 7;
+            box-shadow: 0 3px 8px rgba(15, 23, 42, .035);
         }}
         .featured-lineage-model-name {{
             min-width: 0;
             color: var(--text);
-            font-size: clamp(0.66rem, 0.18vw + 0.61rem, 0.76rem);
+            font-size: clamp(0.66rem, 0.18vw + 0.61rem, 0.75rem);
             font-weight: 750;
             line-height: 1.12;
+            text-align: center;
             overflow-wrap: break-word;
             word-break: normal;
             hyphens: none;
         }}
-        .featured-lineage-model-type {{
-            grid-column: 2;
-            color: var(--muted);
-            margin-top: .08rem;
-            font-size: clamp(0.46rem, 0.12vw + 0.43rem, 0.55rem);
-            font-weight: 800;
-            letter-spacing: .065em;
-            line-height: 1.2;
-        }}
-        .featured-lineage-node-icon {{
-            grid-row: 1 / span 2;
-            width: .52rem;
-            height: .52rem;
-            border-radius: 3px;
-            background: currentColor;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
-        }}
-        .featured-lineage-node-staging {{
+        .featured-lineage-node-source {{
             color: #64748B;
+            border-color: rgba(148, 163, 184, .34);
             background: rgba(248, 250, 252, .96);
         }}
         .featured-lineage-node-intermediate {{
@@ -1762,119 +1677,82 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border-color: rgba(6, 182, 212, .22);
             background: rgba(240, 253, 250, .92);
         }}
-        @media (hover: hover) and (pointer: fine) {{
-            .featured-lineage-node:hover {{
-                transform: translateY(-1px);
-                border-color: rgba(37, 99, 235, 0.45);
-                background-color: rgba(239, 246, 255, .98);
-                box-shadow: 0 8px 18px rgba(37, 99, 235, 0.09);
-            }}
+        .featured-lineage-links {{
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            pointer-events: none;
         }}
-        @keyframes featured-lineage-route-flow {{
-            0% {{ opacity: 0; stroke-dashoffset: 190; }}
-            12%, 46% {{ opacity: .62; }}
-            58%, 100% {{ opacity: 0; stroke-dashoffset: 0; }}
+        .featured-lineage-links marker path {{
+            fill: rgba(37, 99, 235, .58);
         }}
-        @keyframes featured-lineage-mobile-flow {{
-            0%, 6% {{ opacity: 0; transform: translate(-50%, -50%); }}
-            9%, 43% {{ opacity: 1; }}
-            50% {{ opacity: 0; transform: translate(-50%, 220%); }}
-            100% {{ opacity: 0; transform: translate(-50%, 220%); }}
+        .featured-lineage-link {{
+            fill: none;
+            stroke: rgba(37, 99, 235, .34);
+            stroke-width: 1.15;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            marker-end: url(#featuredLineageArrow);
+            vector-effect: non-scaling-stroke;
         }}
-        @container (max-width: 639px) {{
+        .featured-lineage-pulse {{
+            fill: var(--data-blue);
+            stroke: #FFFFFF;
+            stroke-width: .8;
+            filter: drop-shadow(0 0 2px rgba(37, 99, 235, .22));
+            opacity: .75;
+        }}
+        @container (max-width: 319px) {{
             .featured-lineage-canvas {{
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: .55rem;
-                min-height: 0;
-                overflow-x: auto;
-                padding-bottom: .12rem;
+                gap: 9px;
             }}
-            .featured-lineage-column-title,
-            .featured-lineage-lane {{
+            .featured-lineage-stage-headings {{
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }}
+            .featured-lineage-stage-headings span:not(:first-child) {{
                 display: none;
             }}
-            .featured-lineage-branch {{
-                box-sizing: border-box;
+            .featured-lineage-group {{
+                padding: 9px;
+            }}
+            .featured-lineage-graph {{
                 display: grid;
-                grid-template-columns: minmax(0, 1fr) minmax(26px, 32px) minmax(0, 1fr) minmax(26px, 32px) minmax(0, 1.15fr);
+                grid-template-columns: 1fr;
                 align-items: center;
+                gap: 18px;
+            }}
+            .featured-lineage-column {{
+                grid-template-columns: 1fr;
                 gap: 7px;
-                min-width: 0;
-                padding: .54rem;
-                border: 1px solid rgba(148, 163, 184, .20);
-                border-radius: 10px;
-                background: rgba(255, 255, 255, .48);
             }}
-            .featured-lineage-branch-title {{
-                display: block;
-                grid-column: 1 / -1;
-                color: var(--data-blue);
-                font-size: .62rem;
-                font-weight: 850;
-                letter-spacing: .085em;
-                line-height: 1;
-                text-transform: uppercase;
+            .featured-lineage-marts {{
+                grid-template-columns: 1fr;
             }}
-            .featured-lineage-branch-group {{
-                display: grid;
-                gap: 8px;
-                min-width: 0;
+            .featured-lineage-links {{
+                display: none;
             }}
-            .featured-lineage-branch-sources {{
-                grid-column: 1;
+            .featured-lineage-sources::after,
+            .featured-lineage-intermediate::after {{
+                content: "";
+                justify-self: center;
+                width: 2px;
+                height: 14px;
+                margin: 2px 0 -2px;
+                border-radius: 999px;
+                background: linear-gradient(180deg, rgba(37, 99, 235, .34), rgba(6, 182, 212, .38));
             }}
-            .featured-lineage-branch-marts {{
-                grid-column: 5;
-            }}
-            .featured-lineage-branch-group-label {{
-                display: block;
-                color: var(--muted);
-                font-size: .55rem;
-                font-weight: 850;
-                letter-spacing: .08em;
-                line-height: 1;
-                text-transform: uppercase;
+            .featured-lineage-sources::before,
+            .featured-lineage-intermediate::before {{
+                content: "";
+                display: none;
             }}
             .featured-lineage-node {{
-                grid-column: auto;
-                grid-row: auto;
                 min-height: 42px;
                 padding: 6px 8px;
-            }}
-            .featured-lineage-node-intermediate {{
-                grid-column: 3;
-            }}
-            .featured-lineage-branch > .featured-lineage-node-mart {{
-                grid-column: 5;
-            }}
-            .featured-lineage-mobile-connector {{
-                position: relative;
-                display: block;
-                justify-self: stretch;
-                align-self: center;
-                width: 100%;
-                height: 1.5px;
-                border-radius: 999px;
-                background: linear-gradient(90deg, rgba(37, 99, 235, .30), rgba(6, 182, 212, .38));
-                overflow: hidden;
-            }}
-            .featured-lineage-mobile-connector span {{
-                position: absolute;
-                left: 0;
-                top: 50%;
-                width: 6px;
-                height: 6px;
-                border: 1.5px solid #FFFFFF;
-                border-radius: 999px;
-                background: var(--data-blue);
-                box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
-                animation: featured-lineage-branch-flow 12s linear infinite;
-            }}
-            .featured-lineage-branch-skill .featured-lineage-mobile-connector span {{
-                background: var(--data-cyan);
-                box-shadow: 0 0 0 3px rgba(6, 182, 212, .10);
-                animation-delay: 5s;
             }}
             .featured-lineage-model-name {{
                 font-size: clamp(.66rem, 0.35vw + .58rem, .78rem);
@@ -1889,50 +1767,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .featured-lineage-canvas {{
                 gap: .62rem;
             }}
-            .featured-lineage-branch {{
-                grid-template-columns: 1fr;
-                gap: 8px;
+            .featured-lineage-stage-headings,
+            .featured-lineage-graph {{
+                grid-template-columns: minmax(78px, .82fr) minmax(106px, 1fr) minmax(116px, 1.08fr);
+                gap: .85rem;
+            }}
+            .featured-lineage-marts {{
+                grid-template-columns: minmax(0, 1fr);
+            }}
+            .featured-lineage-group {{
                 padding: .52rem;
-            }}
-            .featured-lineage-branch-sources,
-            .featured-lineage-branch-marts,
-            .featured-lineage-node-intermediate,
-            .featured-lineage-branch > .featured-lineage-node-mart {{
-                grid-column: 1;
-            }}
-            .featured-lineage-mobile-connector {{
-                justify-self: start;
-                width: 2px;
-                height: 18px;
-                margin-left: 1rem;
-                background: linear-gradient(180deg, rgba(37, 99, 235, .30), rgba(6, 182, 212, .38));
-            }}
-            .featured-lineage-mobile-connector::after {{
-                content: "";
-                position: absolute;
-                left: 50%;
-                bottom: 1px;
-                width: 7px;
-                height: 7px;
-                border-right: 2px solid rgba(6, 182, 212, .65);
-                border-bottom: 2px solid rgba(6, 182, 212, .65);
-                transform: translateX(-50%) rotate(45deg);
-            }}
-            .featured-lineage-mobile-connector span {{
-                left: 50%;
-                top: 0;
-                animation-name: featured-lineage-mobile-flow;
             }}
             .featured-lineage-node {{
                 min-height: 42px;
                 padding: 7px 8px;
             }}
-        }}
-        @keyframes featured-lineage-branch-flow {{
-            0%, 6% {{ opacity: 0; transform: translate(-50%, -50%); }}
-            9%, 43% {{ opacity: 1; }}
-            50% {{ opacity: 0; transform: translate(460%, -50%); }}
-            100% {{ opacity: 0; transform: translate(460%, -50%); }}
         }}
         .home-section {{
             margin: 1.55rem 0;
@@ -4121,18 +3970,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-profile-status-dot,
             .hero-skill-node,
             .hero-skill-connector-flow,
-            .featured-lineage-route,
-            .featured-lineage-mobile-connector span {{
+            .featured-lineage-pulse {{
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;
                 opacity: 1 !important;
             }}
-            .featured-lineage-route {{
-                stroke-dashoffset: 0 !important;
-                opacity: 0 !important;
-            }}
-            .featured-lineage-mobile-connector span {{
+            .featured-lineage-pulse {{
                 display: none;
             }}
             .sidebar-mini-packet {{

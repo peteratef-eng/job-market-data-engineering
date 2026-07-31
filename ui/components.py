@@ -258,28 +258,43 @@ def kpi_grid(values: dict[str, str]) -> None:
 
 def pipeline_visual(class_name: str = "") -> None:
     steps = [
-        ("01", "Raw CSVs", "Input tables"),
-        ("02", "Python / Pandas", "Prepared sample"),
-        ("03", "PostgreSQL", "Warehouse tables"),
-        ("04", "dbt Models", "Staging and joins"),
-        ("05", "Quality Checks", "Validation SQL"),
-        ("06", "Analytics Marts", "Business-ready marts"),
-        ("07", "Streamlit Dashboard", "Interactive portfolio"),
+        ("01", "Raw CSVs", "Input tables", "ingest", "M5 4h10l2 2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4z M9 12h6 M9 16h6"),
+        ("02", "Python / Pandas", "Prepared sample", "ingest", "M8 9l-4 3 4 3 M16 9l4 3-4 3 M14 5l-4 14"),
+        ("03", "PostgreSQL", "Warehouse tables", "model", "M5 7c0-2 3.1-4 7-4s7 2 7 4-3.1 4-7 4-7-2-7-4z M5 7v10c0 2 3.1 4 7 4s7-2 7-4V7 M5 12c0 2 3.1 4 7 4s7-2 7-4"),
+        ("04", "dbt Models", "Staging and joins", "model", "M12 3l8 4-8 4-8-4 8-4z M4 12l8 4 8-4 M4 17l8 4 8-4"),
+        ("05", "Quality Checks", "Validation SQL", "deliver", "M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z M9 12l2 2 4-5"),
+        ("06", "Analytics Marts", "Business-ready marts", "deliver", "M4 5h16v14H4z M4 10h16 M9 5v14 M15 5v14"),
+        ("07", "Streamlit Dashboard", "Interactive portfolio", "deliver final", "M4 19V5h16v14H4z M8 15l3-3 2 2 3-5 M8 19v-2 M12 19v-3 M16 19v-6"),
     ]
-    step_classes = " ".join(["pipeline-step", class_name]).strip()
+    step_classes = " ".join(["pipeline-milestone", class_name]).strip()
     tabindex = ' tabindex="0"' if class_name else ""
     markup = "".join(
         (
-            f'<div class="{html.escape(step_classes)} pipeline-step-{index}"{tabindex}>'
-            f'<span>{number}</span>'
+            f'<div class="{html.escape(step_classes)} pipeline-milestone-{index} pipeline-category-{html.escape(category)}"{tabindex}>'
+            '<span class="pipeline-milestone-icon" aria-hidden="true">'
+            f'<svg viewBox="0 0 24 24" role="img" aria-label="{html.escape(label)} icon">'
+            f'<path d="{path}"></path>'
+            '</svg>'
+            '</span>'
+            f'<span class="pipeline-milestone-number">{number}</span>'
             f'<strong>{html.escape(label)}</strong>'
             f'<small>{html.escape(output)}</small>'
             '</div>'
         )
-        for index, (number, label, output) in enumerate(steps, start=1)
+        for index, (number, label, output, category, path) in enumerate(steps, start=1)
     )
     st.markdown(
-        f'<div class="pipeline" aria-label="Connected data pipeline">{markup}<span class="pipeline-flow-packet" aria-hidden="true"></span></div>',
+        (
+            '<div class="pipeline-rail-shell" aria-label="Connected data pipeline">'
+            '<div class="pipeline-rail-viewport">'
+            '<div class="pipeline pipeline-rail" role="list">'
+            '<span class="pipeline-rail-line" aria-hidden="true"></span>'
+            '<span class="pipeline-rail-pulse" aria-hidden="true"></span>'
+            f'{markup}'
+            '</div>'
+            '</div>'
+            '</div>'
+        ),
         unsafe_allow_html=True,
     )
 

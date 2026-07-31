@@ -1604,8 +1604,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .featured-lineage-stage-headings {{
             display: grid;
-            grid-template-columns: minmax(94px, .9fr) minmax(118px, 1fr) minmax(132px, 1.1fr);
-            gap: clamp(1.35rem, 4.2vw, 3rem);
+            grid-template-columns: minmax(104px, .9fr) minmax(126px, 1fr) minmax(152px, 1.18fr);
+            gap: clamp(1rem, 2.8vw, 2rem);
             width: 100%;
             color: var(--muted);
             font-size: .58rem;
@@ -1638,9 +1638,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-lineage-graph {{
             position: relative;
             display: grid;
-            grid-template-columns: minmax(94px, .9fr) minmax(118px, 1fr) minmax(132px, 1.1fr);
+            grid-template-columns: minmax(104px, .9fr) minmax(126px, 1fr) minmax(152px, 1.18fr);
             align-items: center;
-            gap: clamp(1.35rem, 4.2vw, 3rem);
+            gap: clamp(1rem, 2.8vw, 2rem);
             width: 100%;
             min-height: 0;
             overflow: visible;
@@ -1657,7 +1657,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             align-content: center;
         }}
         .featured-lineage-marts {{
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: minmax(0, 1fr);
+            gap: 7px;
         }}
         .featured-lineage-marts-single {{
             grid-template-columns: minmax(0, 1fr);
@@ -1673,12 +1674,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             max-width: 100%;
             min-width: 0;
             min-height: 42px;
-            padding: 6px 8px;
+            padding: 7px 9px;
             border: 1px solid rgba(148, 163, 184, .28);
             border-radius: 8px;
             background: rgba(255, 255, 255, .95);
             color: var(--text);
             box-shadow: 0 3px 8px rgba(15, 23, 42, .035);
+            animation: featured-lineage-node-idle 8s ease-in-out infinite;
         }}
         .featured-lineage-model-name {{
             min-width: 0;
@@ -1690,6 +1692,34 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             overflow-wrap: break-word;
             word-break: normal;
             hyphens: none;
+        }}
+        .featured-lineage-source-a,
+        .featured-lineage-source-b {{
+            animation-name: featured-lineage-source-activation;
+        }}
+        .featured-lineage-int {{
+            overflow: hidden;
+            animation-name: featured-lineage-int-activation;
+        }}
+        .featured-lineage-int::after {{
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(100deg, transparent 20%, rgba(37, 99, 235, .18) 48%, transparent 74%);
+            opacity: 0;
+            transform: translateX(-120%);
+            animation: featured-lineage-int-shimmer 8s ease-in-out infinite;
+            pointer-events: none;
+        }}
+        .featured-lineage-mart-1 {{ animation-name: featured-lineage-mart-activation-1; }}
+        .featured-lineage-mart-2 {{ animation-name: featured-lineage-mart-activation-2; }}
+        .featured-lineage-mart-3 {{ animation-name: featured-lineage-mart-activation-3; }}
+        .featured-lineage-mart-4 {{ animation-name: featured-lineage-mart-activation-4; }}
+        .featured-lineage-group-skill .featured-lineage-node,
+        .featured-lineage-group-skill .featured-lineage-int::after,
+        .featured-lineage-group-skill .featured-lineage-link,
+        .featured-lineage-group-skill .featured-lineage-pulse {{
+            animation-delay: 1s;
         }}
         .featured-lineage-node-source {{
             color: #64748B;
@@ -1721,18 +1751,87 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-lineage-link {{
             fill: none;
             stroke: rgba(37, 99, 235, .34);
-            stroke-width: 1.15;
+            stroke-width: 1.2;
             stroke-linecap: round;
             stroke-linejoin: round;
             marker-end: url(#featuredLineageArrow);
             vector-effect: non-scaling-stroke;
+            animation: featured-lineage-path-activation 8s ease-in-out infinite;
         }}
         .featured-lineage-pulse {{
-            fill: var(--data-blue);
+            fill: #06b6d4;
             stroke: #FFFFFF;
             stroke-width: .8;
             filter: drop-shadow(0 0 2px rgba(37, 99, 235, .22));
-            opacity: .75;
+            opacity: 0;
+            animation: featured-lineage-pulse-visibility 8s ease-in-out infinite;
+        }}
+        .featured-lineage-source-pulse {{
+            fill: #2563eb;
+        }}
+        .featured-lineage-merge-pulse {{
+            fill: #38bdf8;
+            animation-name: featured-lineage-merge-visibility;
+        }}
+        .featured-lineage-output-pulse,
+        .featured-lineage-mart-pulse {{
+            fill: #06b6d4;
+            animation-name: featured-lineage-output-visibility;
+        }}
+        .featured-lineage-mart-pulse-1 {{ animation-delay: 0s; }}
+        .featured-lineage-mart-pulse-2 {{ animation-delay: .12s; }}
+        .featured-lineage-mart-pulse-3 {{ animation-delay: .24s; }}
+        .featured-lineage-mart-pulse-4 {{ animation-delay: .36s; }}
+        .featured-lineage-group-skill .featured-lineage-mart-pulse-1 {{
+            animation-delay: 1s;
+        }}
+        .featured-lineage-group-skill .featured-lineage-mart-pulse-2 {{ animation-delay: 1.12s; }}
+        .featured-lineage-group-skill .featured-lineage-mart-pulse-3 {{ animation-delay: 1.24s; }}
+        .featured-lineage-group-skill .featured-lineage-mart-pulse-4 {{ animation-delay: 1.36s; }}
+        @keyframes featured-lineage-source-activation {{
+            0%, 7%, 25%, 100% {{ border-color: rgba(148, 163, 184, .34); box-shadow: 0 3px 8px rgba(15, 23, 42, .035); }}
+            8%, 22% {{ border-color: rgba(37, 99, 235, .48); box-shadow: 0 0 0 3px rgba(37, 99, 235, .08); }}
+        }}
+        @keyframes featured-lineage-int-activation {{
+            0%, 22%, 36%, 100% {{ border-color: rgba(37, 99, 235, .28); background: rgba(239, 246, 255, .96); box-shadow: 0 3px 8px rgba(15, 23, 42, .035); }}
+            24%, 34% {{ border-color: rgba(37, 99, 235, .62); background: rgba(219, 234, 254, .98); box-shadow: 0 0 0 3px rgba(37, 99, 235, .11); }}
+        }}
+        @keyframes featured-lineage-int-shimmer {{
+            0%, 23%, 35%, 100% {{ opacity: 0; transform: translateX(-120%); }}
+            26% {{ opacity: .85; }}
+            33% {{ opacity: 0; transform: translateX(120%); }}
+        }}
+        @keyframes featured-lineage-mart-activation-1 {{
+            0%, 51%, 68%, 100% {{ border-color: rgba(6, 182, 212, .22); background: rgba(240, 253, 250, .92); }}
+            54%, 64% {{ border-color: rgba(6, 182, 212, .62); background: rgba(207, 250, 254, .72); }}
+        }}
+        @keyframes featured-lineage-mart-activation-2 {{
+            0%, 53%, 70%, 100% {{ border-color: rgba(6, 182, 212, .22); background: rgba(240, 253, 250, .92); }}
+            56%, 66% {{ border-color: rgba(6, 182, 212, .62); background: rgba(207, 250, 254, .72); }}
+        }}
+        @keyframes featured-lineage-mart-activation-3 {{
+            0%, 55%, 72%, 100% {{ border-color: rgba(6, 182, 212, .22); background: rgba(240, 253, 250, .92); }}
+            58%, 68% {{ border-color: rgba(6, 182, 212, .62); background: rgba(207, 250, 254, .72); }}
+        }}
+        @keyframes featured-lineage-mart-activation-4 {{
+            0%, 57%, 74%, 100% {{ border-color: rgba(6, 182, 212, .22); background: rgba(240, 253, 250, .92); }}
+            60%, 70% {{ border-color: rgba(6, 182, 212, .62); background: rgba(207, 250, 254, .72); }}
+        }}
+        @keyframes featured-lineage-path-activation {{
+            0%, 7%, 72%, 100% {{ opacity: .72; }}
+            10%, 64% {{ opacity: 1; }}
+        }}
+        @keyframes featured-lineage-pulse-visibility {{
+            0%, 7%, 25%, 100% {{ opacity: 0; }}
+            9%, 22% {{ opacity: .95; }}
+        }}
+        @keyframes featured-lineage-merge-visibility {{
+            0%, 22%, 33%, 100% {{ opacity: 0; }}
+            24%, 31% {{ opacity: 1; }}
+        }}
+        @keyframes featured-lineage-output-visibility {{
+            0%, 37%, 68%, 100% {{ opacity: 0; }}
+            40%, 64% {{ opacity: .95; }}
         }}
         @container (max-width: 319px) {{
             .featured-lineage-canvas {{
@@ -2100,29 +2199,73 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .pipeline-info-grid {{
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: .85rem;
+            gap: .75rem;
             align-items: stretch;
-            margin-top: 1rem;
+            margin-top: .85rem;
         }}
         .pipeline-info-grid .pipeline-card {{
             position: relative;
-            height: 100%;
+            height: auto;
+            min-height: 0;
             margin: 0;
-            border-top: 3px solid rgba(6, 182, 212, .38);
+            padding: .9rem .95rem;
+            border-top: 0;
+            border-left: 3px solid rgba(37, 99, 235, .34);
         }}
         .pipeline-info-grid .pipeline-card::after {{
             content: "";
             position: absolute;
-            right: .85rem;
-            bottom: .75rem;
-            width: 4.8rem;
-            height: 2.8rem;
-            opacity: .045;
+            right: -.53rem;
+            top: 50%;
+            width: .58rem;
+            height: .58rem;
+            opacity: .45;
             pointer-events: none;
-            background:
-                linear-gradient(var(--data-navy) 1px, transparent 1px),
-                linear-gradient(90deg, var(--data-navy) 1px, transparent 1px);
-            background-size: 100% .9rem, 1.6rem 100%;
+            border-top: 2px solid rgba(37, 99, 235, .35);
+            border-right: 2px solid rgba(37, 99, 235, .35);
+            background: transparent;
+            transform: translateY(-50%) rotate(45deg);
+        }}
+        .pipeline-info-grid .pipeline-card:last-child::after {{
+            display: none;
+        }}
+        .pipeline-info-card-heading {{
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            margin-bottom: .5rem;
+        }}
+        .pipeline-info-icon {{
+            display: grid;
+            place-items: center;
+            width: 1.8rem;
+            height: 1.8rem;
+            flex: 0 0 1.8rem;
+            border-radius: 999px;
+            color: var(--data-blue);
+            background: rgba(239, 246, 255, .92);
+            border: 1px solid rgba(37, 99, 235, .16);
+            font-size: .72rem;
+            font-weight: 850;
+        }}
+        .pipeline-info-card-heading small {{
+            display: block;
+            color: var(--data-blue);
+            font-size: .6rem;
+            font-weight: 850;
+            letter-spacing: .09em;
+            line-height: 1;
+        }}
+        .pipeline-info-card-heading strong {{
+            display: block;
+            margin-top: .18rem;
+            color: var(--text);
+            font-size: .92rem;
+            line-height: 1.15;
+        }}
+        .pipeline-info-grid .section-copy {{
+            font-size: .86rem;
+            line-height: 1.48;
         }}
         .contact-resume-strip {{
             display: grid;
@@ -3155,96 +3298,164 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             line-height: 1.35;
         }}
 
-        .pipeline {{
+        .pipeline-rail-shell {{
+            position: relative;
+            margin: .55rem 0 1.7rem;
+        }}
+        .pipeline-rail-viewport {{
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: .4rem .15rem .7rem;
+            scrollbar-width: thin;
+            mask-image: linear-gradient(90deg, transparent 0, #000 1.2rem, #000 calc(100% - 1.2rem), transparent 100%);
+        }}
+        .pipeline.pipeline-rail {{
+            --rail-y: 54px;
             position: relative;
             isolation: isolate;
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: .85rem;
-            margin: 1rem 0 1.25rem;
-            overflow: hidden;
+            grid-template-columns: repeat(7, minmax(150px, 1fr));
+            gap: 12px;
+            min-width: 1120px;
+            min-height: 184px;
+            margin: 0;
+            overflow: visible;
             container-type: inline-size;
         }}
-        .pipeline::before {{
-            content: "";
+        .pipeline-rail-line {{
             position: absolute;
             z-index: 0;
-            left: 2rem;
-            right: 2rem;
-            top: calc(50% - 1px);
+            left: 5%;
+            right: 5%;
+            top: var(--rail-y);
             height: 2px;
             border-radius: 999px;
-            background: linear-gradient(90deg, rgba(148, 163, 184, .34), rgba(37, 99, 235, .42), rgba(6, 182, 212, .34));
+            background: linear-gradient(90deg, rgba(37, 99, 235, .25), rgba(37, 99, 235, .70), rgba(6, 182, 212, .70));
             pointer-events: none;
         }}
-        .pipeline-step {{
-            position: relative;
-            z-index: 2;
-            min-height: 7.1rem;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            border-radius: 10px;
-            padding: .85rem .62rem;
-            text-align: center;
-            font-weight: 600;
-            color: var(--text);
-            box-shadow: var(--shadow);
+        .pipeline-rail-line::after {{
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg, transparent calc(100% - 7px), rgba(37, 99, 235, .58) calc(100% - 7px), rgba(37, 99, 235, .58) calc(100% - 5px), transparent calc(100% - 5px)),
+                linear-gradient(-45deg, transparent calc(100% - 7px), rgba(37, 99, 235, .58) calc(100% - 7px), rgba(37, 99, 235, .58) calc(100% - 5px), transparent calc(100% - 5px));
+            background-size: calc(100% / 6) 10px;
+            background-repeat: repeat-x;
+            background-position: calc(100% / 12) 50%;
         }}
-        .pipeline-step::after {{
+        .pipeline-rail-pulse {{
+            position: absolute;
+            z-index: 4;
+            top: var(--rail-y);
+            left: 5%;
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: #06b6d4;
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, .13), 0 0 14px rgba(6, 182, 212, .72);
+            transform: translate(-50%, -50%);
+            animation: pipeline-rail-pulse-flow 7.5s cubic-bezier(.45, 0, .2, 1) infinite;
+            pointer-events: none;
+        }}
+        .pipeline-rail-pulse::after {{
             content: "";
             position: absolute;
             top: 50%;
-            right: -.55rem;
-            width: .56rem;
-            height: .56rem;
-            border-top: 2px solid rgba(37, 99, 235, .48);
-            border-right: 2px solid rgba(37, 99, 235, .48);
-            transform: translateY(-50%) rotate(45deg);
+            right: 5px;
+            width: 32px;
+            height: 3px;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, .55));
         }}
-        .pipeline-step:last-of-type::after {{
-            display: none;
+        .pipeline-milestone {{
+            position: relative;
+            z-index: 2;
+            display: grid;
+            justify-items: center;
+            align-content: start;
+            min-height: 118px;
+            padding: 12px 11px 13px;
+            border: 1px solid rgba(148, 163, 184, .24);
+            border-radius: 13px;
+            background: rgba(255, 255, 255, .95);
+            color: var(--text);
+            text-align: center;
+            box-shadow: 0 5px 14px rgba(15, 23, 42, .045);
+            animation: pipeline-milestone-pass 7.5s ease-in-out infinite;
         }}
-        .pipeline-step-4::after {{
-            top: auto;
-            right: auto;
-            left: 50%;
-            bottom: -.58rem;
-            transform: translateX(-50%) rotate(135deg);
-        }}
-        .pipeline-step span {{
-            display: block;
-            color: var(--accent-bright);
-            font-size: .92rem;
-            margin-bottom: .22rem;
-        }}
-        .pipeline-step strong {{
-            display: block;
-            line-height: 1.25;
-        }}
-        .pipeline-step small {{
-            display: block;
-            color: var(--muted);
-            font-weight: 500;
-            font-size: .76rem;
-            line-height: 1.3;
-            margin-top: .28rem;
-        }}
-        .pipeline-flow-packet {{
-            position: absolute;
-            z-index: 1;
-            left: 2rem;
-            top: calc(50% - 3px);
-            width: 6px;
-            height: 6px;
+        .pipeline-milestone-icon {{
+            display: grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            margin: 0 0 .38rem;
             border-radius: 999px;
-            background: var(--data-blue);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, .10), 0 0 10px rgba(37, 99, 235, .28);
-            animation: pipeline-flow-packet 8s linear infinite;
+            color: var(--data-blue);
+            background: rgba(239, 246, 255, .96);
+            border: 1px solid rgba(37, 99, 235, .18);
+            transition: border-color 180ms ease, background-color 180ms ease;
         }}
-        @keyframes pipeline-flow-packet {{
-            0%, 8% {{ opacity: 0; transform: translate3d(0, 0, 0); }}
-            12%, 82% {{ opacity: 1; }}
-            94%, 100% {{ opacity: 0; transform: translate3d(calc(100cqw - 4.4rem), 0, 0); }}
+        .pipeline-milestone-icon svg {{
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }}
+        .pipeline-milestone-number {{
+            color: var(--data-blue);
+            font-size: .62rem;
+            font-weight: 850;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            line-height: 1;
+        }}
+        .pipeline-milestone strong {{
+            display: block;
+            margin-top: .28rem;
+            color: var(--text);
+            font-size: .86rem;
+            font-weight: 800;
+            line-height: 1.16;
+        }}
+        .pipeline-milestone small {{
+            display: block;
+            margin-top: .26rem;
+            color: var(--muted);
+            font-size: .71rem;
+            font-weight: 600;
+            line-height: 1.28;
+        }}
+        .pipeline-category-model .pipeline-milestone-icon {{
+            color: #1D4ED8;
+            background: rgba(219, 234, 254, .92);
+        }}
+        .pipeline-category-deliver .pipeline-milestone-icon,
+        .pipeline-category-final .pipeline-milestone-icon {{
+            color: #0891B2;
+            background: rgba(207, 250, 254, .62);
+        }}
+        .pipeline-milestone-1 {{ animation-delay: 0s; }}
+        .pipeline-milestone-2 {{ animation-delay: 1.245s; }}
+        .pipeline-milestone-3 {{ animation-delay: 2.49s; }}
+        .pipeline-milestone-4 {{ animation-delay: 3.735s; }}
+        .pipeline-milestone-5 {{ animation-delay: 4.98s; }}
+        .pipeline-milestone-6 {{ animation-delay: 6.225s; }}
+        .pipeline-milestone-7 {{ animation-delay: 7.47s; }}
+        @keyframes pipeline-rail-pulse-flow {{
+            0% {{ left: 5%; opacity: 0; background: #2563eb; }}
+            5% {{ opacity: 1; }}
+            86% {{ opacity: 1; background: #06b6d4; }}
+            94% {{ left: 95%; opacity: 1; background: #06b6d4; }}
+            100% {{ left: 95%; opacity: 0; background: #06b6d4; }}
+        }}
+        @keyframes pipeline-milestone-pass {{
+            0%, 91%, 100% {{ border-color: rgba(148, 163, 184, .24); background: rgba(255, 255, 255, .95); box-shadow: 0 5px 14px rgba(15, 23, 42, .045); }}
+            3%, 8% {{ border-color: rgba(6, 182, 212, .52); background: rgba(239, 246, 255, .98); box-shadow: 0 0 0 3px rgba(6, 182, 212, .08); }}
         }}
 
         .chart-card-heading {{
@@ -3522,25 +3733,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
         }}
         @media (max-width: 1024px) {{
-            .pipeline {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
-            .pipeline::before {{
-                left: 1.6rem;
-                right: 1.6rem;
-            }}
-            .pipeline-step-3::after,
-            .pipeline-step-6::after {{
-                top: auto;
-                right: auto;
-                left: 50%;
-                bottom: -.58rem;
-                transform: translateX(-50%) rotate(135deg);
-            }}
-            .pipeline-step-4::after {{
-                top: 50%;
-                right: -.55rem;
-                left: auto;
-                bottom: auto;
-                transform: translateY(-50%) rotate(45deg);
+            .pipeline.pipeline-rail {{
+                grid-template-columns: repeat(7, 150px);
+                min-width: 1120px;
             }}
             .featured-preview img {{ max-height: 320px; }}
             .featured-lineage-preview {{ min-height: 0; }}
@@ -3866,48 +4061,67 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         @media (max-width: 560px) {{
             .block-container {{ padding: .35rem 1rem 2.5rem; }}
-            .pipeline {{
-                grid-template-columns: 1fr;
-                gap: .75rem;
+            .pipeline-rail-viewport {{
+                overflow-x: visible;
+                padding: .25rem 0 .45rem;
+                mask-image: none;
             }}
-            .pipeline::before {{
-                left: 50%;
+            .pipeline.pipeline-rail {{
+                --rail-x: 1.05rem;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: .62rem;
+                min-width: 0;
+                min-height: 0;
+                padding-left: 2.4rem;
+            }}
+            .pipeline-rail-line {{
+                left: var(--rail-x);
                 right: auto;
-                top: 1rem;
-                bottom: 1rem;
+                top: .8rem;
+                bottom: .8rem;
                 width: 2px;
                 height: auto;
+                background: linear-gradient(180deg, rgba(37, 99, 235, .25), rgba(37, 99, 235, .70), rgba(6, 182, 212, .70));
+            }}
+            .pipeline-rail-line::after {{
+                display: none;
+            }}
+            .pipeline-rail-pulse {{
+                left: var(--rail-x);
+                top: .8rem;
+                animation-name: pipeline-rail-pulse-flow-mobile;
+            }}
+            .pipeline-rail-pulse::after {{
+                top: auto;
+                right: auto;
+                left: 50%;
+                bottom: 5px;
+                width: 3px;
+                height: 28px;
                 transform: translateX(-50%);
-                background: linear-gradient(180deg, rgba(148, 163, 184, .34), rgba(37, 99, 235, .42), rgba(6, 182, 212, .34));
+                background: linear-gradient(180deg, transparent, rgba(6, 182, 212, .55));
             }}
-            .pipeline-step::after {{
-                top: auto;
-                right: auto;
-                left: 50%;
-                bottom: -.52rem;
-                transform: translateX(-50%) rotate(135deg);
+            .pipeline-milestone {{
+                min-height: 96px;
+                justify-items: start;
+                text-align: left;
+                padding: .78rem .85rem;
             }}
-            .pipeline-step-3::after,
-            .pipeline-step-4::after,
-            .pipeline-step-6::after {{
-                top: auto;
-                right: auto;
-                left: 50%;
-                bottom: -.52rem;
-                transform: translateX(-50%) rotate(135deg);
-            }}
-            .pipeline-flow-packet {{
-                left: calc(50% - 3px);
-                top: 1rem;
-                animation-name: pipeline-flow-packet-mobile;
+            .pipeline-milestone-icon {{
+                position: absolute;
+                left: -2.42rem;
+                top: .85rem;
             }}
             .section-card {{ padding: 1rem; }}
             .kpi-card {{ min-height: 118px; }}
         }}
-        @keyframes pipeline-flow-packet-mobile {{
-            0%, 8% {{ opacity: 0; transform: translate3d(0, 0, 0); }}
-            12%, 82% {{ opacity: 1; }}
-            94%, 100% {{ opacity: 0; transform: translate3d(0, calc(100cqh - 2rem), 0); }}
+        @keyframes pipeline-rail-pulse-flow-mobile {{
+            0% {{ top: .8rem; opacity: 0; background: #2563eb; }}
+            5% {{ opacity: 1; }}
+            86% {{ opacity: 1; background: #06b6d4; }}
+            94% {{ top: calc(100% - .8rem); opacity: 1; background: #06b6d4; }}
+            100% {{ top: calc(100% - .8rem); opacity: 0; background: #06b6d4; }}
         }}
         @media (hover: none), (pointer: coarse) {{
             .hero-skill-node:hover {{
@@ -3953,7 +4167,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-profile-card:hover,
             .hero-skill-node,
             .hero-skill-node:hover,
-            .pipeline-flow-packet,
+            .pipeline-rail-pulse,
             .data-quality-detail,
             .sidebar-brand:hover,
             .sidebar-brand:focus-within,
@@ -4038,7 +4252,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .sidebar-mini-packet {{
                 display: none;
             }}
-            .pipeline-flow-packet {{
+            .pipeline-rail-pulse,
+            .featured-lineage-pulse {{
                 display: none;
             }}
         }}

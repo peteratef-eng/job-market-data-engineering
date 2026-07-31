@@ -7,7 +7,7 @@ from dashboard.data_loader import load_dashboard_metadata
 from ui.components import pipeline_visual
 
 st.title("Data Pipeline")
-pipeline_visual(class_name="pipeline-card")
+pipeline_visual()
 
 metadata = load_dashboard_metadata()
 source_rows = metadata.get("source_job_postings_rows")
@@ -16,7 +16,8 @@ skills_rows = metadata.get("sample_job_skills_rows")
 
 pipeline_info = [
     (
-        "Inputs",
+        "INPUTS",
+        "Source data",
         (
             f"Source tables include job_postings_fact, company_dim, skills_dim, and skills_job_dim. The verified source dataset contains {source_rows:,} job postings before hosted sampling."
             if source_rows
@@ -24,11 +25,13 @@ pipeline_info = [
         ),
     ),
     (
-        "Processing",
+        "PROCESSING",
+        "Engineering workflow",
         "Python/Pandas prepares dashboard-ready files, PostgreSQL supports relational storage, and dbt organizes staging, intermediate, and mart models for analysis.",
     ),
     (
-        "Outputs",
+        "OUTPUTS",
+        "Analytics delivery",
         (
             f"The portfolio dashboard uses a {sample_rows:,}-posting hosted sample with {skills_rows:,} job-skill rows and analytics-ready outputs for recruiter review."
             if sample_rows and skills_rows
@@ -38,11 +41,17 @@ pipeline_info = [
 ]
 pipeline_info_markup = "".join(
     (
-        '<div class="section-card pipeline-card" tabindex="0">'
-        f'<div class="section-title">{html.escape(title)}</div>'
+        f'<div class="section-card pipeline-card pipeline-info-card-{index}" tabindex="0">'
+        '<div class="pipeline-info-card-heading">'
+        f'<span class="pipeline-info-icon" aria-hidden="true">{index}</span>'
+        '<span>'
+        f'<small>{html.escape(title)}</small>'
+        f'<strong>{html.escape(label)}</strong>'
+        '</span>'
+        '</div>'
         f'<div class="section-copy">{html.escape(body)}</div>'
         '</div>'
     )
-    for title, body in pipeline_info
+    for index, (title, label, body) in enumerate(pipeline_info, start=1)
 )
 st.markdown(f'<section class="pipeline-info-grid">{pipeline_info_markup}</section>', unsafe_allow_html=True)

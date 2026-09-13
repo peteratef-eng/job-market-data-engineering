@@ -1075,64 +1075,49 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             transform: translateX(-50%);
             pointer-events: none;
         }}
-        .pipeline-track {{
+        @property --hero-glow {{
+            syntax: '<number>';
+            inherits: true;
+            initial-value: 0;
+        }}
+        .hero-flow-svg {{
             position: absolute;
             left: 4%;
             right: 4%;
-            top: calc(2.05rem + 39px);
+            top: calc(2.05rem + 19px);
             z-index: 1;
-            height: 2px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, rgba(37, 99, 235, .20), rgba(6, 182, 212, .65), rgba(37, 99, 235, .20));
+            width: 92%;
+            height: 40px;
+            overflow: visible;
             pointer-events: none;
         }}
-        .pipeline-track::after {{
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 50%;
-            width: 8px;
-            height: 8px;
-            border-top: 2px solid rgba(6, 182, 212, .75);
-            border-right: 2px solid rgba(6, 182, 212, .75);
-            transform: translateY(-50%) rotate(45deg);
+        .hero-flow-svg-tablet,
+        .hero-flow-svg-mobile {{
+            display: none;
         }}
-        .pipeline-motion-layer {{
-            position: absolute;
-            inset: 0;
-            z-index: 4;
-            pointer-events: none;
+        .hero-flow-base {{
+            fill: none;
+            stroke: var(--border);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            vector-effect: non-scaling-stroke;
         }}
-        .pipeline-ball {{
-            position: absolute;
-            top: calc(2.05rem + 39px);
-            left: 4%;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #06b6d4;
-            box-shadow:
-                0 0 0 4px rgba(6, 182, 212, .14),
-                0 0 14px rgba(6, 182, 212, .8);
-            transform: translate(-50%, -50%);
-            animation: pipeline-data-flow 6s linear infinite;
-            will-change: left, transform;
+        .hero-flow-energy {{
+            fill: none;
+            stroke: var(--data-cyan);
+            stroke-width: 2.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 18 82;
+            vector-effect: non-scaling-stroke;
+            filter: drop-shadow(0 0 4px color-mix(in srgb, var(--data-cyan) 65%, transparent));
         }}
-        .pipeline-ball::after {{
-            content: "";
-            position: absolute;
-            top: 50%;
-            right: 6px;
-            width: 30px;
-            height: 3px;
-            transform: translateY(-50%);
-            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, .55));
-        }}
-        @keyframes pipeline-data-flow {{
-            0% {{ left: 4%; opacity: 0; }}
-            5% {{ opacity: 1; }}
-            95% {{ opacity: 1; }}
-            100% {{ left: 96%; opacity: 0; }}
+        .hero-flow-dot {{
+            fill: var(--data-cyan);
+            stroke: var(--surface);
+            stroke-width: .8;
+            filter: drop-shadow(0 0 5px color-mix(in srgb, var(--data-cyan) 80%, transparent));
         }}
         .hero-skill-node {{
             position: relative;
@@ -1145,21 +1130,44 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             align-items: center;
             gap: .46rem;
             padding: .58rem .62rem;
-            border: 1px solid rgba(37, 99, 235, .18);
-            border-radius: 9px;
-            background: rgba(255, 255, 255, .90);
-            box-shadow: 0 5px 12px rgba(15, 23, 42, .04);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            box-shadow: 0 5px 12px rgba(15, 23, 42, .05);
             color: var(--text);
             text-align: left;
+            text-decoration: none;
+            cursor: pointer;
             transform-origin: center;
+            transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
             animation: home-skill-node-enter 420ms ease-out both;
+            --hero-glow: 0;
+        }}
+        .hero-skill-node::before {{
+            content: "";
+            position: absolute;
+            inset: -3px;
+            z-index: -1;
+            border-radius: 15px;
+            border: 2px solid var(--data-blue);
+            box-shadow:
+                0 0 0 4px color-mix(in srgb, var(--data-blue) 16%, transparent),
+                0 0 20px color-mix(in srgb, var(--data-blue) 45%, transparent);
+            opacity: var(--hero-glow);
+            pointer-events: none;
+        }}
+        .hero-skill-node-6::before {{
+            border-color: var(--data-green);
+            box-shadow:
+                0 0 0 4px color-mix(in srgb, var(--data-green) 18%, transparent),
+                0 0 20px color-mix(in srgb, var(--data-green) 50%, transparent);
         }}
         .hero-skill-icon {{
             width: 8px;
             height: 8px;
             border-radius: 999px;
-            background: rgba(37, 99, 235, .62);
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, .06);
+            background: var(--muted);
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--muted) 12%, transparent);
         }}
         .hero-skill-node-content {{
             position: relative;
@@ -1183,12 +1191,117 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             line-height: 1.15;
             overflow-wrap: normal;
         }}
+        .hero-skill-tooltip {{
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 10px);
+            z-index: 20;
+            width: max-content;
+            max-width: 200px;
+            padding: .5rem .65rem;
+            border-radius: 10px;
+            background: var(--text);
+            color: var(--surface);
+            font-size: .68rem;
+            font-weight: 600;
+            line-height: 1.4;
+            text-align: left;
+            opacity: 0;
+            transform: translate(-50%, 4px);
+            transition: opacity .16s ease, transform .16s ease;
+            pointer-events: none;
+            box-shadow: 0 12px 26px rgba(15, 23, 42, .2);
+        }}
+        .hero-skill-tooltip::after {{
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: var(--text);
+        }}
+        .hero-skill-node:focus-visible {{
+            border-color: var(--accent);
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            box-shadow: 0 10px 22px color-mix(in srgb, var(--accent) 16%, transparent);
+        }}
+        .hero-skill-node:focus-visible .hero-skill-tooltip {{
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }}
         .hero-skill-node-1 {{ animation-delay: 120ms; }}
         .hero-skill-node-2 {{ animation-delay: 170ms; }}
         .hero-skill-node-3 {{ animation-delay: 220ms; }}
         .hero-skill-node-4 {{ animation-delay: 270ms; }}
         .hero-skill-node-5 {{ animation-delay: 320ms; }}
         .hero-skill-node-6 {{ animation-delay: 370ms; }}
+        .hero-skill-node-1 {{ animation-name: home-skill-node-enter, hero-node-pulse-1; }}
+        .hero-skill-node-2 {{ animation-name: home-skill-node-enter, hero-node-pulse-2; }}
+        .hero-skill-node-3 {{ animation-name: home-skill-node-enter, hero-node-pulse-3; }}
+        .hero-skill-node-4 {{ animation-name: home-skill-node-enter, hero-node-pulse-4; }}
+        .hero-skill-node-5 {{ animation-name: home-skill-node-enter, hero-node-pulse-5; }}
+        .hero-skill-node-6 {{ animation-name: home-skill-node-enter, hero-node-pulse-6; }}
+        .hero-skill-node-1,
+        .hero-skill-node-2,
+        .hero-skill-node-3,
+        .hero-skill-node-4,
+        .hero-skill-node-5,
+        .hero-skill-node-6 {{
+            animation-duration: 420ms, 7s;
+            animation-timing-function: ease-out, ease-in-out;
+            animation-iteration-count: 1, infinite;
+            animation-fill-mode: both, none;
+        }}
+        @keyframes hero-node-pulse-1 {{
+            0%, 8%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            2% {{ transform: scale(1.05); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-2 {{
+            0%, 9%, 25%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            17% {{ transform: scale(1.05); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-3 {{
+            0%, 26%, 42%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            34% {{ transform: scale(1.05); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-4 {{
+            0%, 43%, 59%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            51% {{ transform: scale(1.05); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-5 {{
+            0%, 60%, 76%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            68% {{ transform: scale(1.05); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-6 {{
+            0%, 77%, 93%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            85% {{ transform: scale(1.07); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-tablet-1 {{
+            0%, 8%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            2% {{ transform: scale(1.05); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-tablet-2 {{
+            0%, 10.5%, 26.5%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            18.5% {{ transform: scale(1.05); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-tablet-3 {{
+            0%, 29%, 45%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            37% {{ transform: scale(1.05); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-tablet-4 {{
+            0%, 40%, 56%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            48% {{ transform: scale(1.05); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-tablet-5 {{
+            0%, 58.5%, 74.5%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            66.5% {{ transform: scale(1.05); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
+        @keyframes hero-node-pulse-tablet-6 {{
+            0%, 77%, 93%, 100% {{ transform: scale(1); --hero-glow: 0; }}
+            85% {{ transform: scale(1.07); --hero-glow: 1; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }}
+        }}
         .hero-photo-shell {{
             justify-self: center;
             width: min(100%, 360px);
@@ -2030,9 +2143,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .hero-skill-node:hover {{
                 transform: translateY(-2px);
-                border-color: rgba(37, 99, 235, 0.50);
-                background-color: rgba(239, 246, 255, .98);
-                box-shadow: 0 10px 22px rgba(37, 99, 235, 0.10);
+                border-color: var(--accent);
+                box-shadow: 0 10px 22px color-mix(in srgb, var(--accent) 16%, transparent);
+            }}
+            .hero-skill-node:hover .hero-skill-tooltip {{
+                opacity: 1;
+                transform: translate(-50%, 0);
             }}
             .hero-profile-card:hover {{
                 transform: translateY(-3px);
@@ -3948,43 +4064,23 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-skill-node-4 {{ grid-column: 3; grid-row: 2; }}
             .hero-skill-node-5 {{ grid-column: 2; grid-row: 2; }}
             .hero-skill-node-6 {{ grid-column: 1; grid-row: 2; }}
-            .pipeline-track {{
+            .hero-flow-svg-desktop {{
+                display: none;
+            }}
+            .hero-flow-svg-tablet {{
+                display: block;
                 left: calc(50% - 220px);
                 right: calc(50% - 220px);
                 top: calc(2.05rem + 38px);
-            }}
-            .pipeline-track::before {{
-                content: "";
-                position: absolute;
-                right: 0;
-                top: 0;
-                width: 2px;
+                width: 440px;
                 height: 88px;
-                border-radius: 999px;
-                background: linear-gradient(180deg, rgba(6, 182, 212, .62), rgba(37, 99, 235, .28));
             }}
-            .pipeline-track::after {{
-                right: auto;
-                left: 0;
-                top: 88px;
-                width: 100%;
-                height: 2px;
-                border: 0;
-                border-radius: 999px;
-                background: linear-gradient(270deg, rgba(37, 99, 235, .20), rgba(6, 182, 212, .58), rgba(37, 99, 235, .20));
-                transform: none;
-            }}
-            .pipeline-ball {{
-                animation-name: pipeline-data-flow-tablet;
-            }}
-            @keyframes pipeline-data-flow-tablet {{
-                0% {{ left: 4%; top: calc(2.05rem + 38px); opacity: 0; }}
-                6% {{ opacity: 1; }}
-                45% {{ left: 96%; top: calc(2.05rem + 38px); opacity: 1; }}
-                52% {{ left: 96%; top: calc(2.05rem + 126px); opacity: 1; }}
-                95% {{ left: 4%; top: calc(2.05rem + 126px); opacity: 1; }}
-                100% {{ left: 4%; top: calc(2.05rem + 126px); opacity: 0; }}
-            }}
+            .hero-skill-node-1 {{ animation-name: home-skill-node-enter, hero-node-pulse-tablet-1; }}
+            .hero-skill-node-2 {{ animation-name: home-skill-node-enter, hero-node-pulse-tablet-2; }}
+            .hero-skill-node-3 {{ animation-name: home-skill-node-enter, hero-node-pulse-tablet-3; }}
+            .hero-skill-node-4 {{ animation-name: home-skill-node-enter, hero-node-pulse-tablet-4; }}
+            .hero-skill-node-5 {{ animation-name: home-skill-node-enter, hero-node-pulse-tablet-5; }}
+            .hero-skill-node-6 {{ animation-name: home-skill-node-enter, hero-node-pulse-tablet-6; }}
             .dashboard-primary-kpis,
             .dashboard-metadata-strip {{
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4088,53 +4184,24 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 height: 58px;
                 width: 100%;
             }}
-            .pipeline-track {{
-                left: 1.08rem;
-                right: auto;
-                top: 2.35rem;
-                bottom: .7rem;
-                width: 2px;
-                height: auto;
-                background: linear-gradient(180deg, rgba(37, 99, 235, .20), rgba(6, 182, 212, .62), rgba(37, 99, 235, .20));
-            }}
-            .pipeline-track::before {{
+            .hero-flow-svg-desktop,
+            .hero-flow-svg-tablet {{
                 display: none;
             }}
-            .pipeline-track::after {{
-                right: auto;
-                left: 50%;
-                top: auto;
-                bottom: 0;
-                width: 8px;
-                height: 8px;
-                border-top: 0;
-                border-left: 0;
-                border-right: 2px solid rgba(6, 182, 212, .75);
-                border-bottom: 2px solid rgba(6, 182, 212, .75);
-                background: transparent;
-                transform: translateX(-50%) rotate(45deg);
-            }}
-            .pipeline-ball {{
+            .hero-flow-svg-mobile {{
+                display: block;
                 left: 1.08rem;
-                top: 2.35rem;
-                animation-name: pipeline-data-flow-mobile;
-            }}
-            .pipeline-ball::after {{
-                top: auto;
                 right: auto;
-                left: 50%;
-                bottom: 6px;
-                width: 3px;
-                height: 28px;
-                transform: translateX(-50%);
-                background: linear-gradient(180deg, transparent, rgba(6, 182, 212, .55));
+                top: calc(2.35rem + 29px);
+                width: 20px;
+                height: 330px;
             }}
-            @keyframes pipeline-data-flow-mobile {{
-                0% {{ top: 2.35rem; opacity: 0; }}
-                6% {{ opacity: 1; }}
-                95% {{ top: calc(100% - .7rem); opacity: 1; }}
-                100% {{ top: calc(100% - .7rem); opacity: 0; }}
-            }}
+            .hero-skill-node-1 {{ animation-name: home-skill-node-enter, hero-node-pulse-1; }}
+            .hero-skill-node-2 {{ animation-name: home-skill-node-enter, hero-node-pulse-2; }}
+            .hero-skill-node-3 {{ animation-name: home-skill-node-enter, hero-node-pulse-3; }}
+            .hero-skill-node-4 {{ animation-name: home-skill-node-enter, hero-node-pulse-4; }}
+            .hero-skill-node-5 {{ animation-name: home-skill-node-enter, hero-node-pulse-5; }}
+            .hero-skill-node-6 {{ animation-name: home-skill-node-enter, hero-node-pulse-6; }}
             .hero-photo-shell {{
                 order: -1;
                 width: min(100%, 300px);
@@ -4312,8 +4379,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         @media (hover: none), (pointer: coarse) {{
             .hero-skill-node:hover {{
                 transform: none;
-                border-color: rgba(37, 99, 235, .18);
+                border-color: var(--border);
                 box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
+            }}
+            .hero-skill-node:hover .hero-skill-tooltip {{
+                opacity: 0;
+                transform: translate(-50%, 4px);
             }}
             .hero-profile-card,
             .hero-profile-card:hover {{
@@ -4421,24 +4492,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-profile-card:hover,
             .hero-profile-status-dot,
             .hero-skill-node,
-            .pipeline-ball,
             .featured-lineage-pulse {{
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;
                 opacity: 1 !important;
             }}
-            .pipeline-ball {{
-                left: 50%;
-                opacity: .8 !important;
+            .hero-skill-node::before {{
+                opacity: 0 !important;
             }}
-            .featured-lineage-pulse {{
+            .hero-flow-motion,
+            .featured-lineage-pulse,
+            .featured-lineage-energy {{
                 display: none;
             }}
             .sidebar-mini-packet {{
-                display: none;
-            }}
-            .featured-lineage-pulse {{
                 display: none;
             }}
             .data-flow-pulse {{

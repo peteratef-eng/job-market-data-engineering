@@ -106,30 +106,88 @@ hero_photo_markup = (
 )
 
 skill_pipeline_steps = [
-    ("DATA SOURCES", "Files / APIs"),
-    ("INGEST & PROCESS", "Python / Pandas"),
-    ("STORE", "SQL / PostgreSQL"),
-    ("TRANSFORM & MODEL", "dbt"),
-    ("VALIDATE", "Data Quality"),
-    ("DELIVER", "Analytics-Ready Data"),
+    ("DATA SOURCES", "Files / APIs", "Raw job postings pulled from flat files and public APIs."),
+    ("INGEST & PROCESS", "Python / Pandas", "Python and Pandas clean, normalize, and reshape incoming records."),
+    ("STORE", "SQL / PostgreSQL", "Structured records land in a PostgreSQL warehouse for querying."),
+    ("TRANSFORM & MODEL", "dbt", "dbt builds tested, documented staging and mart models."),
+    ("VALIDATE", "Data Quality", "Automated checks confirm the models are accurate and trustworthy."),
+    ("DELIVER", "Analytics-Ready Data", "Clean, modeled tables power the live dashboard and insights."),
 ]
+# Each SVG below rides the SAME <path> for both its lit "comet" sweep (stroke-dasharray/
+# dashoffset) and its traveling dot (animateMotion), so the two can never drift apart.
+# keyTimes/keyPoints are hand-weighted per breakpoint layout (straight row / 3x2 zigzag /
+# vertical stack) so travel time between two nodes is proportional to the real gap between
+# them, then parked at keyPoint 1 for the last 15% of the loop for the arrival settle + fade.
+hero_flow_svg = (
+    '<svg class="hero-flow-svg hero-flow-svg-desktop" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">'
+    '<path class="hero-flow-base" d="M13.6 20 H86.4"></path>'
+    '<g class="hero-flow-motion">'
+    '<path id="heroFlowEnergyDesktop" class="hero-flow-energy" pathLength="100" d="M13.6 20 H86.4">'
+    '<animate attributeName="stroke-dashoffset" dur="7s" repeatCount="indefinite" calcMode="linear" '
+    'keyTimes="0;0.17;0.34;0.51;0.68;0.85;1" values="100;76.4;52.8;29.2;5.6;-18;-18"></animate>'
+    '</path>'
+    '<circle class="hero-flow-dot" r="2.6">'
+    '<animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" '
+    'keyTimes="0;0.17;0.34;0.51;0.68;0.85;1" keyPoints="0;0.2;0.4;0.6;0.8;1;1">'
+    '<mpath href="#heroFlowEnergyDesktop"></mpath>'
+    '</animateMotion>'
+    '</circle>'
+    '<animate attributeName="opacity" dur="7s" repeatCount="indefinite" '
+    'keyTimes="0;0.03;0.85;0.92;1" values="0;1;1;0;0"></animate>'
+    '</g>'
+    '</svg>'
+    '<svg class="hero-flow-svg hero-flow-svg-tablet" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'
+    '<path class="hero-flow-base" d="M15.5 0 H84.5 V100 H15.5"></path>'
+    '<g class="hero-flow-motion">'
+    '<path id="heroFlowEnergyTablet" class="hero-flow-energy" pathLength="100" d="M15.5 0 H84.5 V100 H15.5">'
+    '<animate attributeName="stroke-dashoffset" dur="7s" repeatCount="indefinite" calcMode="linear" '
+    'keyTimes="0;0.185;0.370;0.480;0.665;0.85;1" values="100;74.35;48.7;33.31;7.65;-18;-18"></animate>'
+    '</path>'
+    '<circle class="hero-flow-dot" r="3">'
+    '<animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" '
+    'keyTimes="0;0.185;0.370;0.480;0.665;0.85;1" keyPoints="0;0.2174;0.4348;0.5652;0.7826;1;1">'
+    '<mpath href="#heroFlowEnergyTablet"></mpath>'
+    '</animateMotion>'
+    '</circle>'
+    '<animate attributeName="opacity" dur="7s" repeatCount="indefinite" '
+    'keyTimes="0;0.03;0.85;0.92;1" values="0;1;1;0;0"></animate>'
+    '</g>'
+    '</svg>'
+    '<svg class="hero-flow-svg hero-flow-svg-mobile" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'
+    '<path class="hero-flow-base" d="M50 0 V100"></path>'
+    '<g class="hero-flow-motion">'
+    '<path id="heroFlowEnergyMobile" class="hero-flow-energy" pathLength="100" d="M50 0 V100">'
+    '<animate attributeName="stroke-dashoffset" dur="7s" repeatCount="indefinite" calcMode="linear" '
+    'keyTimes="0;0.17;0.34;0.51;0.68;0.85;1" values="100;76.4;52.8;29.2;5.6;-18;-18"></animate>'
+    '</path>'
+    '<circle class="hero-flow-dot" r="2.6">'
+    '<animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" '
+    'keyTimes="0;0.17;0.34;0.51;0.68;0.85;1" keyPoints="0;0.2;0.4;0.6;0.8;1;1">'
+    '<mpath href="#heroFlowEnergyMobile"></mpath>'
+    '</animateMotion>'
+    '</circle>'
+    '<animate attributeName="opacity" dur="7s" repeatCount="indefinite" '
+    'keyTimes="0;0.03;0.85;0.92;1" values="0;1;1;0;0"></animate>'
+    '</g>'
+    '</svg>'
+)
 skill_pipeline_markup = (
     '<span class="sr-only">Core Data Engineering workflow: Airflow orchestrates data ingestion from files and APIs, processing with Python and Pandas, storage in SQL and PostgreSQL, transformation with dbt, data-quality validation, and delivery of analytics-ready data.</span>'
     '<div class="core-workflow-orchestrator" aria-hidden="true">'
     '<span class="core-workflow-orchestrator-label"><strong>Airflow</strong><span aria-hidden="true">&middot;</span><small>Pipeline Orchestration</small></span>'
     '</div>'
     '<span class="core-workflow-orchestration-line" aria-hidden="true"></span>'
-    '<span class="pipeline-track" aria-hidden="true"></span>'
-    '<span class="pipeline-motion-layer" aria-hidden="true"><span class="pipeline-ball"></span></span>'
+    + hero_flow_svg
 )
-for index, (stage, label) in enumerate(skill_pipeline_steps, start=1):
+for index, (stage, label, detail) in enumerate(skill_pipeline_steps, start=1):
     skill_pipeline_markup += (
-        f'<span class="hero-skill-node hero-skill-node-{index}">'
+        f'<span class="hero-skill-node hero-skill-node-{index}" tabindex="0">'
         f'<span class="hero-skill-icon" aria-hidden="true"></span>'
         f'<span class="hero-skill-node-content">'
         f'<span class="core-workflow-stage">{html.escape(stage)}</span>'
         f'<strong class="core-workflow-tool">{html.escape(label)}</strong>'
         '</span>'
+        f'<span class="hero-skill-tooltip" role="tooltip">{html.escape(detail)}</span>'
         '</span>'
     )
 

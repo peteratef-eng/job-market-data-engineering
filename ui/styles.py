@@ -1317,16 +1317,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             align-self: start;
             grid-column: 2;
             grid-row: 1;
-            width: min(100%, 248px);
+            width: min(100%, 340px);
             height: fit-content;
             min-height: 0;
-            padding: .5rem;
-            border: 1px solid rgba(37, 99, 235, .22);
-            border-radius: 18px;
+            padding: .78rem;
+            border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+            border-radius: 22px;
             background:
-                radial-gradient(circle at 75% 88%, rgba(37, 99, 235, 0.10), transparent 34%),
-                linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.88));
-            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.075);
+                radial-gradient(circle at 82% 92%, color-mix(in srgb, var(--accent-bright) 10%, transparent), transparent 34%),
+                linear-gradient(145deg, color-mix(in srgb, var(--surface) 96%, var(--tag-bg)), color-mix(in srgb, var(--surface) 88%, var(--tag-bg)));
+            box-shadow:
+                0 18px 45px rgba(15, 23, 42, 0.08),
+                0 4px 14px rgba(37, 99, 235, 0.06);
             overflow: hidden;
             transform: translateZ(0);
             transform-origin: center center;
@@ -1343,23 +1345,34 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             position: relative;
             background: transparent;
         }}
+        .hero-profile-media::after {{
+            content: "";
+            display: block;
+            height: 2px;
+            width: calc(100% - .7rem);
+            margin: .68rem auto 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+            opacity: .72;
+        }}
         .hero-profile-image-wrap {{
-            height: 145px;
+            width: 100%;
+            height: clamp(245px, 24vw, 280px);
             aspect-ratio: auto;
             overflow: hidden;
-            border-radius: 14px;
-            background: #eef2f7;
-            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 17px;
+            background: color-mix(in srgb, var(--tag-bg) 58%, var(--surface));
+            border: 1px solid color-mix(in srgb, var(--accent) 14%, transparent);
         }}
         .hero-profile-image {{
             display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 18%;
+            object-position: center 30%;
             border-radius: 0;
             border: 0;
-            background: #E2E8F0;
+            background: color-mix(in srgb, var(--tag-bg) 58%, var(--surface));
             box-shadow: none;
             transform: none;
             animation: none;
@@ -1368,73 +1381,80 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: flex;
             flex-direction: column;
             gap: 0;
-            padding: .46rem .14rem .04rem;
+            padding: 1.02rem .28rem .18rem;
             text-align: left;
             border-top: 0;
         }}
         .hero-profile-heading {{
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 0;
         }}
         .hero-profile-name {{
             margin: 0;
-            color: #0F172A;
-            font-size: clamp(1.42rem, 1.9vw, 1.62rem);
+            color: var(--text);
+            font-size: clamp(2.12rem, 2.7vw, 2.5rem);
             font-weight: 800;
-            line-height: 1.05;
+            line-height: 1.07;
+            letter-spacing: 0;
+            white-space: nowrap;
         }}
         .hero-profile-role {{
-            margin: .08rem 0 0;
+            margin: .78rem 0 0;
             color: var(--text-2);
-            font-size: .74rem;
-            font-weight: 650;
-            line-height: 1.3;
+            font-size: clamp(1rem, 1.35vw, 1.1rem);
+            font-weight: 700;
+            line-height: 1.22;
         }}
         .hero-profile-meta {{
             display: flex;
             align-items: center;
             justify-content: flex-start;
             flex-wrap: wrap;
-            gap: .3rem;
-            margin-top: .24rem;
+            gap: .42rem;
+            margin-top: .7rem;
         }}
         .hero-profile-status {{
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            min-height: 21px;
-            padding: 2px 6px;
-            border: 1px solid rgba(16, 185, 129, 0.22);
+            gap: 7px;
+            min-height: 28px;
+            padding: 4px 10px;
+            border: 1px solid color-mix(in srgb, var(--positive) 22%, transparent);
             border-radius: 999px;
-            background: rgba(16, 185, 129, 0.08);
-            color: #047857;
-            font-size: .62rem;
+            background: color-mix(in srgb, var(--positive) 10%, var(--tag-bg));
+            color: color-mix(in srgb, var(--positive) 62%, var(--text));
+            font-size: .78rem;
             font-weight: 650;
-            line-height: 1.2;
+            line-height: 1;
             white-space: nowrap;
         }}
         .hero-profile-status-dot {{
-            width: 7px;
-            height: 7px;
-            flex: 0 0 7px;
+            width: 8px;
+            height: 8px;
+            min-width: 8px;
+            min-height: 8px;
+            max-width: 8px;
+            max-height: 8px;
+            flex: 0 0 8px;
+            aspect-ratio: 1 / 1;
             border-radius: 50%;
-            background: #10B981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+            background: var(--positive);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 14%, transparent);
         }}
         .hero-profile-location {{
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            min-height: 21px;
-            padding: 2px 6px;
-            border: 1px solid rgba(148, 163, 184, 0.25);
+            min-height: 28px;
+            padding: 4px 10px;
+            border: 1px solid color-mix(in srgb, var(--border) 78%, var(--accent));
             border-radius: 999px;
-            background: rgba(248, 250, 252, 0.92);
-            color: #475569;
-            font-size: .62rem;
+            background: color-mix(in srgb, var(--surface-2) 84%, var(--tag-bg));
+            color: var(--text-2);
+            font-size: .78rem;
             font-weight: 600;
-            line-height: 1.2;
+            line-height: 1;
             white-space: nowrap;
         }}
         .hero-profile-location-icon {{
@@ -3124,10 +3144,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: block;
             padding: 1.25rem 1.3rem 1.1rem;
             margin: .85rem 0 .7rem;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--surface);
-            box-shadow: var(--shadow);
+            border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--border));
+            border-radius: 16px;
+            background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--surface) 92%, var(--tag-bg)));
+            box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
         }}
         .market-filters-heading {{
             margin: 0 0 .9rem;
@@ -3155,31 +3175,50 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-size: .84rem;
             font-weight: 750;
             margin: .4rem 0 .75rem;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.045);
         }}
         .dashboard-primary-kpis {{
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: .75rem;
+            gap: .85rem;
             margin: .75rem 0 .75rem;
         }}
         .dashboard-primary-kpi {{
             min-width: 0;
-            min-height: 112px;
-            padding: .9rem 1rem;
+            min-height: 116px;
+            padding: 1.02rem 1.1rem;
             border: 1px solid var(--border);
             border-top: 3px solid var(--data-blue);
-            border-radius: 12px;
-            background: var(--surface);
-            box-shadow: var(--shadow);
+            border-radius: 16px;
+            background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--surface) 94%, var(--data-blue)));
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+            transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+        }}
+        .dashboard-primary-kpi:hover {{
+            transform: translateY(-2px);
+            border-color: color-mix(in srgb, var(--data-blue) 45%, var(--border));
+            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.09);
         }}
         .dashboard-primary-kpi-2 {{
             border-top-color: var(--data-cyan);
+            background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--surface) 94%, var(--data-cyan)));
+        }}
+        .dashboard-primary-kpi-2:hover {{
+            border-color: color-mix(in srgb, var(--data-cyan) 45%, var(--border));
         }}
         .dashboard-primary-kpi-3 {{
             border-top-color: #64748B;
+            background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--surface) 94%, #64748B));
+        }}
+        .dashboard-primary-kpi-3:hover {{
+            border-color: color-mix(in srgb, #64748B 45%, var(--border));
         }}
         .dashboard-primary-kpi-4 {{
             border-top-color: var(--data-green);
+            background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--surface) 94%, var(--data-green)));
+        }}
+        .dashboard-primary-kpi-4:hover {{
+            border-color: color-mix(in srgb, var(--data-green) 45%, var(--border));
         }}
         .dashboard-kpi-label {{
             color: var(--muted);
@@ -3206,15 +3245,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             margin: 0 0 1.2rem;
-            padding: .65rem .85rem;
-            border: 1px solid rgba(37, 99, 235, .16);
-            border-radius: 12px;
-            background: rgba(239, 246, 255, .55);
+            padding: .72rem .95rem;
+            border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+            border-radius: 14px;
+            background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 7%, var(--surface)), color-mix(in srgb, var(--accent) 3%, var(--surface)));
         }}
         .dashboard-meta-item {{
             min-width: 0;
             padding: .15rem .85rem;
-            border-left: 1px solid rgba(37, 99, 235, .16);
+            border-left: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
             border-top: 3px solid transparent;
         }}
         .dashboard-meta-item-1 {{
@@ -3250,6 +3289,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .dashboard-methodology p {{
             margin: .35rem 0;
+        }}
+        .dashboard-methodology strong {{
+            color: var(--text);
         }}
         .dashboard-compact-footer {{
             color: var(--muted);
@@ -3602,12 +3644,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
 
         .chart-card-heading {{
-            background: var(--surface);
+            background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--surface) 95%, var(--tag-bg)));
             border: 1px solid var(--border);
             border-bottom: 0;
-            border-radius: 12px 12px 0 0;
-            box-shadow: var(--shadow);
-            padding: .9rem 1rem .35rem;
+            border-radius: 14px 14px 0 0;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+            padding: .95rem 1.1rem .4rem;
             margin-top: .8rem;
         }}
         .st-key-market_dashboard_chart_job_title_demand,
@@ -3624,7 +3666,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             transform: none;
             transform-origin: center center;
             border: 1px solid transparent;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: visible;
             transition:
                 transform 220ms ease,
@@ -3657,8 +3699,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         @media (hover: hover) and (pointer: fine) {{
             .market-chart-reveal-complete:hover {{
                 transform: translate3d(0, -2px, 0);
-                border-color: rgba(37, 99, 235, 0.40);
-                box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12);
+                border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+                box-shadow: 0 14px 30px color-mix(in srgb, var(--accent) 14%, transparent);
                 position: relative;
                 z-index: 2;
             }}
@@ -4169,7 +4211,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .dashboard-meta-item {{
                 border-left: 0;
-                border-top: 1px solid rgba(37, 99, 235, .14);
+                border-top: 1px solid color-mix(in srgb, var(--accent) 14%, transparent);
                 padding: .55rem 0;
             }}
             .dashboard-meta-item:first-child {{

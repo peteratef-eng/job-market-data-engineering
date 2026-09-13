@@ -105,91 +105,6 @@ hero_photo_markup = (
     else '<div class="hero-photo-fallback" aria-label="Peter Atef portrait">PA</div>'
 )
 
-skill_pipeline_steps = [
-    ("DATA SOURCES", "Files / APIs", "Raw job postings pulled from flat files and public APIs."),
-    ("INGEST & PROCESS", "Python / Pandas", "Python and Pandas clean, normalize, and reshape incoming records."),
-    ("STORE", "SQL / PostgreSQL", "Structured records land in a PostgreSQL warehouse for querying."),
-    ("TRANSFORM & MODEL", "dbt", "dbt builds tested, documented staging and mart models."),
-    ("VALIDATE", "Data Quality", "Automated checks confirm the models are accurate and trustworthy."),
-    ("DELIVER", "Analytics-Ready Data", "Clean, modeled tables power the live dashboard and insights."),
-]
-# Each SVG below rides the SAME <path> for both its lit "comet" sweep (stroke-dasharray/
-# dashoffset) and its traveling dot (animateMotion), so the two can never drift apart.
-# keyTimes/keyPoints are hand-weighted per breakpoint layout (straight row / 3x2 zigzag /
-# vertical stack) so travel time between two nodes is proportional to the real gap between
-# them, then parked at keyPoint 1 for the last 15% of the loop for the arrival settle + fade.
-hero_flow_svg = (
-    '<svg class="hero-flow-svg hero-flow-svg-desktop" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">'
-    '<path class="hero-flow-base" d="M13.6 20 H86.4"></path>'
-    '<g class="hero-flow-motion">'
-    '<path id="heroFlowEnergyDesktop" class="hero-flow-energy" pathLength="100" d="M13.6 20 H86.4">'
-    '<animate attributeName="stroke-dashoffset" dur="7s" repeatCount="indefinite" calcMode="linear" '
-    'keyTimes="0;0.17;0.34;0.51;0.68;0.85;1" values="100;76.4;52.8;29.2;5.6;-18;-18"></animate>'
-    '</path>'
-    '<circle class="hero-flow-dot" r="2.6">'
-    '<animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" '
-    'keyTimes="0;0.17;0.34;0.51;0.68;0.85;1" keyPoints="0;0.2;0.4;0.6;0.8;1;1">'
-    '<mpath href="#heroFlowEnergyDesktop"></mpath>'
-    '</animateMotion>'
-    '</circle>'
-    '<animate attributeName="opacity" dur="7s" repeatCount="indefinite" '
-    'keyTimes="0;0.03;0.85;0.92;1" values="0;1;1;0;0"></animate>'
-    '</g>'
-    '</svg>'
-    '<svg class="hero-flow-svg hero-flow-svg-tablet" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'
-    '<path class="hero-flow-base" d="M15.5 0 H84.5 V100 H15.5"></path>'
-    '<g class="hero-flow-motion">'
-    '<path id="heroFlowEnergyTablet" class="hero-flow-energy" pathLength="100" d="M15.5 0 H84.5 V100 H15.5">'
-    '<animate attributeName="stroke-dashoffset" dur="7s" repeatCount="indefinite" calcMode="linear" '
-    'keyTimes="0;0.185;0.370;0.480;0.665;0.85;1" values="100;74.35;48.7;33.31;7.65;-18;-18"></animate>'
-    '</path>'
-    '<circle class="hero-flow-dot" r="3">'
-    '<animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" '
-    'keyTimes="0;0.185;0.370;0.480;0.665;0.85;1" keyPoints="0;0.2174;0.4348;0.5652;0.7826;1;1">'
-    '<mpath href="#heroFlowEnergyTablet"></mpath>'
-    '</animateMotion>'
-    '</circle>'
-    '<animate attributeName="opacity" dur="7s" repeatCount="indefinite" '
-    'keyTimes="0;0.03;0.85;0.92;1" values="0;1;1;0;0"></animate>'
-    '</g>'
-    '</svg>'
-    '<svg class="hero-flow-svg hero-flow-svg-mobile" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'
-    '<path class="hero-flow-base" d="M50 0 V100"></path>'
-    '<g class="hero-flow-motion">'
-    '<path id="heroFlowEnergyMobile" class="hero-flow-energy" pathLength="100" d="M50 0 V100">'
-    '<animate attributeName="stroke-dashoffset" dur="7s" repeatCount="indefinite" calcMode="linear" '
-    'keyTimes="0;0.17;0.34;0.51;0.68;0.85;1" values="100;76.4;52.8;29.2;5.6;-18;-18"></animate>'
-    '</path>'
-    '<circle class="hero-flow-dot" r="2.6">'
-    '<animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" '
-    'keyTimes="0;0.17;0.34;0.51;0.68;0.85;1" keyPoints="0;0.2;0.4;0.6;0.8;1;1">'
-    '<mpath href="#heroFlowEnergyMobile"></mpath>'
-    '</animateMotion>'
-    '</circle>'
-    '<animate attributeName="opacity" dur="7s" repeatCount="indefinite" '
-    'keyTimes="0;0.03;0.85;0.92;1" values="0;1;1;0;0"></animate>'
-    '</g>'
-    '</svg>'
-)
-skill_pipeline_markup = (
-    '<span class="sr-only">Core Data Engineering workflow: Airflow orchestrates data ingestion from files and APIs, processing with Python and Pandas, storage in SQL and PostgreSQL, transformation with dbt, data-quality validation, and delivery of analytics-ready data.</span>'
-    '<div class="core-workflow-orchestrator" aria-hidden="true">'
-    '<span class="core-workflow-orchestrator-label"><strong>Airflow</strong><span aria-hidden="true">&middot;</span><small>Pipeline Orchestration</small></span>'
-    '</div>'
-    '<span class="core-workflow-orchestration-line" aria-hidden="true"></span>'
-    + hero_flow_svg
-)
-for index, (stage, label, detail) in enumerate(skill_pipeline_steps, start=1):
-    skill_pipeline_markup += (
-        f'<span class="hero-skill-node hero-skill-node-{index}" tabindex="0">'
-        f'<span class="hero-skill-icon" aria-hidden="true"></span>'
-        f'<span class="hero-skill-node-content">'
-        f'<span class="core-workflow-stage">{html.escape(stage)}</span>'
-        f'<strong class="core-workflow-tool">{html.escape(label)}</strong>'
-        '</span>'
-        f'<span class="hero-skill-tooltip" role="tooltip">{html.escape(detail)}</span>'
-        '</span>'
-    )
 
 st.markdown(
     f"""
@@ -238,12 +153,6 @@ st.markdown(
                 </div>
             </div>
         </article>
-        <div class="hero-skill-section">
-            <div class="hero-skill-label">CORE DATA ENGINEERING WORKFLOW</div>
-            <div class="hero-skill-pipeline" aria-label="Core Data Engineering workflow: Airflow orchestrates data ingestion from files and APIs, processing with Python and Pandas, storage in SQL and PostgreSQL, transformation with dbt, data-quality validation, and delivery of analytics-ready data.">
-                {skill_pipeline_markup}
-            </div>
-        </div>
     </section>
     """,
     unsafe_allow_html=True,
@@ -325,17 +234,17 @@ preview_markup = dedent(
                 <div class="featured-lineage-branch-title">Job Postings Lineage</div>
                 <div class="featured-lineage-graph">
                     <div class="featured-lineage-column featured-lineage-sources">
-                        <div class="featured-lineage-node featured-lineage-node-source featured-lineage-source-a" title="stg_companies" aria-label="stg_companies, source model"><span class="featured-lineage-model-name">stg_companies</span></div>
-                        <div class="featured-lineage-node featured-lineage-node-source featured-lineage-source-b" title="stg_job_postings" aria-label="stg_job_postings, source model"><span class="featured-lineage-model-name">stg_job_<br>postings</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-source featured-lineage-source-a" tabindex="0" title="stg_companies" aria-label="stg_companies, source model" data-tooltip="Source: raw company records"><span class="featured-lineage-model-name">stg_companies</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-source featured-lineage-source-b" tabindex="0" title="stg_job_postings" aria-label="stg_job_postings, source model" data-tooltip="Source: raw job posting records"><span class="featured-lineage-model-name">stg_job_<br>postings</span></div>
                     </div>
                     <div class="featured-lineage-column featured-lineage-intermediate">
-                        <div class="featured-lineage-node featured-lineage-node-intermediate featured-lineage-int" title="int_job_postings_enriched" aria-label="int_job_postings_enriched, intermediate model"><span class="featured-lineage-model-name">int_job_postings_<br>enriched</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-intermediate featured-lineage-int" tabindex="0" title="int_job_postings_enriched" aria-label="int_job_postings_enriched, intermediate model" data-tooltip="Intermediate: postings joined with company data"><span class="featured-lineage-model-name">int_job_postings_<br>enriched</span></div>
                     </div>
                     <div class="featured-lineage-column featured-lineage-marts">
-                        <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-mart-1" title="mart_company_leaderboard" aria-label="mart_company_leaderboard, mart model"><span class="featured-lineage-model-name">mart_company_<br>leaderboard</span></div>
-                        <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-mart-2" title="mart_monthly_job_trends" aria-label="mart_monthly_job_trends, mart model"><span class="featured-lineage-model-name">mart_monthly_<br>job_trends</span></div>
-                        <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-mart-3" title="mart_remote_work_trends" aria-label="mart_remote_work_trends, mart model"><span class="featured-lineage-model-name">mart_remote_<br>work_trends</span></div>
-                        <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-mart-4" title="mart_salary_trends" aria-label="mart_salary_trends, mart model"><span class="featured-lineage-model-name">mart_salary_<br>trends</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-mart-1" tabindex="0" title="mart_company_leaderboard" aria-label="mart_company_leaderboard, mart model" data-tooltip="Mart: top hiring companies ranked"><span class="featured-lineage-model-name">mart_company_<br>leaderboard</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-mart-2" tabindex="0" title="mart_monthly_job_trends" aria-label="mart_monthly_job_trends, mart model" data-tooltip="Mart: posting volume trends by month"><span class="featured-lineage-model-name">mart_monthly_<br>job_trends</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-mart-3" tabindex="0" title="mart_remote_work_trends" aria-label="mart_remote_work_trends, mart model" data-tooltip="Mart: remote vs on-site trends"><span class="featured-lineage-model-name">mart_remote_<br>work_trends</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-mart-4" tabindex="0" title="mart_salary_trends" aria-label="mart_salary_trends, mart model" data-tooltip="Mart: salary trends by role and market"><span class="featured-lineage-model-name">mart_salary_<br>trends</span></div>
                     </div>
                     <svg class="featured-lineage-links featured-lineage-sequence" viewBox="0 0 100 120" preserveAspectRatio="none" aria-hidden="true">
                         <defs>
@@ -355,6 +264,14 @@ preview_markup = dedent(
                         <path id="jobMart2Path" class="featured-lineage-link featured-lineage-link-mart" d="M64 60 C69 60 69 47 75 47"></path>
                         <path id="jobMart3Path" class="featured-lineage-link featured-lineage-link-mart" d="M64 60 C69 60 69 73 75 73"></path>
                         <path id="jobMart4Path" class="featured-lineage-link featured-lineage-link-mart" d="M64 60 C68 60 68 98 75 98"></path>
+                        <path class="featured-lineage-energy" pathLength="100" d="M24 34 C30 34 31 56 38 56"><animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.08;0.23;1" values="100;100;0;0"></animate></path>
+                        <path class="featured-lineage-energy" pathLength="100" d="M24 82 C30 82 31 64 38 64"><animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.08;0.23;1" values="100;100;0;0"></animate></path>
+                        <path class="featured-lineage-energy" pathLength="100" d="M38 60 H45"><animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.23;0.31;1" values="100;100;0;0"></animate></path>
+                        <path class="featured-lineage-energy" pathLength="100" d="M57 60 H64"><animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.32;0.42;1" values="100;100;0;0"></animate></path>
+                        <path class="featured-lineage-energy featured-lineage-energy-mart" pathLength="100" d="M64 60 C68 60 68 22 75 22"><animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.42;0.58;1" values="100;100;0;0"></animate></path>
+                        <path class="featured-lineage-energy featured-lineage-energy-mart" pathLength="100" d="M64 60 C69 60 69 47 75 47"><animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.44;0.60;1" values="100;100;0;0"></animate></path>
+                        <path class="featured-lineage-energy featured-lineage-energy-mart" pathLength="100" d="M64 60 C69 60 69 73 75 73"><animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.46;0.62;1" values="100;100;0;0"></animate></path>
+                        <path class="featured-lineage-energy featured-lineage-energy-mart" pathLength="100" d="M64 60 C68 60 68 98 75 98"><animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.48;0.64;1" values="100;100;0;0"></animate></path>
                         <circle class="featured-lineage-pulse featured-lineage-source-pulse" r="2.2" filter="url(#featuredLineageGlow)"><animateMotion dur="8s" repeatCount="indefinite" keyTimes="0;0.08;0.23;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#jobSourceAPath"></mpath></animateMotion></circle>
                         <circle class="featured-lineage-pulse featured-lineage-source-pulse" r="2.2" filter="url(#featuredLineageGlow)"><animateMotion dur="8s" repeatCount="indefinite" keyTimes="0;0.08;0.23;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#jobSourceBPath"></mpath></animateMotion></circle>
                         <circle class="featured-lineage-pulse featured-lineage-merge-pulse" r="2.8" filter="url(#featuredLineageGlow)"><animateMotion dur="8s" repeatCount="indefinite" keyTimes="0;0.23;0.31;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#jobMergePath"></mpath></animateMotion></circle>
@@ -371,14 +288,14 @@ preview_markup = dedent(
                 <div class="featured-lineage-branch-title">Skills Lineage</div>
                 <div class="featured-lineage-graph">
                     <div class="featured-lineage-column featured-lineage-sources">
-                        <div class="featured-lineage-node featured-lineage-node-source featured-lineage-source-a" title="stg_job_skills" aria-label="stg_job_skills, source model"><span class="featured-lineage-model-name">stg_job_<br>skills</span></div>
-                        <div class="featured-lineage-node featured-lineage-node-source featured-lineage-source-b" title="stg_skills" aria-label="stg_skills, source model"><span class="featured-lineage-model-name">stg_skills</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-source featured-lineage-source-a" tabindex="0" title="stg_job_skills" aria-label="stg_job_skills, source model" data-tooltip="Source: raw job-to-skill mappings"><span class="featured-lineage-model-name">stg_job_<br>skills</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-source featured-lineage-source-b" tabindex="0" title="stg_skills" aria-label="stg_skills, source model" data-tooltip="Source: raw skill reference data"><span class="featured-lineage-model-name">stg_skills</span></div>
                     </div>
                     <div class="featured-lineage-column featured-lineage-intermediate">
-                        <div class="featured-lineage-node featured-lineage-node-intermediate featured-lineage-int" title="int_job_skills_enriched" aria-label="int_job_skills_enriched, intermediate model"><span class="featured-lineage-model-name">int_job_skills_<br>enriched</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-intermediate featured-lineage-int" tabindex="0" title="int_job_skills_enriched" aria-label="int_job_skills_enriched, intermediate model" data-tooltip="Intermediate: skills joined with job postings"><span class="featured-lineage-model-name">int_job_skills_<br>enriched</span></div>
                     </div>
                     <div class="featured-lineage-column featured-lineage-marts featured-lineage-marts-single">
-                        <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-mart-1" title="mart_skill_demand_by_role" aria-label="mart_skill_demand_by_role, mart model"><span class="featured-lineage-model-name">mart_skill_demand_<br>by_role</span></div>
+                        <div class="featured-lineage-node featured-lineage-node-mart featured-lineage-mart-1" tabindex="0" title="mart_skill_demand_by_role" aria-label="mart_skill_demand_by_role, mart model" data-tooltip="Mart: skill demand ranked by role"><span class="featured-lineage-model-name">mart_skill_demand_<br>by_role</span></div>
                     </div>
                     <svg class="featured-lineage-links featured-lineage-sequence" viewBox="0 0 100 120" preserveAspectRatio="none" aria-hidden="true">
                         <defs>
@@ -390,6 +307,10 @@ preview_markup = dedent(
                         <path id="skillSourceBPath" class="featured-lineage-link featured-lineage-link-source" d="M24 82 C30 82 31 64 38 64"></path>
                         <path id="skillMergePath" class="featured-lineage-link featured-lineage-link-merge" d="M38 60 H45"></path>
                         <path id="skillOutPath" class="featured-lineage-link featured-lineage-link-output" d="M57 60 H75"></path>
+                        <path class="featured-lineage-energy" pathLength="100" d="M24 34 C30 34 31 56 38 56"><animate attributeName="stroke-dashoffset" dur="8s" begin="1s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.08;0.23;1" values="100;100;0;0"></animate></path>
+                        <path class="featured-lineage-energy" pathLength="100" d="M24 82 C30 82 31 64 38 64"><animate attributeName="stroke-dashoffset" dur="8s" begin="1s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.08;0.23;1" values="100;100;0;0"></animate></path>
+                        <path class="featured-lineage-energy" pathLength="100" d="M38 60 H45"><animate attributeName="stroke-dashoffset" dur="8s" begin="1s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.23;0.31;1" values="100;100;0;0"></animate></path>
+                        <path class="featured-lineage-energy featured-lineage-energy-mart" pathLength="100" d="M57 60 H75"><animate attributeName="stroke-dashoffset" dur="8s" begin="1s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.32;0.58;1" values="100;100;0;0"></animate></path>
                         <circle class="featured-lineage-pulse featured-lineage-source-pulse" r="2.2"><animateMotion dur="8s" begin="1s" repeatCount="indefinite" keyTimes="0;0.08;0.23;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#skillSourceAPath"></mpath></animateMotion></circle>
                         <circle class="featured-lineage-pulse featured-lineage-source-pulse" r="2.2"><animateMotion dur="8s" begin="1s" repeatCount="indefinite" keyTimes="0;0.08;0.23;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#skillSourceBPath"></mpath></animateMotion></circle>
                         <circle class="featured-lineage-pulse featured-lineage-merge-pulse" r="2.8"><animateMotion dur="8s" begin="1s" repeatCount="indefinite" keyTimes="0;0.23;0.31;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#skillMergePath"></mpath></animateMotion></circle>

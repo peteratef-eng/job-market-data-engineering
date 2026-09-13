@@ -348,8 +348,13 @@ else:
         st.caption("Company rankings may include job boards or aggregators.")
 
 st.subheader("Salary Insights")
-st.caption(
-    f"Salary analysis is based on {salary_records:,} records in the current result set."
+st.markdown(
+    f'<div class="salary-coverage-note">'
+    f'<strong>{html.escape(coverage_label)} salary coverage</strong>'
+    f' &middot; charts below are based on {salary_records:,} of {total_records:,} matching postings that report a salary. '
+    'Postings without salary data are excluded, so bars may not reflect the full result set.'
+    '</div>',
+    unsafe_allow_html=True,
 )
 salary_choice = st.radio(
     "Salary chart",

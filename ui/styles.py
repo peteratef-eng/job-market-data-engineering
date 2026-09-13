@@ -34,27 +34,27 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             --hover: {theme["hover"]};
             --disabled: {theme["disabled"]};
             --color-navy: #0f172a;
-            --color-blue: #2563eb;
-            --color-blue-dark: #1d4ed8;
-            --color-cyan: #06b6d4;
+            --color-blue: #b45309;
+            --color-blue-dark: #92400e;
+            --color-cyan: #1e3a5f;
             --color-green: #10b981;
             --color-background: #f6f8fc;
             --color-surface: #ffffff;
             --color-text-muted: #52637a;
             --color-border: #d8e2ef;
-            --color-border-blue: rgba(37, 99, 235, 0.24);
+            --color-border-blue: rgba(180, 83, 9, 0.24);
             --font: "Source Sans Pro", "Source Sans 3", "Source Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --data-navy: #0F172A;
-            --data-blue: #2563EB;
-            --data-blue-dark: #1D4ED8;
-            --data-cyan: #06B6D4;
-            --data-cyan-soft: rgba(6, 182, 212, 0.12);
+            --data-blue: #B45309;
+            --data-blue-dark: #92400E;
+            --data-cyan: #1E3A5F;
+            --data-cyan-soft: rgba(30, 58, 95, 0.12);
             --data-indigo: #4F46E5;
             --data-green: #10B981;
             --data-green-soft: rgba(16, 185, 129, 0.10);
             --data-amber: #F59E0B;
             --data-amber-soft: rgba(245, 158, 11, 0.10);
-            --data-red: #DC2626;
+            --data-red: #B91C1C;
             --data-surface: #FFFFFF;
             --data-background: #F8FAFC;
             --data-background-blue: #EFF6FF;
@@ -224,9 +224,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .sidebar-brand:hover,
             .sidebar-brand:focus-within {{
                 transform: translateY(-3px);
-                border-color: rgba(37, 99, 235, 0.45);
+                border-color: rgba(180, 83, 9, 0.45);
                 background-color: rgba(239, 246, 255, 0.75);
-                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.14);
+                box-shadow: 0 14px 30px rgba(180, 83, 9, 0.14);
                 position: relative;
                 z-index: 2;
             }}
@@ -350,7 +350,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .sidebar-section-toggle:focus-visible,
         .sidebar-project-summary:focus-visible {{
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, .16);
+            box-shadow: 0 0 0 3px rgba(180, 83, 9, .16);
         }}
         .sidebar-expander-chevron,
         .sidebar-project-chevron {{
@@ -410,7 +410,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             flex-direction: column;
             gap: .08rem;
             padding: .35rem 0 .25rem .85rem;
-            border-left: 1px solid rgba(37, 99, 235, .20);
+            border-left: 1px solid rgba(180, 83, 9, .20);
         }}
         .sidebar-portfolio-link {{
             display: flex;
@@ -435,11 +435,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             text-decoration: none;
         }}
         .sidebar-portfolio-link:focus-visible {{
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, .14);
+            box-shadow: 0 0 0 3px rgba(180, 83, 9, .14);
         }}
         .sidebar-portfolio-link-active {{
             color: var(--data-blue);
-            background: rgba(37, 99, 235, .09);
+            background: rgba(180, 83, 9, .09);
             font-weight: 700;
         }}
         .sidebar-project-expander {{
@@ -457,10 +457,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: 100%;
             min-height: 92px;
             padding: .75rem 2rem .75rem .75rem;
-            border: 1px solid rgba(37, 99, 235, .18);
+            border: 1px solid rgba(180, 83, 9, .18);
             border-radius: 11px;
             background:
-                radial-gradient(circle at 85% 15%, rgba(6, 182, 212, .09), transparent 38%),
+                radial-gradient(circle at 85% 15%, rgba(30, 58, 95, .09), transparent 38%),
                 linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(239, 246, 255, .86));
             box-shadow: 0 8px 20px rgba(15, 23, 42, .06);
             overflow: hidden;
@@ -475,15 +475,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             right: .68rem;
         }}
         .sidebar-project-card-active {{
-            border-color: rgba(37, 99, 235, .34);
+            border-color: rgba(180, 83, 9, .34);
             background:
-                radial-gradient(circle at 85% 15%, rgba(6, 182, 212, .12), transparent 38%),
+                radial-gradient(circle at 85% 15%, rgba(30, 58, 95, .12), transparent 38%),
                 rgba(239, 246, 255, .92);
         }}
         .sidebar-project-expander.is-active > .sidebar-project-summary {{
-            border-color: rgba(37, 99, 235, .42);
+            border-color: rgba(180, 83, 9, .42);
             background:
-                radial-gradient(circle at 85% 15%, rgba(6, 182, 212, .11), transparent 38%),
+                radial-gradient(circle at 85% 15%, rgba(30, 58, 95, .11), transparent 38%),
                 rgba(239, 246, 255, .94);
         }}
         .sidebar-project-card-header {{
@@ -501,8 +501,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             justify-content: center;
             border-radius: 9px;
             color: var(--data-blue);
-            background: rgba(37, 99, 235, .10);
-            border: 1px solid rgba(37, 99, 235, .16);
+            background: rgba(180, 83, 9, .10);
+            border: 1px solid rgba(180, 83, 9, .16);
         }}
         .sidebar-project-icon svg {{
             width: 17px;
@@ -538,7 +538,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             gap: .08rem;
             margin: .25rem 0 .15rem .8rem;
             padding: .35rem 0 .25rem .85rem;
-            border-left: 1px solid rgba(37, 99, 235, .20);
+            border-left: 1px solid rgba(180, 83, 9, .20);
         }}
         .sidebar-project-expander[open] > .sidebar-project-links {{
             animation: sidebar-project-content-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -578,7 +578,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: 6px;
             height: 6px;
             border-radius: 999px;
-            background: rgba(37, 99, 235, .26);
+            background: rgba(180, 83, 9, .26);
             transform: translateY(-50%);
         }}
         .sidebar-project-link:hover,
@@ -593,12 +593,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .sidebar-project-link-active {{
             color: var(--data-blue);
-            background: rgba(37, 99, 235, .09);
+            background: rgba(180, 83, 9, .09);
             font-weight: 700;
         }}
         .sidebar-project-link-active::before {{
-            background: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+            background: #b45309;
+            box-shadow: 0 0 0 3px rgba(180, 83, 9, .12);
         }}
         [data-testid="stSidebar"] [data-testid="stPageLink"] {{
             width: 100%;
@@ -629,7 +629,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: 6px;
             height: 6px;
             border-radius: 999px;
-            background: rgba(37, 99, 235, .26);
+            background: rgba(180, 83, 9, .26);
             transform: translateY(-50%);
         }}
         [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover,
@@ -661,10 +661,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             height: 10px;
             border-radius: 4px;
             background: rgba(255, 255, 255, .95);
-            border: 1px solid rgba(37, 99, 235, .26);
+            border: 1px solid rgba(180, 83, 9, .26);
         }}
         .sidebar-mini-mart {{
-            border-color: rgba(6, 182, 212, .35);
+            border-color: rgba(30, 58, 95, .35);
             background: rgba(236, 254, 255, .95);
         }}
         .sidebar-mini-track {{
@@ -672,7 +672,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             z-index: 1;
             height: 2px;
             border-radius: 999px;
-            background: linear-gradient(90deg, rgba(37, 99, 235, .24), rgba(6, 182, 212, .26));
+            background: linear-gradient(90deg, rgba(180, 83, 9, .24), rgba(30, 58, 95, .26));
         }}
         .sidebar-mini-packet {{
             position: absolute;
@@ -682,20 +682,20 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: #2563eb;
+            background: #b45309;
             box-shadow:
-                0 0 0 3px rgba(37, 99, 235, .10),
-                0 0 7px rgba(37, 99, 235, .26);
+                0 0 0 3px rgba(180, 83, 9, .10),
+                0 0 7px rgba(180, 83, 9, .26);
             transform: translate3d(0, -50%, 0);
             animation: sidebar-mini-packet-flow 4s linear infinite;
             pointer-events: none;
         }}
         @keyframes sidebar-mini-packet-flow {{
-            0% {{ left: 3px; opacity: 0; background: #2563eb; }}
+            0% {{ left: 3px; opacity: 0; background: #b45309; }}
             8% {{ opacity: 1; }}
-            72% {{ opacity: 1; background: #2563eb; }}
-            88% {{ opacity: 1; background: #06b6d4; }}
-            96%, 100% {{ left: calc(100% - 8px); opacity: 0; background: #06b6d4; }}
+            72% {{ opacity: 1; background: #b45309; }}
+            88% {{ opacity: 1; background: #1e3a5f; }}
+            96%, 100% {{ left: calc(100% - 8px); opacity: 0; background: #1e3a5f; }}
         }}
         .sidebar-projects-expander:not([open]) .sidebar-mini-packet {{
             animation-play-state: paused;
@@ -704,8 +704,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .sidebar-project-card:hover,
             .sidebar-project-card:focus-within {{
                 transform: translateY(-2px);
-                border-color: rgba(37, 99, 235, .38);
-                box-shadow: 0 10px 24px rgba(37, 99, 235, .10);
+                border-color: rgba(180, 83, 9, .38);
+                box-shadow: 0 10px 24px rgba(180, 83, 9, .10);
             }}
         }}
 
@@ -795,11 +795,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             height: auto;
             min-height: 0;
             margin: .2rem 0 .85rem;
-            border: 1px solid rgba(37, 99, 235, .14);
+            border: 1px solid rgba(180, 83, 9, .14);
             border-radius: 18px;
             background:
-                radial-gradient(circle at 78% 52%, rgba(37, 99, 235, .11), transparent 31%),
-                radial-gradient(circle at 26% 30%, rgba(6, 182, 212, .075), transparent 28%),
+                radial-gradient(circle at 78% 52%, rgba(180, 83, 9, .11), transparent 31%),
+                radial-gradient(circle at 26% 30%, rgba(30, 58, 95, .075), transparent 28%),
                 linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(248, 250, 252, .90));
             box-shadow: 0 14px 34px rgba(15, 23, 42, .065);
             overflow: hidden;
@@ -810,8 +810,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             z-index: -3;
             opacity: .34;
             background-image:
-                linear-gradient(rgba(37, 99, 235, .045) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(37, 99, 235, .045) 1px, transparent 1px),
+                linear-gradient(rgba(180, 83, 9, .045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(180, 83, 9, .045) 1px, transparent 1px),
                 linear-gradient(rgba(15, 23, 42, .035) 1px, transparent 1px);
             background-size: 34px 34px;
             mask-image: linear-gradient(135deg, rgba(0, 0, 0, .76), transparent 78%);
@@ -917,7 +917,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: min(100%, 31rem);
             min-height: 1.55rem;
             margin-top: .45rem;
-            border-left: 3px solid rgba(37, 99, 235, .42);
+            border-left: 3px solid rgba(180, 83, 9, .42);
             padding: .22rem .58rem;
             color: var(--accent);
             font-size: .84rem;
@@ -955,7 +955,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             min-height: 2.65rem;
             padding: .7rem 1rem;
             border-radius: 10px;
-            border: 1px solid rgba(37, 99, 235, .22);
+            border: 1px solid rgba(180, 83, 9, .22);
             background: var(--surface);
             color: var(--data-blue);
             font-weight: 700;
@@ -1038,10 +1038,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             min-width: 0;
             height: 1.65rem;
             padding: .22rem .55rem;
-            border: 1px solid rgba(37, 99, 235, .20);
+            border: 1px solid rgba(180, 83, 9, .20);
             border-radius: 999px;
             background: rgba(239, 246, 255, .92);
-            box-shadow: 0 4px 10px rgba(37, 99, 235, .045);
+            box-shadow: 0 4px 10px rgba(180, 83, 9, .045);
             color: var(--data-blue);
             transform: translateX(-50%);
             overflow: hidden;
@@ -1071,7 +1071,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: 2px;
             height: .48rem;
             border-radius: 999px;
-            background: rgba(37, 99, 235, .28);
+            background: rgba(180, 83, 9, .28);
             transform: translateX(-50%);
             pointer-events: none;
         }}
@@ -1309,10 +1309,10 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border-radius: 34px;
             padding: 1rem;
             background:
-                radial-gradient(circle at 72% 18%, rgba(37, 99, 235, .2), transparent 36%),
+                radial-gradient(circle at 72% 18%, rgba(180, 83, 9, .2), transparent 36%),
                 linear-gradient(145deg, rgba(239, 246, 255, .95), rgba(255, 255, 255, .5));
-            border: 1px solid rgba(37, 99, 235, .18);
-            box-shadow: 0 22px 44px rgba(37, 99, 235, .14);
+            border: 1px solid rgba(180, 83, 9, .18);
+            box-shadow: 0 22px 44px rgba(180, 83, 9, .14);
             overflow: hidden;
         }}
         .hero-photo {{
@@ -1360,8 +1360,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             object-fit: cover;
             object-position: center top;
             border-radius: 18px;
-            border: 1px solid rgba(37, 99, 235, .18);
-            box-shadow: 0 18px 38px rgba(37, 99, 235, .12);
+            border: 1px solid rgba(180, 83, 9, .18);
+            box-shadow: 0 18px 38px rgba(180, 83, 9, .12);
             transform: none;
             animation: none;
         }}
@@ -1373,12 +1373,12 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .home-profile-info-card {{
             padding: 1rem 1rem 1.05rem;
-            border: 1px solid rgba(37, 99, 235, .22);
+            border: 1px solid rgba(180, 83, 9, .22);
             border-radius: 18px;
             background:
-                radial-gradient(circle at 72% 12%, rgba(37, 99, 235, .14), transparent 34%),
+                radial-gradient(circle at 72% 12%, rgba(180, 83, 9, .14), transparent 34%),
                 linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(248, 250, 252, .92));
-            box-shadow: 0 18px 38px rgba(37, 99, 235, .12);
+            box-shadow: 0 18px 38px rgba(180, 83, 9, .12);
             overflow: hidden;
             transform-origin: center center;
             transition:
@@ -1441,7 +1441,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 linear-gradient(145deg, color-mix(in srgb, var(--surface) 96%, var(--tag-bg)), color-mix(in srgb, var(--surface) 88%, var(--tag-bg)));
             box-shadow:
                 0 18px 45px rgba(15, 23, 42, 0.08),
-                0 4px 14px rgba(37, 99, 235, 0.06);
+                0 4px 14px rgba(180, 83, 9, 0.06);
             overflow: hidden;
             transform: translateZ(0);
             transform-origin: center center;
@@ -1451,8 +1451,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 box-shadow 240ms ease;
         }}
         .hero-profile-card:focus-within {{
-            border-color: rgba(37, 99, 235, 0.72);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+            border-color: rgba(180, 83, 9, 0.72);
+            box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.12);
         }}
         .hero-profile-media {{
             position: relative;
@@ -1651,7 +1651,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border: 1px solid var(--border);
             border-radius: 10px;
             background:
-                radial-gradient(circle at 55% 45%, rgba(37, 99, 235, 0.10), transparent 48%),
+                radial-gradient(circle at 55% 45%, rgba(180, 83, 9, 0.10), transparent 48%),
                 linear-gradient(145deg, rgba(255,255,255,0.98), rgba(239,246,255,0.88));
             overflow: hidden;
             min-height: 0;
@@ -1683,7 +1683,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             flex-direction: column;
             gap: 10px;
             padding: 12px;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
             container-type: inline-size;
         }}
@@ -1754,9 +1754,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             height: auto;
             min-height: 0;
             padding: 10px;
-            border: 1px solid rgba(148, 163, 184, .18);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, .54);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: linear-gradient(160deg, color-mix(in srgb, var(--surface) 70%, transparent), color-mix(in srgb, var(--surface) 45%, transparent));
         }}
         .featured-lineage-branch-title {{
             display: block;
@@ -1808,12 +1808,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             min-width: 0;
             min-height: 42px;
             padding: 7px 9px;
-            border: 1px solid rgba(148, 163, 184, .28);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, .95);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
             color: var(--text);
-            box-shadow: 0 3px 8px rgba(15, 23, 42, .035);
+            box-shadow: 0 4px 10px rgba(15, 23, 42, .05);
+            transition: transform .16s ease, box-shadow .16s ease;
             animation: featured-lineage-node-idle 8s ease-in-out infinite;
+        }}
+        .featured-lineage-node[data-tooltip]:hover,
+        .featured-lineage-node[data-tooltip]:focus-visible {{
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, .1);
         }}
         .featured-lineage-model-name {{
             min-width: 0;
@@ -1838,7 +1844,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(100deg, transparent 20%, rgba(37, 99, 235, .18) 48%, transparent 74%);
+            background: linear-gradient(100deg, transparent 20%, rgba(180, 83, 9, .18) 48%, transparent 74%);
             opacity: 0;
             transform: translateX(-120%);
             animation: featured-lineage-int-shimmer 8s ease-in-out infinite;
@@ -1855,19 +1861,53 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             animation-delay: 1s;
         }}
         .featured-lineage-node-source {{
-            color: #64748B;
-            border-color: rgba(148, 163, 184, .34);
-            background: rgba(248, 250, 252, .96);
+            color: var(--muted);
+            border-color: var(--border);
+            background: var(--surface);
         }}
         .featured-lineage-node-intermediate {{
             color: var(--data-blue);
-            border-color: rgba(37, 99, 235, .28);
-            background: rgba(239, 246, 255, .96);
+            border-color: color-mix(in srgb, var(--data-blue) 28%, transparent);
+            background: color-mix(in srgb, var(--data-blue) 6%, var(--surface));
         }}
         .featured-lineage-node-mart {{
-            color: var(--data-cyan);
-            border-color: rgba(6, 182, 212, .22);
-            background: rgba(240, 253, 250, .92);
+            color: color-mix(in srgb, var(--data-green) 70%, var(--text));
+            border-color: color-mix(in srgb, var(--data-green) 26%, transparent);
+            background: color-mix(in srgb, var(--data-green) 7%, var(--surface));
+        }}
+        .featured-lineage-node[data-tooltip] {{
+            cursor: pointer;
+        }}
+        .featured-lineage-node[data-tooltip]::after {{
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 50%;
+            top: calc(100% + 8px);
+            z-index: 30;
+            width: max-content;
+            max-width: 180px;
+            padding: .45rem .6rem;
+            border-radius: 9px;
+            background: var(--text);
+            color: var(--surface);
+            font-size: .64rem;
+            font-weight: 600;
+            line-height: 1.35;
+            text-align: left;
+            opacity: 0;
+            transform: translate(-50%, -4px);
+            transition: opacity .16s ease, transform .16s ease;
+            pointer-events: none;
+            box-shadow: 0 10px 22px rgba(15, 23, 42, .2);
+        }}
+        .featured-lineage-node[data-tooltip]:hover::after,
+        .featured-lineage-node[data-tooltip]:focus-visible::after {{
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }}
+        .featured-lineage-node[data-tooltip]:focus-visible {{
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
         }}
         .featured-lineage-links {{
             position: absolute;
@@ -1879,36 +1919,47 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             pointer-events: none;
         }}
         .featured-lineage-links marker path {{
-            fill: rgba(37, 99, 235, .58);
+            fill: rgba(180, 83, 9, .58);
         }}
         .featured-lineage-link {{
             fill: none;
-            stroke: rgba(37, 99, 235, .34);
+            stroke: var(--border);
             stroke-width: 1.2;
             stroke-linecap: round;
             stroke-linejoin: round;
             marker-end: url(#featuredLineageArrow);
             vector-effect: non-scaling-stroke;
-            animation: featured-lineage-path-activation 8s ease-in-out infinite;
+        }}
+        .featured-lineage-energy {{
+            fill: none;
+            stroke: var(--data-cyan);
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-dasharray: 100;
+            vector-effect: non-scaling-stroke;
+            filter: drop-shadow(0 0 3px color-mix(in srgb, var(--data-cyan) 70%, transparent));
+        }}
+        .featured-lineage-energy-mart {{
+            stroke: color-mix(in srgb, var(--data-cyan) 55%, var(--data-green) 45%);
         }}
         .featured-lineage-pulse {{
-            fill: #06b6d4;
+            fill: var(--data-cyan);
             stroke: #FFFFFF;
             stroke-width: .8;
-            filter: drop-shadow(0 0 2px rgba(37, 99, 235, .22));
+            filter: drop-shadow(0 0 3px color-mix(in srgb, var(--data-cyan) 70%, transparent));
             opacity: 0;
             animation: featured-lineage-pulse-visibility 8s ease-in-out infinite;
         }}
         .featured-lineage-source-pulse {{
-            fill: #2563eb;
+            fill: var(--data-cyan);
         }}
         .featured-lineage-merge-pulse {{
-            fill: #38bdf8;
+            fill: var(--data-cyan);
             animation-name: featured-lineage-merge-visibility;
         }}
         .featured-lineage-output-pulse,
         .featured-lineage-mart-pulse {{
-            fill: #06b6d4;
+            fill: var(--data-cyan);
             animation-name: featured-lineage-output-visibility;
         }}
         .featured-lineage-mart-pulse-1 {{ animation-delay: 0s; }}
@@ -1923,11 +1974,11 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         .featured-lineage-group-skill .featured-lineage-mart-pulse-4 {{ animation-delay: 1.36s; }}
         @keyframes featured-lineage-source-activation {{
             0%, 7%, 25%, 100% {{ border-color: rgba(148, 163, 184, .34); box-shadow: 0 3px 8px rgba(15, 23, 42, .035); }}
-            8%, 22% {{ border-color: rgba(37, 99, 235, .48); box-shadow: 0 0 0 3px rgba(37, 99, 235, .08); }}
+            8%, 22% {{ border-color: rgba(180, 83, 9, .48); box-shadow: 0 0 0 3px rgba(180, 83, 9, .08); }}
         }}
         @keyframes featured-lineage-int-activation {{
-            0%, 22%, 36%, 100% {{ border-color: rgba(37, 99, 235, .28); background: rgba(239, 246, 255, .96); box-shadow: 0 3px 8px rgba(15, 23, 42, .035); }}
-            24%, 34% {{ border-color: rgba(37, 99, 235, .62); background: rgba(219, 234, 254, .98); box-shadow: 0 0 0 3px rgba(37, 99, 235, .11); }}
+            0%, 22%, 36%, 100% {{ border-color: rgba(180, 83, 9, .28); background: rgba(239, 246, 255, .96); box-shadow: 0 3px 8px rgba(15, 23, 42, .035); }}
+            24%, 34% {{ border-color: rgba(180, 83, 9, .62); background: rgba(219, 234, 254, .98); box-shadow: 0 0 0 3px rgba(180, 83, 9, .11); }}
         }}
         @keyframes featured-lineage-int-shimmer {{
             0%, 23%, 35%, 100% {{ opacity: 0; transform: translateX(-120%); }}
@@ -1935,20 +1986,20 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             33% {{ opacity: 0; transform: translateX(120%); }}
         }}
         @keyframes featured-lineage-mart-activation-1 {{
-            0%, 51%, 68%, 100% {{ border-color: rgba(6, 182, 212, .22); background: rgba(240, 253, 250, .92); }}
-            54%, 64% {{ border-color: rgba(6, 182, 212, .62); background: rgba(207, 250, 254, .72); }}
+            0%, 51%, 68%, 100% {{ border-color: color-mix(in srgb, var(--data-green) 26%, transparent); background: color-mix(in srgb, var(--data-green) 7%, var(--surface)); }}
+            54%, 64% {{ border-color: color-mix(in srgb, var(--data-green) 64%, transparent); background: color-mix(in srgb, var(--data-green) 16%, var(--surface)); }}
         }}
         @keyframes featured-lineage-mart-activation-2 {{
-            0%, 53%, 70%, 100% {{ border-color: rgba(6, 182, 212, .22); background: rgba(240, 253, 250, .92); }}
-            56%, 66% {{ border-color: rgba(6, 182, 212, .62); background: rgba(207, 250, 254, .72); }}
+            0%, 53%, 70%, 100% {{ border-color: color-mix(in srgb, var(--data-green) 26%, transparent); background: color-mix(in srgb, var(--data-green) 7%, var(--surface)); }}
+            56%, 66% {{ border-color: color-mix(in srgb, var(--data-green) 64%, transparent); background: color-mix(in srgb, var(--data-green) 16%, var(--surface)); }}
         }}
         @keyframes featured-lineage-mart-activation-3 {{
-            0%, 55%, 72%, 100% {{ border-color: rgba(6, 182, 212, .22); background: rgba(240, 253, 250, .92); }}
-            58%, 68% {{ border-color: rgba(6, 182, 212, .62); background: rgba(207, 250, 254, .72); }}
+            0%, 55%, 72%, 100% {{ border-color: color-mix(in srgb, var(--data-green) 26%, transparent); background: color-mix(in srgb, var(--data-green) 7%, var(--surface)); }}
+            58%, 68% {{ border-color: color-mix(in srgb, var(--data-green) 64%, transparent); background: color-mix(in srgb, var(--data-green) 16%, var(--surface)); }}
         }}
         @keyframes featured-lineage-mart-activation-4 {{
-            0%, 57%, 74%, 100% {{ border-color: rgba(6, 182, 212, .22); background: rgba(240, 253, 250, .92); }}
-            60%, 70% {{ border-color: rgba(6, 182, 212, .62); background: rgba(207, 250, 254, .72); }}
+            0%, 57%, 74%, 100% {{ border-color: color-mix(in srgb, var(--data-green) 26%, transparent); background: color-mix(in srgb, var(--data-green) 7%, var(--surface)); }}
+            60%, 70% {{ border-color: color-mix(in srgb, var(--data-green) 64%, transparent); background: color-mix(in srgb, var(--data-green) 16%, var(--surface)); }}
         }}
         @keyframes featured-lineage-path-activation {{
             0%, 7%, 72%, 100% {{ opacity: .72; }}
@@ -2004,7 +2055,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 height: 14px;
                 margin: 2px 0 -2px;
                 border-radius: 999px;
-                background: linear-gradient(180deg, rgba(37, 99, 235, .34), rgba(6, 182, 212, .38));
+                background: linear-gradient(180deg, rgba(180, 83, 9, .34), rgba(30, 58, 95, .38));
             }}
             .featured-lineage-sources::before,
             .featured-lineage-intermediate::before {{
@@ -2088,13 +2139,13 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             background: var(--data-blue);
         }}
         .home-skill-card-1 {{
-            border-top-color: rgba(37, 99, 235, .42);
+            border-top-color: rgba(180, 83, 9, .42);
         }}
         .home-skill-card-1 .section-title::before {{
             background: var(--data-blue);
         }}
         .home-skill-card-2 {{
-            border-top-color: rgba(6, 182, 212, .42);
+            border-top-color: rgba(30, 58, 95, .42);
         }}
         .home-skill-card-2 .section-title::before {{
             background: var(--data-cyan);
@@ -2135,7 +2186,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .data-command-hero .portfolio-button:hover,
             .data-command-hero .portfolio-button:focus-visible {{
                 transform: translateY(-2px);
-                box-shadow: 0 10px 24px rgba(37, 99, 235, .13);
+                box-shadow: 0 10px 24px rgba(180, 83, 9, .13);
             }}
             .data-command-hero .portfolio-button-primary:hover span,
             .data-command-hero .portfolio-button-primary:focus-visible span {{
@@ -2152,14 +2203,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             }}
             .hero-profile-card:hover {{
                 transform: translateY(-3px);
-                border-color: rgba(37, 99, 235, 0.42);
-                box-shadow: 0 20px 44px rgba(37, 99, 235, 0.15);
+                border-color: rgba(180, 83, 9, 0.42);
+                box-shadow: 0 20px 44px rgba(180, 83, 9, 0.15);
             }}
             .home-profile-info-card:hover,
             .home-profile-info-card:focus-within {{
                 transform: translateY(-3px);
-                border-color: rgba(37, 99, 235, 0.50);
-                box-shadow: 0 18px 38px rgba(37, 99, 235, 0.17);
+                border-color: rgba(180, 83, 9, 0.50);
+                box-shadow: 0 18px 38px rgba(180, 83, 9, 0.17);
             }}
             .home-profile-info-card:hover .home-profile-info-name,
             .home-profile-info-card:focus-within .home-profile-info-name {{
@@ -2243,7 +2294,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             background: #10B981;
         }}
         .project-scale-badge {{
-            border: 1px solid rgba(37, 99, 235, 0.20);
+            border: 1px solid rgba(180, 83, 9, 0.20);
             background: rgba(239, 246, 255, 0.82);
             color: var(--data-blue);
         }}
@@ -2271,7 +2322,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             display: inline-flex;
             align-items: center;
             padding: 5px 9px;
-            border: 1px solid rgba(37, 99, 235, 0.16);
+            border: 1px solid rgba(180, 83, 9, 0.16);
             border-radius: 999px;
             background: rgba(239, 246, 255, 0.68);
             color: var(--data-blue);
@@ -2346,7 +2397,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             margin: 0;
             padding: .9rem .95rem;
             border-top: 0;
-            border-left: 3px solid rgba(37, 99, 235, .34);
+            border-left: 3px solid rgba(180, 83, 9, .34);
         }}
         .pipeline-info-grid .pipeline-card::after {{
             content: "";
@@ -2357,8 +2408,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             height: .58rem;
             opacity: .45;
             pointer-events: none;
-            border-top: 2px solid rgba(37, 99, 235, .35);
-            border-right: 2px solid rgba(37, 99, 235, .35);
+            border-top: 2px solid rgba(180, 83, 9, .35);
+            border-right: 2px solid rgba(180, 83, 9, .35);
             background: transparent;
             transform: translateY(-50%) rotate(45deg);
         }}
@@ -2380,7 +2431,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border-radius: 999px;
             color: var(--data-blue);
             background: rgba(239, 246, 255, .92);
-            border: 1px solid rgba(37, 99, 235, .16);
+            border: 1px solid rgba(180, 83, 9, .16);
             font-size: .72rem;
             font-weight: 850;
         }}
@@ -2479,7 +2530,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             padding: .72rem .8rem;
             overflow: hidden;
             background:
-                radial-gradient(circle at 50% 45%, rgba(37, 99, 235, 0.13), transparent 28%),
+                radial-gradient(circle at 50% 45%, rgba(180, 83, 9, 0.13), transparent 28%),
                 linear-gradient(135deg, rgba(239, 246, 255, 0.98), rgba(255, 255, 255, 0.88)),
                 repeating-linear-gradient(90deg, transparent 0 22px, rgba(147, 197, 253, 0.18) 22px 23px);
         }}
@@ -2503,7 +2554,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             min-width: 0;
             min-height: 4.45rem;
             padding: .42rem .34rem;
-            border: 1px solid rgba(37, 99, 235, 0.18);
+            border: 1px solid rgba(180, 83, 9, 0.18);
             border-radius: 9px;
             background: rgba(255, 255, 255, 0.78);
             color: var(--text);
@@ -2546,9 +2597,9 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .project-warehouse-stage {{
             min-height: 5rem;
-            border-color: rgba(37, 99, 235, 0.32);
+            border-color: rgba(180, 83, 9, 0.32);
             background:
-                radial-gradient(circle at 50% 36%, rgba(37, 99, 235, 0.18), transparent 55%),
+                radial-gradient(circle at 50% 36%, rgba(180, 83, 9, 0.18), transparent 55%),
                 rgba(255, 255, 255, 0.86);
             animation-name: project-pipeline-warehouse-pulse;
         }}
@@ -2561,14 +2612,14 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             height: 2px;
             min-width: 0;
             border-radius: 999px;
-            background: linear-gradient(90deg, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0.5));
+            background: linear-gradient(90deg, rgba(180, 83, 9, 0.18), rgba(180, 83, 9, 0.5));
             overflow: hidden;
         }}
         .project-pipeline-connector::after {{
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.78), transparent);
+            background: linear-gradient(90deg, transparent, rgba(180, 83, 9, 0.78), transparent);
             animation: project-pipeline-connector-flow 2.8s linear infinite;
         }}
         .project-pipeline-particle {{
@@ -2579,8 +2630,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             width: .46rem;
             height: .46rem;
             border-radius: 999px;
-            background: rgba(37, 99, 235, 0.92);
-            box-shadow: 0 0 11px rgba(37, 99, 235, 0.42);
+            background: rgba(180, 83, 9, 0.92);
+            box-shadow: 0 0 11px rgba(180, 83, 9, 0.42);
             transform: translate3d(0, -50%, 0);
             animation: project-pipeline-particle-flow 8s cubic-bezier(0.45, 0, 0.2, 1) infinite;
         }}
@@ -2605,28 +2656,28 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             0%, 16%, 100% {{
                 opacity: .78;
                 transform: none;
-                border-color: rgba(37, 99, 235, 0.18);
+                border-color: rgba(180, 83, 9, 0.18);
                 box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
             }}
             7%, 11% {{
                 opacity: 1;
                 transform: translateY(-2px);
-                border-color: rgba(37, 99, 235, 0.50);
-                box-shadow: 0 8px 22px rgba(37, 99, 235, 0.16);
+                border-color: rgba(180, 83, 9, 0.50);
+                box-shadow: 0 8px 22px rgba(180, 83, 9, 0.16);
             }}
         }}
         @keyframes project-pipeline-warehouse-pulse {{
             0%, 16%, 100% {{
                 opacity: .82;
                 transform: none;
-                border-color: rgba(37, 99, 235, 0.32);
+                border-color: rgba(180, 83, 9, 0.32);
                 box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
             }}
             7%, 11% {{
                 opacity: 1;
                 transform: translateY(-2px);
-                border-color: rgba(37, 99, 235, 0.56);
-                box-shadow: 0 8px 24px rgba(37, 99, 235, 0.20);
+                border-color: rgba(180, 83, 9, 0.56);
+                box-shadow: 0 8px 24px rgba(180, 83, 9, 0.20);
             }}
         }}
         @keyframes project-pipeline-connector-flow {{
@@ -2679,7 +2730,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .project-pipeline-particle {{
                 width: .34rem;
                 height: .34rem;
-                box-shadow: 0 0 7px rgba(37, 99, 235, 0.32);
+                box-shadow: 0 0 7px rgba(180, 83, 9, 0.32);
             }}
             .project-card-featured .project-actions {{
                 flex-direction: column;
@@ -2791,18 +2842,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .about-hover-card:hover,
             .about-hover-card:focus-within {{
                 transform: translateY(-3px);
-                border-color: rgba(37, 99, 235, 0.45);
+                border-color: rgba(180, 83, 9, 0.45);
                 background-color: rgba(239, 246, 255, 0.65);
-                box-shadow: 0 12px 28px rgba(37, 99, 235, 0.14);
+                box-shadow: 0 12px 28px rgba(180, 83, 9, 0.14);
                 position: relative;
                 z-index: 2;
             }}
             .experience-hover-card:hover,
             .experience-hover-card:focus-within {{
                 transform: translateY(-4px);
-                border-color: rgba(37, 99, 235, 0.38);
+                border-color: rgba(180, 83, 9, 0.38);
                 background-color: rgba(239, 246, 255, 0.62);
-                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.13);
+                box-shadow: 0 14px 30px rgba(180, 83, 9, 0.13);
                 position: relative;
                 z-index: 2;
             }}
@@ -2998,7 +3049,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .quality-summary-item {{
             min-width: 0;
-            border: 1px solid rgba(37, 99, 235, .16);
+            border: 1px solid rgba(180, 83, 9, .16);
             border-radius: 10px;
             background: rgba(239, 246, 255, .52);
             padding: .65rem .75rem;
@@ -3093,7 +3144,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             background: transparent;
             color: var(--data-blue) !important;
             box-shadow: none;
-            border-color: rgba(37, 99, 235, .24);
+            border-color: rgba(180, 83, 9, .24);
         }}
         .contact-card-action-secondary:hover,
         .contact-card-action-secondary:focus-visible {{
@@ -3133,7 +3184,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .pipeline-card:hover,
             .pipeline-card:focus-within {{
                 transform: translateY(-3px);
-                border-color: rgba(37, 99, 235, 0.30);
+                border-color: rgba(180, 83, 9, 0.30);
                 background-color: rgba(239, 246, 255, 0.58);
                 box-shadow: 0 14px 28px rgba(15, 23, 42, 0.09);
                 position: relative;
@@ -3162,7 +3213,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .pipeline-step-card:hover,
             .pipeline-step-card:focus-within {{
                 transform: translateY(-4px);
-                border-color: rgba(37, 99, 235, 0.30);
+                border-color: rgba(180, 83, 9, 0.30);
                 background-color: rgba(239, 246, 255, 0.58);
                 box-shadow: 0 14px 28px rgba(15, 23, 42, 0.09);
                 position: relative;
@@ -3171,18 +3222,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .contact-hover-card:hover,
             .contact-hover-card:focus-within {{
                 transform: translateY(-4px);
-                border-color: rgba(37, 99, 235, 0.38);
+                border-color: rgba(180, 83, 9, 0.38);
                 background-color: rgba(239, 246, 255, 0.62);
-                box-shadow: 0 14px 30px rgba(37, 99, 235, 0.13);
+                box-shadow: 0 14px 30px rgba(180, 83, 9, 0.13);
                 position: relative;
                 z-index: 2;
             }}
             .contact-hover-card.contact-resume-strip:hover,
             .contact-hover-card.contact-resume-strip:focus-within {{
                 transform: translateY(-2px);
-                border-color: rgba(37, 99, 235, 0.38);
+                border-color: rgba(180, 83, 9, 0.38);
                 background-color: rgba(239, 246, 255, 0.62);
-                box-shadow: 0 12px 24px rgba(37, 99, 235, 0.11);
+                box-shadow: 0 12px 24px rgba(180, 83, 9, 0.11);
             }}
             .job-intelligence-hover-card:hover .section-title,
             .job-intelligence-hover-card:focus-within .section-title,
@@ -3421,6 +3472,21 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             font-weight: 750;
             text-decoration: none;
         }}
+        .salary-coverage-note {{
+            display: block;
+            margin: .35rem 0 .85rem;
+            padding: .55rem .8rem;
+            border: 1px solid color-mix(in srgb, var(--warning) 30%, transparent);
+            border-left: 3px solid var(--warning);
+            border-radius: 8px;
+            background: color-mix(in srgb, var(--warning) 8%, var(--surface));
+            color: var(--text-2);
+            font-size: .82rem;
+            line-height: 1.45;
+        }}
+        .salary-coverage-note strong {{
+            color: var(--text);
+        }}
         .kpi-card {{
             min-height: 132px;
             padding: .95rem 1rem;
@@ -3486,7 +3552,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             min-height: 78px;
             padding: .82rem 1rem;
             margin: 0 0 .72rem;
-            border: 1px solid rgba(37, 99, 235, .16);
+            border: 1px solid rgba(180, 83, 9, .16);
             border-radius: 14px;
             background: linear-gradient(135deg, rgba(239, 246, 255, .94), rgba(255, 255, 255, .96));
             box-shadow: 0 5px 14px rgba(15, 23, 42, .04);
@@ -3506,7 +3572,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border-radius: 11px;
             color: var(--data-blue);
             background: rgba(219, 234, 254, .84);
-            border: 1px solid rgba(37, 99, 235, .18);
+            border: 1px solid rgba(180, 83, 9, .18);
         }}
         .pipeline-orchestration-icon svg {{
             width: 1.25rem;
@@ -3554,7 +3620,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             min-height: 1.65rem;
             padding: .28rem .52rem;
             border-radius: 999px;
-            border: 1px solid rgba(37, 99, 235, .14);
+            border: 1px solid rgba(180, 83, 9, .14);
             background: rgba(255, 255, 255, .78);
             color: var(--text-2);
             font-size: .7rem;
@@ -3566,7 +3632,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             bottom: -.72rem;
             height: .72rem;
             width: 0;
-            border-left: 1px dashed rgba(37, 99, 235, .34);
+            border-left: 1px dashed rgba(180, 83, 9, .34);
             pointer-events: none;
         }}
         .pipeline-airflow-stem-2 {{ left: calc((100% / 6) * 1.5); }}
@@ -3603,7 +3669,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border-radius: 10px;
             color: var(--data-blue);
             background: rgba(239, 246, 255, .96);
-            border: 1px solid rgba(37, 99, 235, .18);
+            border: 1px solid rgba(180, 83, 9, .18);
             transition: border-color 180ms ease, background-color 180ms ease;
         }}
         .pipeline-stage-icon svg {{
@@ -3660,7 +3726,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .pipeline-category-warehouse .pipeline-stage-icon,
         .pipeline-category-transform .pipeline-stage-icon {{
-            color: #1D4ED8;
+            color: #92400E;
             background: rgba(219, 234, 254, .92);
         }}
         .pipeline-category-validate .pipeline-stage-icon,
@@ -3693,7 +3759,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .data-flow-path {{
             fill: none;
-            stroke: rgba(37, 99, 235, .30);
+            stroke: rgba(180, 83, 9, .30);
             stroke-width: 2;
             stroke-linecap: round;
         }}
@@ -3705,7 +3771,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .data-flow-arrow-segments,
         .data-flow-stems {{
-            stroke: rgba(37, 99, 235, .42);
+            stroke: rgba(180, 83, 9, .42);
             stroke-width: 1.4;
             fill: none;
             vector-effect: non-scaling-stroke;
@@ -3715,7 +3781,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             opacity: .74;
         }}
         .data-flow-svg marker path {{
-            fill: rgba(6, 182, 212, .74);
+            fill: rgba(30, 58, 95, .74);
         }}
         .data-packet,
         .pulse-trail,
@@ -3725,7 +3791,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             transition: opacity .2s ease, fill .2s ease;
         }}
         .pulse-trail {{
-            fill: #06b6d4;
+            fill: #1e3a5f;
             stroke: none;
         }}
         .pulse-trail-1 {{
@@ -3735,15 +3801,15 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             opacity: .15;
         }}
         .data-flow-pulse {{
-            fill: #06b6d4;
+            fill: #1e3a5f;
             stroke: #FFFFFF;
             stroke-width: 1;
             opacity: .96;
-            filter: drop-shadow(0 0 4px rgba(6, 182, 212, .75));
+            filter: drop-shadow(0 0 4px rgba(30, 58, 95, .75));
         }}
         @keyframes pipeline-stage-pass {{
             0%, 86%, 100% {{ border-color: rgba(148, 163, 184, .24); background: rgba(255, 255, 255, .95); box-shadow: 0 5px 14px rgba(15, 23, 42, .045); }}
-            5%, 13% {{ border-color: rgba(6, 182, 212, .54); background: rgba(239, 246, 255, .98); box-shadow: 0 0 0 3px rgba(6, 182, 212, .08); }}
+            5%, 13% {{ border-color: rgba(30, 58, 95, .54); background: rgba(239, 246, 255, .98); box-shadow: 0 0 0 3px rgba(30, 58, 95, .08); }}
         }}
         @keyframes pipeline-stage-status-pass {{
             0%, 4%, 15%, 100% {{ opacity: 0; }}
@@ -3751,8 +3817,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .pipeline-architecture-card:hover,
         .pipeline-architecture-card:focus-within {{
-            border-color: rgba(37, 99, 235, .48);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
+            border-color: rgba(180, 83, 9, .48);
+            box-shadow: 0 0 0 3px rgba(180, 83, 9, .08);
         }}
         .pipeline-architecture-card:hover .pipeline-stage-status,
         .pipeline-architecture-card:focus-within .pipeline-stage-status {{
@@ -3924,6 +3990,18 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             border-color: var(--border);
             border-radius: 10px;
             min-height: 2.45rem;
+            transition: border-color .14s ease, box-shadow .14s ease;
+        }}
+        [data-baseweb="select"]:hover > div,
+        [data-testid="stDateInput"] input:hover {{
+            border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+        }}
+        [data-baseweb="popover"] {{
+            border-radius: 10px !important;
+            box-shadow: 0 14px 32px rgba(15, 23, 42, .14) !important;
+        }}
+        [data-baseweb="menu"] li[role="option"]:hover {{
+            background: var(--tag-bg) !important;
         }}
         [data-baseweb="select"] span,
         [data-baseweb="select"] input,
@@ -3951,8 +4029,8 @@ def inject_global_styles(theme: dict[str, str]) -> None:
         }}
         .st-key-dashboard_filter_panel [data-baseweb="select"] > div:focus-within {{
             outline: 0 !important;
-            border-color: rgba(37, 99, 235, 0.70) !important;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+            border-color: rgba(180, 83, 9, 0.70) !important;
+            box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.12) !important;
         }}
         .st-key-dashboard_filter_panel [data-baseweb="select"] input,
         .st-key-dashboard_filter_panel [data-baseweb="select"] input:focus,
@@ -4110,7 +4188,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
                 padding: .9rem;
                 border-radius: 16px;
                 background:
-                    radial-gradient(circle at 50% 12%, rgba(37, 99, 235, .10), transparent 32%),
+                    radial-gradient(circle at 50% 12%, rgba(180, 83, 9, .10), transparent 32%),
                     linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(248, 250, 252, .94));
             }}
             .data-blueprint-grid {{
@@ -4389,7 +4467,7 @@ def inject_global_styles(theme: dict[str, str]) -> None:
             .hero-profile-card,
             .hero-profile-card:hover {{
                 transform: none;
-                border-color: rgba(37, 99, 235, .28);
+                border-color: rgba(180, 83, 9, .28);
                 box-shadow: 0 12px 30px rgba(15, 23, 42, .10);
             }}
         }}

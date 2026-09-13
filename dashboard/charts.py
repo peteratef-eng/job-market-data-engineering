@@ -99,10 +99,17 @@ def salary_bar(df: pd.DataFrame, dimension: str, title: str, theme: dict[str, st
         labels=LABELS,
         hover_data=hover_data,
         color_discrete_sequence=[theme["positive"]],
+        text="avg_salary",
         height=chart_height(len(plot_df)),
     )
     fig.update_xaxes(tickprefix="$")
-    fig.update_traces(marker_line_width=0, hovertemplate="<b>%{y}</b><br>Avg salary: $%{x:,.0f}<extra></extra>")
+    fig.update_traces(
+        texttemplate="$%{text:,.0f}",
+        textposition="outside",
+        cliponaxis=False,
+        marker_line_width=0,
+        hovertemplate="<b>%{y}</b><br>Avg salary: $%{x:,.0f}<extra></extra>",
+    )
     fig = style(fig, theme)
     fig.update_layout(margin=dict(l=180, r=120, t=14, b=68))
     return fig
@@ -137,10 +144,17 @@ def remote_salary_chart(df: pd.DataFrame, theme: dict[str, str]):
         hover_data={"salary_jobs": ":,", "avg_salary": ":$,.0f"},
         color="remote_status",
         color_discrete_sequence=theme["palette"],
+        text="avg_salary",
         height=500,
     )
     fig.update_yaxes(tickprefix="$")
-    fig.update_traces(marker_line_width=0, hovertemplate="<b>%{x}</b><br>Avg salary: $%{y:,.0f}<extra></extra>")
+    fig.update_traces(
+        texttemplate="$%{text:,.0f}",
+        textposition="outside",
+        cliponaxis=False,
+        marker_line_width=0,
+        hovertemplate="<b>%{x}</b><br>Avg salary: $%{y:,.0f}<extra></extra>",
+    )
     fig = style(fig, theme)
     fig.update_layout(margin=dict(l=90, r=70, t=14, b=68))
     return fig

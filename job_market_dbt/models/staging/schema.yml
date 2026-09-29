@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_job_postings
+    columns:
+      - name: job_id
+        tests:
+          - not_null
+          - unique
+
+      - name: company_id
+        tests:
+          - not_null 
+  - name: stg_companies
+    columns:
+      - name: company_id
+        tests:
+          - not_null
+          - unique
+
+      - name: clean_company_name
+        tests:
+          - not_null
+
+  - name: stg_skills
+    columns:
+      - name: skill_id
+        tests:
+          - not_null
+          - unique
+
+      - name: clean_skill_name
+        tests:
+          - not_null
+
+  - name: stg_job_skills
+    columns:
+      - name: job_id
+        tests:
+          - not_null
+
+      - name: skill_id
+        tests:
+          - not_null

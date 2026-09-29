@@ -1,0 +1,15 @@
+# Raw data files
+data/
+
+# Secrets (keep .env.example committed as a template)
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# dbt generated output
+job_market_dbt/target/
+job_market_dbt/logs/
+job_market_dbt/dbt_packages/
